@@ -57,6 +57,7 @@
 
 ### 资产
 
+- **`assets/THIRDPARTY_LICENSES.md` 按钮/标签图片更新** — `de.img.*.png`、`mb.img.background.png` 从待替换清单移至原创素材（自行绘制）
 - **de 默认按钮纹理替换** — 三态 PNG 替换为自生成 UI 纹理，约 260px→680px，消除第三方素材依赖
 - **mb 旧按钮纹理删除** — 三态 PNG 已无引用，对应 UI 配置已迁移至 de
 - **mb 标签背景纹理更新** — `mb.img.background.png` 尺寸 630→1123 字节
@@ -77,6 +78,7 @@
 - **页脚增加版权声明** — 三页面（index/community_share/history_versions）统一加入 `© HujiuGame` 和第三方素材版权声明链接
 - **符号与 i18n 文本分离** — 所有 emoji（💡⚡🛠️🔧🎮📥📜💬✨）从 `data-i18n` 元素移出到 HTML 硬编码，语言文件只存纯文本，避免切换语言后符号丢失
 - **9 语言 `community_description` 移除 ✨** — 符号移至 HTML，对齐符号分离策略
+- **讨论区链接更新** — `docs/data/community.json` 更新为新的 Gitee/GitHub Issue 地址，仓库名从 `hujiugame-qingfeng` → `hujiugame.qingfeng`
 
 ### 文档
 
