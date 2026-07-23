@@ -1,0 +1,37 @@
+{
+  "message_box" : {
+    "open_official_website.title" : "Open Game Official Website?",
+    "open_official_website.content" : "Do you want to open the browser and go to the official website?",
+    "quit_game.title" : "Quit Game",
+    "quit_game.content" : "Are you sure you want to quit the game?",
+    "update_detected.title" : "New Version Detected",
+    "update_detected.content" : "Would you like to open your browser to download the latest version from our official website?",
+    "update_request_failed.title" : "Update Check Failed",
+    "update_request_failed.content" : "Check network permissions and internet connection.Want open browser to visit official site for latest version?",
+    "game_version_different.title" : "Version Mismatch!",
+    "game_version_different.content.1" : "The current game \"",
+    "game_version_different.content.2" : "\" best launcher version is:",
+    "game_version_different.content.3" : ", while the current version is:",
+    "game_version_different.content.4" : ". Forcing it to run may cause crashes"
+  },
+  "menu" : {
+    "main.button.start" : "Start",
+    "main.button.create" : "Create",
+    "main.button.config" : "Settings",
+    "main.button.quit" : "Quit",
+    "list.button.back" : "Back",
+    "list.button.import" : "Import",
+    "list.button.profile" : "Profile",
+    "list.button.share" : "Share",
+    "list.button.delete" : "Delete",
+    "list.button.last_page" : "Previous Page",
+    "list.button.next_page" : "Next Page",
+    "list.label.absolute_path" : "Folder Path",
+    "list.label.selected_path" : "Selected Folder",
+    "list.label.page" : "of",
+    "load.label.loading" : "Loading..."
+  },
+  "config" : {
+    "basic.back" : "Back"
+  }
+}

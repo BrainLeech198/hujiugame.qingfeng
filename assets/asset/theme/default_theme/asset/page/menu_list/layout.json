@@ -1,0 +1,444 @@
+{
+  "backgroundMusic" : ["Scorching Sun.mp3", "Title Music.mp3", "The Dragon Fell in Love wit.mp3"],
+  "backgroundPicture" : "menu.background.png",
+  "picture" : {
+    "path_tab" : {
+      "path" : "transparent/black32.png",
+      "position" : {
+        "x" : 0,
+        "y" : 1220
+      },
+      "size" : {
+        "width" : 2560,
+        "height" : 220
+      }
+    },
+    "function_tab" : {
+      "path" : "transparent/black16.png",
+      "position" : {
+        "x" : 0,
+        "y" : 0
+      },
+      "size" : {
+        "width" : 540,
+        "height" : 1220
+      }
+    }
+  },
+  "ui": {
+    "image" : {
+      "unselect_frame0": {
+        "kind": "unselect_frame.image",
+        "position": {
+          "x": 694,
+          "y": 737
+        },
+        "size": {
+          "width": 320,
+          "height": 440
+        }
+      },
+      "unselect_frame1": {
+        "kind": "unselect_frame.image",
+        "position": {
+          "x": 1158,
+          "y": 737
+        },
+        "size": {
+          "width": 320,
+          "height": 440
+        }
+      },
+      "unselect_frame2": {
+        "kind": "unselect_frame.image",
+        "position": {
+          "x": 1622,
+          "y": 737
+        },
+        "size": {
+          "width": 320,
+          "height": 440
+        }
+      },
+      "unselect_frame3": {
+        "kind": "unselect_frame.image",
+        "position": {
+          "x": 2086,
+          "y": 737
+        },
+        "size": {
+          "width": 320,
+          "height": 440
+        }
+      },
+      "unselect_frame4": {
+        "kind": "unselect_frame.image",
+        "position": {
+          "x": 694,
+          "y": 263
+        },
+        "size": {
+          "width": 320,
+          "height": 440
+        }
+      },
+      "unselect_frame5": {
+        "kind": "unselect_frame.image",
+        "position": {
+          "x": 1158,
+          "y": 263
+        },
+        "size": {
+          "width": 320,
+          "height": 440
+        }
+      },
+      "unselect_frame6": {
+        "kind": "unselect_frame.image",
+        "position": {
+          "x": 1622,
+          "y": 263
+        },
+        "size": {
+          "width": 320,
+          "height": 440
+        }
+      },
+      "unselect_frame7": {
+        "kind": "unselect_frame.image",
+        "position": {
+          "x": 2086,
+          "y": 263
+        },
+        "size": {
+          "width": 320,
+          "height": 440
+        }
+      },
+      "select_frame0": {
+        "kind": "select_frame.image",
+        "position": {
+          "x": 694,
+          "y": 737
+        },
+        "size": {
+          "width": 320,
+          "height": 440
+        }
+      },
+      "select_frame1": {
+        "kind": "select_frame.image",
+        "position": {
+          "x": 1158,
+          "y": 737
+        },
+        "size": {
+          "width": 320,
+          "height": 440
+        }
+      },
+      "select_frame2": {
+        "kind": "select_frame.image",
+        "position": {
+          "x": 1622,
+          "y": 737
+        },
+        "size": {
+          "width": 320,
+          "height": 440
+        }
+      },
+      "select_frame3": {
+        "kind": "select_frame.image",
+        "position": {
+          "x": 2086,
+          "y": 737
+        },
+        "size": {
+          "width": 320,
+          "height": 440
+        }
+      },
+      "select_frame4": {
+        "kind": "select_frame.image",
+        "position": {
+          "x": 694,
+          "y": 263
+        },
+        "size": {
+          "width": 320,
+          "height": 440
+        }
+      },
+      "select_frame5": {
+        "kind": "select_frame.image",
+        "position": {
+          "x": 1158,
+          "y": 263
+        },
+        "size": {
+          "width": 320,
+          "height": 440
+        }
+      },
+      "select_frame6": {
+        "kind": "select_frame.image",
+        "position": {
+          "x": 1622,
+          "y": 263
+        },
+        "size": {
+          "width": 320,
+          "height": 440
+        }
+      },
+      "select_frame7": {
+        "kind": "select_frame.image",
+        "position": {
+          "x": 2086,
+          "y": 263
+        },
+        "size": {
+          "width": 320,
+          "height": 440
+        }
+      },
+      "game_cover0": {
+        "kind": "game_cover.image0",
+        "show": false,
+        "position": {
+          "x": 704,
+          "y": 747
+        },
+        "size": {
+          "width": 300,
+          "height": 420
+        }
+      },
+      "game_cover1": {
+        "kind": "game_cover.image1",
+        "show": false,
+        "position": {
+          "x": 1168,
+          "y": 747
+        },
+        "size": {
+          "width": 300,
+          "height": 420
+        }
+      },
+      "game_cover2": {
+        "kind": "game_cover.image2",
+        "show": false,
+        "position": {
+          "x": 1632,
+          "y": 747
+        },
+        "size": {
+          "width": 300,
+          "height": 420
+        }
+      },
+      "game_cover3": {
+        "kind": "game_cover.image3",
+        "show": false,
+        "position": {
+          "x": 2096,
+          "y": 747
+        },
+        "size": {
+          "width": 300,
+          "height": 420
+        }
+      },
+      "game_cover4": {
+        "kind": "game_cover.image4",
+        "show": false,
+        "position": {
+          "x": 704,
+          "y": 273
+        },
+        "size": {
+          "width": 300,
+          "height": 420
+        }
+      },
+      "game_cover5": {
+        "kind": "game_cover.image5",
+        "show": false,
+        "position": {
+          "x": 1168,
+          "y": 273
+        },
+        "size": {
+          "width": 300,
+          "height": 420
+        }
+      },
+      "game_cover6": {
+        "kind": "game_cover.image6",
+        "show": false,
+        "position": {
+          "x": 1632,
+          "y": 273
+        },
+        "size": {
+          "width": 300,
+          "height": 420
+        }
+      },
+      "game_cover7": {
+        "kind": "game_cover.image7",
+        "show": false,
+        "position": {
+          "x": 2096,
+          "y": 273
+        },
+        "size": {
+          "width": 300,
+          "height": 420
+        }
+      }
+    },
+    "label" : {
+      "absolute_path" : {
+        "kind" : "default",
+        "position" : {
+          "x" : 595,
+          "y" : 1265
+        },
+        "size" : {
+          "width" : 1910,
+          "height" : 130
+        },
+        "textKey" : "{language$requirement.json#menu.list.label.absolute_path} : {game$game_list.absolute_path}",
+        "fontSize" : 0.8,
+        "fontColor" : "#FFFFFFFF",
+        "fontFlag" : "w"
+      },
+      "selected_path" : {
+        "kind" : "default",
+        "position" : {
+          "x" : 595,
+          "y" : 1265
+        },
+        "size" : {
+          "width" : 1910,
+          "height" : 130
+        },
+        "textKey" : "{language$requirement.json#menu.list.label.selected_path} : {game$game_list.selected_path}",
+        "fontSize" : 0.8,
+        "fontColor" : "#FFFFFFFF",
+        "fontFlag" : "w"
+      },
+      "page" : {
+        "kind" : "default",
+        "position" : {
+          "x" : 610,
+          "y" : 55
+        },
+        "size" : {
+          "width" : 400,
+          "height" : 110
+        },
+        "textKey" : "{game$game_list.now_page}{language$requirement.json#menu.list.label.page}{game$game_list.max_page}",
+        "fontSize" : 1,
+        "fontColor" : "#FFFFFFFF",
+        "fontFlag" : "center"
+      }
+    },
+    "button" : {
+      "back" : {
+        "kind" : "default",
+        "position" : {
+          "x" : 70,
+          "y" : 1275
+        },
+        "size" : {
+          "width" : 400,
+          "height" : 110
+        },
+        "textKey" : "{language$requirement.json#menu.list.button.back}",
+        "fontSize" : 1.2
+      },
+      "import" : {
+        "kind" : "default",
+        "position" : {
+          "x" : 70,
+          "y" : 1055
+        },
+        "size" : {
+          "width" : 400,
+          "height" : 110
+        },
+        "textKey" : "{language$requirement.json#menu.list.button.import}",
+        "fontSize" : 1.2
+      },
+      "profile" : {
+        "kind" : "default",
+        "position" : {
+          "x" : 70,
+          "y" : 880
+        },
+        "size" : {
+          "width" : 400,
+          "height" : 110
+        },
+        "textKey" : "{language$requirement.json#menu.list.button.profile}",
+        "fontSize" : 1.2
+      },
+      "share" : {
+        "kind" : "default",
+        "position" : {
+          "x" : 70,
+          "y" : 705
+        },
+        "size" : {
+          "width" : 400,
+          "height" : 110
+        },
+        "textKey" : "{language$requirement.json#menu.list.button.share}",
+        "fontSize" : 1.2
+      },
+      "delete" : {
+        "kind" : "default",
+        "position" : {
+          "x" : 70,
+          "y" : 530
+        },
+        "size" : {
+          "width" : 400,
+          "height" : 110
+        },
+        "textKey" : "{language$requirement.json#menu.list.button.delete}",
+        "fontSize" : 1.2
+      },
+      "select.last_page" : {
+        "kind" : "default",
+        "position" : {
+          "x" : 1480,
+          "y" : 55
+        },
+        "size" : {
+          "width" : 400,
+          "height" : 110
+        },
+        "textKey" : "{language$requirement.json#menu.list.button.last_page}",
+        "fontSize" : 1.2
+      },
+      "select.next_page" : {
+        "kind" : "default",
+        "position" : {
+          "x" : 2020,
+          "y" : 55
+        },
+        "size" : {
+          "width" : 400,
+          "height" : 110
+        },
+        "textKey" : "{language$requirement.json#menu.list.button.next_page}",
+        "fontSize" : 1.2
+      }
+    }
+  }
+}

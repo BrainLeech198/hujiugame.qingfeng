@@ -1,0 +1,9 @@
+{
+  "name" : "message_box.title",
+  "font" : "default",
+  "image" :
+  {
+    "background" : "label/mb.img.background.png"
+  },
+  "fontColor" : "#FFFFFFFF"
+}

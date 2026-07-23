@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools">
+    <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
+    <application
+            android:allowBackup="true"
+            android:fullBackupContent="true"
+            android:icon="@drawable/my_ic_launcher"
+            android:isGame="true"
+            android:appCategory="game"
+            android:label="@string/app_name"
+            tools:ignore="UnusedAttribute"
+            android:theme="@style/GdxTheme">
+        <activity
+                android:name="com.hujiugame.qingfeng.android.AndroidLauncher"
+                android:label="@string/app_name"
+                android:screenOrientation="landscape"
+                android:configChanges="keyboard|keyboardHidden|navigation|orientation|screenSize|screenLayout"
+                android:exported="true">
+            <!-- 启动器入口 -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+            <!-- 文件关联：处理 .qfg 文件 -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="file" />
+                <data android:scheme="content" />
+                <data android:mimeType="*/*" />
+                <data android:pathPattern=".*\\.qfg" />
+                <data android:host="*" />
+            </intent-filter>
+        </activity>
+
+        <!-- 文件提供者：用于安全共享文件给外部文件管理器 -->
+        <provider
+                android:name="androidx.core.content.FileProvider"
+                android:authorities="${applicationId}.fileprovider"
+                android:exported="false"
+                android:grantUriPermissions="true">
+            <meta-data
+                    android:name="android.support.FILE_PROVIDER_PATHS"
+                    android:resource="@xml/file_paths" />
+        </provider>
+
+    </application>
+
+    <!-- 权限设置 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+</manifest>

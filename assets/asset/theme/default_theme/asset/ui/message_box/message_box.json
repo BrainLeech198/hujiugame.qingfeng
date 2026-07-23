@@ -1,0 +1,32 @@
+{
+  "audio":"message_box/849886__wavewire__ui_textblip_08.wav",
+  "label" :
+  {
+    "title" :
+    {
+      "kind" : "message_box.title",
+      "fontSize" : 1.2,
+      "fontFlag" : "center",
+      "fontArgs" : {
+        "pad" : 20
+      }
+    },
+    "content" :
+    {
+      "kind" : "message_box.content",
+      "fontSize" : 1.0,
+      "fontFlag" : "nw",
+      "fontArgs" : {
+        "pad" : 25
+      }
+    }
+  },
+  "button" :
+  {
+    "normal" :
+    {
+      "kind" : "default",
+      "fontSize" : 1.2
+    }
+  }
+}

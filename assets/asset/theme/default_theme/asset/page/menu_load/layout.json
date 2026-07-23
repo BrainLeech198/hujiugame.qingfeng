@@ -1,0 +1,22 @@
+{
+  "backgroundPicture" : "menu.background.png",
+  "ui" : {
+    "label" : {
+      "load" : {
+        "kind" : "default",
+        "position" : {
+          "x" : 1000,
+          "y" : 300
+        },
+        "size" : {
+          "width" : 560,
+          "height" : 100
+        },
+        "textKey" : "{language$requirement.json#menu.load.label.loading}",
+        "fontSize" : 1,
+        "fontColor" : "#FFFFFFFF",
+        "fontFlag" : "center"
+      }
+    }
+  }
+}

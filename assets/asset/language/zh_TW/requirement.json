@@ -1,0 +1,37 @@
+{
+  "message_box" : {
+    "open_official_website.title" : "開啟遊戲官網？",
+    "open_official_website.content" : "是否開啟瀏覽器前往官網？",
+    "quit_game.title" : "離開遊戲？",
+    "quit_game.content" : "確定要離開遊戲嗎？",
+    "update_detected.title" : "檢測到新版本！",
+    "update_detected.content" : "是否開啟瀏覽器前往官網下載最新版本？",
+    "update_request_failed.title" : "版本檢測失敗！",
+    "update_request_failed.content" : "請檢查網路連線權限，是否打開瀏覽器前往官網並查看版本更新？",
+    "game_version_different.title" : "版本不一致！",
+    "game_version_different.content.1" : "當前遊戲《",
+    "game_version_different.content.2" : "》最佳啟動器版本為:",
+    "game_version_different.content.3" : "而當前版本為:",
+    "game_version_different.content.4" : "強行執行可能導致崩潰"
+  },
+  "menu" : {
+    "main.button.start" : "開始",
+    "main.button.create" : "創作",
+    "main.button.config" : "設定",
+    "main.button.quit" : "離開",
+    "list.button.back" : "返回",
+    "list.button.import" : "匯入",
+    "list.button.profile" : "檔案",
+    "list.button.share" : "分享",
+    "list.button.delete" : "刪除",
+    "list.button.last_page" : "上一頁",
+    "list.button.next_page" : "下一頁",
+    "list.label.absolute_path" : "目錄路徑",
+    "list.label.selected_path" : "選擇的游戏目錄",
+    "list.label.page" : "/",
+    "load.label.loading" : "載入中..."
+  },
+  "config" : {
+    "basic.back" : "返回"
+  }
+}

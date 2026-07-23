@@ -1,0 +1,9 @@
+{
+  "name" : "default2",
+  "font" : "default",
+  "image" :
+  {
+    "background" : "transparent/black16.png"
+  },
+  "fontColor" : "#FFFFFFFF"
+}

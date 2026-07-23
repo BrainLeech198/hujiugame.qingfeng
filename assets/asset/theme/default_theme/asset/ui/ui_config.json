@@ -1,0 +1,7 @@
+{
+  "button": ["default","default2"],
+  "label": ["default","default2", "message_box.content", "message_box.title"],
+  "image": ["select_frame.image", "unselect_frame.image"],
+  "font": ["default"],
+  "messageBox": ["default"]
+}

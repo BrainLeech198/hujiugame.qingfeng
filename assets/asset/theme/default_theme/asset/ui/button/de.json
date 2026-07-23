@@ -1,0 +1,13 @@
+{
+  "name" : "default",
+  "font" : "default",
+  "image" : {
+    "up" : "button/de.img.up.png",
+    "down" : "button/de.img.down.png",
+    "disabled" : "button/de.img.disabled.png"
+  },
+  "audio" : {
+    "click" : "button/862694__cat-fox_alex__random-click-2.wav"
+  },
+  "fontColor" : "#FFFFFFFF"
+}

@@ -1,0 +1,9 @@
+plugins {
+  // 已注释：国内网络无法访问 foojay.io 自动下载 JDK，请手动安装 JDK 21
+  // 并在 gradle.properties 中设置 org.gradle.java.home
+  // id("org.gradle.toolchains.foojay-resolver-convention") version "0.9.0"
+}
+// A list of which subprojects to load as part of the same larger project.
+// You can remove Strings from the list and reload the Gradle project
+// if you want to temporarily disable a subproject.
+include 'lwjgl3', 'core', 'android'

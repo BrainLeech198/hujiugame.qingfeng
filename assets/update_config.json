@@ -1,0 +1,31 @@
+{
+  "protect" : [
+    "asset/app_config.json",
+    "asset/user_config.json",
+    "asset/language/language_config.json",
+    "asset/theme/theme_config.json",
+    "asset_export/export_config.json",
+    "asset_import/import_config.json",
+    "asset_trash/trash_config.json",
+    "game/game_config.json",
+    "project/project_config.json",
+    "save/save_config.json",
+  ],
+  "prohibit" : [
+    "assets.txt",
+    "update_config.json",
+    "asset/resource/image/error.png",
+    "asset/resource/image/app_repair.png",
+    "asset/resource/image/app_init.png",
+    "asset/resource/image/controller_cursor.png",
+    "asset/resource/image/controller_button_a.png",
+    "asset/resource/image/controller_button_b.png",
+    "asset/resource/image/controller_button_a_or_b.png",
+    "asset/resource/image/keyboard_button_enter.png",
+    "asset/resource/image/keyboard_button_escape.png",
+    "asset/resource/image/keyboard_button_enter_or_escape.png",
+    "asset/resource/image/virtual_confirm_rect.png",
+    "asset/resource/image/virtual_cancel_rect.png",
+    "game/sample"
+  ]
+}

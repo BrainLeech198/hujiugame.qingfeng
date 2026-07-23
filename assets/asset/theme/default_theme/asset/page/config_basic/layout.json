@@ -1,0 +1,77 @@
+{
+  "backgroundMusic" : ["Scorching Sun.mp3", "Title Music.mp3", "The Dragon Fell in Love wit.mp3"],
+  "backgroundPicture" : "menu.background.png",
+  "picture" : {
+    "introduction_tab" : {
+      "path" : "transparent/black32.png",
+      "position" : {
+        "x" : 0,
+        "y" : 1220
+      },
+      "size" : {
+        "width" : 2560,
+        "height" : 220
+      }
+    },
+    "function_tab" : {
+      "path" : "transparent/black16.png",
+      "position" : {
+        "x" : 0,
+        "y" : 0
+      },
+      "size" : {
+        "width" : 540,
+        "height" : 1220
+      }
+    }
+  },
+  "ui" : {
+    "label" : {
+      "info" : {
+        "kind" : "default",
+        "position" : {
+          "x" : 595,
+          "y" : 1265
+        },
+        "size" : {
+          "width" : 1910,
+          "height" : 130
+        },
+        "text" : "",
+        "fontSize" : 0.8,
+        "fontColor" : "#FFFFFFFF",
+        "fontFlag" : "w"
+      },
+      "resolution" : {
+        "kind" : "default2",
+        "position" : {
+          "x" : 595,
+          "y" : 1075
+        },
+        "size" : {
+          "width" : 928,
+          "height" : 90
+        },
+        "textKey" : "",
+        "fontSize" : 1,
+        "fontColor" : "#FFFFFFFF",
+        "fontFlag" : "w"
+      }
+    },
+    "button" : {
+      "back" : {
+        "kind" : "default",
+        "position" : {
+          "x" : 70,
+          "y" : 1275
+        },
+        "size" : {
+          "width" : 400,
+          "height" : 110
+        },
+        "textKey" : "{language$requirement.json#config.basic.back}",
+        "fontSize" : 1.2
+      }
+    }
+  }
+}

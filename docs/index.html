@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
+    <title data-i18n="site_title">氢风 · 官网</title>
+    <style>
+        /* ================================
+           基础重置
+           ================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #eef2f6 0%, #d9e2ec 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+        }
+
+        /* ================================
+           头部 - 品牌标志
+           ================================ */
+        .hero-card {
+            max-width: 1100px;
+            width: 100%;
+            background: rgba(255,255,255,0.9);
+            border-radius: 40px;
+            padding: 30px 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 30px -15px rgba(0,35,70,0.15);
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.8);
+            backdrop-filter: blur(4px);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .hero-card:hover {
+            transform: scale(1.01);
+            box-shadow: 0 20px 35px -12px rgba(0,45,80,0.2);
+        }
+
+        .logo-img {
+            width: 600px;
+            max-width: 90%;
+            height: auto;
+            display: block;
+            margin: 0 auto 15px auto;
+            border-radius: 28px;
+            filter: drop-shadow(0 8px 15px rgba(0,30,50,0.1));
+            transition: filter 0.2s;
+        }
+        .logo-img:hover {
+            filter: drop-shadow(0 12px 20px rgba(0,50,70,0.15));
+        }
+
+        .app-title {
+            font-size: 2.6rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #0b3b4e, #2f6b8f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-top: 8px;
+            text-shadow: 0 2px 5px rgba(255,255,255,0.5);
+        }
+
+        /* ================================
+           提示卡片
+           ================================ */
+        .tip-card {
+            max-width: 1100px;
+            width: 100%;
+            background: rgba(255,255,255,0.8);
+            border-radius: 40px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 30px -15px rgba(0,35,70,0.15);
+            border: 1px solid rgba(255,255,255,0.8);
+            backdrop-filter: blur(4px);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .tip-text {
+            font-size: 1.2rem;
+            color: #1d4d6b;
+            line-height: 1.5;
+            flex: 1;
+            min-width: 250px;
+        }
+        .tip-text .highlight {
+            font-weight: 600;
+            color: #0b3b4e;
+        }
+
+        .tip-btn {
+            background: linear-gradient(135deg, #2f6b8f, #1a5f7a);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 8px 16px -6px rgba(20,80,120,0.4);
+            transition: all 0.2s;
+            white-space: nowrap;
+            border: 1px solid rgba(255,255,255,0.3);
+            text-decoration: none;
+            display: inline-block;
+        }
+        .tip-btn:hover {
+            background: linear-gradient(135deg, #1a5f7a, #0f4a62);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px -8px rgba(20,80,120,0.5);
+        }
+
+        /* ================================
+           修复步骤面板
+           ================================ */
+        .repair-steps {
+            max-width: 1100px;
+            width: 100%;
+            display: none;
+            margin-top: -20px;
+            margin-bottom: 30px;
+            background: rgba(255,255,255,0.85);
+            border-radius: 40px;
+            padding: 30px 35px;
+            box-shadow: 0 15px 30px -15px rgba(0,35,70,0.15);
+            border: 1px solid rgba(255,255,255,0.8);
+            animation: fadeInUp 0.3s ease;
+        }
+        .repair-steps.open {
+            display: block;
+        }
+        .repair-steps h3 {
+            font-size: 1.5rem;
+            color: #0d4057;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .repair-step {
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px dashed #c7ddee;
+        }
+        .repair-step:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .repair-step-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1a5f7a;
+            margin-bottom: 12px;
+        }
+        .repair-step-text {
+            font-size: 1rem;
+            color: #1e3a4a;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        .repair-step img {
+            width: 100%;
+            max-width: 700px;
+            border-radius: 20px;
+            border: 1px solid #c7ddee;
+            box-shadow: 0 5px 15px rgba(0,35,70,0.1);
+            display: block;
+            margin: 0 auto;
+        }
+        .repair-step .img-placeholder {
+            width: 100%;
+            max-width: 700px;
+            border-radius: 20px;
+            border: 1px dashed #c7ddee;
+            background: #f3f9ff;
+            padding: 40px 20px;
+            text-align: center;
+            color: #7a9eb5;
+            margin: 0 auto;
+        }
+
+        /* ================================
+           通用卡片
+           ================================ */
+        .card {
+            max-width: 1100px;
+            width: 100%;
+            background-color: rgba(255,255,255,0.7);
+            backdrop-filter: blur(12px);
+            border-radius: 56px;
+            box-shadow: 0 30px 50px -20px rgba(0,30,50,0.3), 0 0 0 1px rgba(255,255,255,0.8) inset;
+            padding: 40px 35px 50px 35px;
+            border: 1px solid rgba(255,255,255,0.9);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            box-shadow: 0 40px 60px -15px rgba(20,80,120,0.4);
+        }
+        .card + .card {
+            margin-top: 30px;
+        }
+
+        .card-intro {
+            margin-bottom: 30px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding: 0 10px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .card-header h2 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: #0d4057;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+        }
+        .card-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(90deg, #2f6b8f, #b1d0e8);
+            border-radius: 4px;
+        }
+
+        .intro-body {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #1e3a4a;
+            padding: 0 10px;
+        }
+        .intro-body p {
+            margin-bottom: 16px;
+        }
+        .intro-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        .history-link {
+            font-size: 1.2rem;
+            background: rgba(255,255,255,0.6);
+            padding: 10px 28px;
+            border-radius: 50px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(70,120,160,0.4);
+            transition: all 0.2s;
+            color: #1d4d6b;
+            text-decoration: none;
+            font-weight: 500;
+            box-shadow: 0 6px 12px rgba(0,20,30,0.05);
+            white-space: nowrap;
+        }
+        .history-link:hover {
+            background: white;
+            border-color: #2f6b8f;
+            color: #083445;
+            box-shadow: 0 12px 20px -8px rgba(20,80,120,0.3);
+            transform: translateY(-2px);
+        }
+
+        /* ================================
+           下载区域
+           ================================ */
+        .download-panels {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 15px;
+        }
+
+        .platform-box {
+            background: rgba(255,255,255,0.65);
+            backdrop-filter: blur(10px);
+            border-radius: 36px;
+            padding: 30px 20px;
+            box-shadow: 0 15px 25px -12px rgba(0,30,50,0.2);
+            border: 1px solid rgba(255,255,255,0.8);
+            height: fit-content;
+        }
+
+        .platform-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .download-item {
+            flex: 1 1 200px;
+            min-width: 160px;
+            text-align: center;
+            background: rgba(255,255,255,0.8);
+            border-radius: 28px;
+            padding: 22px 15px 18px 15px;
+            transition: 0.25s;
+            border: 1px solid rgba(255,255,255,0.9);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.02);
+        }
+        .download-item:hover {
+            background: white;
+            box-shadow: 0 20px 25px -12px #1c4e6e;
+            transform: translateY(-6px);
+        }
+        .download-item a {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+        .download-item span {
+            font-size: 1.3rem;
+            font-weight: 550;
+            color: #1d4d6b;
+            background: rgba(230,240,250,0.8);
+            padding: 6px 18px;
+            border-radius: 40px;
+            width: fit-content;
+            margin: 0 auto;
+            border: 1px solid rgba(80,130,170,0.2);
+            backdrop-filter: blur(2px);
+        }
+
+        .download-icon {
+            width: 100%;
+            max-width: 170px;
+            height: auto;
+            border-radius: 24px;
+            transition: 0.15s;
+            border: 1px solid rgba(150,180,200,0.3);
+            background-color: #eef4f9;
+            min-height: 80px;
+            object-fit: contain;
+        }
+        .download-icon.error {
+            background: #d9e2ec;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2f627c;
+            font-size: 1rem;
+            padding: 20px 0;
+        }
+
+        /* ================================
+           更新日志
+           ================================ */
+        .changelog-box {
+            background: rgba(255,255,255,0.75);
+            backdrop-filter: blur(10px);
+            border-radius: 36px;
+            padding: 30px;
+            box-shadow: 0 15px 25px -12px rgba(0,35,55,0.25);
+            border: 1px solid rgba(255,255,255,0.8);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .changelog-header {
+            border-bottom: 2px dashed #a0c4d9;
+            padding-bottom: 18px;
+            margin-bottom: 22px;
+        }
+
+        .version-badge {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #0b3b4e;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            word-break: break-word;
+        }
+        .version-badge .tag {
+            background: #1a5f7a;
+            color: white;
+            font-size: 1rem;
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-weight: 400;
+            white-space: nowrap;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .log-content {
+            font-size: 1.25rem;
+            line-height: 1.6;
+            color: #1e3a4a;
+            background: #f3f9ff;
+            padding: 22px 25px;
+            border-radius: 28px;
+            border: 1px solid #c7ddee;
+            white-space: pre-wrap;
+            word-break: break-word;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
+            min-height: 120px;
+        }
+
+        .loading-skeleton {
+            color: #7a9eb5;
+            font-style: italic;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        /* ================================
+           社区
+           ================================ */
+        .community-description {
+            margin-top: 20px;
+            padding: 0 10px;
+            font-size: 1rem;
+            color: #2f6b8f;
+            line-height: 1.5;
+            border-top: 1px dashed rgba(160,196,217,0.5);
+            padding-top: 15px;
+        }
+        .community-description p {
+            margin: 0;
+        }
+
+        /* ================================
+           页脚
+           ================================ */
+        .footnote {
+            max-width: 1100px;
+            width: 100%;
+            margin-top: 35px;
+            text-align: center;
+            color: #4f6f8a;
+            font-size: 1rem;
+            border-top: 1px solid rgba(90,130,160,0.25);
+            padding-top: 25px;
+            backdrop-filter: blur(4px);
+        }
+        .footnote a {
+            color: #1f5f83;
+            text-decoration: none;
+            border-bottom: 1px dotted;
+            transition: color 0.2s;
+            font-weight: 500;
+        }
+        .footnote a:hover {
+            color: #083445;
+            border-bottom-style: solid;
+        }
+
+        /* ================================
+           模态框
+           ================================ */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(16px);
+            border-radius: 48px;
+            max-width: 500px;
+            width: 90%;
+            padding: 30px 25px;
+            box-shadow: 0 25px 45px -12px rgba(0,20,40,0.5);
+            border: 1px solid rgba(255,255,255,0.8);
+            animation: fadeInUp 0.2s ease;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-header {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #0d4057;
+            margin-bottom: 15px;
+            border-bottom: 2px dashed #a0c4d9;
+            padding-bottom: 12px;
+        }
+        .modal-body {
+            max-height: 60vh;
+            overflow-y: auto;
+            margin: 15px 0;
+        }
+
+        .modal-error {
+            text-align: center;
+            color: #b52b2b;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            line-height: 1;
+            cursor: pointer;
+            float: right;
+            color: #4f6f8a;
+            transition: 0.2s;
+        }
+        .modal-close:hover {
+            color: #083445;
+        }
+
+        .download-option {
+            background: rgba(255,255,255,0.7);
+            border-radius: 28px;
+            padding: 16px 20px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(70,120,160,0.3);
+            transition: 0.2s;
+        }
+        .download-option:hover {
+            background: white;
+            transform: translateY(-2px);
+        }
+        .option-description {
+            font-size: 1rem;
+            color: #1e3a4a;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        .option-btn {
+            background: linear-gradient(135deg, #2f6b8f, #1a5f7a);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.2s;
+        }
+        .option-btn:hover {
+            background: linear-gradient(135deg, #1a5f7a, #0f4a62);
+            transform: scale(1.02);
+        }
+
+        /* ================================
+           响应式
+           ================================ */
+        @media (max-width: 700px) {
+            .hero-card { padding: 20px 12px; }
+            .tip-card { padding: 20px; flex-direction: column; text-align: center; }
+            .card { padding: 25px 18px; }
+            .app-title { font-size: 2rem; }
+            .download-panels { grid-template-columns: 1fr; }
+            .card-header { flex-direction: column; align-items: flex-start; }
+            .history-link { align-self: flex-start; white-space: normal; }
+            .version-badge { font-size: 1.7rem; }
+            .card-header h2 { font-size: 1.7rem; }
+            .footnote { margin-top: 25px; }
+            .community-description { font-size: 0.9rem; }
+            .modal-content { padding: 20px; }
+            .modal-header { font-size: 1.5rem; }
+            .repair-steps { padding: 20px; }
+            .repair-steps h3 { font-size: 1.3rem; }
+            .repair-step-title { font-size: 1.1rem; }
+        }
+        @media (max-width: 400px) {
+            .platform-grid { flex-direction: column; align-items: center; }
+            .log-content { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== 头部 ==================== -->
+<header class="hero-card">
+    <img alt="氢风启动器 logo" class="logo-img" id="logoImg" src="resource/image/logo.png"
+         onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22600%22%20height%3D%22200%22%20viewBox%3D%220%200%20600%20200%22%3E%3Crect%20width%3D%22600%22%20height%3D%22200%22%20fill%3D%22%23b8d4e3%22%2F%3E%3Ctext%20x%3D%22300%22%20y%3D%22120%22%20font-size%3D%2236%22%20fill%3D%22%231d4d6b%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3E%E6%B0%A2%E9%A3%8E%20Logo%3C%2Ftext%3E%3C%2Fsvg%3E'; this.style.filter='grayscale(0.3)';">
+    <h1 class="app-title" data-i18n="brand_name">氢风</h1>
+</header>
+
+<!-- ==================== 主内容 ==================== -->
+<main>
+
+    <!-- 提示卡片：Watt Toolkit -->
+    <section class="tip-card" id="tipCardWatt">
+        <div class="tip-text">
+            <span class="highlight">💡</span> <span data-i18n="tip_watt_title">温馨提示：</span>
+            <span data-i18n="tip_watt_text">若您下载本站资源速度较慢，推荐使用免费加速工具 <strong>Watt Toolkit</strong>，可显著提升下载体验。</span>
+        </div>
+        <a href="https://steampp.net/" class="tip-btn" target="_blank" rel="noopener">⚡ <span data-i18n="tip_watt_button">下载 Watt Toolkit</span></a>
+    </section>
+
+    <!-- 提示卡片：资源修复 -->
+    <section class="tip-card" id="tipCardRepair">
+        <div class="tip-text">
+            <span class="highlight">🛠️</span> <span data-i18n="tip_repair_title">修复指引：</span>
+            <span data-i18n="tip_repair_text">若您遇到资源文件出错或缺失，请在游戏启动器加载界面右下角找到维修标识并点击，程序将自动退出，并在下次启动时尝试修复。</span>
+        </div>
+        <button class="tip-btn">🔧 <span data-i18n="tip_repair_button">查看修复方法</span></button>
+    </section>
+
+    <!-- 修复步骤面板 -->
+    <div class="repair-steps" id="repairSteps">
+        <h3 data-i18n="repair_steps_title">修复步骤</h3>
+        <div class="repair-step">
+            <div class="repair-step-title" data-i18n="repair_step1_title">第一步：点击维修标识</div>
+            <div class="repair-step-text" data-i18n="repair_step1_text">在启动器加载界面右下角点击维修图标，程序将自动检测并修复缺失或损坏的资源文件。</div>
+            <img src="resource/image/repair1.png" alt="修复步骤1 - 维修标识位置"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+            <div class="img-placeholder" style="display:none;" data-i18n="repair_img_placeholder">图片加载失败，请检查网络连接</div>
+        </div>
+        <div class="repair-step">
+            <div class="repair-step-title" data-i18n="repair_step2_title">第二步：点击确定退出</div>
+            <div class="repair-step-text" data-i18n="repair_step2_text">修复完成后自动弹出提示窗口，点击「确定」退出程序。再次启动氢风，资源文件即已修复完成，可正常使用。</div>
+            <img src="resource/image/repair2.png" alt="修复步骤2 - 确定退出"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+            <div class="img-placeholder" style="display:none;" data-i18n="repair_img_placeholder">图片加载失败，请检查网络连接</div>
+        </div>
+    </div>
+
+    <!-- 游戏介绍 -->
+    <section class="card card-intro">
+        <div class="card-header" style="margin-bottom: 20px;">
+            <h2>🎮 <span data-i18n="game_intro_title">游戏介绍</span></h2>
+        </div>
+        <div class="intro-body">
+            <p data-i18n="game_intro_desc1">
+                氢风启动器是一款基于 libGDX 构建的视觉小说游戏启动器，遵循开发团队统一规范的标准化文件结构。
+            </p>
+            <p data-i18n="game_intro_desc2">
+                在传统对话式叙事之外，核心引擎支持 2D 地图探索、视频播放等扩展功能。内置可视化编辑器，支持实时编辑故事内容、角色对话、分支选项与地图场景，无需额外工具即可即时预览更改。
+            </p>
+            <p data-i18n="game_intro_desc3">
+                氢风启动器不仅是视觉小说引擎，更是一个<strong>编辑器+启动器一体化</strong>的叙事游戏创作与分享平台。目标是像 Roblox、RPG Maker、Flash 那样，让创作者在一个闭环生态中完成创作、分发、游玩的全流程。
+            </p>
+            <p data-i18n="game_intro_desc4">
+                启动器支持一键导出游戏为 <code>.qfg</code> 包文件，可直接加载运行，方便分享给其他玩家或发布到社区。同时支持多套主题与多语言界面，适配不同地区用户的个性化偏好。
+            </p>
+        </div>
+    </section>
+
+    <!-- 资源下载 -->
+    <section class="card">
+        <div class="card-header">
+            <h2>📥 <span data-i18n="download_section_title">资源下载</span></h2>
+            <a href="html/history_versions.html" class="history-link">📜 <span data-i18n="history_button">历史版本 →</span></a>
+        </div>
+        <div class="download-panels">
+            <div class="platform-box">
+                <div class="platform-grid">
+                    <div class="download-item">
+                        <a href="#" id="windows-link" data-platform="windows">
+                            <img alt="下载 Windows 版" class="download-icon" id="windowsIcon"
+                                 src="resource/image/download-windows.png"
+                                 onerror="this.classList.add('error'); this.alt='Windows下载'; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22200%22%20height%3D%22100%22%20viewBox%3D%220%200%20200%20100%22%3E%3Crect%20width%3D%22200%22%20height%3D%22100%22%20fill%3D%22%233b6f8c%22%2F%3E%3Ctext%20x%3D%22100%22%20y%3D%2255%22%20font-size%3D%2224%22%20fill%3D%22%23ffffff%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3EWindows%3C%2Ftext%3E%3C%2Fsvg%3E';">
+                            <span data-i18n="windows_button">Windows端</span>
+                        </a>
+                    </div>
+                    <div class="download-item">
+                        <a href="#" id="android-link" data-platform="android">
+                            <img id="androidIcon" src="resource/image/download-android.png" alt="下载 Android 版" class="download-icon"
+                                 onerror="this.classList.add('error'); this.alt='Android下载'; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22200%22%20height%3D%22100%22%20viewBox%3D%220%200%20200%20100%22%3E%3Crect%20width%3D%22200%22%20height%3D%22100%22%20fill%3D%22%233b6f8c%22%2F%3E%3Ctext%20x%3D%22100%22%20y%3D%2255%22%20font-size%3D%2224%22%20fill%3D%22%23ffffff%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3EAndroid%3C%2Ftext%3E%3C%2Fsvg%3E';">
+                            <span data-i18n="android_button">Android端</span>
+                        </a>
+                    </div>
+                    <div class="download-item">
+                        <a href="#" id="linux-link" data-platform="linux">
+                            <img id="linuxIcon" src="resource/image/download-linux.png" alt="下载 Linux 版" class="download-icon"
+                                 onerror="this.classList.add('error'); this.alt='Linux下载'; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22200%22%20height%3D%22100%22%20viewBox%3D%220%200%20200%20100%22%3E%3Crect%20width%3D%22200%22%20height%3D%22100%22%20fill%3D%22%233b6f8c%22%2F%3E%3Ctext%20x%3D%22100%22%20y%3D%2255%22%20font-size%3D%2224%22%20fill%3D%22%23ffffff%22%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%3ELinux%3C%2Ftext%3E%3C%2Fsvg%3E';">
+                            <span data-i18n="linux_button">Linux端</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="changelog-box">
+                <div class="changelog-header">
+                    <div class="version-badge" id="version-display">
+                        <span id="version-name" class="loading-skeleton" data-i18n="loading_version">加载版本中...</span>
+                        <span class="tag" data-i18n="latest_tag">最新</span>
+                    </div>
+                </div>
+                <div class="log-content" id="version-log">
+                    <span class="loading-skeleton" data-i18n="loading_log">正在获取更新日志…</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 社区分享 -->
+    <section class="card">
+        <div class="card-header">
+            <h2>💬 <span data-i18n="community_title">社区分享</span></h2>
+            <a href="html/community_share.html" class="history-link">💬 <span data-i18n="community_button">社区分享 →</span></a>
+        </div>
+        <div class="community-description">
+            <p>✨ <span data-i18n="community_description">这里是功能建议与改进反馈、创作内容分享、玩家间讨论的社区空间。欢迎文明交流！</span></p>
+        </div>
+    </section>
+
+</main>
+
+<!-- ==================== 页脚 ==================== -->
+<footer class="footnote">
+    &copy; HujiuGame &nbsp;&nbsp; | &nbsp;&nbsp;
+    ⚡ <span data-i18n="footer_text">氢风启动器 · 官方站</span> &nbsp;&nbsp; | &nbsp;&nbsp;
+    <a data-i18n="footer_all_versions" href="html/history_versions.html">所有版本</a>
+    &nbsp;&nbsp; | &nbsp;&nbsp;
+    <a data-i18n="footer_community_resources" href="html/community_share.html">社区资源</a>
+    <br>
+    <a href="THIRDPARTY_LICENSES.html">第三方素材版权声明</a>
+</footer>
+
+<!-- ==================== 下载模态框 ==================== -->
+<div id="downloadModal" class="modal">
+    <div class="modal-content">
+        <button class="modal-close" id="modalClose">&times;</button>
+        <div class="modal-header" id="modalTitle">选择下载方式</div>
+        <div class="modal-body" id="modalBody"></div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // ==================== i18n 初始化 ====================
+        let currentMessages = null;
+        const localeMap = {
+            'zh': 'zh',
+            'zh-CN': 'zh',
+            'zh-TW': 'zh-TW',
+            'zh-HK': 'zh-TW',
+            'en': 'en',
+            'ja': 'ja',
+            'ko': 'ko',
+            'ru': 'ru',
+            'pt': 'pt',
+            'fr': 'fr',
+            'de': 'de'
+        };
+        const defaultLang = 'zh';
+
+        function getBrowserLang() {
+            const lang = navigator.language || navigator.userLanguage;
+            const baseLang = lang.split('-')[0];
+            return localeMap[baseLang] ? baseLang : defaultLang;
+        }
+
+        function loadMessages(lang) {
+            return fetch(`data/locales/${lang}.json`, { cache: 'no-cache' })
+                .then(res => {
+                    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                    return res.json();
+                })
+                .catch(err => {
+                    console.warn(`加载语言文件 ${lang} 失败，回退到 ${defaultLang}`, err);
+                    if (lang !== defaultLang) return loadMessages(defaultLang);
+                    throw err;
+                });
+        }
+
+        function applyI18n(messages) {
+            currentMessages = messages;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (messages[key]) {
+                    el.textContent = messages[key];
+                }
+            });
+            // 处理提示卡片中的混合内容（保留 strong 标签）
+            const tipWattTextSpan = document.querySelector('#tipCardWatt .tip-text span:last-child');
+            if (tipWattTextSpan && messages.tip_watt_text) {
+                const text = messages.tip_watt_text;
+                const strongMatch = /<strong>(.*?)<\/strong>/.exec(text);
+                if (strongMatch) {
+                    tipWattTextSpan.innerHTML = text;
+                } else {
+                    tipWattTextSpan.textContent = text;
+                }
+            }
+            const tipRepairTextSpan = document.querySelector('#tipCardRepair .tip-text span:last-child');
+            if (tipRepairTextSpan && messages.tip_repair_text) {
+                tipRepairTextSpan.textContent = messages.tip_repair_text;
+            }
+            if (messages.site_title) document.title = messages.site_title;
+        }
+
+        function bindRepairButton() {
+            const repairBtn = document.querySelector('#tipCardRepair .tip-btn');
+            const repairSteps = document.getElementById('repairSteps');
+            if (repairBtn && repairSteps) {
+                repairBtn.onclick = () => {
+                    const isOpen = repairSteps.classList.toggle('open');
+                    repairBtn.textContent = currentMessages[isOpen ? 'tip_repair_button_hide' : 'tip_repair_button'];
+                };
+                // 点击面板外部关闭
+                document.addEventListener('click', (e) => {
+                    const tipCard = repairBtn.closest('.tip-card');
+                    if (repairSteps.classList.contains('open') &&
+                        !repairSteps.contains(e.target) &&
+                        !tipCard.contains(e.target)) {
+                        repairSteps.classList.remove('open');
+                        repairBtn.textContent = currentMessages['tip_repair_button'];
+                    }
+                });
+            }
+        }
+
+        // ==================== 模态框管理 ====================
+        const modal = document.getElementById('downloadModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+        const modalClose = document.getElementById('modalClose');
+
+        function showDownloadOptions(platform, options) {
+            if (!options || Object.keys(options).length === 0) {
+                alert(currentMessages?.no_download_options || '该平台暂无可用下载链接，请联系管理员。');
+                return;
+            }
+            const platformNames = {
+                windows: currentMessages?.windows_button || 'Windows',
+                android: currentMessages?.android_button || 'Android',
+                linux: currentMessages?.linux_button || 'Linux'
+            };
+            modalTitle.textContent = `${platformNames[platform]} - ${currentMessages?.select_download_method || '选择下载方式'}`;
+            modalBody.innerHTML = '';
+            for (const [source, data] of Object.entries(options)) {
+                const description = data.description || (currentMessages?.[`source_${source}`] || source);
+                const url = data.url;
+                if (!url) continue;
+                const btnText = currentMessages?.[`download_from_${source}`] || source;
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'download-option';
+                optionDiv.innerHTML = `
+                    <div class="option-description">${description}</div>
+                    <a href="${url}" class="option-btn" target="_blank" rel="noopener">${btnText} →</a>
+                `;
+                modalBody.appendChild(optionDiv);
+            }
+            if (modalBody.children.length === 0) {
+                modalBody.innerHTML = `<div class="modal-error">${currentMessages?.no_valid_download_source || '没有有效的下载链接'}</div>`;
+            }
+            modal.style.display = 'flex';
+        }
+
+        modalClose.onclick = () => { modal.style.display = 'none'; };
+        window.onclick = (event) => {
+            if (event.target === modal) { modal.style.display = 'none'; }
+        };
+
+        // ==================== 版本信息与下载 ====================
+        const CONFIG = {
+            VERSION_DATA_PATH: 'data/versions.json',
+            IMAGE_CONFIG_PATH: 'data/image.json'
+        };
+
+        const versionNameEl = document.getElementById('version-name');
+        const versionLogEl = document.getElementById('version-log');
+        const windowsLink = document.getElementById('windows-link');
+        const androidLink = document.getElementById('android-link');
+        const linuxLink = document.getElementById('linux-link');
+
+        const logoImg = document.getElementById('logoImg');
+        const windowsIcon = document.getElementById('windowsIcon');
+        const androidIcon = document.getElementById('androidIcon');
+        const linuxIcon = document.getElementById('linuxIcon');
+
+        let currentVersionInfo = null;
+
+        function loadImageConfig() {
+            fetch(CONFIG.IMAGE_CONFIG_PATH, { cache: 'no-cache' })
+                .then(response => {
+                    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                    return response.json();
+                })
+                .then(config => {
+                    if (logoImg && config.logo) logoImg.src = config.logo;
+                    if (windowsIcon && config['download-windows']) windowsIcon.src = config['download-windows'];
+                    if (androidIcon && config['download-android']) androidIcon.src = config['download-android'];
+                    if (linuxIcon && config['download-linux']) linuxIcon.src = config['download-linux'];
+                })
+                .catch(err => console.warn('图片配置加载失败，使用默认路径', err));
+        }
+
+        function setLoadingState() {
+            if (versionNameEl && currentMessages) versionNameEl.textContent = currentMessages.loading_version;
+            if (versionLogEl && currentMessages) versionLogEl.innerHTML = `<span class="loading-skeleton">${currentMessages.loading_log}</span>`;
+        }
+
+        function showError(message) {
+            if (versionNameEl) versionNameEl.textContent = '❌ ' + (currentMessages?.error_load_failed || '加载失败：') + message;
+            if (versionLogEl) versionLogEl.innerHTML = `<span style="color:#b52b2b;">${message}</span>`;
+        }
+
+        function fetchVersionAndUpdate() {
+            setLoadingState();
+
+            fetch(CONFIG.VERSION_DATA_PATH, { cache: 'no-cache' })
+                .then(response => {
+                    if (!response.ok) throw new Error(`HTTP ${response.status} - ${response.statusText}`);
+                    return response.json();
+                })
+                .then(data => {
+                    const newestKey = data.newest_version;
+                    if (newestKey === undefined || !data.versions) throw new Error('JSON 缺少 newest_version 或 versions 字段');
+                    const versionInfo = data.versions[String(newestKey)];
+                    if (!versionInfo || !versionInfo.name) throw new Error(`未找到键 ${newestKey} 对应的版本信息`);
+
+                    if (versionNameEl) {
+                        versionNameEl.textContent = versionInfo.name;
+                        versionNameEl.classList.remove('loading-skeleton');
+                    }
+                    if (versionLogEl) {
+                        versionLogEl.textContent = versionInfo.log;
+                        versionLogEl.classList.remove('loading-skeleton');
+                    }
+
+                    currentVersionInfo = versionInfo;
+
+                    if (windowsLink) {
+                        windowsLink.onclick = (e) => {
+                            e.preventDefault();
+                            showDownloadOptions('windows', currentVersionInfo.download?.windows);
+                        };
+                    }
+                    if (androidLink) {
+                        androidLink.onclick = (e) => {
+                            e.preventDefault();
+                            showDownloadOptions('android', currentVersionInfo.download?.android);
+                        };
+                    }
+                    if (linuxLink) {
+                        linuxLink.onclick = (e) => {
+                            e.preventDefault();
+                            showDownloadOptions('linux', currentVersionInfo.download?.linux);
+                        };
+                    }
+                })
+                .catch(error => showError(error.message));
+        }
+
+        // 启动流程
+        const userLang = getBrowserLang();
+        loadMessages(userLang).then(messages => {
+            applyI18n(messages);
+            bindRepairButton();
+            loadImageConfig();
+            fetchVersionAndUpdate();
+        }).catch(err => {
+            console.error('i18n 初始化失败', err);
+            loadImageConfig();
+            fetchVersionAndUpdate();
+        });
+    })();
+</script>
+</body>
+</html>

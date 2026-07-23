@@ -1,0 +1,15 @@
+{
+  "language": "zh_CN",
+  "theme": "default_theme",
+  "useViewport": "stretch",
+  "fullscreen": false,
+  "resolution": {
+    "width": 1024,
+    "height": 576
+  },
+  "soundVolume": {
+    "total": 1,
+    "music": 0.5,
+    "sound": 0.8
+  }
+}

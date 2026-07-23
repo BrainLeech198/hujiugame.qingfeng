@@ -1,0 +1,10 @@
+{
+  "name": "默认主题",
+  "version": "1.0.0",
+  "icon": "icon.png",
+  "font": "default",
+  "fontUseSize": [0.8, 1.2, 1.5],
+  "primaryColor" : "#3F48CCFF",
+  "secondaryColor" : "#FDA1FFFF",
+  "fontColor" : "#000000FF"
+}

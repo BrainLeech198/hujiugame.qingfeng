@@ -1,0 +1,37 @@
+{
+  "message_box" : {
+    "open_official_website.title" : "打开游戏官网？",
+    "open_official_website.content" : "是否打开浏览器前往官网？",
+    "quit_game.title" : "退出游戏？",
+    "quit_game.content" : "确定要退出游戏吗？",
+    "update_detected.title" : "检测到新版本！",
+    "update_detected.content" : "是否打开浏览器前往官网下载最新版本？",
+    "update_request_failed.title" : "版本检测失败！",
+    "update_request_failed.content" : "请检查软件网络连接权限，是否打开浏览器前往官网并查看版本更新？",
+    "game_version_different.title" : "版本不一致！",
+    "game_version_different.content.1" : "当前游戏《",
+    "game_version_different.content.2" : "》最佳启动器版本为:",
+    "game_version_different.content.3" : "而当前版本为:",
+    "game_version_different.content.4" : "强行运行可能导致崩溃"
+  },
+  "menu" : {
+    "main.button.start" : "开始",
+    "main.button.create" : "创作",
+    "main.button.config" : "设置",
+    "main.button.quit" : "退出",
+    "list.button.back" : "返回",
+    "list.button.import" : "导入",
+    "list.button.profile" : "档案",
+    "list.button.share" : "分享",
+    "list.button.delete" : "删除",
+    "list.button.last_page" : "上一页",
+    "list.button.next_page" : "下一页",
+    "list.label.absolute_path" : "目录路径",
+    "list.label.selected_path" : "选择的游戏目录",
+    "list.label.page" : "/",
+    "load.label.loading" : "加载中..."
+  },
+  "config" : {
+    "basic.back" : "返回"
+  }
+}
