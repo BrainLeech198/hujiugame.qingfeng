@@ -5,6 +5,33 @@
 > - `develop/SCRIPT_INTERNAL_STANDARD.md` —— 修改脚本指令/值系统时
 > - `DOCUMENTATION_INDEX.md` —— 新增/重命名/删除文档时
 
+## 2026-07-24 — UniversalKey/GameStateLayout 重命名 + 配置键修复 + MessageBox 调整
+
+### 重构
+
+- **`UniversalKey`→`UniversalUIKey` 重命名** — 类名从 `UniversalKey` 统一为 `UniversalUIKey`，明确其通用 UI 按键常量的职责；新增私有构造器防止工具类实例化。波及 5 文件：`UniversalInputHandlerFunction`、`VirtualInputHandler`、`ConfigBasic`、`GameRole`、`RequirementUiKey` 的旧引用全部同步更新
+- **`GameStateLayout`→`GameStatePageInfo` 重命名** — 类名从 `GameStateLayout` 改为 `GameStatePageInfo`，更准确反映其页面信息映射的职责；新增私有构造器。`SceneStack` 中的旧引用同步更新
+
+### 变更
+
+- **`MessageBox` UI 参数调整** — 标题高度占比从 `100/600`→`120/600`，标题内容间距从 `5/600`→`10/600`，优化视觉效果
+
+### 修复
+
+- **`RequirementConfigKey.MENU_LIST_PAGE_MAX_GAME` 键值对齐** — 从 snake_case 的 `page_max_game` 修正为 camelCase 的 `pageMaxGame`，与实际 JSON 格式保持一致
+
+### 资产
+
+- **`menu_list/config.json`** — 新增菜单列表页面配置，包含 `pageMaxGame: 8`
+
+### 文档
+
+- **`DOCUMENTATION_INDEX.md`** — 添加 3D 场景支持预想方案条目
+
+### 新增
+
+- **3D 场景支持预想方案** — `develop/plans/2026-07-24-3d-scene-support.md`，通过 page 目录 3d.json 实现可选 3D 场景，最小架构入侵
+
 ## 2026-07-23 — SceneStack 重构 + 配置加载 + 文件夹化 + 语言配置合并
 
 ### 重构
