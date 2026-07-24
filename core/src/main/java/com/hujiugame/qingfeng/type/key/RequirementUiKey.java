@@ -16,7 +16,7 @@ public final class RequirementUiKey
     public static final String MENU_MAIN_BUTTON_START = "start";
     public static final String MENU_MAIN_BUTTON_CREATE = "create";
     public static final String MENU_MAIN_BUTTON_CONFIG = "config";
-    public static final String MENU_MAIN_BUTTON_QUIT = UniversalKey.BUTTON_QUIT;
+    public static final String MENU_MAIN_BUTTON_QUIT = UniversalUIKey.BUTTON_QUIT;
 
     // ===================================================================================================================
 
@@ -32,7 +32,7 @@ public final class RequirementUiKey
     public static final String MENU_LIST_LABEL_SELECTED_PATH = "selected_path";
     public static final String MENU_LIST_LABEL_PAGE = "page";
 
-    public static final String MENU_LIST_BUTTON_BACK = UniversalKey.BUTTON_BACK;
+    public static final String MENU_LIST_BUTTON_BACK = UniversalUIKey.BUTTON_BACK;
     public static final String MENU_LIST_BUTTON_IMPORT = "import";
     public static final String MENU_LIST_BUTTON_PROFILE = "profile";
     public static final String MENU_LIST_BUTTON_SHARE = "share";
@@ -48,5 +48,5 @@ public final class RequirementUiKey
 
     // game_menu
     public static final String GAME_MENU_BUTTON_START = "start";
-    public static final String GAME_MENU_BUTTON_QUIT = UniversalKey.BUTTON_QUIT;
+    public static final String GAME_MENU_BUTTON_QUIT = UniversalUIKey.BUTTON_QUIT;
 }

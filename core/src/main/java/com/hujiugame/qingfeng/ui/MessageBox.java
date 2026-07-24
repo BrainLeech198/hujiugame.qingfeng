@@ -43,8 +43,8 @@ public final class MessageBox
     private final int boxHeight = 600;
     private final int boxPositionX = (ScreenSize.WIDTH - boxWidth) / 2;
     private final int boxPositionY = (ScreenSize.HEIGHT - boxHeight) / 2;
-    private final int boxTitleHeight = (int) (100f / 600 * boxHeight);
-    private final int boxTitleContentGap = (int) (5f / 600 * boxHeight);
+    private final int boxTitleHeight = (int) (120f / 600 * boxHeight);
+    private final int boxTitleContentGap = (int) (10f / 600 * boxHeight);
     // ask box 参数
     private final int ASK_BOX_BUTTON_COUNT = 2;
     private final int ASK_BOX_BUTTON_X_GAP = (int) (30f / 900 * boxWidth);
@@ -57,6 +57,7 @@ public final class MessageBox
     private final int INFO_BOX_BUTTON_WIDTH = (boxWidth - INFO_BOX_BUTTON_X_GAP * (INFO_BOX_BUTTON_COUNT + 1)) / INFO_BOX_BUTTON_COUNT;
     private final int INFO_BOX_BUTTON_Y_GAP = (int) (30f / 600 * boxHeight);
     private final int INFO_BOX_BUTTON_HEIGHT = (int) (100f / 600 * boxHeight);
+
     private AudioManager audioManager;
     private UiManager uiManager;
     private ThemeManager themeManager;

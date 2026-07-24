@@ -4,7 +4,7 @@ import com.hujiugame.qingfeng.core.GameHost;
 import com.hujiugame.qingfeng.data.game.GameStateDataContainer;
 import com.hujiugame.qingfeng.data.game.Layout;
 import com.hujiugame.qingfeng.data.story.Role;
-import com.hujiugame.qingfeng.type.key.UniversalKey;
+import com.hujiugame.qingfeng.type.key.UniversalUIKey;
 import com.hujiugame.qingfeng.type.play.Hoster;
 import com.hujiugame.qingfeng.audio.AudioManager;
 import com.hujiugame.qingfeng.graphic.GraphicsManager;
@@ -143,7 +143,7 @@ public final class GameRole implements GameRender
     public void update (float deltaTime)
     {
         // 按下返回按钮
-        if (gameUiManager.isButtonClicked(UniversalKey.BUTTON_BACK))
+        if (gameUiManager.isButtonClicked(UniversalUIKey.BUTTON_BACK))
         {
             eventQueue.addEvent(new EventPopGameState());
         }

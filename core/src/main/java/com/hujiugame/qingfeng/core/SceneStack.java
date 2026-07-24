@@ -12,7 +12,7 @@ import com.hujiugame.qingfeng.data.game.StateStructure;
 import com.hujiugame.qingfeng.data.play.PlayLocalData;
 import com.hujiugame.qingfeng.type.file.PathName;
 import com.hujiugame.qingfeng.type.game.state.GameState;
-import com.hujiugame.qingfeng.type.game.state.GameStateLayout;
+import com.hujiugame.qingfeng.type.game.state.GameStatePageInfo;
 import com.hujiugame.qingfeng.audio.AudioManager;
 import com.hujiugame.qingfeng.graphic.GraphicsManager;
 import com.hujiugame.qingfeng.ui.UiManager;
@@ -300,10 +300,10 @@ public final class SceneStack
 
             // 判断以及获取游戏页面结构路径
             boolean isNeedLayout = true;
-            if (GameStateLayout.GAME_STATE_LAYOUT_MAP.containsKey(state))
+            if (GameStatePageInfo.GAME_STATE_LAYOUT_MAP.containsKey(state))
             {
                 // 获取游戏子页面结构
-                Map<Integer, String> subStateMap = GameStateLayout.GAME_STATE_LAYOUT_MAP.get(state);
+                Map<Integer, String> subStateMap = GameStatePageInfo.GAME_STATE_LAYOUT_MAP.get(state);
                 // 主页面结构如果不需要
                 if (subStateMap == null)
                 {
@@ -395,10 +395,10 @@ public final class SceneStack
 
             // 判断以及获取游戏页面配置路径
             boolean isNeedConfig = true;
-            if (GameStateLayout.GAME_STATE_CONFIG_MAP.containsKey(state))
+            if (GameStatePageInfo.GAME_STATE_CONFIG_MAP.containsKey(state))
             {
                 // 获取游戏子页面配置
-                Map<Integer, Boolean> subStateMap = GameStateLayout.GAME_STATE_CONFIG_MAP.get(state);
+                Map<Integer, Boolean> subStateMap = GameStatePageInfo.GAME_STATE_CONFIG_MAP.get(state);
                 // 主页面结构如果不需要
                 if (subStateMap == null)
                 {
@@ -421,7 +421,7 @@ public final class SceneStack
                     else
                     {
                         String pageDirName = null;
-                        Map<Integer, String> layoutSubStateMap = GameStateLayout.GAME_STATE_LAYOUT_MAP.get(state);
+                        Map<Integer, String> layoutSubStateMap = GameStatePageInfo.GAME_STATE_LAYOUT_MAP.get(state);
                         if (layoutSubStateMap != null && layoutSubStateMap.containsKey(subState))
                         {
                             pageDirName = layoutSubStateMap.get(subState);

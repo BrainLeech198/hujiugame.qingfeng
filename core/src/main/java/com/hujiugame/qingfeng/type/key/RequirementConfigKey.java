@@ -13,5 +13,5 @@ public final class RequirementConfigKey
     // ===================================================================================================================
 
     // menu list
-    public static final String MENU_LIST_PAGE_MAX_GAME = "page_max_game";
+    public static final String MENU_LIST_PAGE_MAX_GAME = "pageMaxGame";
 }

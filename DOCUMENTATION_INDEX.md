@@ -36,6 +36,7 @@
 | **InstanceContent 拆分** | [develop/plans/refactor-instancecontent.md](develop/plans/refactor-instancecontent.md) | 初始化链/上帝对象重构方案 |
 | **UiManager 拆分** | [develop/plans/refactor-uimanager.md](develop/plans/refactor-uimanager.md) | 4200+ 行外观模式拆分方案 |
 | **测试体系建立** | [develop/plans/testing-setup.md](develop/plans/testing-setup.md) | JUnit 5 + headless 后端测试方案 |
+| **3D 场景支持预想方案** | [develop/plans/2026-07-24-3d-scene-support.md](develop/plans/2026-07-24-3d-scene-support.md) | 通过 page 目录 3d.json 实现可选 3D 场景，最小架构入侵 |
 | **第三方素材版权声明** | [assets/THIRDPARTY_LICENSES.md](assets/THIRDPARTY_LICENSES.md) | 第三方素材著作权声明及署名要求（随发行包分发） |
 
 ---

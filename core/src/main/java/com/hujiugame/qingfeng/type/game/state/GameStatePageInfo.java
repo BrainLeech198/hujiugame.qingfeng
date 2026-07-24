@@ -4,9 +4,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class GameStateLayout
+public final class GameStatePageInfo
 {
-    private GameStateLayout()
+    private GameStatePageInfo ()
     {
         throw new UnsupportedOperationException("Utility class cannot be instantiated");
     }
