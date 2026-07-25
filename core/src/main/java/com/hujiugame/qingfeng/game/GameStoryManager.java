@@ -8,6 +8,7 @@ import com.hujiugame.qingfeng.data.story.page.Page;
 import com.hujiugame.qingfeng.data.story.Role;
 import com.hujiugame.qingfeng.data.story.tree.*;
 import com.hujiugame.qingfeng.type.file.PathName;
+import com.hujiugame.qingfeng.type.key.StoryKey;
 import com.hujiugame.qingfeng.manager.LayoutManager;
 import com.hujiugame.qingfeng.manager.ThemeManager;
 import com.hujiugame.qingfeng.util.system.FileUtils;
@@ -103,78 +104,78 @@ public final class GameStoryManager
         try
         {
             // 解析“根”节点 Section
-            JsonEntity rootSection = storyTreeJson.getJsonEntityByKey("root");
+            JsonEntity rootSection = storyTreeJson.getJsonEntityByKey(StoryKey.Tree.Type.ROOT);
             if (!rootSection.isEmpty())
             {
                 LogUtils.debug(GameStoryManager.class, "parseStoryTreeBlock 开始解析Root节点 Section, 数量: " + rootSection.keySet().size());
                 for (String id : rootSection.keySet())
                 {
-                    LogUtils.debug(GameStoryManager.class, "parseStoryTreeBlock 解析Root节点 (id): " + id + " (block): " + block);
+                    LogUtils.debug(GameStoryManager.class, "parseStoryTreeBlock 解析Root节点 (" + StoryKey.Tree.ID + "): " + id + " (" + StoryKey.Tree.BLOCK + "): " + block);
                     JsonEntity nodeData = rootSection.getJsonEntityByKey(id);
 
-                    String page = nodeData.getString("page");
-                    List<TreeStructureInfo> children = parseStructureInfoList(block, nodeData, "out");
+                    String page = nodeData.getString(StoryKey.PAGE);
+                    List<TreeStructureInfo> children = parseStructureInfoList(block, nodeData, StoryKey.Tree.OUT);
 
-                    LogUtils.debug(GameStoryManager.class, "parseStoryTreeBlock Root节点数据 (id): " + id + " (page): " + page + " (children数): " + children.size());
+                    LogUtils.debug(GameStoryManager.class, "parseStoryTreeBlock Root节点数据 (" + StoryKey.Tree.ID + "): " + id + " (" + StoryKey.PAGE + "): " + page + " (children数): " + children.size());
                     TreeStructure root = new RootStructure(block, id, page, children);
                     map.put(root.getTreeStructureInfo(), root);
                 }
             }
 
             // 解析“分支”节点 Section
-            JsonEntity branchSection = storyTreeJson.getJsonEntityByKey("branch");
+            JsonEntity branchSection = storyTreeJson.getJsonEntityByKey(StoryKey.Tree.Type.BRANCH);
             if (!branchSection.isEmpty())
             {
                 LogUtils.debug(GameStoryManager.class, "parseStoryTreeBlock 开始解析Branch节点 Section, 数量: " + branchSection.keySet().size());
                 for (String id : branchSection.keySet())
                 {
-                    LogUtils.debug(GameStoryManager.class, "parseStoryTreeBlock 解析Branch节点 (id): " + id + " (block): " + block);
+                    LogUtils.debug(GameStoryManager.class, "parseStoryTreeBlock 解析Branch节点 (" + StoryKey.Tree.ID + "): " + id + " (" + StoryKey.Tree.BLOCK + "): " + block);
                     JsonEntity nodeData = branchSection.getJsonEntityByKey(id);
 
-                    List<TreeStructureInfo> parents = parseStructureInfoList(block, nodeData, "in");
+                    List<TreeStructureInfo> parents = parseStructureInfoList(block, nodeData, StoryKey.Tree.IN);
                     List<String> pages = parsePageList(nodeData);
-                    List<TreeStructureInfo> children = parseStructureInfoList(block, nodeData, "out");
+                    List<TreeStructureInfo> children = parseStructureInfoList(block, nodeData, StoryKey.Tree.OUT);
 
-                    LogUtils.debug(GameStoryManager.class, "parseStoryTreeBlock Branch节点数据 (id): " + id + " (pages): " + pages + " (parents数): " + parents.size() + " (children数): " + children.size());
+                    LogUtils.debug(GameStoryManager.class, "parseStoryTreeBlock Branch节点数据 (" + StoryKey.Tree.ID + "): " + id + " (pages): " + pages + " (parents数): " + parents.size() + " (children数): " + children.size());
                     TreeStructure branch = new BranchStructure(block, id, pages, parents, children);
                     map.put(branch.getTreeStructureInfo(), branch);
                 }
             }
 
             // 解析“普通”节点 Section
-            JsonEntity nodeSection = storyTreeJson.getJsonEntityByKey("node");
+            JsonEntity nodeSection = storyTreeJson.getJsonEntityByKey(StoryKey.Tree.Type.NODE);
             if (!nodeSection.isEmpty())
             {
                 LogUtils.debug(GameStoryManager.class, "parseStoryTreeBlock 开始解析Node节点 Section, 数量: " + nodeSection.keySet().size());
                 for (String id : nodeSection.keySet())
                 {
-                    LogUtils.debug(GameStoryManager.class, "parseStoryTreeBlock 解析Node节点 (id): " + id + " (block): " + block);
+                    LogUtils.debug(GameStoryManager.class, "parseStoryTreeBlock 解析Node节点 (" + StoryKey.Tree.ID + "): " + id + " (" + StoryKey.Tree.BLOCK + "): " + block);
                     JsonEntity nodeData = nodeSection.getJsonEntityByKey(id);
 
-                    List<TreeStructureInfo> parents = parseStructureInfoList(block, nodeData, "in");
-                    String page = nodeData.getString("page");
-                    List<TreeStructureInfo> children = parseStructureInfoList(block, nodeData, "out");
+                    List<TreeStructureInfo> parents = parseStructureInfoList(block, nodeData, StoryKey.Tree.IN);
+                    String page = nodeData.getString(StoryKey.PAGE);
+                    List<TreeStructureInfo> children = parseStructureInfoList(block, nodeData, StoryKey.Tree.OUT);
 
-                    LogUtils.debug(GameStoryManager.class, "parseStoryTreeBlock Node节点数据 (id): " + id + " (page): " + page + " (parents数): " + parents.size() + " (children数): " + children.size());
+                    LogUtils.debug(GameStoryManager.class, "parseStoryTreeBlock Node节点数据 (" + StoryKey.Tree.ID + "): " + id + " (" + StoryKey.PAGE + "): " + page + " (parents数): " + parents.size() + " (children数): " + children.size());
                     TreeStructure node = new NodeStructure(block, id, page, parents, children);
                     map.put(node.getTreeStructureInfo(), node);
                 }
             }
 
             // 解析“叶子”节点 Section
-            JsonEntity leafSection = storyTreeJson.getJsonEntityByKey("leaf");
+            JsonEntity leafSection = storyTreeJson.getJsonEntityByKey(StoryKey.Tree.Type.LEAF);
             if (!leafSection.isEmpty())
             {
                 LogUtils.debug(GameStoryManager.class, "parseStoryTreeBlock 开始解析Leaf节点 Section, 数量: " + leafSection.keySet().size());
                 for (String id : leafSection.keySet())
                 {
-                    LogUtils.debug(GameStoryManager.class, "parseStoryTreeBlock 解析Leaf节点 (id): " + id + " (block): " + block);
+                    LogUtils.debug(GameStoryManager.class, "parseStoryTreeBlock 解析Leaf节点 (" + StoryKey.Tree.ID + "): " + id + " (" + StoryKey.Tree.BLOCK + "): " + block);
                     JsonEntity leafData = leafSection.getJsonEntityByKey(id);
 
-                    List<TreeStructureInfo> parents = parseStructureInfoList(block, leafData, "in");
-                    String page = leafData.getString("page");
+                    List<TreeStructureInfo> parents = parseStructureInfoList(block, leafData, StoryKey.Tree.IN);
+                    String page = leafData.getString(StoryKey.PAGE);
 
-                    LogUtils.debug(GameStoryManager.class, "parseStoryTreeBlock Leaf节点数据 (id): " + id + " (page): " + page + " (parents数): " + parents.size());
+                    LogUtils.debug(GameStoryManager.class, "parseStoryTreeBlock Leaf节点数据 (" + StoryKey.Tree.ID + "): " + id + " (" + StoryKey.PAGE + "): " + page + " (parents数): " + parents.size());
                     TreeStructure leaf = new LeafStructure(block, id, page, parents);
                     map.put(leaf.getTreeStructureInfo(), leaf);
                 }
@@ -199,21 +200,21 @@ public final class GameStoryManager
     {
         if (nodeData == null) return Collections.emptyList();
 
-        List<String> pages = nodeData.getStringList("page");
+        List<String> pages = nodeData.getStringList(StoryKey.PAGE);
         if (pages != null)
         {
             LogUtils.debug(GameStoryManager.class, "parsePageList 解析为数组 (size): " + pages.size());
             return pages;
         }
 
-        String singlePage = nodeData.getString("page");
+        String singlePage = nodeData.getString(StoryKey.PAGE);
         if (singlePage != null && !singlePage.isEmpty())
         {
             LogUtils.debug(GameStoryManager.class, "parsePageList 解析为单页字符串 (page): " + singlePage);
             return Collections.singletonList(singlePage);
         }
 
-        LogUtils.debug(GameStoryManager.class, "parsePageList 未找到page数据");
+        LogUtils.debug(GameStoryManager.class, "parsePageList 未找到" + StoryKey.PAGE + "数据");
         return Collections.emptyList();
     }
 
@@ -221,7 +222,7 @@ public final class GameStoryManager
      * 从节点数据中解析指定key对应的连接信息列表
      * @param block 块标识
      * @param nodeData 节点JSON数据
-     * @param key JSON中的key名称（如"in"或"out"）
+     * @param key 连接方向（in / out）
      * @return 树结构信息列表
      */
     private List<TreeStructureInfo> parseStructureInfoList (String block, JsonEntity nodeData, String key)
@@ -370,7 +371,7 @@ public final class GameStoryManager
                 return null;
             }
 
-            LogUtils.debug(GameStoryManager.class, "getPage 获取页面成功 (roleId): " + role.getId() + " (pageId): " + pageId + " (page): " + page);
+            LogUtils.debug(GameStoryManager.class, "getPage 获取页面成功 (roleId): " + role.getId() + " (pageId): " + pageId + " (" + StoryKey.PAGE + "): " + page);
             return page;
         }
         catch (Exception e)

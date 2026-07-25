@@ -6,6 +6,7 @@ import com.hujiugame.qingfeng.data.game.Layout;
 import com.hujiugame.qingfeng.data.story.tree.TreeStructureInfo;
 import com.hujiugame.qingfeng.data.story.tree.TreeStructureType;
 import com.hujiugame.qingfeng.type.file.FileName;
+import com.hujiugame.qingfeng.type.key.StoryKey;
 import com.hujiugame.qingfeng.type.file.PathName;
 import com.hujiugame.qingfeng.manager.LayoutManager;
 import com.hujiugame.qingfeng.manager.ThemeManager;
@@ -119,20 +120,20 @@ public class Role
         try
         {
             // 解析角色id
-            if (roleJson.containsKey("id"))
+            if (roleJson.containsKey(StoryKey.Role.ID))
             {
-                this.id = roleJson.getString("id");
+                this.id = roleJson.getString(StoryKey.Role.ID);
             }
             else
             {
-                LogUtils.error(Role.class, "Role 角色字段不存在 (key): id");
+                LogUtils.error(Role.class, "Role 角色字段不存在 (key): " + StoryKey.Role.ID);
                 return false;
             }
 
             // 解析起始界面
-            if (roleJson.containsKey("root"))
+            if (roleJson.containsKey(StoryKey.Role.ROOT))
             {
-                JsonEntity rootJson = roleJson.getJsonEntityByKey("root");
+                JsonEntity rootJson = roleJson.getJsonEntityByKey(StoryKey.Role.ROOT);
                 TreeStructureInfo root = new TreeStructureInfo(rootJson);
                 if (root.getStructureType() != TreeStructureType.ROOT)
                 {
@@ -143,7 +144,7 @@ public class Role
             }
             else
             {
-                LogUtils.error(Role.class, "Role 起始根节点字段不存在 (key): root");
+                LogUtils.error(Role.class, "Role 起始根节点字段不存在 (key): " + StoryKey.Role.ROOT);
                 return false;
             }
 

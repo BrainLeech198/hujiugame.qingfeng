@@ -1,6 +1,7 @@
 package com.hujiugame.qingfeng.data.story.tree;
 
 import com.hujiugame.qingfeng.data.JsonEntity;
+import com.hujiugame.qingfeng.type.key.StoryKey;
 import com.hujiugame.qingfeng.util.system.LogUtils;
 
 import java.util.Objects;
@@ -43,7 +44,7 @@ public class TreeStructureInfo
      */
     public TreeStructureInfo (String defaultBlock, JsonEntity json)
     {
-        if (json.getString("block") == null) json.put("block", defaultBlock);
+        if (json.getString(StoryKey.Tree.BLOCK) == null) json.put(StoryKey.Tree.BLOCK, defaultBlock);
         loadFromJson(json);
     }
 
@@ -54,9 +55,9 @@ public class TreeStructureInfo
      */
     private void loadFromJson (JsonEntity json)
     {
-        String block = json.getString("block");
-        String typeString = json.getString("type");
-        String id = json.getString("id");
+        String block = json.getString(StoryKey.Tree.BLOCK);
+        String typeString = json.getString(StoryKey.Tree.TYPE);
+        String id = json.getString(StoryKey.Tree.ID);
         if (block != null && typeString != null && id != null)
         {
             try
@@ -65,16 +66,21 @@ public class TreeStructureInfo
                 this.block = block;
                 this.structureType = type;
                 this.structureId = id;
-                LogUtils.debug(TreeStructureInfo.class, "TreeStructureInfo 节点信息 (json): " + json + " (block): " + block + " (type): " + type + " (id): " + id);
+                LogUtils.debug(TreeStructureInfo.class, "TreeStructureInfo 节点信息 (json): " + json
+                    + " (" + StoryKey.Tree.BLOCK + "): " + block
+                    + " (" + StoryKey.Tree.TYPE + "): " + type
+                    + " (" + StoryKey.Tree.ID + "): " + id);
             }
             catch (IllegalArgumentException e)
             {
-                LogUtils.error(TreeStructureInfo.class, "TreeStructureInfo 未知节点类型 (json): " + json + " (type): " + typeString);
+                LogUtils.error(TreeStructureInfo.class, "TreeStructureInfo 未知节点类型 (json): " + json
+                    + " (" + StoryKey.Tree.TYPE + "): " + typeString);
             }
         }
         else
         {
-            LogUtils.error(TreeStructureInfo.class, "TreeStructureInfo 节点信息缺失 (json): " + json + " 正确应该包括 (block) (type) (id)");
+            LogUtils.error(TreeStructureInfo.class, "TreeStructureInfo 节点信息缺失 (json): " + json
+                + " 正确应该包括 (" + StoryKey.Tree.BLOCK + ") (" + StoryKey.Tree.TYPE + ") (" + StoryKey.Tree.ID + ")");
         }
     }
 
