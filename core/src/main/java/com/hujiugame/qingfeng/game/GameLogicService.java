@@ -4,6 +4,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.data.play.PlayLocalData;
 import com.hujiugame.qingfeng.type.file.FileName;
+import com.hujiugame.qingfeng.type.key.ConfigKey;
 import com.hujiugame.qingfeng.util.system.FileUtils;
 import com.hujiugame.qingfeng.util.system.LogUtils;
 
@@ -105,13 +106,13 @@ public final class GameLogicService
     {
         try
         {
-            if (gameConfigJson.containsKey("id"))
+            if (gameConfigJson.containsKey(ConfigKey.Game.ID))
             {
-                return gameConfigJson.getString("id");
+                return gameConfigJson.getString(ConfigKey.Game.ID);
             }
             else
             {
-                LogUtils.error(GameLogicService.class, "parseGameId 配置文件缺少 id 字段");
+                LogUtils.error(GameLogicService.class, "parseGameId 配置文件缺少 " + ConfigKey.Game.ID + " 字段");
                 return null;
             }
         }
@@ -132,13 +133,13 @@ public final class GameLogicService
     {
         try
         {
-            if (gameConfigJson.containsKey("name"))
+            if (gameConfigJson.containsKey(ConfigKey.Game.NAME))
             {
-                return gameConfigJson.getString("name");
+                return gameConfigJson.getString(ConfigKey.Game.NAME);
             }
             else
             {
-                LogUtils.error(GameLogicService.class, "parseGameName 配置文件缺少 name 字段");
+                LogUtils.error(GameLogicService.class, "parseGameName 配置文件缺少 " + ConfigKey.Game.NAME + " 字段");
                 return null;
             }
         }
@@ -159,13 +160,13 @@ public final class GameLogicService
     {
         try
         {
-            if (gameConfigJson.containsKey("version"))
+            if (gameConfigJson.containsKey(ConfigKey.Game.VERSION))
             {
-                return gameConfigJson.getString("version");
+                return gameConfigJson.getString(ConfigKey.Game.VERSION);
             }
             else
             {
-                LogUtils.error(GameLogicService.class, "parseGameVersion 配置文件缺少 version 字段");
+                LogUtils.error(GameLogicService.class, "parseGameVersion 配置文件缺少 " + ConfigKey.Game.VERSION + " 字段");
                 return null;
             }
         }
@@ -186,13 +187,13 @@ public final class GameLogicService
     {
         try
         {
-            if (gameConfigJson.containsKey("launcher_version"))
+            if (gameConfigJson.containsKey(ConfigKey.Game.LAUNCHER_VERSION))
             {
-                return gameConfigJson.getString("launcher_version");
+                return gameConfigJson.getString(ConfigKey.Game.LAUNCHER_VERSION);
             }
             else
             {
-                LogUtils.error(GameLogicService.class, "parseGameLauncherVersion 配置文件缺少 launcher_version 字段");
+                LogUtils.error(GameLogicService.class, "parseGameLauncherVersion 配置文件缺少 " + ConfigKey.Game.LAUNCHER_VERSION + " 字段");
                 return null;
             }
         }

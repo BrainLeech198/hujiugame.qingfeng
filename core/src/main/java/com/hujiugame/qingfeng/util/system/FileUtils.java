@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.type.file.FileName;
+import com.hujiugame.qingfeng.type.key.ConfigKey;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -247,8 +248,8 @@ public final class FileUtils
                 return new FileHandle[0];
             }
 
-            List<String> childDirs = dirEntity.getStringList("directory");
-            List<String> childFiles = dirEntity.getStringList("file");
+            List<String> childDirs = dirEntity.getStringList(ConfigKey.Directory.DIRECTORY);
+            List<String> childFiles = dirEntity.getStringList(ConfigKey.Directory.FILE);
 
             int dirCount = childDirs != null ? childDirs.size() : 0;
             int fileCount = childFiles != null ? childFiles.size() : 0;
@@ -604,8 +605,8 @@ public final class FileUtils
         {
             // 获取自己目录的结构
             JsonEntity dirStructure = INTERNAL_DIRECTORY_STRUCTURE.getJsonEntityByKey(sourceDirectoryPath);
-            List<String> childDirectoryList = dirStructure.getStringList("directory");
-            List<String> childFileList = dirStructure.getStringList("file");
+            List<String> childDirectoryList = dirStructure.getStringList(ConfigKey.Directory.DIRECTORY);
+            List<String> childFileList = dirStructure.getStringList(ConfigKey.Directory.FILE);
 
             // 遍历目录继续递归复制
             for (String childDirectory : childDirectoryList)

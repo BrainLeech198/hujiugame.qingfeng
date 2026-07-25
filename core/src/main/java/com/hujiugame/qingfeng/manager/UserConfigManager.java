@@ -5,7 +5,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.type.file.FileName;
 import com.hujiugame.qingfeng.type.file.PathName;
-import com.hujiugame.qingfeng.type.key.UserConfigKey;
+import com.hujiugame.qingfeng.type.key.ConfigKey;
 import com.hujiugame.qingfeng.type.ui.UseViewport;
 import com.hujiugame.qingfeng.util.system.FileUtils;
 import com.hujiugame.qingfeng.util.system.LogUtils;
@@ -92,9 +92,9 @@ public final class UserConfigManager
     {
         try
         {
-            if (userConfigJson.containsKey(UserConfigKey.LANGUAGE))
+            if (userConfigJson.containsKey(ConfigKey.User.LANGUAGE))
             {
-                this.language = userConfigJson.getString(UserConfigKey.LANGUAGE);
+                this.language = userConfigJson.getString(ConfigKey.User.LANGUAGE);
                 return true;
             }
             else
@@ -120,9 +120,9 @@ public final class UserConfigManager
     {
         try
         {
-            if (userConfigJson.containsKey(UserConfigKey.THEME))
+            if (userConfigJson.containsKey(ConfigKey.User.THEME))
             {
-                this.theme = userConfigJson.getString(UserConfigKey.THEME);
+                this.theme = userConfigJson.getString(ConfigKey.User.THEME);
                 return true;
             }
             else
@@ -148,9 +148,9 @@ public final class UserConfigManager
     {
         try
         {
-            if (userConfigJson.containsKey(UserConfigKey.USE_VIEWPORT))
+            if (userConfigJson.containsKey(ConfigKey.User.USE_VIEWPORT))
             {
-                this.useViewport = UseViewport.valueOf(userConfigJson.getString(UserConfigKey.USE_VIEWPORT).toUpperCase());
+                this.useViewport = UseViewport.valueOf(userConfigJson.getString(ConfigKey.User.USE_VIEWPORT).toUpperCase());
                 return true;
             }
             else
@@ -176,9 +176,9 @@ public final class UserConfigManager
     {
         try
         {
-            if (userConfigJson.containsKey(UserConfigKey.FULLSCREEN))
+            if (userConfigJson.containsKey(ConfigKey.User.FULLSCREEN))
             {
-                this.fullscreen = userConfigJson.getBoolean(UserConfigKey.FULLSCREEN);
+                this.fullscreen = userConfigJson.getBoolean(ConfigKey.User.FULLSCREEN);
                 return true;
             }
             else
@@ -204,14 +204,14 @@ public final class UserConfigManager
     {
         try
         {
-            if (userConfigJson.containsKey(UserConfigKey.RESOLUTION))
+            if (userConfigJson.containsKey(ConfigKey.User.Resolution.KEY))
             {
-                JsonEntity resolutionJson = userConfigJson.getJsonEntityByKey(UserConfigKey.RESOLUTION);
+                JsonEntity resolutionJson = userConfigJson.getJsonEntityByKey(ConfigKey.User.Resolution.KEY);
 
                 // width
-                if (resolutionJson.containsKey(UserConfigKey.RESOLUTION_WIDTH))
+                if (resolutionJson.containsKey(ConfigKey.User.Resolution.WIDTH))
                 {
-                    this.resolutionWidth = resolutionJson.getInt(UserConfigKey.RESOLUTION_WIDTH);
+                    this.resolutionWidth = resolutionJson.getInt(ConfigKey.User.Resolution.WIDTH);
                 }
                 else
                 {
@@ -220,9 +220,9 @@ public final class UserConfigManager
                 }
 
                 // height
-                if (resolutionJson.containsKey(UserConfigKey.RESOLUTION_HEIGHT))
+                if (resolutionJson.containsKey(ConfigKey.User.Resolution.HEIGHT))
                 {
-                    this.resolutionHeight = resolutionJson.getInt(UserConfigKey.RESOLUTION_HEIGHT);
+                    this.resolutionHeight = resolutionJson.getInt(ConfigKey.User.Resolution.HEIGHT);
                 }
                 else
                 {
@@ -255,14 +255,14 @@ public final class UserConfigManager
     {
         try
         {
-            if (userConfigJson.containsKey(UserConfigKey.SOUND_VOLUME))
+            if (userConfigJson.containsKey(ConfigKey.User.Volume.KEY))
             {
-                JsonEntity soundVolumeJson = userConfigJson.getJsonEntityByKey(UserConfigKey.SOUND_VOLUME);
+                JsonEntity soundVolumeJson = userConfigJson.getJsonEntityByKey(ConfigKey.User.Volume.KEY);
 
                 // total
-                if (soundVolumeJson.containsKey(UserConfigKey.SOUND_VOLUME_TOTAL))
+                if (soundVolumeJson.containsKey(ConfigKey.User.Volume.TOTAL))
                 {
-                    this.soundVolumeTotal = soundVolumeJson.getFloat(UserConfigKey.SOUND_VOLUME_TOTAL);
+                    this.soundVolumeTotal = soundVolumeJson.getFloat(ConfigKey.User.Volume.TOTAL);
                 }
                 else
                 {
@@ -271,9 +271,9 @@ public final class UserConfigManager
                 }
 
                 // music
-                if (soundVolumeJson.containsKey(UserConfigKey.SOUND_VOLUME_MUSIC))
+                if (soundVolumeJson.containsKey(ConfigKey.User.Volume.MUSIC))
                 {
-                    this.soundVolumeMusic = soundVolumeJson.getFloat(UserConfigKey.SOUND_VOLUME_MUSIC);
+                    this.soundVolumeMusic = soundVolumeJson.getFloat(ConfigKey.User.Volume.MUSIC);
                 }
                 else
                 {
@@ -282,9 +282,9 @@ public final class UserConfigManager
                 }
 
                 // sound
-                if (soundVolumeJson.containsKey(UserConfigKey.SOUND_VOLUME_SOUND))
+                if (soundVolumeJson.containsKey(ConfigKey.User.Volume.SOUND))
                 {
-                    this.soundVolumeSound = soundVolumeJson.getFloat(UserConfigKey.SOUND_VOLUME_SOUND);
+                    this.soundVolumeSound = soundVolumeJson.getFloat(ConfigKey.User.Volume.SOUND);
                 }
                 else
                 {
@@ -466,7 +466,7 @@ public final class UserConfigManager
     public void setLanguage (String language)
     {
         this.language = language;
-        json.put("language", language);
+        json.put(ConfigKey.User.LANGUAGE, language);
     }
 
     /**
@@ -487,7 +487,7 @@ public final class UserConfigManager
     public void setTheme (String theme)
     {
         this.theme = theme;
-        json.put("theme", theme);
+        json.put(ConfigKey.User.THEME, theme);
     }
 
     /**
@@ -588,7 +588,7 @@ public final class UserConfigManager
     public void setSoundVolumeTotal (float soundVolumeTotal)
     {
         this.soundVolumeTotal = soundVolumeTotal;
-        json.getJsonEntityByKey("soundVolume").put("total", soundVolumeTotal);
+        json.getJsonEntityByKey(ConfigKey.User.Volume.KEY).put(ConfigKey.User.Volume.TOTAL, soundVolumeTotal);
     }
 
     /**
@@ -609,7 +609,7 @@ public final class UserConfigManager
     public void setSoundVolumeMusic (float soundVolumeMusic)
     {
         this.soundVolumeMusic = soundVolumeMusic;
-        json.getJsonEntityByKey("soundVolume").put("music", soundVolumeMusic);
+        json.getJsonEntityByKey(ConfigKey.User.Volume.KEY).put(ConfigKey.User.Volume.MUSIC, soundVolumeMusic);
     }
 
     /**
@@ -630,6 +630,6 @@ public final class UserConfigManager
     public void setSoundVolumeSound (float soundVolumeSound)
     {
         this.soundVolumeSound = soundVolumeSound;
-        json.getJsonEntityByKey("soundVolume").put("sound", soundVolumeSound);
+        json.getJsonEntityByKey(ConfigKey.User.Volume.KEY).put(ConfigKey.User.Volume.SOUND, soundVolumeSound);
     }
 }

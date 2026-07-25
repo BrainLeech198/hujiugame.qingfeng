@@ -5,6 +5,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.type.file.FileName;
 import com.hujiugame.qingfeng.type.file.PathName;
+import com.hujiugame.qingfeng.type.key.ConfigKey;
 import com.hujiugame.qingfeng.util.system.FileUtils;
 import com.hujiugame.qingfeng.util.system.LogUtils;
 
@@ -98,14 +99,14 @@ public final class GameUserConfigManager
     {
         try
         {
-            if (userConfigJson.containsKey("language"))
+            if (userConfigJson.containsKey(ConfigKey.User.LANGUAGE))
             {
-                this.language = userConfigJson.getString("language");
+                this.language = userConfigJson.getString(ConfigKey.User.LANGUAGE);
                 return true;
             }
             else
             {
-                LogUtils.error(GameUserConfigManager.class, "init 用户游戏配置缺少language字段");
+                LogUtils.error(GameUserConfigManager.class, "init 用户游戏配置缺少" + ConfigKey.User.LANGUAGE + "字段");
                 return false;
             }
         }
@@ -126,14 +127,14 @@ public final class GameUserConfigManager
     {
         try
         {
-            if (userConfigJson.containsKey("theme"))
+            if (userConfigJson.containsKey(ConfigKey.User.THEME))
             {
-                this.theme = userConfigJson.getString("theme");
+                this.theme = userConfigJson.getString(ConfigKey.User.THEME);
                 return true;
             }
             else
             {
-                LogUtils.error(GameUserConfigManager.class, "init 用户游戏配置缺少theme字段");
+                LogUtils.error(GameUserConfigManager.class, "init 用户游戏配置缺少" + ConfigKey.User.THEME + "字段");
                 return false;
             }
         }
@@ -245,7 +246,7 @@ public final class GameUserConfigManager
     public void setLanguage (String language)
     {
         this.language = language;
-        json.put("language", language);
+        json.put(ConfigKey.User.LANGUAGE, language);
     }
 
     /**
@@ -266,6 +267,6 @@ public final class GameUserConfigManager
     public void setTheme (String theme)
     {
         this.theme = theme;
-        json.put("theme", theme);
+        json.put(ConfigKey.User.THEME, theme);
     }
 }
