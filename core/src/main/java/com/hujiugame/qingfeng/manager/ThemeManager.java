@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.type.Numeric;
 import com.hujiugame.qingfeng.type.Name;
+import com.hujiugame.qingfeng.type.key.ThemeKey;
 import com.hujiugame.qingfeng.type.file.FileName;
 import com.hujiugame.qingfeng.type.file.PathName;
 import com.hujiugame.qingfeng.ui.kind.ColorConfig;
@@ -173,9 +174,9 @@ public final class ThemeManager
         try
         {
             // 字体读取
-            if (themeJson.containsKey("version"))
+            if (themeJson.containsKey(ThemeKey.VERSION))
             {
-                version = themeJson.getString("version");
+                version = themeJson.getString(ThemeKey.VERSION);
                 LogUtils.debug(ThemeManager.class, "loadFontFromJson 读取主题版本 (version): " + version);
             }
             else
@@ -203,9 +204,9 @@ public final class ThemeManager
         try
         {
             // 字体读取
-            if (json.containsKey("font"))
+            if (json.containsKey(ThemeKey.FONT))
             {
-                font = json.getString("font");
+                font = json.getString(ThemeKey.FONT);
                 LogUtils.debug(ThemeManager.class, "loadFontFromJson 读取主题字体 (font): " + font);
             }
             else
@@ -231,9 +232,9 @@ public final class ThemeManager
     {
         try
         {
-            if (json.containsKey("fontUseSize"))
+            if (json.containsKey(ThemeKey.FONT_USE_SIZE))
             {
-                List<Float> sizeList = json.getFloatList("fontUseSize");
+                List<Float> sizeList = json.getFloatList(ThemeKey.FONT_USE_SIZE);
                 fontUseSize = new float[sizeList.size()];
                 for (int i = 0; i < sizeList.size(); i++)
                 {
@@ -265,7 +266,7 @@ public final class ThemeManager
         try
         {
             // 颜色读取
-            String[] colorKeys = new String[]{"primaryColor", "secondaryColor", "fontColor"};
+            String[] colorKeys = new String[]{ThemeKey.PRIMARY_COLOR, ThemeKey.SECONDARY_COLOR, ThemeKey.FONT_COLOR};
             String[] colorHexs = new String[]{"#000000FF", "#000000FF", "#000000FF"};
 
             for (int i = 0; i < colorKeys.length; i++)
@@ -309,7 +310,7 @@ public final class ThemeManager
             String colorHex = String.format("#%02X%02X%02X%02X",
                 (int)(primaryColor.r * 255), (int)(primaryColor.g * 255),
                 (int)(primaryColor.b * 255), (int)(primaryColor.a * 255));
-            appConfig.put("process_color", colorHex);
+            appConfig.put(ThemeKey.PROCESS_COLOR, colorHex);
             FileUtils.createStringFile(appConfig.getJsonString(), appConfigFileHandle, false);
             LogUtils.debug(ThemeManager.class, "saveProcessColorToAppConfig 写入主色调: " + colorHex);
         }

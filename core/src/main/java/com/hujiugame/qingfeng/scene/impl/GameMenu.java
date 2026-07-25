@@ -4,8 +4,7 @@ import com.hujiugame.qingfeng.core.GameHost;
 import com.hujiugame.qingfeng.data.game.GameStateDataContainer;
 import com.hujiugame.qingfeng.type.game.state.GameState;
 import com.hujiugame.qingfeng.type.game.state.GameSubState;
-import com.hujiugame.qingfeng.type.key.RequirementLanguageKey;
-import com.hujiugame.qingfeng.type.key.RequirementUiKey;
+import com.hujiugame.qingfeng.type.key.RequirementKey;
 import com.hujiugame.qingfeng.audio.AudioManager;
 import com.hujiugame.qingfeng.graphic.GraphicsManager;
 import com.hujiugame.qingfeng.scene.GameRender;
@@ -56,22 +55,22 @@ public final class GameMenu implements GameRender
     public void update (float deltaTime)
     {
         // 开始按钮
-        if (gameUiManager.isButtonClicked(RequirementUiKey.GAME_MENU_BUTTON_START))
+        if (gameUiManager.isButtonClicked(RequirementKey.Ui.GAME_MENU_BUTTON_START))
         {
             eventQueue.addEvent(new EventPushGameState(GameState.GAME, GameSubState.GAME_ROLE));
         }
 
         // 按下返回按钮
-        if (gameUiManager.isButtonClicked(RequirementUiKey.GAME_MENU_BUTTON_QUIT))
+        if (gameUiManager.isButtonClicked(RequirementKey.Ui.GAME_MENU_BUTTON_QUIT))
         {
-            gameUiManager.getMessageBox().showAsk(RequirementLanguageKey.IN_GAME_MESSAGE_BOX_QUIT_GAME_KEY,
-                "{language$" + RequirementLanguageKey.REQUIREMENT_BLOCK + "#" + RequirementLanguageKey.IN_GAME_MESSAGE_BOX_FIRST_KEY + "." + RequirementLanguageKey.IN_GAME_MESSAGE_BOX_QUIT_GAME_TITLE + "}",
-                "{language$" + RequirementLanguageKey.REQUIREMENT_BLOCK + "#" + RequirementLanguageKey.IN_GAME_MESSAGE_BOX_FIRST_KEY + "." + RequirementLanguageKey.IN_GAME_MESSAGE_BOX_QUIT_GAME_CONTENT + "}"
+            gameUiManager.getMessageBox().showAsk(RequirementKey.Language.IN_GAME_MESSAGE_BOX_QUIT_GAME_KEY,
+                "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.IN_GAME_MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.IN_GAME_MESSAGE_BOX_QUIT_GAME_TITLE + "}",
+                "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.IN_GAME_MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.IN_GAME_MESSAGE_BOX_QUIT_GAME_CONTENT + "}"
             );
         }
 
         // 检测弹窗
-        gameUiManager.getMessageBox().handleAsk(RequirementLanguageKey.IN_GAME_MESSAGE_BOX_QUIT_GAME_KEY,
+        gameUiManager.getMessageBox().handleAsk(RequirementKey.Language.IN_GAME_MESSAGE_BOX_QUIT_GAME_KEY,
             () ->
             {
                 gameHost.getGameSessionManager().quitGame();

@@ -1,6 +1,7 @@
 package com.hujiugame.qingfeng.util.json.parser;
 
 import com.hujiugame.qingfeng.data.JsonEntity;
+import com.hujiugame.qingfeng.type.key.GraphicsKey;
 
 public class JsonPathParser
 {
@@ -16,9 +17,9 @@ public class JsonPathParser
     {
         this.json = json;
 
-        if (json.containsKey("path"))
+        if (json.containsKey(GraphicsKey.PATH))
         {
-            path = json.getString("path");
+            path = json.getString(GraphicsKey.PATH);
         }
     }
 

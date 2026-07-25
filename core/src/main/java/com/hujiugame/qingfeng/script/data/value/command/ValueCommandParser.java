@@ -2,6 +2,7 @@ package com.hujiugame.qingfeng.script.data.value.command;
 
 import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.script.data.value.command.action.*;
+import com.hujiugame.qingfeng.type.key.ScriptKey;
 import com.hujiugame.qingfeng.script.data.value.command.param.atomic.*;
 import com.hujiugame.qingfeng.script.data.value.command.param.compare.*;
 import com.hujiugame.qingfeng.script.data.value.command.param.logic.AndLogicValueCommandParam;
@@ -29,20 +30,20 @@ public class ValueCommandParser
             return null;
         }
 
-        if (!json.containsKey("type"))
+        if (!json.containsKey(ScriptKey.Command.TYPE))
         {
-            LogUtils.error(ValueCommandParser.class, "parse 缺少 type 字段 (json): " + json);
+            LogUtils.error(ValueCommandParser.class, "parse 缺少 " + ScriptKey.Command.TYPE + " 字段 (json): " + json);
             return null;
         }
-        if (!json.containsKey("action"))
+        if (!json.containsKey(ScriptKey.Command.ACTION))
         {
-            LogUtils.error(ValueCommandParser.class, "parse 缺少 action 字段 (json): " + json);
+            LogUtils.error(ValueCommandParser.class, "parse 缺少 " + ScriptKey.Command.ACTION + " 字段 (json): " + json);
             return null;
         }
 
-        String typeStr = json.getString("type");
-        String actionStr = json.getString("action");
-        JsonEntity paramJson = json.containsKey("param") ? json.getJsonEntityByKey("param") : new JsonEntity();
+        String typeStr = json.getString(ScriptKey.Command.TYPE);
+        String actionStr = json.getString(ScriptKey.Command.ACTION);
+        JsonEntity paramJson = json.containsKey(ScriptKey.Command.PARAM) ? json.getJsonEntityByKey(ScriptKey.Command.PARAM) : new JsonEntity();
 
         ValueCommandType type = ValueCommandType.fromString(typeStr);
         ValueCommandAction action = ValueCommandAction.fromString(actionStr);

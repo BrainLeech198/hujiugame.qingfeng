@@ -38,6 +38,8 @@ import com.hujiugame.qingfeng.ui.kind.label.LabelState;
 import com.hujiugame.qingfeng.type.Numeric;
 import com.hujiugame.qingfeng.type.file.FileName;
 import com.hujiugame.qingfeng.type.file.PathName;
+import com.hujiugame.qingfeng.type.key.JsonKey;
+import com.hujiugame.qingfeng.type.key.UiKey;
 import com.hujiugame.qingfeng.type.ui.FontFlag;
 import com.hujiugame.qingfeng.audio.AudioManager;
 import com.hujiugame.qingfeng.graphic.GraphicsManager;
@@ -219,19 +221,19 @@ public final class UiManager
                 Set<String> styleSet = new HashSet<>(styles);
                 switch (category)
                 {
-                    case "button":
+                    case UiKey.Button.KEY:
                         availableButtonStyles = styleSet;
                         break;
-                    case "label":
+                    case UiKey.Label.KEY:
                         availableLabelStyles = styleSet;
                         break;
-                    case "image":
+                    case UiKey.Image.KEY:
                         availableImageStyles = styleSet;
                         break;
-                    case "font":
+                    case UiKey.Font.KEY:
                         availableFontStyles = styleSet;
                         break;
-                    case "messageBox":
+                    case UiKey.MessageBox.KEY:
                         availableMessageBoxStyles = styleSet;
                         break;
                 }
@@ -766,21 +768,21 @@ public final class UiManager
                 JsonEntity fontJson = new JsonEntity(fontJsonFileHandle);
                 LogUtils.debug(UiManager.class, "loadFont 读取字体配置 (json): " + fontJson);
 
-                String fontTag = fontJson.getString("name");
+                String fontTag = fontJson.getString(UiKey.Font.NAME);
                 if (fontTag == null)
                 {
                     LogUtils.error(UiManager.class, "loadFont 字体配置缺少name字段 (json): " + fontJson);
                     return false;
                 }
 
-                String fontFile = fontJson.getString("path");
+                String fontFile = fontJson.getString(UiKey.Font.PATH);
                 if (fontFile == null)
                 {
                     LogUtils.error(UiManager.class, "loadFont 字体配置缺少path字段 (json): " + fontJson);
                     return false;
                 }
 
-                float fontScale = fontJson.getFloat("scale");
+                float fontScale = fontJson.getFloat(UiKey.Font.SCALE);
                 if (fontScale <= 0)
                 {
                     LogUtils.error(UiManager.class, "loadFont 字体配置缺少scale字段 (json): " + fontJson);
@@ -1786,15 +1788,15 @@ public final class UiManager
             float padX = 50, padY = 50;
             if (fontArgs != null)
             {
-                if (fontArgs.containsKey("padX") && fontArgs.containsKey("padY"))
+                if (fontArgs.containsKey(JsonKey.Font.Args.PAD_X) && fontArgs.containsKey(JsonKey.Font.Args.PAD_Y))
                 {
-                    padX = fontArgs.getFloat("padX");
-                    padY = fontArgs.getFloat("padY");
+                    padX = fontArgs.getFloat(JsonKey.Font.Args.PAD_X);
+                    padY = fontArgs.getFloat(JsonKey.Font.Args.PAD_Y);
                 }
-                else if (fontArgs.containsKey("pad"))
+                else if (fontArgs.containsKey(JsonKey.Font.Args.PAD))
                 {
-                    padX = fontArgs.getFloat("pad");
-                    padY = fontArgs.getFloat("pad");
+                    padX = fontArgs.getFloat(JsonKey.Font.Args.PAD);
+                    padY = fontArgs.getFloat(JsonKey.Font.Args.PAD);
                 }
             }
 
@@ -2038,15 +2040,15 @@ public final class UiManager
             if (fontArgs != null)
             {
                 float padX = 50, padY = 50;
-                if (fontArgs.containsKey("padX") && fontArgs.containsKey("padY"))
+                if (fontArgs.containsKey(JsonKey.Font.Args.PAD_X) && fontArgs.containsKey(JsonKey.Font.Args.PAD_Y))
                 {
-                    padX = fontArgs.getFloat("padX");
-                    padY = fontArgs.getFloat("padY");
+                    padX = fontArgs.getFloat(JsonKey.Font.Args.PAD_X);
+                    padY = fontArgs.getFloat(JsonKey.Font.Args.PAD_Y);
                 }
-                else if (fontArgs.containsKey("pad"))
+                else if (fontArgs.containsKey(JsonKey.Font.Args.PAD))
                 {
-                    padX = fontArgs.getFloat("pad");
-                    padY = fontArgs.getFloat("pad");
+                    padX = fontArgs.getFloat(JsonKey.Font.Args.PAD);
+                    padY = fontArgs.getFloat(JsonKey.Font.Args.PAD);
                 }
                 label.setPosition(padX, padY);
                 label.setSize(width - padX * 2, height - padY * 2);

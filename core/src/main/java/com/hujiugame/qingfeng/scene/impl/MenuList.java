@@ -6,12 +6,10 @@ import com.hujiugame.qingfeng.core.GameHost;
 import com.hujiugame.qingfeng.core.UpdateChecker;
 import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.data.game.GameStateDataContainer;
-import com.hujiugame.qingfeng.type.key.RequirementConfigKey;
+import com.hujiugame.qingfeng.type.key.RequirementKey;
 import com.hujiugame.qingfeng.ui.kind.image.ImageInfo;
 import com.hujiugame.qingfeng.type.file.PathName;
 import com.hujiugame.qingfeng.type.key.GameInfoKey;
-import com.hujiugame.qingfeng.type.key.RequirementLanguageKey;
-import com.hujiugame.qingfeng.type.key.RequirementUiKey;
 import com.hujiugame.qingfeng.audio.AudioManager;
 import com.hujiugame.qingfeng.graphic.GraphicsManager;
 import com.hujiugame.qingfeng.scene.GameRender;
@@ -49,10 +47,10 @@ public final class MenuList implements GameRender
     private int tailIndex = -1;
     private int selectedIndex = -1;
 
-    private final String unSelectFrameTag = RequirementUiKey.MENU_LIST_IMAGE_UNSELECT_FRAME;
-    private final String selectFrameTag = RequirementUiKey.MENU_LIST_IMAGE_SELECT_FRAME;
-    private final String gameCoverTag = RequirementUiKey.MENU_LIST_IMAGE_GAME_COVER;
-    private final String gameCoverKind = RequirementUiKey.MENU_LIST_IMAGE_GAME_COVER_KIND;
+    private final String unSelectFrameTag = RequirementKey.Ui.MENU_LIST_IMAGE_UNSELECT_FRAME;
+    private final String selectFrameTag = RequirementKey.Ui.MENU_LIST_IMAGE_SELECT_FRAME;
+    private final String gameCoverTag = RequirementKey.Ui.MENU_LIST_IMAGE_GAME_COVER;
+    private final String gameCoverKind = RequirementKey.Ui.MENU_LIST_IMAGE_GAME_COVER_KIND;
 
     private final List<String> gamePathNameList = new LinkedList<>();
     private String selectedGamePath = "";
@@ -177,20 +175,20 @@ public final class MenuList implements GameRender
         if (selectedIndex == -1)
         {
             // 隐藏功能按键
-            uiManager.hideButton(RequirementUiKey.MENU_LIST_BUTTON_PROFILE);
-            uiManager.hideButton(RequirementUiKey.MENU_LIST_BUTTON_SHARE);
-            uiManager.hideButton(RequirementUiKey.MENU_LIST_BUTTON_DELETE);
-            uiManager.hideLabel(RequirementUiKey.MENU_LIST_LABEL_SELECTED_PATH);
-            uiManager.showLabel(RequirementUiKey.MENU_LIST_LABEL_ABSOLUTE_PATH);
+            uiManager.hideButton(RequirementKey.Ui.MENU_LIST_BUTTON_PROFILE);
+            uiManager.hideButton(RequirementKey.Ui.MENU_LIST_BUTTON_SHARE);
+            uiManager.hideButton(RequirementKey.Ui.MENU_LIST_BUTTON_DELETE);
+            uiManager.hideLabel(RequirementKey.Ui.MENU_LIST_LABEL_SELECTED_PATH);
+            uiManager.showLabel(RequirementKey.Ui.MENU_LIST_LABEL_ABSOLUTE_PATH);
         }
         else
         {
             // 显示功能按键
-            uiManager.showButton(RequirementUiKey.MENU_LIST_BUTTON_PROFILE);
-            uiManager.showButton(RequirementUiKey.MENU_LIST_BUTTON_SHARE);
-            uiManager.showButton(RequirementUiKey.MENU_LIST_BUTTON_DELETE);
-            uiManager.showLabel(RequirementUiKey.MENU_LIST_LABEL_SELECTED_PATH);
-            uiManager.hideLabel(RequirementUiKey.MENU_LIST_LABEL_ABSOLUTE_PATH);
+            uiManager.showButton(RequirementKey.Ui.MENU_LIST_BUTTON_PROFILE);
+            uiManager.showButton(RequirementKey.Ui.MENU_LIST_BUTTON_SHARE);
+            uiManager.showButton(RequirementKey.Ui.MENU_LIST_BUTTON_DELETE);
+            uiManager.showLabel(RequirementKey.Ui.MENU_LIST_LABEL_SELECTED_PATH);
+            uiManager.hideLabel(RequirementKey.Ui.MENU_LIST_LABEL_ABSOLUTE_PATH);
         }
 
         // 设置页数显示
@@ -200,36 +198,36 @@ public final class MenuList implements GameRender
         // 判断是否单独一页
         if (maxPage == 1)
         {
-            uiManager.hideLabel(RequirementUiKey.MENU_LIST_LABEL_PAGE);
-            uiManager.hideButton(RequirementUiKey.MENU_LIST_BUTTON_SELECT_NEXT_PAGE);
-            uiManager.hideButton(RequirementUiKey.MENU_LIST_BUTTON_SELECT_LAST_PAGE);
+            uiManager.hideLabel(RequirementKey.Ui.MENU_LIST_LABEL_PAGE);
+            uiManager.hideButton(RequirementKey.Ui.MENU_LIST_BUTTON_SELECT_NEXT_PAGE);
+            uiManager.hideButton(RequirementKey.Ui.MENU_LIST_BUTTON_SELECT_LAST_PAGE);
         }
         else
         {
-            uiManager.showLabel(RequirementUiKey.MENU_LIST_LABEL_PAGE);
-            uiManager.showButton(RequirementUiKey.MENU_LIST_BUTTON_SELECT_NEXT_PAGE);
-            uiManager.showButton(RequirementUiKey.MENU_LIST_BUTTON_SELECT_LAST_PAGE);
+            uiManager.showLabel(RequirementKey.Ui.MENU_LIST_LABEL_PAGE);
+            uiManager.showButton(RequirementKey.Ui.MENU_LIST_BUTTON_SELECT_NEXT_PAGE);
+            uiManager.showButton(RequirementKey.Ui.MENU_LIST_BUTTON_SELECT_LAST_PAGE);
         }
 
         // 判断翻页情况
         // 第一页
         if (nowPage == 1)
         {
-            uiManager.disableButton(RequirementUiKey.MENU_LIST_BUTTON_SELECT_LAST_PAGE);
+            uiManager.disableButton(RequirementKey.Ui.MENU_LIST_BUTTON_SELECT_LAST_PAGE);
         }
         else
         {
-            uiManager.enableButton(RequirementUiKey.MENU_LIST_BUTTON_SELECT_LAST_PAGE);
+            uiManager.enableButton(RequirementKey.Ui.MENU_LIST_BUTTON_SELECT_LAST_PAGE);
         }
 
         // 最后一页
         if (nowPage == maxPage)
         {
-            uiManager.disableButton(RequirementUiKey.MENU_LIST_BUTTON_SELECT_NEXT_PAGE);
+            uiManager.disableButton(RequirementKey.Ui.MENU_LIST_BUTTON_SELECT_NEXT_PAGE);
         }
         else
         {
-            uiManager.enableButton(RequirementUiKey.MENU_LIST_BUTTON_SELECT_NEXT_PAGE);
+            uiManager.enableButton(RequirementKey.Ui.MENU_LIST_BUTTON_SELECT_NEXT_PAGE);
         }
     }
 
@@ -324,15 +322,15 @@ public final class MenuList implements GameRender
         // 判断版本是否一致
         if (!updateChecker.doMinorCompatible(selectedGameLauncherVersion))
         {
-            uiManager.getMessageBox().showInfo(RequirementLanguageKey.MESSAGE_BOX_GAME_VERSION_DIFFERENT_KEY,
-                "{language$" + RequirementLanguageKey.REQUIREMENT_BLOCK + "#" + RequirementLanguageKey.MESSAGE_BOX_FIRST_KEY + "." + RequirementLanguageKey.MESSAGE_BOX_GAME_VERSION_DIFFERENT_TITLE + "}",
-                "{language$" + RequirementLanguageKey.REQUIREMENT_BLOCK + "#" + RequirementLanguageKey.MESSAGE_BOX_FIRST_KEY + "." + RequirementLanguageKey.MESSAGE_BOX_GAME_VERSION_DIFFERENT_CONTENT_1 + "}"
+            uiManager.getMessageBox().showInfo(RequirementKey.Language.MESSAGE_BOX_GAME_VERSION_DIFFERENT_KEY,
+                "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_GAME_VERSION_DIFFERENT_TITLE + "}",
+                "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_GAME_VERSION_DIFFERENT_CONTENT_1 + "}"
                     + "{game$" + GameInfoKey.GAME_LIST_SELECTED_NAME + "}"
-                    + "{language$" + RequirementLanguageKey.REQUIREMENT_BLOCK + "#" + RequirementLanguageKey.MESSAGE_BOX_FIRST_KEY + "." + RequirementLanguageKey.MESSAGE_BOX_GAME_VERSION_DIFFERENT_CONTENT_2 + "}"
+                    + "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_GAME_VERSION_DIFFERENT_CONTENT_2 + "}"
                     + "{game$" + GameInfoKey.GAME_LIST_SELECTED_LAUNCHER_VERSION + "}"
-                    + "{language$" + RequirementLanguageKey.REQUIREMENT_BLOCK + "#" + RequirementLanguageKey.MESSAGE_BOX_FIRST_KEY + "." + RequirementLanguageKey.MESSAGE_BOX_GAME_VERSION_DIFFERENT_CONTENT_3 + "}"
+                    + "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_GAME_VERSION_DIFFERENT_CONTENT_3 + "}"
                     + "{game$" + GameInfoKey.LAUNCHER_VERSION + "}"
-                    + "{language$" + RequirementLanguageKey.REQUIREMENT_BLOCK + "#" + RequirementLanguageKey.MESSAGE_BOX_FIRST_KEY + "." + RequirementLanguageKey.MESSAGE_BOX_GAME_VERSION_DIFFERENT_CONTENT_4 + "}"
+                    + "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_GAME_VERSION_DIFFERENT_CONTENT_4 + "}"
             );
         }
     }
@@ -365,9 +363,9 @@ public final class MenuList implements GameRender
         this.gameStateDataContainer = gameStateDataContainer;
 
         // config
-        if (gameStateDataContainer.getConfigJson().containsKey(RequirementConfigKey.MENU_LIST_PAGE_MAX_GAME))
+        if (gameStateDataContainer.getConfigJson().containsKey(RequirementKey.Config.MENU_LIST_PAGE_MAX_GAME))
         {
-            pageMaxGame = gameStateDataContainer.getConfigJson().getInt(RequirementConfigKey.MENU_LIST_PAGE_MAX_GAME);
+            pageMaxGame = gameStateDataContainer.getConfigJson().getInt(RequirementKey.Config.MENU_LIST_PAGE_MAX_GAME);
         }
 
         // ui
@@ -419,43 +417,43 @@ public final class MenuList implements GameRender
         }
 
         // 按下返回按钮
-        if (uiManager.isButtonClicked(RequirementUiKey.MENU_LIST_BUTTON_BACK))
+        if (uiManager.isButtonClicked(RequirementKey.Ui.MENU_LIST_BUTTON_BACK))
         {
             eventQueue.addEvent(new EventPopGameState());
         }
 
         // 点击路径标签
-        if (uiManager.isLabelClicked(RequirementUiKey.MENU_LIST_LABEL_ABSOLUTE_PATH))
+        if (uiManager.isLabelClicked(RequirementKey.Ui.MENU_LIST_LABEL_ABSOLUTE_PATH))
         {
             FileHandle gameListPathHandle = Objects.requireNonNull(Gdx.files.external(gameListPath));
             FileExplorer.showInExplorer(gameListPathHandle);
         }
-        else if (uiManager.isLabelClicked(RequirementUiKey.MENU_LIST_LABEL_SELECTED_PATH))
+        else if (uiManager.isLabelClicked(RequirementKey.Ui.MENU_LIST_LABEL_SELECTED_PATH))
         {
             FileHandle selectedGamePathHandle = Objects.requireNonNull(Gdx.files.external(selectedGamePath));
             FileExplorer.showInExplorer(selectedGamePathHandle);
         }
 
         // 功能按钮
-        if (uiManager.isButtonClicked(RequirementUiKey.MENU_LIST_BUTTON_IMPORT))
+        if (uiManager.isButtonClicked(RequirementKey.Ui.MENU_LIST_BUTTON_IMPORT))
         {
             FileChooser.createFileChooser("import_game");
             FileChooser.showFileChooser("import_game", "选择游戏", null, FileChooser.EXT_GAME);
         }
 
         // 按下上一页按钮
-        else if (uiManager.isButtonClicked(RequirementUiKey.MENU_LIST_BUTTON_SELECT_LAST_PAGE))
+        else if (uiManager.isButtonClicked(RequirementKey.Ui.MENU_LIST_BUTTON_SELECT_LAST_PAGE))
         {
             lastPage();
         }
         // 按下下一页按钮
-        else if (uiManager.isButtonClicked(RequirementUiKey.MENU_LIST_BUTTON_SELECT_NEXT_PAGE))
+        else if (uiManager.isButtonClicked(RequirementKey.Ui.MENU_LIST_BUTTON_SELECT_NEXT_PAGE))
         {
             nextPage();
         }
 
         // 检测弹窗返回值
-        uiManager.getMessageBox().handleInfo(RequirementLanguageKey.MESSAGE_BOX_GAME_VERSION_DIFFERENT_KEY, () ->
+        uiManager.getMessageBox().handleInfo(RequirementKey.Language.MESSAGE_BOX_GAME_VERSION_DIFFERENT_KEY, () ->
         {
         });
     }

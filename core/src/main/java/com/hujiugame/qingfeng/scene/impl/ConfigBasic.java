@@ -1,7 +1,7 @@
 package com.hujiugame.qingfeng.scene.impl;
 
 import com.hujiugame.qingfeng.data.game.GameStateDataContainer;
-import com.hujiugame.qingfeng.type.key.UniversalUIKey;
+import com.hujiugame.qingfeng.type.key.UniversalUiKey;
 import com.hujiugame.qingfeng.audio.AudioManager;
 import com.hujiugame.qingfeng.graphic.GraphicsManager;
 import com.hujiugame.qingfeng.scene.GameRender;
@@ -50,7 +50,7 @@ public final class ConfigBasic implements GameRender
     public void update (float deltaTime)
     {
         // 按下返回按钮
-        if (uiManager.isButtonClicked(UniversalUIKey.BUTTON_BACK))
+        if (uiManager.isButtonClicked(UniversalUiKey.BUTTON_BACK))
         {
             eventQueue.addEvent(new EventPopGameState());
         }

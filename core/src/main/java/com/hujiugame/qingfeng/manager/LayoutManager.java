@@ -1,4 +1,4 @@
- package com.hujiugame.qingfeng.manager;
+package com.hujiugame.qingfeng.manager;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.hujiugame.qingfeng.data.JsonEntity;
@@ -9,6 +9,9 @@ import com.hujiugame.qingfeng.ui.kind.button.ButtonInfo;
 import com.hujiugame.qingfeng.ui.kind.image.ImageInfo;
 import com.hujiugame.qingfeng.ui.kind.label.LabelInfo;
 import com.hujiugame.qingfeng.type.file.PathName;
+import com.hujiugame.qingfeng.type.key.GraphicsKey;
+import com.hujiugame.qingfeng.type.key.LayoutKey;
+import com.hujiugame.qingfeng.type.key.UiKey;
 import com.hujiugame.qingfeng.audio.AudioManager;
 import com.hujiugame.qingfeng.graphic.GraphicsManager;
 import com.hujiugame.qingfeng.ui.UiManager;
@@ -86,18 +89,18 @@ public final class LayoutManager
     /**
      * 加载布局基本信息（名称和模板）
      *
-     * @param layout 布局配置对象
-     * @param layoutJson   布局JSON实体
-     * @param file         布局文件句柄（用于名称回退）
+     * @param layout     布局配置对象
+     * @param layoutJson 布局JSON实体
+     * @param file       布局文件句柄（用于名称回退）
      * @return 加载成功返回 true，失败返回 false
      */
     private boolean loadLayoutBasicInfo (Layout layout, JsonEntity layoutJson, FileHandle file)
     {
         try
         {
-            if (layoutJson.containsKey("name"))
+            if (layoutJson.containsKey(LayoutKey.NAME))
             {
-                layout.setName(layoutJson.getString("name"));
+                layout.setName(layoutJson.getString(LayoutKey.NAME));
                 LogUtils.debug(LayoutManager.class, "loadLayoutBasicInfo 页面结构名称 (name): " + layout.getName());
             }
             else
@@ -106,9 +109,9 @@ public final class LayoutManager
                 LogUtils.debug(LayoutManager.class, "loadLayoutBasicInfo 获取页面结构名称失败，使用文件名作为页面结构名称 (name): " + layout.getName());
             }
 
-            if (layoutJson.containsKey("template"))
+            if (layoutJson.containsKey(LayoutKey.TEMPLATE))
             {
-                layout.setTemplate(layoutJson.getString("template"));
+                layout.setTemplate(layoutJson.getString(LayoutKey.TEMPLATE));
                 LogUtils.debug(LayoutManager.class, "loadLayoutBasicInfo 模板 (template): " + layout.getTemplate());
             }
             else
@@ -128,7 +131,7 @@ public final class LayoutManager
     /**
      * 加载布局中的背景音乐和音乐列表
      *
-     * @param layout          布局配置对象
+     * @param layout                布局配置对象
      * @param layoutJson            布局JSON实体
      * @param resourceRootDirectory 资源根目录文件句柄
      * @return 加载成功返回 true，失败返回 false
@@ -146,7 +149,7 @@ public final class LayoutManager
             List<String> backgroundMusicNames = null;
 
             // 优先尝试解析为列表（JSON 数组）
-            List<String> nameList = layoutJson.getStringList("backgroundMusic");
+            List<String> nameList = layoutJson.getStringList(LayoutKey.BACKGROUND_MUSIC);
             if (nameList != null && !nameList.isEmpty())
             {
                 backgroundMusicNames = nameList;
@@ -154,7 +157,7 @@ public final class LayoutManager
             else
             {
                 // 回退到单个字符串（JSON 单值，向后兼容）
-                String singleName = layoutJson.getString("backgroundMusic");
+                String singleName = layoutJson.getString(LayoutKey.BACKGROUND_MUSIC);
                 if (singleName != null)
                 {
                     backgroundMusicNames = Collections.singletonList(singleName);
@@ -189,7 +192,7 @@ public final class LayoutManager
 
             // 解析音乐list
             // ===================================================================================================================
-            JsonEntity musicMap = layoutJson.getJsonEntityByKey("music");
+            JsonEntity musicMap = layoutJson.getJsonEntityByKey(LayoutKey.MUSIC);
             List<String> newMusicList = new ArrayList<>();
             if (!musicMap.isEmpty())
             {
@@ -228,18 +231,18 @@ public final class LayoutManager
     /**
      * 加载布局中的背景图片、图片列表和动图（GIF）列表
      *
-     * @param layout          布局配置对象
+     * @param layout                布局配置对象
      * @param layoutJson            布局JSON实体
      * @param resourceRootDirectory 资源根目录文件句柄
      * @return 加载成功返回 true，失败返回 false
      */
-    private boolean loadLayoutPicture (Layout layout, JsonEntity layoutJson, FileHandle resourceRootDirectory)
+    private boolean loadLayoutGraphics (Layout layout, JsonEntity layoutJson, FileHandle resourceRootDirectory)
     {
         try
         {
             // 解析背景图片路径
             // ===================================================================================================================
-            String backgroundPictureName = layoutJson.getString("backgroundPicture");
+            String backgroundPictureName = layoutJson.getString(LayoutKey.BACKGROUND_PICTURE);
             String backgroundPicturePath = null;
 
             if (backgroundPictureName != null)
@@ -254,11 +257,38 @@ public final class LayoutManager
 
             // 上载
             layout.setBackgroundPicture(backgroundPictureName);
-            LogUtils.debug(LayoutManager.class, "loadLayoutPicture 背景图片 (file): " + backgroundPicturePath);
+            LogUtils.debug(LayoutManager.class, "loadLayoutGraphics 背景图片 (file): " + backgroundPicturePath);
 
-            // 解析图片map
+            // 解析 graphics 子分类
             // ===================================================================================================================
-            JsonEntity pictureMapJson = layoutJson.getJsonEntityByKey("picture");
+            JsonEntity graphicsJson = layoutJson.getJsonEntityByKey(LayoutKey.GRAPHICS);
+            if (!graphicsJson.isEmpty())
+            {
+                if (!loadLayoutGraphicsPicture(layout, graphicsJson, resourceRootDirectory)) return false;
+                if (!loadLayoutGraphicsGif(layout, graphicsJson, resourceRootDirectory)) return false;
+            }
+            return true;
+        }
+        catch (Exception e)
+        {
+            LogUtils.error(LayoutManager.class, "loadLayoutGraphics", e);
+            return false;
+        }
+    }
+
+    /**
+     * 加载 graphics → picture 图片条目
+     *
+     * @param layout          布局配置对象
+     * @param graphicsJson    graphics 部分 JSON 实体
+     * @param resourceRootDirectory 资源根目录文件句柄
+     * @return 加载成功返回 true，失败返回 false
+     */
+    private boolean loadLayoutGraphicsPicture (Layout layout, JsonEntity graphicsJson, FileHandle resourceRootDirectory)
+    {
+        try
+        {
+            JsonEntity pictureMapJson = graphicsJson.getJsonEntityByKey(GraphicsKey.PICTURE);
             Map<String, PictureInfo> newPictureMap = new HashMap<>();
 
             if (!pictureMapJson.isEmpty())
@@ -270,7 +300,7 @@ public final class LayoutManager
                     JsonEntity pictureInfoJson = pictureMapJson.getJsonEntityByKey(pictureTag);
 
                     // 上载图片
-                    String pictureFileName = pictureInfoJson.getString("path");
+                    String pictureFileName = pictureInfoJson.getString(GraphicsKey.PATH);
                     FileHandle pictureFileHandle = resourceRootDirectory.child(PathName.ASSET_S_RESOURCE_IMAGE).child(pictureFileName);
                     if (graphicsManager.loadPicture(pictureFileName, pictureFileHandle))
                     {
@@ -284,10 +314,29 @@ public final class LayoutManager
             // 上载
             layout.setPictureMap(newPictureMap);
 
-            LogUtils.debug(LayoutManager.class, "loadLayoutPicture 图片 (list): " + newPictureMap);
-            // 解析动图(gif)map
-            // ===================================================================================================================
-            JsonEntity gifMapJson = layoutJson.getJsonEntityByKey("gif");
+            LogUtils.debug(LayoutManager.class, "loadLayoutGraphicsPicture 图片 (list): " + newPictureMap);
+            return true;
+        }
+        catch (Exception e)
+        {
+            LogUtils.error(LayoutManager.class, "loadLayoutGraphicsPicture", e);
+            return false;
+        }
+    }
+
+    /**
+     * 加载 graphics → gif 动图条目
+     *
+     * @param layout          布局配置对象
+     * @param graphicsJson    graphics 部分 JSON 实体
+     * @param resourceRootDirectory 资源根目录文件句柄
+     * @return 加载成功返回 true，失败返回 false
+     */
+    private boolean loadLayoutGraphicsGif (Layout layout, JsonEntity graphicsJson, FileHandle resourceRootDirectory)
+    {
+        try
+        {
+            JsonEntity gifMapJson = graphicsJson.getJsonEntityByKey(GraphicsKey.GIF);
             Map<String, GifInfo> newGifMap = new HashMap<>();
 
             if (!gifMapJson.isEmpty())
@@ -302,9 +351,9 @@ public final class LayoutManager
                     List<FileHandle> gifFileList = new ArrayList<>();
 
                     // tag : {"length": n, "duration": s, "path":{"0": "...."}}
-                    int gifSize = gifInfoJson.getInt("length");
-                    float gifDuration = gifInfoJson.getFloat("duration");
-                    JsonEntity gifPathJson = gifInfoJson.getJsonEntityByKey("path");
+                    int gifSize = gifInfoJson.getInt(GraphicsKey.Gif.LENGTH);
+                    float gifDuration = gifInfoJson.getFloat(GraphicsKey.Gif.DURATION);
+                    JsonEntity gifPathJson = gifInfoJson.getJsonEntityByKey(GraphicsKey.PATH);
                     for (int i = 1; i <= gifSize; i++)
                     {
                         if (gifPathJson.containsKey(i + ""))
@@ -316,7 +365,7 @@ public final class LayoutManager
                         }
                         else
                         {
-                            LogUtils.error(LayoutManager.class, "loadLayoutPicture 动图 (tag): " + gifTag + " 丢失第 " + i + " 张图片");
+                            LogUtils.error(LayoutManager.class, "loadLayoutGraphicsGif 动图 (tag): " + gifTag + " 丢失第 " + i + " 张图片");
                             return false;
                         }
                     }
@@ -334,12 +383,12 @@ public final class LayoutManager
             // 上载
             layout.setGifMap(newGifMap);
 
-            LogUtils.debug(LayoutManager.class, "loadLayoutPicture Gif (list): " + newGifMap);
+            LogUtils.debug(LayoutManager.class, "loadLayoutGraphicsGif Gif (list): " + newGifMap);
             return true;
         }
         catch (Exception e)
         {
-            LogUtils.error(LayoutManager.class, "loadLayoutPicture", e);
+            LogUtils.error(LayoutManager.class, "loadLayoutGraphicsGif", e);
             return false;
         }
     }
@@ -348,7 +397,7 @@ public final class LayoutManager
      * 加载布局UI中的图像配置
      *
      * @param layout 布局配置对象
-     * @param uiJson       UI部分的JSON实体
+     * @param uiJson UI部分的JSON实体
      * @return 加载成功返回 true，失败返回 false
      */
     private boolean loadLayoutUiImage (Layout layout, JsonEntity uiJson)
@@ -359,7 +408,7 @@ public final class LayoutManager
             // ===================================================================================================================
 
             // 解析图像json
-            JsonEntity imageMapJson = uiJson.getJsonEntityByKey("image");
+            JsonEntity imageMapJson = uiJson.getJsonEntityByKey(UiKey.Image.KEY);
             Map<String, ImageInfo> imageMap = new LinkedHashMap<>();
 
             for (String imageTag : imageMapJson.keySet())
@@ -389,10 +438,10 @@ public final class LayoutManager
      * 加载布局UI中的标签配置
      *
      * @param layout 布局配置对象
-     * @param uiJson       UI部分的JSON实体
+     * @param uiJson UI部分的JSON实体
      * @return 加载成功返回 true，失败返回 false
      */
-    private boolean loadLayoutLabel (Layout layout, JsonEntity uiJson)
+    private boolean loadLayoutUiLabel (Layout layout, JsonEntity uiJson)
     {
         try
         {
@@ -400,7 +449,7 @@ public final class LayoutManager
             // ===================================================================================================================
 
             // 解析标签json
-            JsonEntity labelMapJson = uiJson.getJsonEntityByKey("label");
+            JsonEntity labelMapJson = uiJson.getJsonEntityByKey(UiKey.Label.KEY);
             Map<String, LabelInfo> labelMap = new HashMap<>();
 
             for (String labelTag : labelMapJson.keySet())
@@ -416,12 +465,12 @@ public final class LayoutManager
             // 上载
             layout.setLabelMap(labelMap);
 
-            LogUtils.debug(LayoutManager.class, "loadLayoutLabel 标签 (list): " + labelMap);
+            LogUtils.debug(LayoutManager.class, "loadLayoutUiLabel 标签 (list): " + labelMap);
             return true;
         }
         catch (Exception e)
         {
-            LogUtils.error(LayoutManager.class, "loadLayoutLabel", e);
+            LogUtils.error(LayoutManager.class, "loadLayoutUiLabel", e);
             return false;
         }
     }
@@ -430,10 +479,10 @@ public final class LayoutManager
      * 加载布局UI中的按钮配置
      *
      * @param layout 布局配置对象
-     * @param uiJson       UI部分的JSON实体
+     * @param uiJson UI部分的JSON实体
      * @return 加载成功返回 true，失败返回 false
      */
-    private boolean loadLayoutButton (Layout layout, JsonEntity uiJson)
+    private boolean loadLayoutUiButton (Layout layout, JsonEntity uiJson)
     {
         try
         {
@@ -441,7 +490,7 @@ public final class LayoutManager
             // ===================================================================================================================
 
             // 解析按钮json
-            JsonEntity buttonMapJson = uiJson.getJsonEntityByKey("button");
+            JsonEntity buttonMapJson = uiJson.getJsonEntityByKey(UiKey.Button.KEY);
             Map<String, ButtonInfo> buttonMap = new HashMap<>();
 
             // 添加到新按钮列表
@@ -455,7 +504,7 @@ public final class LayoutManager
                 buttonMap.put(buttonTag, buttonInfo);
 
                 // debug
-                LogUtils.debug(LayoutManager.class, "loadLayoutButton 按钮 (tag):" + buttonTag + " (json): " + buttonJson);
+                LogUtils.debug(LayoutManager.class, "loadLayoutUiButton 按钮 (tag):" + buttonTag + " (json): " + buttonJson);
             }
 
             // 上载
@@ -465,7 +514,7 @@ public final class LayoutManager
         }
         catch (Exception e)
         {
-            LogUtils.error(LayoutManager.class, "loadLayoutButton", e);
+            LogUtils.error(LayoutManager.class, "loadLayoutUiButton", e);
             return false;
         }
     }
@@ -473,8 +522,8 @@ public final class LayoutManager
     /**
      * 加载布局中的UI配置（图像、标签、按钮）
      *
-     * @param layout 布局配置对象
-     * @param layoutJson   布局JSON实体
+     * @param layout     布局配置对象
+     * @param layoutJson 布局JSON实体
      * @return 加载成功返回 true，失败返回 false
      */
     private boolean loadLayoutUi (Layout layout, JsonEntity layoutJson)
@@ -484,24 +533,18 @@ public final class LayoutManager
             if (!layoutJson.isEmpty())
             {
                 // 解析ui
-                if (layoutJson.containsKey("ui"))
+                if (layoutJson.containsKey(LayoutKey.UI))
                 {
-                    JsonEntity uiJson = layoutJson.getJsonEntityByKey("ui");
+                    JsonEntity uiJson = layoutJson.getJsonEntityByKey(LayoutKey.UI);
 
                     if (!loadLayoutUiImage(layout, uiJson))
-                    {
                         return false;
-                    }
 
-                    if (!loadLayoutLabel(layout, uiJson))
-                    {
+                    if (!loadLayoutUiLabel(layout, uiJson))
                         return false;
-                    }
 
-                    if (!loadLayoutButton(layout, uiJson))
-                    {
+                    if (!loadLayoutUiButton(layout, uiJson))
                         return false;
-                    }
 
                 }
             }
@@ -538,7 +581,7 @@ public final class LayoutManager
                 LogUtils.debug(LayoutManager.class, "loadLayout 读取缓存 (key): " + layoutKey);
                 JsonEntity layoutJson = readLayoutJson(fileHandle);
                 loadLayoutMusic(cached, layoutJson, resourceRootDirectoryHandle);
-                loadLayoutPicture(cached, layoutJson, resourceRootDirectoryHandle);
+                loadLayoutGraphics(cached, layoutJson, resourceRootDirectoryHandle);
                 return cached;
             }
 
@@ -569,7 +612,7 @@ public final class LayoutManager
             }
 
             // 配置draw图片
-            if (!loadLayoutPicture(layout, layoutJson, resourceRootDirectoryHandle))
+            if (!loadLayoutGraphics(layout, layoutJson, resourceRootDirectoryHandle))
             {
                 LogUtils.error(LayoutManager.class, "loadLayout 配置图片出现问题");
             }
@@ -619,11 +662,12 @@ public final class LayoutManager
 
             if (mainOriginalJson != null && !mainOriginalJson.isEmpty())
             {
-                LogUtils.debug(LayoutManager.class, "mergeLayout 主布局原始JSON (ui/image): " + hasUiSection(mainOriginalJson, "image") +
-                    " (ui/label): " + hasUiSection(mainOriginalJson, "label") +
-                    " (ui/button): " + hasUiSection(mainOriginalJson, "button") +
-                    " (picture): " + mainOriginalJson.containsKey("picture") +
-                    " (gif): " + mainOriginalJson.containsKey("gif"));
+                JsonEntity graphicsJson = mainOriginalJson.getJsonEntityByKey(LayoutKey.GRAPHICS);
+                LogUtils.debug(LayoutManager.class, "mergeLayout 主布局原始JSON (" + LayoutKey.UI + "/" + UiKey.Image.KEY + "): " + hasUiSection(mainOriginalJson, UiKey.Image.KEY) +
+                    " (" + LayoutKey.UI + "/" + UiKey.Label.KEY + "): " + hasUiSection(mainOriginalJson, UiKey.Label.KEY) +
+                    " (" + LayoutKey.UI + "/" + UiKey.Button.KEY + "): " + hasUiSection(mainOriginalJson, UiKey.Button.KEY) +
+                    " (" + LayoutKey.GRAPHICS + "/" + GraphicsKey.PICTURE + "): " + graphicsJson.containsKey(GraphicsKey.PICTURE) +
+                    " (" + LayoutKey.GRAPHICS + "/" + GraphicsKey.GIF + "): " + graphicsJson.containsKey(GraphicsKey.GIF));
             }
             else
             {
@@ -705,7 +749,7 @@ public final class LayoutManager
     private static boolean hasUiSection (JsonEntity layoutJson, String section)
     {
         if (layoutJson == null || layoutJson.isEmpty()) return false;
-        JsonEntity uiJson = layoutJson.getJsonEntityByKey("ui");
+        JsonEntity uiJson = layoutJson.getJsonEntityByKey(LayoutKey.UI);
         if (uiJson.isEmpty()) return false;
         JsonEntity sectionJson = uiJson.getJsonEntityByKey(section);
         return !sectionJson.isEmpty();
@@ -726,7 +770,7 @@ public final class LayoutManager
             LogUtils.debug(LayoutManager.class, "extractUiSectionTagJson layoutJson 为空 (section): " + section + " (tag): " + tag);
             return new JsonEntity();
         }
-        JsonEntity uiJson = layoutJson.getJsonEntityByKey("ui");
+        JsonEntity uiJson = layoutJson.getJsonEntityByKey(LayoutKey.UI);
         if (uiJson.isEmpty())
         {
             LogUtils.debug(LayoutManager.class, "extractUiSectionTagJson ui 不存在 (section): " + section + " (tag): " + tag);
@@ -747,10 +791,10 @@ public final class LayoutManager
     }
 
     /**
-     * 从布局 JSON 顶层分类（picture、gif）下提取指定 tag 的 JSON
+     * 从布局 JSON 的分类下提取指定 tag 的 JSON
      *
      * @param layoutJson 布局 JSON
-     * @param section    顶层分类名称
+     * @param section    分类名称（如 picture、gif）
      * @param tag        标签
      * @return tag 对应的 JSON，不存在返回空对象
      */
@@ -788,8 +832,8 @@ public final class LayoutManager
             String tag = entry.getKey();
             if (result.containsKey(tag))
             {
-                JsonEntity mainTagJson = extractSectionTagJson(mainOriginalJson, "picture", tag);
-                JsonEntity mergeTagJson = extractSectionTagJson(merge.getJson(), "picture", tag);
+                JsonEntity mainTagJson = extractSectionTagJson(mainOriginalJson.getJsonEntityByKey(LayoutKey.GRAPHICS), GraphicsKey.PICTURE, tag);
+                JsonEntity mergeTagJson = extractSectionTagJson(merge.getJson().getJsonEntityByKey(LayoutKey.GRAPHICS), GraphicsKey.PICTURE, tag);
                 if (!mainTagJson.isEmpty() && !mergeTagJson.isEmpty())
                 {
                     result.put(tag, new PictureInfo(tag, mergeTagJson.combined(mainTagJson)));
@@ -823,8 +867,8 @@ public final class LayoutManager
             String tag = entry.getKey();
             if (result.containsKey(tag))
             {
-                JsonEntity mainTagJson = extractSectionTagJson(mainOriginalJson, "gif", tag);
-                JsonEntity mergeTagJson = extractSectionTagJson(merge.getJson(), "gif", tag);
+                JsonEntity mainTagJson = extractSectionTagJson(mainOriginalJson.getJsonEntityByKey(LayoutKey.GRAPHICS), GraphicsKey.GIF, tag);
+                JsonEntity mergeTagJson = extractSectionTagJson(merge.getJson().getJsonEntityByKey(LayoutKey.GRAPHICS), GraphicsKey.GIF, tag);
                 if (!mainTagJson.isEmpty() && !mergeTagJson.isEmpty())
                 {
                     result.put(tag, new GifInfo(tag, mergeTagJson.combined(mainTagJson)));
@@ -858,8 +902,8 @@ public final class LayoutManager
             String tag = entry.getKey();
             if (result.containsKey(tag))
             {
-                JsonEntity mainTagJson = extractUiSectionTagJson(mainOriginalJson, "image", tag);
-                JsonEntity mergeTagJson = extractUiSectionTagJson(merge.getJson(), "image", tag);
+                JsonEntity mainTagJson = extractUiSectionTagJson(mainOriginalJson, UiKey.Image.KEY, tag);
+                JsonEntity mergeTagJson = extractUiSectionTagJson(merge.getJson(), UiKey.Image.KEY, tag);
                 if (!mainTagJson.isEmpty() && !mergeTagJson.isEmpty())
                 {
                     result.put(tag, new ImageInfo(tag, mergeTagJson.combined(mainTagJson)));
@@ -893,8 +937,8 @@ public final class LayoutManager
             String tag = entry.getKey();
             if (result.containsKey(tag))
             {
-                JsonEntity mainTagJson = extractUiSectionTagJson(mainOriginalJson, "label", tag);
-                JsonEntity mergeTagJson = extractUiSectionTagJson(merge.getJson(), "label", tag);
+                JsonEntity mainTagJson = extractUiSectionTagJson(mainOriginalJson, UiKey.Label.KEY, tag);
+                JsonEntity mergeTagJson = extractUiSectionTagJson(merge.getJson(), UiKey.Label.KEY, tag);
                 if (!mainTagJson.isEmpty() && !mergeTagJson.isEmpty())
                 {
                     result.put(tag, new LabelInfo(tag, mergeTagJson.combined(mainTagJson)));
@@ -928,8 +972,8 @@ public final class LayoutManager
             String tag = entry.getKey();
             if (result.containsKey(tag))
             {
-                JsonEntity mainTagJson = extractUiSectionTagJson(mainOriginalJson, "button", tag);
-                JsonEntity mergeTagJson = extractUiSectionTagJson(merge.getJson(), "button", tag);
+                JsonEntity mainTagJson = extractUiSectionTagJson(mainOriginalJson, UiKey.Button.KEY, tag);
+                JsonEntity mergeTagJson = extractUiSectionTagJson(merge.getJson(), UiKey.Button.KEY, tag);
                 if (!mainTagJson.isEmpty() && !mergeTagJson.isEmpty())
                 {
                     result.put(tag, new ButtonInfo(tag, mergeTagJson.combined(mainTagJson)));

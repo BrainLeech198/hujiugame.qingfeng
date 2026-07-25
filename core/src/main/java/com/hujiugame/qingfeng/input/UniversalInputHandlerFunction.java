@@ -2,7 +2,7 @@ package com.hujiugame.qingfeng.input;
 
 import com.hujiugame.qingfeng.Main;
 import com.hujiugame.qingfeng.core.GameHost;
-import com.hujiugame.qingfeng.type.key.UniversalUIKey;
+import com.hujiugame.qingfeng.type.key.UniversalUiKey;
 import com.hujiugame.qingfeng.ui.MessageBox;
 import com.hujiugame.qingfeng.ui.UiManager;
 import com.hujiugame.qingfeng.util.system.LogUtils;
@@ -100,17 +100,17 @@ public final class UniversalInputHandlerFunction
                 }
 
                 // 返回按钮
-                if (gameUiManager.containsButton(UniversalUIKey.BUTTON_BACK))
+                if (gameUiManager.containsButton(UniversalUiKey.BUTTON_BACK))
                 {
                     LogUtils.debug(UniversalInputHandlerFunction.class, "handleEscape (input): " + universalInputType +" 游戏内按钮Back");
-                    gameUiManager.setButtonClicked(UniversalUIKey.BUTTON_BACK, true);
+                    gameUiManager.setButtonClicked(UniversalUiKey.BUTTON_BACK, true);
                     return true;
                 }
 
-                if (gameUiManager.containsButton(UniversalUIKey.BUTTON_QUIT))
+                if (gameUiManager.containsButton(UniversalUiKey.BUTTON_QUIT))
                 {
                     LogUtils.debug(UniversalInputHandlerFunction.class, "handleEscape (input): " + universalInputType +" 游戏内按钮Quit");
-                    gameUiManager.setButtonClicked(UniversalUIKey.BUTTON_QUIT, true);
+                    gameUiManager.setButtonClicked(UniversalUiKey.BUTTON_QUIT, true);
                     return true;
                 }
             }
@@ -125,17 +125,17 @@ public final class UniversalInputHandlerFunction
                     return true;
                 }
 
-                if (uiManager.containsButton(UniversalUIKey.BUTTON_BACK))
+                if (uiManager.containsButton(UniversalUiKey.BUTTON_BACK))
                 {
                     LogUtils.debug(UniversalInputHandlerFunction.class, "handleEscape (input): " + universalInputType +" 游戏外按钮Back");
-                    uiManager.setButtonClicked(UniversalUIKey.BUTTON_BACK, true);
+                    uiManager.setButtonClicked(UniversalUiKey.BUTTON_BACK, true);
                     return true;
                 }
 
-                if (uiManager.containsButton(UniversalUIKey.BUTTON_QUIT))
+                if (uiManager.containsButton(UniversalUiKey.BUTTON_QUIT))
                 {
                     LogUtils.debug(UniversalInputHandlerFunction.class, "handleEscape (input): " + universalInputType +" 游戏外按钮Quit");
-                    uiManager.setButtonClicked(UniversalUIKey.BUTTON_QUIT, true);
+                    uiManager.setButtonClicked(UniversalUiKey.BUTTON_QUIT, true);
                     return true;
                 }
             }

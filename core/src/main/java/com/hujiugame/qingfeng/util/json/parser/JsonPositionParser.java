@@ -1,6 +1,7 @@
 package com.hujiugame.qingfeng.util.json.parser;
 
 import com.hujiugame.qingfeng.data.JsonEntity;
+import com.hujiugame.qingfeng.type.key.JsonKey;
 import com.hujiugame.qingfeng.util.system.LogUtils;
 
 public class JsonPositionParser
@@ -18,20 +19,20 @@ public class JsonPositionParser
     {
         this.json = json;
 
-        if (json.containsKey("position"))
+        if (json.containsKey(JsonKey.Position.KEY))
         {
-            JsonEntity positionJson = json.getJsonEntityByKey("position");
-            if (positionJson.containsKey("x") && positionJson.containsKey("y"))
+            JsonEntity positionJson = json.getJsonEntityByKey(JsonKey.Position.KEY);
+            if (positionJson.containsKey(JsonKey.Position.X) && positionJson.containsKey(JsonKey.Position.Y))
             {
-                x = positionJson.getInt("x");
-                y = positionJson.getInt("y");
+                x = positionJson.getInt(JsonKey.Position.X);
+                y = positionJson.getInt(JsonKey.Position.Y);
                 LogUtils.debug(JsonPositionParser.class, "JsonPositionParser 获取坐标 (x): " +  x + " (y): " + y);
             }
             else
             {
                 LogUtils.debug(JsonPositionParser.class, "JsonPositionParser 获取坐标失败 字段存在情况" +
-                    " (x): " + positionJson.containsKey("x") +
-                    " (y): " + positionJson.containsKey("y"));
+                    " (x): " + positionJson.containsKey(JsonKey.Position.X) +
+                    " (y): " + positionJson.containsKey(JsonKey.Position.Y));
             }
         }
         else

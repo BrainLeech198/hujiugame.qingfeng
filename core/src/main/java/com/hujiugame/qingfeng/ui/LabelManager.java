@@ -17,6 +17,8 @@ import com.hujiugame.qingfeng.ui.kind.TextObject;
 import com.hujiugame.qingfeng.ui.kind.label.LabelInfo;
 import com.hujiugame.qingfeng.ui.kind.label.LabelKind;
 import com.hujiugame.qingfeng.ui.kind.label.LabelState;
+import com.hujiugame.qingfeng.type.key.JsonKey;
+import com.hujiugame.qingfeng.type.key.UiKey;
 import com.hujiugame.qingfeng.type.file.PathName;
 import com.hujiugame.qingfeng.type.ui.FontFlag;
 import com.hujiugame.qingfeng.graphic.GraphicsManager;
@@ -74,14 +76,14 @@ public final class LabelManager
             JsonEntity labelKindJson = new JsonEntity(file);
             LogUtils.debug(LabelManager.class, "loadLabelKind 读取标签配置: " + labelKindJson);
 
-            String labelKindName = labelKindJson.getString("name");
+            String labelKindName = labelKindJson.getString(UiKey.Label.NAME);
             if (labelKindName == null)
             {
                 LogUtils.error(LabelManager.class, "loadLabelKind 缺少 name 字段: " + labelKindJson);
                 return false;
             }
 
-            String fontName = labelKindJson.getString("font");
+            String fontName = labelKindJson.getString(UiKey.Label.FONT);
             if (fontName == null)
             {
                 LogUtils.error(LabelManager.class, "loadLabelKind 缺少 font 字段: " + labelKindJson);
@@ -89,14 +91,14 @@ public final class LabelManager
             }
 
             float borderScale = 1.0f;
-            if (labelKindJson.containsKey("borderScale"))
+            if (labelKindJson.containsKey(UiKey.Label.BORDER_SCALE))
             {
-                borderScale = labelKindJson.getFloat("borderScale");
+                borderScale = labelKindJson.getFloat(UiKey.Label.BORDER_SCALE);
             }
 
             Label.LabelStyle labelStyle = new Label.LabelStyle();
             labelStyle.font = fontResolver.getFont(fontName, 1.0f);
-            String fontColorStr = labelKindJson.getString("fontColor");
+            String fontColorStr = labelKindJson.getString(UiKey.Label.FONT_COLOR);
             if (fontColorStr == null)
             {
                 LogUtils.error(LabelManager.class, "loadLabelKind fontColor 字段缺失或类型不是字符串 (name): " + labelKindName);
@@ -106,7 +108,7 @@ public final class LabelManager
 
             // 生成背景 Pixmap
             Pixmap bgPixmap = null;
-            JsonEntity imageJson = labelKindJson.getJsonEntityByKey("image");
+            JsonEntity imageJson = labelKindJson.getJsonEntityByKey(UiKey.Label.IMAGE);
             FileHandle resImagePath = themePath.child(PathName.ASSET_S_RESOURCE_IMAGE);
 
             if (imageJson.isEmpty())
@@ -115,9 +117,9 @@ public final class LabelManager
                 bgPixmap.setColor(Color.CLEAR);
                 bgPixmap.fill();
             }
-            else if (imageJson.containsKey("background"))
+            else if (imageJson.containsKey(UiKey.Label.IMAGE_BACKGROUND))
             {
-                FileHandle bgFileHandle = resImagePath.child(imageJson.getString("background"));
+                FileHandle bgFileHandle = resImagePath.child(imageJson.getString(UiKey.Label.IMAGE_BACKGROUND));
                 if (!bgFileHandle.exists())
                 {
                     LogUtils.error(LabelManager.class, "loadLabelKind 背景文件不存在: " + bgFileHandle.path());
@@ -125,9 +127,9 @@ public final class LabelManager
                 }
                 bgPixmap = new Pixmap(bgFileHandle);
             }
-            else if (labelKindJson.containsKey("backgroundColor"))
+            else if (labelKindJson.containsKey(UiKey.Label.BACKGROUND_COLOR))
             {
-                String bgColorStr = labelKindJson.getString("backgroundColor");
+                String bgColorStr = labelKindJson.getString(UiKey.Label.BACKGROUND_COLOR);
                 if (bgColorStr == null)
                 {
                     LogUtils.error(LabelManager.class, "loadLabelKind backgroundColor 字段类型不是字符串 (name): " + labelKindName);
@@ -277,15 +279,15 @@ public final class LabelManager
             float padX = 50, padY = 50;
             if (fontArgs != null)
             {
-                if (fontArgs.containsKey("padX") && fontArgs.containsKey("padY"))
+                if (fontArgs.containsKey(JsonKey.Font.Args.PAD_X) && fontArgs.containsKey(JsonKey.Font.Args.PAD_Y))
                 {
-                    padX = fontArgs.getFloat("padX");
-                    padY = fontArgs.getFloat("padY");
+                    padX = fontArgs.getFloat(JsonKey.Font.Args.PAD_X);
+                    padY = fontArgs.getFloat(JsonKey.Font.Args.PAD_Y);
                 }
-                else if (fontArgs.containsKey("pad"))
+                else if (fontArgs.containsKey(JsonKey.Font.Args.PAD))
                 {
-                    padX = fontArgs.getFloat("pad");
-                    padY = fontArgs.getFloat("pad");
+                    padX = fontArgs.getFloat(JsonKey.Font.Args.PAD);
+                    padY = fontArgs.getFloat(JsonKey.Font.Args.PAD);
                 }
             }
 
@@ -617,15 +619,15 @@ public final class LabelManager
             if (fontArgs != null)
             {
                 float padX = 50, padY = 50;
-                if (fontArgs.containsKey("padX") && fontArgs.containsKey("padY"))
+                if (fontArgs.containsKey(JsonKey.Font.Args.PAD_X) && fontArgs.containsKey(JsonKey.Font.Args.PAD_Y))
                 {
-                    padX = fontArgs.getFloat("padX");
-                    padY = fontArgs.getFloat("padY");
+                    padX = fontArgs.getFloat(JsonKey.Font.Args.PAD_X);
+                    padY = fontArgs.getFloat(JsonKey.Font.Args.PAD_Y);
                 }
-                else if (fontArgs.containsKey("pad"))
+                else if (fontArgs.containsKey(JsonKey.Font.Args.PAD))
                 {
-                    padX = fontArgs.getFloat("pad");
-                    padY = fontArgs.getFloat("pad");
+                    padX = fontArgs.getFloat(JsonKey.Font.Args.PAD);
+                    padY = fontArgs.getFloat(JsonKey.Font.Args.PAD);
                 }
             }
 

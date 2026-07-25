@@ -1,6 +1,7 @@
 package com.hujiugame.qingfeng.util.json.parser;
 
 import com.hujiugame.qingfeng.data.JsonEntity;
+import com.hujiugame.qingfeng.type.key.JsonKey;
 import com.hujiugame.qingfeng.util.system.LogUtils;
 
 public class JsonSizeParser
@@ -18,20 +19,20 @@ public class JsonSizeParser
     {
         this.json = json;
 
-        if (json.containsKey("size"))
+        if (json.containsKey(JsonKey.Size.KEY))
         {
-            JsonEntity sizeJson = json.getJsonEntityByKey("size");
-            if (sizeJson.containsKey("width") && sizeJson.containsKey("height"))
+            JsonEntity sizeJson = json.getJsonEntityByKey(JsonKey.Size.KEY);
+            if (sizeJson.containsKey(JsonKey.Size.WIDTH) && sizeJson.containsKey(JsonKey.Size.HEIGHT))
             {
-                this.width = sizeJson.getInt("width");
-                this.height = sizeJson.getInt("height");
+                this.width = sizeJson.getInt(JsonKey.Size.WIDTH);
+                this.height = sizeJson.getInt(JsonKey.Size.HEIGHT);
                 LogUtils.debug(JsonSizeParser.class, "JsonSizeParser 获取尺寸 (width): " +  width + " (height): " + height);
             }
             else
             {
                 LogUtils.debug(JsonSizeParser.class, "JsonSizeParser 获取尺寸失败 字段存在情况" +
-                    " (width): " + sizeJson.containsKey("width") +
-                    " (height): " + sizeJson.containsKey("height"));
+                    " (width): " + sizeJson.containsKey(JsonKey.Size.WIDTH) +
+                    " (height): " + sizeJson.containsKey(JsonKey.Size.HEIGHT));
             }
         }
         else

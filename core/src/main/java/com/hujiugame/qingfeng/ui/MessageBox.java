@@ -15,6 +15,7 @@ import com.hujiugame.qingfeng.ui.kind.label.LabelInfo;
 import com.hujiugame.qingfeng.type.ScreenSize;
 import com.hujiugame.qingfeng.type.file.FileName;
 import com.hujiugame.qingfeng.type.file.PathName;
+import com.hujiugame.qingfeng.type.key.UiKey;
 import com.hujiugame.qingfeng.type.ui.BoxType;
 import com.hujiugame.qingfeng.audio.AudioManager;
 import com.hujiugame.qingfeng.ui.dialog.BoxAsk;
@@ -132,13 +133,13 @@ public final class MessageBox
         try
         {
             // 上载audio样式
-            if (!uiMessageBoxKindJson.containsKey("audio"))
+            if (!uiMessageBoxKindJson.containsKey(UiKey.MessageBox.AUDIO))
             {
                 LogUtils.error(MessageBox.class, "loadMessageBoxKindFromTheme 缺少audio字段");
                 return false;
             }
 
-            String boxAudioFileHandleName = uiMessageBoxKindJson.getString("audio");
+            String boxAudioFileHandleName = uiMessageBoxKindJson.getString(UiKey.MessageBox.AUDIO);
             this.boxAudioFileHandle = themeManager.getPathHandle().child(PathName.ASSET_S_RESOURCE_AUDIO).child(boxAudioFileHandleName);
             audioManager.loadSound(boxAudioFileHandleTag, boxAudioFileHandle);
             LogUtils.debug(MessageBox.class, "loadAudioFromJson 加载弹窗音频 (file): " + boxAudioFileHandle);
@@ -205,32 +206,32 @@ public final class MessageBox
         try
         {
             // 上载label样式
-            if (!uiMessageBoxKindJson.containsKey("label"))
+            if (!uiMessageBoxKindJson.containsKey(UiKey.MessageBox.LABEL))
             {
                 LogUtils.error(MessageBox.class, "loadMessageBoxKindFromTheme 缺少label字段");
                 return false;
             }
-            JsonEntity labelKindJson = uiMessageBoxKindJson.getJsonEntityByKey("label");
+            JsonEntity labelKindJson = uiMessageBoxKindJson.getJsonEntityByKey(UiKey.MessageBox.LABEL);
 
             // title
-            if (!labelKindJson.containsKey("title"))
+            if (!labelKindJson.containsKey(UiKey.MessageBox.LABEL_TITLE))
             {
                 LogUtils.error(MessageBox.class, "loadMessageBoxKindFromTheme 缺少label.title字段");
                 return false;
             }
-            JsonEntity titleLabelJson = labelKindJson.getJsonEntityByKey("title");
+            JsonEntity titleLabelJson = labelKindJson.getJsonEntityByKey(UiKey.MessageBox.LABEL_TITLE);
             if (!loadTitleLabelKind(titleLabelJson))
             {
                 return false;
             }
 
             // content
-            if (!labelKindJson.containsKey("content"))
+            if (!labelKindJson.containsKey(UiKey.MessageBox.LABEL_CONTENT))
             {
                 LogUtils.error(MessageBox.class, "loadMessageBoxKindFromTheme 缺少label.content字段");
                 return false;
             }
-            JsonEntity contentLabelJson = labelKindJson.getJsonEntityByKey("content");
+            JsonEntity contentLabelJson = labelKindJson.getJsonEntityByKey(UiKey.MessageBox.LABEL_CONTENT);
             if (!loadContentLabelKind(contentLabelJson))
             {
                 return false;
@@ -277,17 +278,17 @@ public final class MessageBox
         try
         {
             // 读取按钮样式
-            if (!uiMessageBoxKindJson.containsKey("button"))
+            if (!uiMessageBoxKindJson.containsKey(UiKey.MessageBox.BUTTON))
             {
                 LogUtils.error(MessageBox.class, "loadMessageBoxKindFromTheme 缺少button字段");
                 return false;
             }
-            else if (!uiMessageBoxKindJson.getJsonEntityByKey("button").containsKey("normal"))
+            else if (!uiMessageBoxKindJson.getJsonEntityByKey(UiKey.MessageBox.BUTTON).containsKey(UiKey.MessageBox.BUTTON_NORMAL))
             {
                 LogUtils.error(MessageBox.class, "loadMessageBoxKindFromTheme 缺少button.normal字段");
                 return false;
             }
-            JsonEntity buttonKindJson = uiMessageBoxKindJson.getJsonEntityByKey("button").getJsonEntityByKey("normal");
+            JsonEntity buttonKindJson = uiMessageBoxKindJson.getJsonEntityByKey(UiKey.MessageBox.BUTTON).getJsonEntityByKey(UiKey.MessageBox.BUTTON_NORMAL);
             if (!loadButtonKind(buttonKindJson))
             {
                 return false;

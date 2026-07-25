@@ -6,6 +6,7 @@ import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.type.Name;
 import com.hujiugame.qingfeng.type.file.FileName;
 import com.hujiugame.qingfeng.type.file.PathName;
+import com.hujiugame.qingfeng.type.key.LanguageKey;
 import com.hujiugame.qingfeng.util.system.FileUtils;
 import com.hujiugame.qingfeng.util.system.LogUtils;
 
@@ -172,9 +173,9 @@ public final class LanguageManager
             LogUtils.debug(LanguageManager.class, "parseJson 读取语言配置 (path): " + languageJsonPathHandle);
 
             // 解析可用语言块列表
-            if (json.containsKey("blocks"))
+            if (json.containsKey(LanguageKey.BLOCKS))
             {
-                availableBlocks = new HashSet<>(json.getStringList("blocks"));
+                availableBlocks = new HashSet<>(json.getStringList(LanguageKey.BLOCKS));
                 LogUtils.debug(LanguageManager.class, "parseJson 读取可用语言块 (blocks): " + availableBlocks);
             }
             else
@@ -202,9 +203,9 @@ public final class LanguageManager
         try
         {
             // 字体读取
-            if (json.containsKey("version"))
+            if (json.containsKey(LanguageKey.VERSION))
             {
-                version = json.getString("version");
+                version = json.getString(LanguageKey.VERSION);
                 LogUtils.debug(LanguageManager.class, "loadVersionFromJson 读取语言版本 (version): " + version);
             }
             else

@@ -7,6 +7,7 @@ import com.hujiugame.qingfeng.util.json.parser.JsonPositionParser;
 import com.hujiugame.qingfeng.util.json.parser.JsonShowParser;
 import com.hujiugame.qingfeng.util.json.parser.JsonSizeParser;
 import com.hujiugame.qingfeng.util.json.parser.JsonTextParser;
+import com.hujiugame.qingfeng.type.key.UiKey;
 import com.hujiugame.qingfeng.util.system.LogUtils;
 
 import java.util.Objects;
@@ -93,7 +94,7 @@ public class ButtonInfo
         this.buttonTag = buttonTag;
 
         // 解析kind属性
-        this.buttonKindName = json.getString("kind");
+        this.buttonKindName = json.getString(UiKey.Button.KIND);
 
         // 解析show属性
         this.show = JsonShowParser.parseShow(json);

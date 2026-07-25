@@ -5,6 +5,7 @@ import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.data.game.Layout;
 import com.hujiugame.qingfeng.type.file.FileName;
 import com.hujiugame.qingfeng.type.file.PathName;
+import com.hujiugame.qingfeng.type.key.ConfigKey;
 import com.hujiugame.qingfeng.manager.LayoutManager;
 import com.hujiugame.qingfeng.manager.ThemeManager;
 import com.hujiugame.qingfeng.util.system.FileUtils;
@@ -37,10 +38,10 @@ public final class GameTemplateManager
         if (FileUtils.isFileExist(configPathHandle))
         {
             JsonEntity config = new JsonEntity(configPathHandle);
-            if (config.containsKey("templates"))
+            if (config.containsKey(ConfigKey.Content.TEMPLATES))
             {
-                availableTemplates = new HashSet<>(config.getStringList("templates"));
-                LogUtils.debug(GameTemplateManager.class, "loadTemplateConfig 读取可用模板 (templates): " + availableTemplates);
+                availableTemplates = new HashSet<>(config.getStringList(ConfigKey.Content.TEMPLATES));
+                LogUtils.debug(GameTemplateManager.class, "loadTemplateConfig 读取可用模板 (" + ConfigKey.Content.TEMPLATES + "): " + availableTemplates);
                 return;
             }
         }

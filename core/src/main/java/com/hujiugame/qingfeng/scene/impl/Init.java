@@ -16,6 +16,7 @@ import com.hujiugame.qingfeng.type.game.InitState;
 import com.hujiugame.qingfeng.type.game.state.GameState;
 import com.hujiugame.qingfeng.type.game.state.GameSubState;
 import com.hujiugame.qingfeng.type.key.GameInfoKey;
+import com.hujiugame.qingfeng.type.key.ThemeKey;
 import com.hujiugame.qingfeng.audio.AudioManager;
 import com.hujiugame.qingfeng.graphic.GraphicsManager;
 import com.hujiugame.qingfeng.scene.GameRender;
@@ -102,9 +103,9 @@ public final class Init implements GameRender
             if (FileUtils.isFileExist(appConfigHandle))
             {
                 JsonEntity appConfig = new JsonEntity(appConfigHandle);
-                if (appConfig.containsKey("process_color"))
+                if (appConfig.containsKey(ThemeKey.PROCESS_COLOR))
                 {
-                    String processColorStr = appConfig.getString("process_color");
+                    String processColorStr = appConfig.getString(ThemeKey.PROCESS_COLOR);
                     if (processColorStr != null)
                     {
                         processColor = Color.valueOf(processColorStr);
@@ -113,7 +114,7 @@ public final class Init implements GameRender
                     }
                     else
                     {
-                        LogUtils.error(Init.class, "loadProcessColor process_color 字段类型不是字符串");
+                        LogUtils.error(Init.class, "loadProcessColor " + ThemeKey.PROCESS_COLOR + " 字段类型不是字符串");
                     }
                 }
             }

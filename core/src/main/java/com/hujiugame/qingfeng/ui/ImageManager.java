@@ -18,6 +18,7 @@ import com.hujiugame.qingfeng.ui.kind.image.ImageKind;
 import com.hujiugame.qingfeng.ui.kind.image.ImageState;
 import com.hujiugame.qingfeng.type.file.PathName;
 import com.hujiugame.qingfeng.graphic.GraphicsManager;
+import com.hujiugame.qingfeng.type.key.UiKey;
 import com.hujiugame.qingfeng.util.system.FileUtils;
 import com.hujiugame.qingfeng.util.system.LogUtils;
 
@@ -63,7 +64,7 @@ public final class ImageManager
             JsonEntity imageKindJson = new JsonEntity(file);
             LogUtils.debug(ImageManager.class, "loadImageKind 读取图片配置: " + imageKindJson);
 
-            String imageKindName = imageKindJson.getString("name");
+            String imageKindName = imageKindJson.getString(UiKey.Image.NAME);
             if (imageKindName == null)
             {
                 LogUtils.error(ImageManager.class, "loadImageKind 缺少 name 字段: " + imageKindJson);
@@ -71,9 +72,9 @@ public final class ImageManager
             }
 
             Pixmap pixmap = null;
-            if (imageKindJson.containsKey("image"))
+            if (imageKindJson.containsKey(UiKey.Image.SOURCE))
             {
-                String imagePath = imageKindJson.getString("image");
+                String imagePath = imageKindJson.getString(UiKey.Image.SOURCE);
                 FileHandle imageFileHandle = themePath.child(PathName.ASSET_S_RESOURCE_IMAGE).child(imagePath);
                 if (!imageFileHandle.exists())
                 {
@@ -82,9 +83,9 @@ public final class ImageManager
                 }
                 pixmap = new Pixmap(imageFileHandle);
             }
-            else if (imageKindJson.containsKey("color"))
+            else if (imageKindJson.containsKey(UiKey.Image.COLOR))
             {
-                String colorStr = imageKindJson.getString("color");
+                String colorStr = imageKindJson.getString(UiKey.Image.COLOR);
                 if (colorStr == null)
                 {
                     LogUtils.error(ImageManager.class, "loadImageKind color 字段类型不是字符串 (name): " + imageKindName);

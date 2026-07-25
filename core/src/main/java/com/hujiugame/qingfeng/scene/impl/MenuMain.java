@@ -10,8 +10,7 @@ import com.hujiugame.qingfeng.type.file.FileName;
 import com.hujiugame.qingfeng.type.file.PathName;
 import com.hujiugame.qingfeng.type.game.state.GameState;
 import com.hujiugame.qingfeng.type.game.state.GameSubState;
-import com.hujiugame.qingfeng.type.key.RequirementLanguageKey;
-import com.hujiugame.qingfeng.type.key.RequirementUiKey;
+import com.hujiugame.qingfeng.type.key.RequirementKey;
 import com.hujiugame.qingfeng.type.url.WebSite;
 import com.hujiugame.qingfeng.audio.AudioManager;
 import com.hujiugame.qingfeng.graphic.GraphicsManager;
@@ -77,33 +76,33 @@ public final class MenuMain implements GameRender
             float touchY = (Gdx.graphics.getHeight() - Gdx.input.getY()) * ((float) ScreenSize.HEIGHT / Gdx.graphics.getHeight());
             if (touchX >= 0 && touchX <= 180 && touchY >= 0 && touchY <= 40)
             {
-                uiManager.getMessageBox().showAsk(RequirementLanguageKey.MESSAGE_BOX_OPEN_OFFICIAL_WEBSITE_KEY,
-                    "{language$" + RequirementLanguageKey.REQUIREMENT_BLOCK + "#" + RequirementLanguageKey.MESSAGE_BOX_FIRST_KEY + "." + RequirementLanguageKey.MESSAGE_BOX_OPEN_OFFICIAL_WEBSITE_TITLE + "}",
-                    "{language$" + RequirementLanguageKey.REQUIREMENT_BLOCK + "#" + RequirementLanguageKey.MESSAGE_BOX_FIRST_KEY + "." + RequirementLanguageKey.MESSAGE_BOX_OPEN_OFFICIAL_WEBSITE_CONTENT + "}");
+                uiManager.getMessageBox().showAsk(RequirementKey.Language.MESSAGE_BOX_OPEN_OFFICIAL_WEBSITE_KEY,
+                    "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_OPEN_OFFICIAL_WEBSITE_TITLE + "}",
+                    "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_OPEN_OFFICIAL_WEBSITE_CONTENT + "}");
             }
         }
 
         // 按下开始按钮
-        if (uiManager.isButtonClicked(RequirementUiKey.MENU_MAIN_BUTTON_START))
+        if (uiManager.isButtonClicked(RequirementKey.Ui.MENU_MAIN_BUTTON_START))
         {
             eventQueue.addEvent(new EventPushGameState(GameState.MENU, GameSubState.MENU_LIST));
         }
         // 按下创作按钮
-        else if (uiManager.isButtonClicked(RequirementUiKey.MENU_MAIN_BUTTON_CREATE))
+        else if (uiManager.isButtonClicked(RequirementKey.Ui.MENU_MAIN_BUTTON_CREATE))
         {
 
         }
         // 按下配置按钮
-        else if (uiManager.isButtonClicked(RequirementUiKey.MENU_MAIN_BUTTON_CONFIG))
+        else if (uiManager.isButtonClicked(RequirementKey.Ui.MENU_MAIN_BUTTON_CONFIG))
         {
             eventQueue.addEvent(new EventPushGameState(GameState.CONFIG, GameSubState.CONFIG_BASIC));
         }
         // 按下退出按钮
-        else if (uiManager.isButtonClicked(RequirementUiKey.MENU_MAIN_BUTTON_QUIT))
+        else if (uiManager.isButtonClicked(RequirementKey.Ui.MENU_MAIN_BUTTON_QUIT))
         {
-            uiManager.getMessageBox().showAsk(RequirementLanguageKey.MESSAGE_BOX_QUIT_GAME_KEY,
-                "{language$" + RequirementLanguageKey.REQUIREMENT_BLOCK + "#" + RequirementLanguageKey.MESSAGE_BOX_FIRST_KEY + "." + RequirementLanguageKey.MESSAGE_BOX_QUIT_GAME_TITLE + "}",
-                "{language$" + RequirementLanguageKey.REQUIREMENT_BLOCK + "#" + RequirementLanguageKey.MESSAGE_BOX_FIRST_KEY + "." + RequirementLanguageKey.MESSAGE_BOX_QUIT_GAME_CONTENT+ "}");
+            uiManager.getMessageBox().showAsk(RequirementKey.Language.MESSAGE_BOX_QUIT_GAME_KEY,
+                "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_QUIT_GAME_TITLE + "}",
+                "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_QUIT_GAME_CONTENT+ "}");
         }
 
         // 更新检测
@@ -114,32 +113,32 @@ public final class MenuMain implements GameRender
             {
                 if (updateChecker.isNeedVersionUpdate())
                 {
-                    uiManager.getMessageBox().showAsk(RequirementLanguageKey.MESSAGE_BOX_UPDATE_DETECTED_KEY,
-                        "{language$" + RequirementLanguageKey.REQUIREMENT_BLOCK + "#" + RequirementLanguageKey.MESSAGE_BOX_FIRST_KEY + "." + RequirementLanguageKey.MESSAGE_BOX_UPDATE_DETECTED_TITLE + "}",
-                        "{language$" + RequirementLanguageKey.REQUIREMENT_BLOCK + "#" + RequirementLanguageKey.MESSAGE_BOX_FIRST_KEY + "." + RequirementLanguageKey.MESSAGE_BOX_UPDATE_DETECTED_CONTENT + "}");
+                    uiManager.getMessageBox().showAsk(RequirementKey.Language.MESSAGE_BOX_UPDATE_DETECTED_KEY,
+                        "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_UPDATE_DETECTED_TITLE + "}",
+                        "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_UPDATE_DETECTED_CONTENT + "}");
                 }
             }
             // 请求失败
             else
             {
-                uiManager.getMessageBox().showAsk(RequirementLanguageKey.MESSAGE_BOX_UPDATE_REQUEST_FAILED_KEY,
-                    "{language$" + RequirementLanguageKey.REQUIREMENT_BLOCK + "#" + RequirementLanguageKey.MESSAGE_BOX_FIRST_KEY + "." + RequirementLanguageKey.MESSAGE_BOX_UPDATE_REQUEST_FAILED_TITLE + "}",
-                    "{language$" + RequirementLanguageKey.REQUIREMENT_BLOCK + "#" + RequirementLanguageKey.MESSAGE_BOX_FIRST_KEY + "." + RequirementLanguageKey.MESSAGE_BOX_UPDATE_REQUEST_FAILED_CONTENT + "}");
+                uiManager.getMessageBox().showAsk(RequirementKey.Language.MESSAGE_BOX_UPDATE_REQUEST_FAILED_KEY,
+                    "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_UPDATE_REQUEST_FAILED_TITLE + "}",
+                    "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_UPDATE_REQUEST_FAILED_CONTENT + "}");
             }
             // 重置检测更新完成状态
             updateChecker.setDoDetectUpdateFinish(false);
         }
 
-        uiManager.getMessageBox().handleAsk(RequirementLanguageKey.MESSAGE_BOX_OPEN_OFFICIAL_WEBSITE_KEY,
+        uiManager.getMessageBox().handleAsk(RequirementKey.Language.MESSAGE_BOX_OPEN_OFFICIAL_WEBSITE_KEY,
             () -> Gdx.net.openURI(WebSite.OFFICIAL));
 
-        uiManager.getMessageBox().handleAsk(RequirementLanguageKey.MESSAGE_BOX_QUIT_GAME_KEY,
+        uiManager.getMessageBox().handleAsk(RequirementKey.Language.MESSAGE_BOX_QUIT_GAME_KEY,
             Gdx.app::exit);
 
-        uiManager.getMessageBox().handleAsk(RequirementLanguageKey.MESSAGE_BOX_UPDATE_DETECTED_KEY,
+        uiManager.getMessageBox().handleAsk(RequirementKey.Language.MESSAGE_BOX_UPDATE_DETECTED_KEY,
             () -> Gdx.net.openURI(WebSite.OFFICIAL));
 
-        uiManager.getMessageBox().handleAsk(RequirementLanguageKey.MESSAGE_BOX_UPDATE_REQUEST_FAILED_KEY,
+        uiManager.getMessageBox().handleAsk(RequirementKey.Language.MESSAGE_BOX_UPDATE_REQUEST_FAILED_KEY,
             () -> Gdx.net.openURI(WebSite.OFFICIAL));
 
     }

@@ -4,6 +4,7 @@ import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.util.json.parser.JsonPositionParser;
 import com.hujiugame.qingfeng.util.json.parser.JsonShowParser;
 import com.hujiugame.qingfeng.util.json.parser.JsonSizeParser;
+import com.hujiugame.qingfeng.type.key.UiKey;
 import com.hujiugame.qingfeng.util.system.LogUtils;
 
 import java.util.Objects;
@@ -73,7 +74,7 @@ public class ImageInfo
         this.imageTag = imageTag;
 
         // 解析kind属性
-        this.imageKindName = json.getString("kind");
+        this.imageKindName = json.getString(UiKey.Image.KIND);
 
         // 解析show属性
         this.show = JsonShowParser.parseShow(json);

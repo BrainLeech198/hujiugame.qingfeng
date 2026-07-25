@@ -3,6 +3,7 @@ package com.hujiugame.qingfeng.game;
 import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.data.story.Role;
 import com.hujiugame.qingfeng.type.file.FileName;
+import com.hujiugame.qingfeng.type.key.ConfigKey;
 import com.hujiugame.qingfeng.type.file.PathName;
 import com.hujiugame.qingfeng.manager.LayoutManager;
 import com.hujiugame.qingfeng.manager.ThemeManager;
@@ -50,7 +51,7 @@ public final class GameRoleManager
             roleListJson = new JsonEntity(roleListFilePathHandle);
 
             // 读取数量
-            int roleListCount = roleListJson.getInt("count");
+            int roleListCount = roleListJson.getInt(ConfigKey.Content.COUNT);
             if (roleListCount <= 0)
             {
                 LogUtils.error(GameRoleManager.class, "parseRoleList 角色列表数量错误");
@@ -58,7 +59,7 @@ public final class GameRoleManager
             }
 
             // 遍历，读取角色文件夹名
-            List<String> roleList = roleListJson.getStringList("role");
+            List<String> roleList = roleListJson.getStringList(ConfigKey.Content.ROLE);
             for (String roleDirectoryName : roleList)
             {
                 FileHandle roleDirectoryHandle = gameDirectoryPathHandle.child(PathName.IN_GAME_ASSET_S_STORY_ROLE).child(roleDirectoryName);

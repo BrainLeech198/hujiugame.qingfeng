@@ -14,6 +14,7 @@ import com.hujiugame.qingfeng.script.data.command.param.control.WaitControlScrip
 import com.hujiugame.qingfeng.script.data.command.param.control.WhileControlScriptCommandParam;
 import com.hujiugame.qingfeng.script.data.command.param.story.ForwardPageStoryScriptCommandParam;
 import com.hujiugame.qingfeng.script.data.command.param.story.GotoPageStoryScriptCommandParam;
+import com.hujiugame.qingfeng.type.key.ScriptKey;
 import com.hujiugame.qingfeng.script.data.command.param.variable.AssignmentVariableScriptCommandParam;
 import com.hujiugame.qingfeng.script.data.command.param.variable.CreateVariableScriptCommandParam;
 import com.hujiugame.qingfeng.util.system.LogUtils;
@@ -31,28 +32,28 @@ public class ScriptCommandParser
             LogUtils.debug(ScriptCommandParser.class, "parse 尝试解析脚本命令 (json): " + json);
 
             // type字段
-            if (!json.containsKey("type"))
+            if (!json.containsKey(ScriptKey.Command.TYPE))
             {
-                LogUtils.error(ScriptCommandParser.class, "parse 此json缺少type字段 (json): " + json);
+                LogUtils.error(ScriptCommandParser.class, "parse 此json缺少" + ScriptKey.Command.TYPE + "字段 (json): " + json);
                 return null;
             }
             // action字段
-            if (!json.containsKey("action"))
+            if (!json.containsKey(ScriptKey.Command.ACTION))
             {
-                LogUtils.error(ScriptCommandParser.class, "parse 此json缺少action字段 (json): " + json);
+                LogUtils.error(ScriptCommandParser.class, "parse 此json缺少" + ScriptKey.Command.ACTION + "字段 (json): " + json);
                 return null;
             }
             // param字段
-            if (!json.containsKey("param"))
+            if (!json.containsKey(ScriptKey.Command.PARAM))
             {
-                LogUtils.error(ScriptCommandParser.class, "parse 此json缺少param字段 (json): " + json);
+                LogUtils.error(ScriptCommandParser.class, "parse 此json缺少" + ScriptKey.Command.PARAM + "字段 (json): " + json);
                 return null;
             }
 
             // 获取json数据
-            String type = json.getString("type");
-            String action = json.getString("action");
-            JsonEntity paramJson = json.getJsonEntityByKey("param");
+            String type = json.getString(ScriptKey.Command.TYPE);
+            String action = json.getString(ScriptKey.Command.ACTION);
+            JsonEntity paramJson = json.getJsonEntityByKey(ScriptKey.Command.PARAM);
 
             // 尝试解析脚本命令
             ScriptCommand command = dispatchScriptCommandJson(type, action, paramJson);

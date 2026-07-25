@@ -4,6 +4,7 @@ import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.script.data.trigger.command.action.LabelClickTrigger;
 import com.hujiugame.qingfeng.script.data.trigger.command.action.TriggerAction;
 import com.hujiugame.qingfeng.script.data.trigger.command.param.label.LabelClickTriggerParam;
+import com.hujiugame.qingfeng.type.key.ScriptKey;
 import com.hujiugame.qingfeng.util.system.LogUtils;
 
 public class TriggerCommandParser
@@ -15,28 +16,28 @@ public class TriggerCommandParser
             LogUtils.debug(TriggerCommandParser.class, "parse 尝试解析触发器命令 (json): " + json);
 
             // type字段
-            if (!json.containsKey("type"))
+            if (!json.containsKey(ScriptKey.Command.TYPE))
             {
-                LogUtils.error(TriggerCommandParser.class, "parse 此json缺少type字段 (json): " + json);
+                LogUtils.error(TriggerCommandParser.class, "parse 此json缺少" + ScriptKey.Command.TYPE + "字段 (json): " + json);
                 return null;
             }
             // action字段
-            if (!json.containsKey("action"))
+            if (!json.containsKey(ScriptKey.Command.ACTION))
             {
-                LogUtils.error(TriggerCommandParser.class, "parse 此json缺少action字段 (json): " + json);
+                LogUtils.error(TriggerCommandParser.class, "parse 此json缺少" + ScriptKey.Command.ACTION + "字段 (json): " + json);
                 return null;
             }
             // param字段
-            if (!json.containsKey("param"))
+            if (!json.containsKey(ScriptKey.Command.PARAM))
             {
-                LogUtils.error(TriggerCommandParser.class, "parse 此json缺少param字段 (json): " + json);
+                LogUtils.error(TriggerCommandParser.class, "parse 此json缺少" + ScriptKey.Command.PARAM + "字段 (json): " + json);
                 return null;
             }
 
             // 获取json数据
-            String type = json.getString("type");
-            String action = json.getString("action");
-            JsonEntity paramJson = json.getJsonEntityByKey("param");
+            String type = json.getString(ScriptKey.Command.TYPE);
+            String action = json.getString(ScriptKey.Command.ACTION);
+            JsonEntity paramJson = json.getJsonEntityByKey(ScriptKey.Command.PARAM);
 
             // 尝试解析触发器命令
             TriggerCommand command = dispatchTriggerCommandJson(type, action, paramJson);

@@ -4,6 +4,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.script.data.Script;
 import com.hujiugame.qingfeng.type.file.FileName;
+import com.hujiugame.qingfeng.type.key.ConfigKey;
 import com.hujiugame.qingfeng.type.file.PathName;
 import com.hujiugame.qingfeng.util.system.FileUtils;
 import com.hujiugame.qingfeng.util.system.LogUtils;
@@ -30,10 +31,10 @@ public final class GameScriptManager
         if (FileUtils.isFileExist(configPathHandle))
         {
             JsonEntity config = new JsonEntity(configPathHandle);
-            if (config.containsKey("scripts"))
+            if (config.containsKey(ConfigKey.Content.SCRIPTS))
             {
-                availableScripts = new HashSet<>(config.getStringList("scripts"));
-                LogUtils.debug(GameScriptManager.class, "loadScriptConfig 读取可用脚本 (scripts): " + availableScripts);
+                availableScripts = new HashSet<>(config.getStringList(ConfigKey.Content.SCRIPTS));
+                LogUtils.debug(GameScriptManager.class, "loadScriptConfig 读取可用脚本 (" + ConfigKey.Content.SCRIPTS + "): " + availableScripts);
                 return;
             }
         }

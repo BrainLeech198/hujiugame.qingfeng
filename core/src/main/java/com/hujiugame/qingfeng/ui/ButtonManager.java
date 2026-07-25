@@ -17,9 +17,10 @@ import com.hujiugame.qingfeng.ui.kind.TextObject;
 import com.hujiugame.qingfeng.ui.kind.button.ButtonInfo;
 import com.hujiugame.qingfeng.ui.kind.button.ButtonKind;
 import com.hujiugame.qingfeng.ui.kind.button.ButtonState;
-import com.hujiugame.qingfeng.type.file.PathName;
+import com.hujiugame.qingfeng.type.key.UiKey;
 import com.hujiugame.qingfeng.audio.AudioManager;
 import com.hujiugame.qingfeng.graphic.GraphicsManager;
+import com.hujiugame.qingfeng.type.file.PathName;
 import com.hujiugame.qingfeng.util.system.LogUtils;
 
 import java.util.*;
@@ -78,14 +79,14 @@ public final class ButtonManager
             JsonEntity buttonKindJson = new JsonEntity(file);
             LogUtils.debug(ButtonManager.class, "loadButtonKind 读取按钮配置: " + buttonKindJson);
 
-            String buttonKindName = buttonKindJson.getString("name");
+            String buttonKindName = buttonKindJson.getString(UiKey.Button.NAME);
             if (buttonKindName == null)
             {
                 LogUtils.error(ButtonManager.class, "loadButtonKind 缺少 name 字段: " + buttonKindJson);
                 return false;
             }
 
-            String fontName = buttonKindJson.getString("font");
+            String fontName = buttonKindJson.getString(UiKey.Button.FONT);
             if (fontName == null)
             {
                 LogUtils.error(ButtonManager.class, "loadButtonKind 缺少 font 字段: " + buttonKindJson);
@@ -93,15 +94,15 @@ public final class ButtonManager
             }
 
             float borderScale = 1.0f;
-            if (buttonKindJson.containsKey("borderScale"))
+            if (buttonKindJson.containsKey(UiKey.Button.BORDER_SCALE))
             {
-                borderScale = buttonKindJson.getFloat("borderScale");
+                borderScale = buttonKindJson.getFloat(UiKey.Button.BORDER_SCALE);
             }
 
             TextButton.TextButtonStyle style = new TextButton.TextButtonStyle();
             style.font = fontResolver.getFont(fontName, 1.0f);
 
-            String fontColorStr = buttonKindJson.getString("fontColor");
+            String fontColorStr = buttonKindJson.getString(UiKey.Button.FONT_COLOR);
             if (fontColorStr == null)
             {
                 LogUtils.error(ButtonManager.class, "loadButtonKind fontColor 字段缺失或类型不是字符串 (name): " + buttonKindName);
@@ -112,19 +113,19 @@ public final class ButtonManager
             style.downFontColor = new Color(1f - fontColor.r, 1f - fontColor.g, 1f - fontColor.b, fontColor.a);
             style.disabledFontColor = fontColor.cpy().mul(0.5f, 0.5f, 0.5f, 1f);
 
-            JsonEntity imageJson = buttonKindJson.getJsonEntityByKey("image");
+            JsonEntity imageJson = buttonKindJson.getJsonEntityByKey(UiKey.Button.IMAGE);
             FileHandle resImgDir = themePath.child(PathName.ASSET_S_RESOURCE_IMAGE);
-            Pixmap upPix = new Pixmap(resImgDir.child(imageJson.getString("up")));
-            Pixmap downPix = new Pixmap(resImgDir.child(imageJson.getString("down")));
-            Pixmap disabledPix = new Pixmap(resImgDir.child(imageJson.getString("disabled")));
+            Pixmap upPix = new Pixmap(resImgDir.child(imageJson.getString(UiKey.Button.IMAGE_UP)));
+            Pixmap downPix = new Pixmap(resImgDir.child(imageJson.getString(UiKey.Button.IMAGE_DOWN)));
+            Pixmap disabledPix = new Pixmap(resImgDir.child(imageJson.getString(UiKey.Button.IMAGE_DISABLED)));
 
             pendingPixmapMap.put(UiManager.PIXMAP_BUTTON + buttonKindName + "_up", upPix);
             pendingPixmapMap.put(UiManager.PIXMAP_BUTTON + buttonKindName + "_down", downPix);
             pendingPixmapMap.put(UiManager.PIXMAP_BUTTON + buttonKindName + "_disabled", disabledPix);
 
-            JsonEntity audioJson = buttonKindJson.getJsonEntityByKey("audio");
+            JsonEntity audioJson = buttonKindJson.getJsonEntityByKey(UiKey.Button.AUDIO);
             FileHandle audioFileHandle = themePath.child(PathName.ASSET_S_RESOURCE_AUDIO)
-                .child(audioJson.getString("click"));
+                .child(audioJson.getString(UiKey.Button.AUDIO_CLICK));
 
             pendingButtonStyles.put(buttonKindName, style);
             pendingButtonAudios.put(buttonKindName, audioFileHandle);

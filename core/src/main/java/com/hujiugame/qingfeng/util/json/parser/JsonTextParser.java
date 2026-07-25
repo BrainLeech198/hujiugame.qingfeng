@@ -2,6 +2,7 @@ package com.hujiugame.qingfeng.util.json.parser;
 
 import com.badlogic.gdx.graphics.Color;
 import com.hujiugame.qingfeng.data.JsonEntity;
+import com.hujiugame.qingfeng.type.key.JsonKey;
 import com.hujiugame.qingfeng.ui.kind.TextObject;
 import com.hujiugame.qingfeng.type.ui.FontFlag;
 import com.hujiugame.qingfeng.manager.TextManager;
@@ -46,15 +47,15 @@ public final class JsonTextParser
     {
         try
         {
-            if (json.containsKey("textKey"))
+            if (json.containsKey(JsonKey.Text.TEXT_KEY))
             {
                 LogUtils.debug(JsonTextParser.class, "parseText 获取文本成功(包含解析)");
-                return new TextObject(textManager, json.getString("textKey"));
+                return new TextObject(textManager, json.getString(JsonKey.Text.TEXT_KEY));
             }
-            else if (json.containsKey("text"))
+            else if (json.containsKey(JsonKey.Text.TEXT))
             {
                 LogUtils.debug(JsonTextParser.class, "parseText 获取文本成功(纯文本)");
-                return new TextObject(null, json.getString("text"));
+                return new TextObject(null, json.getString(JsonKey.Text.TEXT));
             }
             else
             {
@@ -79,9 +80,9 @@ public final class JsonTextParser
     {
         try
         {
-            if (json.containsKey("fontName"))
+            if (json.containsKey(JsonKey.Font.FONT_NAME))
             {
-                String fontName = json.getString("fontName");
+                String fontName = json.getString(JsonKey.Font.FONT_NAME);
                 LogUtils.debug(JsonTextParser.class, "parseFontName 获取字体名称成功 (fontName): " + fontName);
                 return fontName;
             }
@@ -109,9 +110,9 @@ public final class JsonTextParser
         {
             float fontSize = 1.0f;
 
-            if (json.containsKey("fontSize"))
+            if (json.containsKey(JsonKey.Font.FONT_SIZE))
             {
-                fontSize = json.getFloat("fontSize");
+                fontSize = json.getFloat(JsonKey.Font.FONT_SIZE);
                 LogUtils.debug(JsonTextParser.class, "parseFontSize 获取文本大小 (fontSize): " + fontSize);
             }
             else
@@ -140,9 +141,9 @@ public final class JsonTextParser
         {
             Color fontColor = null;
 
-            if (json.containsKey("fontColor"))
+            if (json.containsKey(JsonKey.Font.FONT_COLOR))
             {
-                String fontColorStr = json.getString("fontColor");
+                String fontColorStr = json.getString(JsonKey.Font.FONT_COLOR);
                 if (fontColorStr != null)
                 {
                     fontColor = Color.valueOf(fontColorStr);
@@ -184,9 +185,9 @@ public final class JsonTextParser
         {
             FontFlag fontFlag = defaultFontFlag;
 
-            if (json.containsKey("fontFlag"))
+            if (json.containsKey(JsonKey.Font.FONT_FLAG))
             {
-                fontFlag = FontFlag.valueOf(json.getString("fontFlag").toUpperCase());
+                fontFlag = FontFlag.valueOf(json.getString(JsonKey.Font.FONT_FLAG).toUpperCase());
                 LogUtils.debug(JsonTextParser.class, "parseFontFlag 获取文本对齐方式 (fontFlag): " + fontFlag);
             }
             else
@@ -214,9 +215,9 @@ public final class JsonTextParser
         {
             JsonEntity fontArgs = new JsonEntity();
 
-            if (json.containsKey("fontArgs"))
+            if (json.containsKey(JsonKey.Font.FONT_ARGS))
             {
-                fontArgs = json.getJsonEntityByKey("fontArgs");
+                fontArgs = json.getJsonEntityByKey(JsonKey.Font.FONT_ARGS);
                 LogUtils.debug(JsonTextParser.class, "parseFontArgs 获取文本参数 (fontArgs): " + fontArgs);
             }
             else

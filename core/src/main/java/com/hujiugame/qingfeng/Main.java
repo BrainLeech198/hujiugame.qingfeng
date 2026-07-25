@@ -13,7 +13,7 @@ import com.hujiugame.qingfeng.core.UpdateChecker;
 import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.type.file.FileName;
 import com.hujiugame.qingfeng.type.file.PathName;
-import com.hujiugame.qingfeng.type.key.UserConfigKey;
+import com.hujiugame.qingfeng.type.key.ConfigKey;
 import com.hujiugame.qingfeng.type.ui.UseViewport;
 import com.hujiugame.qingfeng.input.ControllerInputHandler;
 import com.hujiugame.qingfeng.input.KeyboardInputHandler;
@@ -507,23 +507,23 @@ public class Main extends ApplicationAdapter
                 {
                     LogUtils.debug(Main.class, "initLibGDX 运行平台不支持调整分辨率 (platform): " + PlatformUtils.getPlatformType());
                 }
-                else if (userConfigJson.containsKey(UserConfigKey.RESOLUTION))
+                else if (userConfigJson.containsKey(ConfigKey.User.Resolution.KEY))
                 {
                     // 分辨率
-                    JsonEntity resolutionJson = userConfigJson.getJsonEntityByKey(UserConfigKey.RESOLUTION);
+                    JsonEntity resolutionJson = userConfigJson.getJsonEntityByKey(ConfigKey.User.Resolution.KEY);
 
-                    if (resolutionJson.containsKey(UserConfigKey.RESOLUTION_WIDTH) && resolutionJson.containsKey(UserConfigKey.RESOLUTION_HEIGHT))
+                    if (resolutionJson.containsKey(ConfigKey.User.Resolution.WIDTH) && resolutionJson.containsKey(ConfigKey.User.Resolution.HEIGHT))
                     {
-                        int screenWidth = resolutionJson.getInt(UserConfigKey.RESOLUTION_WIDTH);
-                        int screenHeight = resolutionJson.getInt(UserConfigKey.RESOLUTION_HEIGHT);
+                        int screenWidth = resolutionJson.getInt(ConfigKey.User.Resolution.WIDTH);
+                        int screenHeight = resolutionJson.getInt(ConfigKey.User.Resolution.HEIGHT);
                         Gdx.graphics.setWindowedMode(screenWidth, screenHeight);
                     }
                 }
 
                 // 配置视窗: stretch, fit, fill
-                if (userConfigJson.containsKey(UserConfigKey.USE_VIEWPORT))
+                if (userConfigJson.containsKey(ConfigKey.User.USE_VIEWPORT))
                 {
-                    String useViewportName = userConfigJson.getString(UserConfigKey.USE_VIEWPORT).toUpperCase();
+                    String useViewportName = userConfigJson.getString(ConfigKey.User.USE_VIEWPORT).toUpperCase();
                     useViewport = UseViewport.valueOf(useViewportName);
                 }
                 else
@@ -593,10 +593,10 @@ public class Main extends ApplicationAdapter
                     //   - copyInternalFile 覆盖外部后, restoreProtectExternalFile 还原合并后的完整配置
                     //   最终外部 user_config.json = 完整配置 + resolution 为本次检测值
                     Map<String, Object> resolutionMap = new HashMap<>();
-                    resolutionMap.put(UserConfigKey.RESOLUTION_WIDTH, detectWidth);
-                    resolutionMap.put(UserConfigKey.RESOLUTION_HEIGHT, detectHeight);
+                    resolutionMap.put(ConfigKey.User.Resolution.WIDTH, detectWidth);
+                    resolutionMap.put(ConfigKey.User.Resolution.HEIGHT, detectHeight);
                     JsonEntity configJson = new JsonEntity();
-                    configJson.put(UserConfigKey.RESOLUTION, resolutionMap);
+                    configJson.put(ConfigKey.User.Resolution.KEY, resolutionMap);
                     FileUtils.createStringFile(configJson.toString(), userConfigHandle, false);
 
                     LogUtils.info(Main.class, "initLibGDX 初次启动自适应分辨率: " + detectWidth + "x" + detectHeight);

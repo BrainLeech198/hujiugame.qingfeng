@@ -9,7 +9,7 @@ import com.hujiugame.qingfeng.type.ScreenSize;
 import com.hujiugame.qingfeng.type.VirtualInputType;
 import com.hujiugame.qingfeng.type.file.FileName;
 import com.hujiugame.qingfeng.type.file.PathName;
-import com.hujiugame.qingfeng.type.key.UniversalUIKey;
+import com.hujiugame.qingfeng.type.key.UniversalUiKey;
 import com.hujiugame.qingfeng.graphic.GraphicsManager;
 import com.hujiugame.qingfeng.ui.MessageBox;
 import com.hujiugame.qingfeng.ui.UiManager;
@@ -540,9 +540,9 @@ public class VirtualInputHandler
             }
 
             // 返回/退出按钮优先级
-            if (uiManager.containsButton(UniversalUIKey.BUTTON_BACK))
+            if (uiManager.containsButton(UniversalUiKey.BUTTON_BACK))
             {
-                InteractableObject backButton = uiManager.getButton(UniversalUIKey.BUTTON_BACK);
+                InteractableObject backButton = uiManager.getButton(UniversalUiKey.BUTTON_BACK);
                 if (backButton != null)
                 {
                     cancelSelectObject = backButton;
@@ -552,9 +552,9 @@ public class VirtualInputHandler
             }
 
             // 退出按钮优先级
-            if (uiManager.containsButton(UniversalUIKey.BUTTON_QUIT))
+            if (uiManager.containsButton(UniversalUiKey.BUTTON_QUIT))
             {
-                InteractableObject quitButton = uiManager.getButton(UniversalUIKey.BUTTON_QUIT);
+                InteractableObject quitButton = uiManager.getButton(UniversalUiKey.BUTTON_QUIT);
                 if (quitButton != null)
                 {
                     cancelSelectObject = quitButton;
