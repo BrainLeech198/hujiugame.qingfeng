@@ -52,6 +52,8 @@ public final class GameStatePageInfo
         // MENU
         Map<Integer, Boolean> menuMap = new HashMap<>();
         menuMap.put(GameSubState.MENU_MAIN, true);
+        menuMap.put(GameSubState.MENU_LIST, true);
+        menuMap.put(GameSubState.MENU_LOAD, true);
         map.put(GameState.MENU, Collections.unmodifiableMap(menuMap));
 
         // CONFIG
