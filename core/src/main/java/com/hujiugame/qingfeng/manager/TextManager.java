@@ -10,6 +10,36 @@ import java.util.regex.Pattern;
 
 public final class TextManager
 {
+    public enum Field
+    {
+        LANGUAGE("language"),
+        GAME("game");
+
+        private final String value;
+
+        Field (String value)
+        {
+            this.value = value;
+        }
+
+        public String getValue ()
+        {
+            return value;
+        }
+
+        public static Field fromValue (String value)
+        {
+            for (Field field : values())
+            {
+                if (field.value.equals(value))
+                {
+                    return field;
+                }
+            }
+            return null;
+        }
+    }
+
     private long stateCode;
     private long languageStateCode;
     private long gameInfoStateCode;
@@ -228,12 +258,18 @@ public final class TextManager
             }
 
             // 获取实际值
-            switch (field)
+            Field f = Field.fromValue(field);
+            if (f == null)
             {
-                case "language":
+                return "Field is not exist (field): " + field;
+            }
+
+            switch (f)
+            {
+                case LANGUAGE:
                     return parseLanguageText(block, key);
 
-                case "game":
+                case GAME:
                     return parseGameInfoText(key);
 
                 default:
