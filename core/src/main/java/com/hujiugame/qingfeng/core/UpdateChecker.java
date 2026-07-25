@@ -10,6 +10,8 @@ import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.type.VersionType;
 import com.hujiugame.qingfeng.type.file.FileName;
 import com.hujiugame.qingfeng.type.file.PathName;
+import com.hujiugame.qingfeng.type.key.ConfigKey;
+import com.hujiugame.qingfeng.type.key.VersionKey;
 import com.hujiugame.qingfeng.type.url.WebSite;
 import com.hujiugame.qingfeng.util.system.CrashUtils;
 import com.hujiugame.qingfeng.util.system.FileUtils;
@@ -213,9 +215,9 @@ public final class UpdateChecker
 
             // 获取运行内部资源版本号
             JsonEntity internalAppVersionJson = new JsonEntity(internalVersionFileHandle);
-            int internalAppVersion = internalAppVersionJson.getInt("appVersion");
-            int internalAppVersionType = internalAppVersionJson.getInt("appVersionType");
-            String internalAppVersionString = internalAppVersionJson.getString("appVersionString");
+            int internalAppVersion = internalAppVersionJson.getInt(VersionKey.APP_VERSION);
+            int internalAppVersionType = internalAppVersionJson.getInt(VersionKey.APP_VERSION_TYPE);
+            String internalAppVersionString = internalAppVersionJson.getString(VersionKey.APP_VERSION_STRING);
 
             // 是否需要差异更新
             boolean needUpdate = false;
@@ -231,8 +233,8 @@ public final class UpdateChecker
             {
                 // 读取外部资源配置版本号
                 JsonEntity externalAppVersionJson = new JsonEntity(externalVersionFileHandle);
-                int externalAppVersionType = externalAppVersionJson.getInt("appVersionType");
-                String externalAppVersionString = externalAppVersionJson.getString("appVersionString");
+                int externalAppVersionType = externalAppVersionJson.getInt(VersionKey.APP_VERSION_TYPE);
+                String externalAppVersionString = externalAppVersionJson.getString(VersionKey.APP_VERSION_STRING);
 
                 // 版本不一致
                 if (!internalAppVersionString.equals(externalAppVersionString))
@@ -279,7 +281,7 @@ public final class UpdateChecker
         try
         {
             // 读取更新文件规则
-            FileHandle updateConfigHandle = Gdx.files.internal("update_config.json");
+            FileHandle updateConfigHandle = Gdx.files.internal(FileName.UPDATE_CONFIG);
             JsonEntity updateConfigJson = new JsonEntity(updateConfigHandle);
 
             // 读取不到正确的json配置
@@ -406,10 +408,10 @@ public final class UpdateChecker
                 }
 
                 // 遍历目录下的文件
-                for (String file : externalDirectoryStructure.getJsonEntityByKey(path).getStringList("file"))
+                for (String file : externalDirectoryStructure.getJsonEntityByKey(path).getStringList(ConfigKey.Directory.FILE))
                 {
                     // 如果内部目录下没有这个文件
-                    if (!FileUtils.INTERNAL_DIRECTORY_STRUCTURE.getJsonEntityByKey(path).getStringList("file").contains(file))
+                    if (!FileUtils.INTERNAL_DIRECTORY_STRUCTURE.getJsonEntityByKey(path).getStringList(ConfigKey.Directory.FILE).contains(file))
                     {
                         // 判断文件存在
                         if (!FileUtils.isFileExist(baseExternalHandle.child(path).child(file)))
@@ -426,10 +428,10 @@ public final class UpdateChecker
                 }
 
                 // 遍历目录下的目录
-                for (String directory : externalDirectoryStructure.getJsonEntityByKey(path).getStringList("directory"))
+                for (String directory : externalDirectoryStructure.getJsonEntityByKey(path).getStringList(ConfigKey.Directory.DIRECTORY))
                 {
                     // 如果内部目录下没有这个目录
-                    if (!FileUtils.INTERNAL_DIRECTORY_STRUCTURE.getJsonEntityByKey(path).getStringList("directory").contains(directory))
+                    if (!FileUtils.INTERNAL_DIRECTORY_STRUCTURE.getJsonEntityByKey(path).getStringList(ConfigKey.Directory.DIRECTORY).contains(directory))
                     {
                         // 删除目录
                         if (!FileUtils.deleteDirectory(baseExternalHandle.child(path).child(directory)))
@@ -464,7 +466,7 @@ public final class UpdateChecker
             LogUtils.debug(UpdateChecker.class, "copyInternalFile 拷贝内部资源文件");
 
             // 文件复制
-            List<String> rootFilePathList = FileUtils.INTERNAL_DIRECTORY_STRUCTURE.getJsonEntityByKey("").getStringList("file");
+            List<String> rootFilePathList = FileUtils.INTERNAL_DIRECTORY_STRUCTURE.getJsonEntityByKey("").getStringList(ConfigKey.Directory.FILE);
             LogUtils.debug(UpdateChecker.class, "copyInternalFile 根目录文件: " + rootFilePathList);
             for (String internalFilePath : rootFilePathList)
             {
@@ -479,7 +481,7 @@ public final class UpdateChecker
             }
 
             // 目录复制
-            List<String> rootDirectoryPathList = FileUtils.INTERNAL_DIRECTORY_STRUCTURE.getJsonEntityByKey("").getStringList("directory");
+            List<String> rootDirectoryPathList = FileUtils.INTERNAL_DIRECTORY_STRUCTURE.getJsonEntityByKey("").getStringList(ConfigKey.Directory.DIRECTORY);
             LogUtils.debug(UpdateChecker.class, "copyInternalFile 根目录目录: " + rootDirectoryPathList);
             for (String internalDirectoryPath : rootDirectoryPathList)
             {
@@ -642,8 +644,8 @@ public final class UpdateChecker
             }
 
             // 读取更新文件配置
-            List<String> protectFileList = updateConfigJson.getStringList("protect");
-            List<String> prohibitFileList = updateConfigJson.getStringList("prohibit");
+            List<String> protectFileList = updateConfigJson.getStringList(VersionKey.Update.PROTECT);
+            List<String> prohibitFileList = updateConfigJson.getStringList(VersionKey.Update.PROHIBIT);
 
             // 移动保护的文件
             if (!moveProtectExternalFile(protectFileList))
@@ -947,9 +949,9 @@ public final class UpdateChecker
                         JsonReader reader = new JsonReader();
                         JsonValue json = reader.parse(responseBody);
 
-                        int webVersionInt = json.getInt("newest_version", -1);
-                        int webVersionType = json.getInt("newest_version_type", -1);
-                        String webVersionStr = json.getString("newest_version_string", null);
+                        int webVersionInt = json.getInt(VersionKey.NEWEST_VERSION, -1);
+                        int webVersionType = json.getInt(VersionKey.NEWEST_VERSION_TYPE, -1);
+                        String webVersionStr = json.getString(VersionKey.NEWEST_VERSION_STRING, null);
 
                         // 主判断: 远程有整型字段 → 整型比较
                         if (webVersionInt != -1)
