@@ -5,6 +5,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.type.LogLevel;
 import com.hujiugame.qingfeng.type.file.PathName;
+import com.hujiugame.qingfeng.type.key.ConfigKey;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
@@ -77,15 +78,15 @@ public final class LogUtils
             {
                 // 直接解析字符串，避免 JsonEntity 内部再次读取文件
                 JsonEntity logConfigJson = new JsonEntity(content);
-                if (logConfigJson.isEmpty() || !logConfigJson.containsKey("logLevel") || !logConfigJson.containsKey("fileLogLevel"))
+                if (logConfigJson.isEmpty() || !logConfigJson.containsKey(ConfigKey.Log.LOG_LEVEL) || !logConfigJson.containsKey(ConfigKey.Log.FILE_LOG_LEVEL))
                 {
                     LogUtils.error(LogUtils.class, "init 配置文件内容无效 (file): " + logConfigPath);
                     needRepairConfig = true;
                 }
                 else
                 {
-                    String configLogLevelStr = logConfigJson.getString("logLevel");
-                    String configFileLogLevelStr = logConfigJson.getString("fileLogLevel");
+                    String configLogLevelStr = logConfigJson.getString(ConfigKey.Log.LOG_LEVEL);
+                    String configFileLogLevelStr = logConfigJson.getString(ConfigKey.Log.FILE_LOG_LEVEL);
                     int configLogLevel = LogLevel.parseLevel(configLogLevelStr, LogLevel.INFO);
                     int configFileLogLevel = LogLevel.parseLevel(configFileLogLevelStr, LogLevel.DEBUG);
                     setLogLevel(configLogLevel);
@@ -103,8 +104,8 @@ public final class LogUtils
         {
             // 创建默认配置时，仅当文件不存在或内容无效才写入，避免重复创建
             JsonEntity logConfigJson = new JsonEntity();
-            logConfigJson.put("logLevel", "INFO");
-            logConfigJson.put("fileLogLevel", "DEBUG");
+            logConfigJson.put(ConfigKey.Log.LOG_LEVEL, LogLevel.Name.INFO.getValue());
+            logConfigJson.put(ConfigKey.Log.FILE_LOG_LEVEL, LogLevel.Name.DEBUG.getValue());
             String defaultContent = logConfigJson.getJsonString();
             // 如果文件已存在但内容无效，则覆盖写入；如果不存在则创建
             if (configFileHandle.exists())
@@ -121,8 +122,8 @@ public final class LogUtils
             setFileLogLevel(LogLevel.DEBUG);
         }
 
-        LogUtils.info(LogUtils.class, "init 控制台日志等级 (logLevel): " + logLevel + " " + LogLevel.displayString(logLevel, "UNKNOW_LEVEL"));
-        LogUtils.info(LogUtils.class, "init 文件的日志等级 (fileLogLevel): " + fileLogLevel + " " + LogLevel.displayString(fileLogLevel, "UNKNOW_LEVEL"));
+        LogUtils.info(LogUtils.class, "init 控制台日志等级 (" + ConfigKey.Log.LOG_LEVEL + "): " + logLevel + " " + LogLevel.displayString(logLevel, "UNKNOW_LEVEL"));
+        LogUtils.info(LogUtils.class, "init 文件的日志等级 (" + ConfigKey.Log.FILE_LOG_LEVEL + "): " + fileLogLevel + " " + LogLevel.displayString(fileLogLevel, "UNKNOW_LEVEL"));
         return true;
     }
 
@@ -232,7 +233,7 @@ public final class LogUtils
         }
         else
         {
-            Gdx.app.error(gdxString, "不正确的LogLevel (logLevel): " + level);
+            Gdx.app.error(gdxString, "不正确的LogLevel (" + ConfigKey.Log.LOG_LEVEL + "): " + level);
         }
 
         // 准备写入文件

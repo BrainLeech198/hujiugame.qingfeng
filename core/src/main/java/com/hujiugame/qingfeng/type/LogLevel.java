@@ -12,6 +12,25 @@ public final class LogLevel
         throw new UnsupportedOperationException("Utility class cannot be instantiated");
     }
 
+    public enum Name
+    {
+        DEBUG("DEBUG"),
+        INFO("INFO"),
+        ERROR("ERROR");
+
+        private final String value;
+
+        Name (String value)
+        {
+            this.value = value;
+        }
+
+        public String getValue ()
+        {
+            return value;
+        }
+    }
+
     public static final int DEBUG = Application.LOG_DEBUG;
     public static final int INFO = Application.LOG_INFO;
     public static final int ERROR = Application.LOG_ERROR;
@@ -19,17 +38,17 @@ public final class LogLevel
     private static final Map<String, Integer> STRING_PARSE_LEVEL_MAP = new HashMap<>();
     static
     {
-        STRING_PARSE_LEVEL_MAP.put("DEBUG", DEBUG);
-        STRING_PARSE_LEVEL_MAP.put("INFO", INFO);
-        STRING_PARSE_LEVEL_MAP.put("ERROR", ERROR);
+        STRING_PARSE_LEVEL_MAP.put(Name.DEBUG.getValue(), DEBUG);
+        STRING_PARSE_LEVEL_MAP.put(Name.INFO.getValue(), INFO);
+        STRING_PARSE_LEVEL_MAP.put(Name.ERROR.getValue(), ERROR);
     }
 
     private static final Map<Integer, String> LEVEL_DISPLAY_STRING_MAP = new HashMap<>();
     static
     {
-        LEVEL_DISPLAY_STRING_MAP.put(DEBUG, "DEBUG");
-        LEVEL_DISPLAY_STRING_MAP.put(INFO, "INFO ");
-        LEVEL_DISPLAY_STRING_MAP.put(ERROR, "ERROR");
+        LEVEL_DISPLAY_STRING_MAP.put(DEBUG, Name.DEBUG.getValue());
+        LEVEL_DISPLAY_STRING_MAP.put(INFO, Name.INFO.getValue() + " ");
+        LEVEL_DISPLAY_STRING_MAP.put(ERROR, Name.ERROR.getValue());
     }
 
     /**
