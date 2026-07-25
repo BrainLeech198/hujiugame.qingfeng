@@ -3,6 +3,7 @@ package com.hujiugame.qingfeng.script.data.command.param.variable;
 import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.script.data.command.param.ScriptCommandParam;
 import com.hujiugame.qingfeng.script.data.value.MathValue;
+import com.hujiugame.qingfeng.type.key.ScriptKey;
 
 public class AssignmentVariableScriptCommandParam implements ScriptCommandParam
 {
@@ -19,8 +20,8 @@ public class AssignmentVariableScriptCommandParam implements ScriptCommandParam
             throw new IllegalStateException("An invalid command parameter cannot be built.");
         }
         json = new JsonEntity();
-        json.put("name", name);
-        json.put("value", value.getJson());
+        json.put(ScriptKey.Command.Param.Variable.NAME, name);
+        json.put(ScriptKey.Command.Param.Variable.VALUE, value.getJson());
     }
 
     public AssignmentVariableScriptCommandParam (String name, MathValue value)
@@ -37,18 +38,18 @@ public class AssignmentVariableScriptCommandParam implements ScriptCommandParam
         if (json.isMap())
         {
             // name字段
-            if (!json.containsKey("name"))
+            if (!json.containsKey(ScriptKey.Command.Param.Variable.NAME))
             {
-                throw new IllegalArgumentException("Command parameter must have \"name\" field. (json): " + json);
+                throw new IllegalArgumentException("Command parameter must have \"" + ScriptKey.Command.Param.Variable.NAME + "\" field. (json): " + json);
             }
             // value字段
-            if (!json.containsKey("value"))
+            if (!json.containsKey(ScriptKey.Command.Param.Variable.VALUE))
             {
-                throw new IllegalArgumentException("Command parameter must have \"value\" field. (json): " + json);
+                throw new IllegalArgumentException("Command parameter must have \"" + ScriptKey.Command.Param.Variable.VALUE + "\" field. (json): " + json);
             }
 
-            name = json.getString("name");
-            value = new MathValue(json.getJsonEntityByKey("value"));
+            name = json.getString(ScriptKey.Command.Param.Variable.NAME);
+            value = new MathValue(json.getJsonEntityByKey(ScriptKey.Command.Param.Variable.VALUE));
             valid = true;
             this.json = json;
         }

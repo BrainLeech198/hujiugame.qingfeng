@@ -1,6 +1,7 @@
 package com.hujiugame.qingfeng.script.data;
 
 import com.hujiugame.qingfeng.data.JsonEntity;
+import com.hujiugame.qingfeng.type.key.ScriptKey;
 
 public class ArgumentInfo
 {
@@ -27,15 +28,15 @@ public class ArgumentInfo
             throw new IllegalStateException("An invalid argument info cannot be built.");
         }
         json = new JsonEntity();
-        json.put("argumentName", argumentName);
-        json.put("type", type.toString());
+        json.put(ScriptKey.Argument.Info.ARGUMENT_NAME, argumentName);
+        json.put(ScriptKey.Argument.Info.TYPE, type.toString());
         if (type == ArgumentType.CONST)
         {
-            json.put("value", value);
+            json.put(ScriptKey.Argument.Info.VALUE, value);
         }
         else
         {
-            json.put("name", name);
+            json.put(ScriptKey.Argument.Info.NAME, name);
         }
     }
 
@@ -71,35 +72,35 @@ public class ArgumentInfo
         if (json.isMap())
         {
             // argumentName字段
-            if (!json.containsKey("argumentName"))
+            if (!json.containsKey(ScriptKey.Argument.Info.ARGUMENT_NAME))
             {
-                throw new IllegalArgumentException("Argument info must have \"argumentName\" field. (json): " + json);
+                throw new IllegalArgumentException("Argument info must have \"" + ScriptKey.Argument.Info.ARGUMENT_NAME + "\" field. (json): " + json);
             }
             // type字段
-            if (!json.containsKey("type"))
+            if (!json.containsKey(ScriptKey.Argument.Info.TYPE))
             {
-                throw new IllegalArgumentException("Argument info must have \"type\" field. (json): " + json);
+                throw new IllegalArgumentException("Argument info must have \"" + ScriptKey.Argument.Info.TYPE + "\" field. (json): " + json);
             }
 
-            argumentName = json.getString("argumentName");
-            type = ArgumentType.valueOf(json.getString("type"));
+            argumentName = json.getString(ScriptKey.Argument.Info.ARGUMENT_NAME);
+            type = ArgumentType.valueOf(json.getString(ScriptKey.Argument.Info.TYPE));
             if (type == ArgumentType.CONST)
             {
                 // value字段
-                if (!json.containsKey("value"))
+                if (!json.containsKey(ScriptKey.Argument.Info.VALUE))
                 {
-                    throw new IllegalArgumentException("Argument info must have \"value\" field. (json): " + json);
+                    throw new IllegalArgumentException("Argument info must have \"" + ScriptKey.Argument.Info.VALUE + "\" field. (json): " + json);
                 }
-                value = json.getObject("value");
+                value = json.getObject(ScriptKey.Argument.Info.VALUE);
             }
             else
             {
                 // name字段
-                if (!json.containsKey("name"))
+                if (!json.containsKey(ScriptKey.Argument.Info.NAME))
                 {
-                    throw new IllegalArgumentException("Argument info must have \"name\" field. (json): " + json);
+                    throw new IllegalArgumentException("Argument info must have \"" + ScriptKey.Argument.Info.NAME + "\" field. (json): " + json);
                 }
-                name = json.getString("name");
+                name = json.getString(ScriptKey.Argument.Info.NAME);
             }
 
             this.json = json;

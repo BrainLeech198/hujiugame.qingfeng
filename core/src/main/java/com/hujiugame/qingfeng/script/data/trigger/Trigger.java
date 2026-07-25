@@ -4,6 +4,7 @@ import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.script.data.command.ScriptCommand;
 import com.hujiugame.qingfeng.script.data.command.ScriptCommandParser;
 import com.hujiugame.qingfeng.script.data.trigger.command.TriggerCommand;
+import com.hujiugame.qingfeng.type.key.ScriptKey;
 import com.hujiugame.qingfeng.script.data.trigger.command.TriggerCommandParser;
 import com.hujiugame.qingfeng.util.system.LogUtils;
 
@@ -32,22 +33,22 @@ public class Trigger
             LogUtils.debug(Trigger.class, "Trigger 尝试解析触发器 (json): " + json);
 
             // trigger字段
-            if (!json.containsKey("trigger"))
+            if (!json.containsKey(ScriptKey.Trigger.TRIGGER))
             {
-                LogUtils.error(Trigger.class, "Trigger 解析失败 缺少 trigger 字段 (json): " + json);
+                LogUtils.error(Trigger.class, "Trigger 解析失败 缺少 " + ScriptKey.Trigger.TRIGGER + " 字段 (json): " + json);
                 this.valid = false;
                 return;
             }
             // commands字段
-            if (!json.containsKey("commands"))
+            if (!json.containsKey(ScriptKey.COMMANDS))
             {
-                LogUtils.error(Trigger.class, "Trigger 解析失败 缺少 commands 字段 (json): " + json);
+                LogUtils.error(Trigger.class, "Trigger 解析失败 缺少 " + ScriptKey.COMMANDS + " 字段 (json): " + json);
                 this.valid = false;
                 return;
             }
 
-            this.triggerCommand = TriggerCommandParser.parse(json.getJsonEntityByKey("trigger"));
-            this.commands = ScriptCommandParser.parseList(json.getJsonEntityByKey("commands"));
+            this.triggerCommand = TriggerCommandParser.parse(json.getJsonEntityByKey(ScriptKey.Trigger.TRIGGER));
+            this.commands = ScriptCommandParser.parseList(json.getJsonEntityByKey(ScriptKey.COMMANDS));
 
             if (this.triggerCommand == null || !this.triggerCommand.isValid() || this.commands == null)
             {
@@ -69,8 +70,8 @@ public class Trigger
     private void buildJson ()
     {
         json = new JsonEntity();
-        json.put("trigger", triggerCommand.getJson());
-        json.put("commands", commands.stream().map(ScriptCommand::getJson).collect(Collectors.toList()));
+        json.put(ScriptKey.Trigger.TRIGGER, triggerCommand.getJson());
+        json.put(ScriptKey.COMMANDS, commands.stream().map(ScriptCommand::getJson).collect(Collectors.toList()));
     }
 
     public boolean isValid ()

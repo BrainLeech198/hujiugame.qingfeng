@@ -6,6 +6,7 @@ import com.hujiugame.qingfeng.script.data.command.ScriptCommandType;
 import com.hujiugame.qingfeng.script.data.command.param.ScriptCommandParam;
 import com.hujiugame.qingfeng.script.data.command.param.variable.AssignmentVariableScriptCommandParam;
 import com.hujiugame.qingfeng.script.data.command.param.variable.CreateVariableScriptCommandParam;
+import com.hujiugame.qingfeng.type.key.ScriptKey;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -53,9 +54,9 @@ public class VariableScriptCommand implements ScriptCommand
     private void buildJson ()
     {
         json = new JsonEntity();
-        json.put("type", scriptCommandType.getDisplayString());
-        json.put("action", scriptCommandAction.getDisplayString());
-        json.put("param", commandParam.getJson());
+        json.put(ScriptKey.Command.TYPE, scriptCommandType.getDisplayString());
+        json.put(ScriptKey.Command.ACTION, scriptCommandAction.getDisplayString());
+        json.put(ScriptKey.Command.PARAM, commandParam.getJson());
     }
 
     @Override

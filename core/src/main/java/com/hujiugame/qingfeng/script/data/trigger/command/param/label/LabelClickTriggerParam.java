@@ -2,6 +2,7 @@ package com.hujiugame.qingfeng.script.data.trigger.command.param.label;
 
 import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.script.data.trigger.command.param.TriggerParam;
+import com.hujiugame.qingfeng.type.key.ScriptKey;
 
 public class LabelClickTriggerParam implements TriggerParam
 {
@@ -17,7 +18,7 @@ public class LabelClickTriggerParam implements TriggerParam
             throw new IllegalStateException("An invalid command parameter cannot be built.");
         }
         json = new JsonEntity();
-        json.put("tag", tag);
+        json.put(ScriptKey.Trigger.Param.Label.TAG, tag);
     }
 
     public LabelClickTriggerParam (String tag)
@@ -33,11 +34,11 @@ public class LabelClickTriggerParam implements TriggerParam
         if (json.isMap())
         {
             // tag字段
-            if (!json.containsKey("tag"))
+            if (!json.containsKey(ScriptKey.Trigger.Param.Label.TAG))
             {
-                throw new IllegalArgumentException("Command parameter must have \"tag\" field. (json): " + json);
+                throw new IllegalArgumentException("Command parameter must have \"" + ScriptKey.Trigger.Param.Label.TAG + "\" field. (json): " + json);
             }
-            tag = json.getString("tag");
+            tag = json.getString(ScriptKey.Trigger.Param.Label.TAG);
             this.json = json;
             valid = true;
         }

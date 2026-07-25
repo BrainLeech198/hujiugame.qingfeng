@@ -2,6 +2,7 @@ package com.hujiugame.qingfeng.script.data.value.command.param.atomic;
 
 import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.script.data.value.command.param.ValueCommandParam;
+import com.hujiugame.qingfeng.type.key.ScriptKey;
 
 public class VariableAtomicValueCommandParam implements ValueCommandParam
 {
@@ -17,7 +18,7 @@ public class VariableAtomicValueCommandParam implements ValueCommandParam
             throw new IllegalStateException("An invalid command parameter cannot be built.");
         }
         json = new JsonEntity();
-        json.put("name", variableName);
+        json.put(ScriptKey.Command.Param.Variable.NAME, variableName);
     }
 
     public VariableAtomicValueCommandParam (String variableName)
@@ -32,11 +33,11 @@ public class VariableAtomicValueCommandParam implements ValueCommandParam
         valid = false;
         if (json.isMap())
         {
-            if (!json.containsKey("name"))
+            if (!json.containsKey(ScriptKey.Command.Param.Variable.NAME))
             {
-                throw new IllegalArgumentException("Command parameter must have \"name\" field. (json): " + json);
+                throw new IllegalArgumentException("Command parameter must have \"" + ScriptKey.Command.Param.Variable.NAME + "\" field. (json): " + json);
             }
-            variableName = json.getString("name");
+            variableName = json.getString(ScriptKey.Command.Param.Variable.NAME);
             this.json = json;
             valid = true;
         }

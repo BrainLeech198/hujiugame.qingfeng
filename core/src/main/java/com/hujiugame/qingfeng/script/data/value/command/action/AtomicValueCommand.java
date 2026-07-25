@@ -5,6 +5,7 @@ import com.hujiugame.qingfeng.script.data.value.command.ValueCommand;
 import com.hujiugame.qingfeng.script.data.value.command.ValueCommandType;
 import com.hujiugame.qingfeng.script.data.value.command.param.ValueCommandParam;
 import com.hujiugame.qingfeng.script.data.value.command.param.atomic.*;
+import com.hujiugame.qingfeng.type.key.ScriptKey;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -56,9 +57,9 @@ public class AtomicValueCommand implements ValueCommand
     private void buildJson ()
     {
         json = new JsonEntity();
-        json.put("type", valueCommandType.getDisplayString());
-        json.put("action", valueCommandAction.getDisplayString());
-        json.put("param", valueCommandParam.getJson());
+        json.put(ScriptKey.Command.TYPE, valueCommandType.getDisplayString());
+        json.put(ScriptKey.Command.ACTION, valueCommandAction.getDisplayString());
+        json.put(ScriptKey.Command.PARAM, valueCommandParam.getJson());
     }
 
     /**

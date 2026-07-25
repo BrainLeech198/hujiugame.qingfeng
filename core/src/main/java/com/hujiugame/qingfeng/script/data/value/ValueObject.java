@@ -3,6 +3,7 @@ package com.hujiugame.qingfeng.script.data.value;
 import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.script.data.value.command.ValueCommand;
 import com.hujiugame.qingfeng.script.data.value.command.ValueCommandParser;
+import com.hujiugame.qingfeng.type.key.ScriptKey;
 import com.hujiugame.qingfeng.util.system.LogUtils;
 
 import java.util.ArrayList;
@@ -23,14 +24,14 @@ public class ValueObject
     {
         if (json != null && json.isMap())
         {
-            if (!json.containsKey("expression"))
+            if (!json.containsKey(ScriptKey.ValueObject.EXPRESSION))
             {
-                LogUtils.error(ValueObject.class, "缺少 expression 字段 (json): " + json);
+                LogUtils.error(ValueObject.class, "缺少 " + ScriptKey.ValueObject.EXPRESSION + " 字段 (json): " + json);
                 this.valid = false;
                 return;
             }
 
-            List<JsonEntity> cmdList = json.getJsonEntityList("expression");
+            List<JsonEntity> cmdList = json.getJsonEntityList(ScriptKey.ValueObject.EXPRESSION);
             this.expression = new ArrayList<>(cmdList.size());
             for (JsonEntity cmdJson : cmdList)
             {

@@ -5,6 +5,7 @@ import com.hujiugame.qingfeng.script.data.trigger.command.TriggerCommand;
 import com.hujiugame.qingfeng.script.data.trigger.command.TriggerType;
 import com.hujiugame.qingfeng.script.data.trigger.command.param.TriggerParam;
 import com.hujiugame.qingfeng.script.data.trigger.command.param.label.LabelClickTriggerParam;
+import com.hujiugame.qingfeng.type.key.ScriptKey;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,9 +53,9 @@ public class LabelClickTrigger implements TriggerCommand
     private void buildJson ()
     {
         json = new JsonEntity();
-        json.put("type", triggerType.getDisplayString());
-        json.put("action", triggerAction.getDisplayString());
-        json.put("param", triggerParam.getJson());
+        json.put(ScriptKey.Command.TYPE, triggerType.getDisplayString());
+        json.put(ScriptKey.Command.ACTION, triggerAction.getDisplayString());
+        json.put(ScriptKey.Command.PARAM, triggerParam.getJson());
     }
 
     /**

@@ -3,6 +3,7 @@ package com.hujiugame.qingfeng.script.data.value.command.param.atomic;
 import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.script.data.TypeMapper;
 import com.hujiugame.qingfeng.script.data.value.command.param.ValueCommandParam;
+import com.hujiugame.qingfeng.type.key.ScriptKey;
 
 public class ConstAtomicValueCommandParam implements ValueCommandParam
 {
@@ -19,8 +20,8 @@ public class ConstAtomicValueCommandParam implements ValueCommandParam
             throw new IllegalStateException("An invalid command parameter cannot be built.");
         }
         json = new JsonEntity();
-        json.put("class", TypeMapper.toTypeString(type));
-        json.put("value", value);
+        json.put(ScriptKey.Command.Param.Atomic.CLASS, TypeMapper.toTypeString(type));
+        json.put(ScriptKey.Command.Param.Atomic.VALUE, value);
     }
 
     public ConstAtomicValueCommandParam (Class<?> type, Object value)
@@ -44,32 +45,32 @@ public class ConstAtomicValueCommandParam implements ValueCommandParam
         if (json.isMap())
         {
             // class字段
-            if (!json.containsKey("class"))
+            if (!json.containsKey(ScriptKey.Command.Param.Atomic.CLASS))
             {
-                throw new IllegalArgumentException("Command parameter must have \"class\" field. (json): " + json);
+                throw new IllegalArgumentException("Command parameter must have \"" + ScriptKey.Command.Param.Atomic.CLASS + "\" field. (json): " + json);
             }
             // value字段
-            if (!json.containsKey("value"))
+            if (!json.containsKey(ScriptKey.Command.Param.Atomic.VALUE))
             {
-                throw new IllegalArgumentException("Command parameter must have \"value\" field. (json): " + json);
+                throw new IllegalArgumentException("Command parameter must have \"" + ScriptKey.Command.Param.Atomic.VALUE + "\" field. (json): " + json);
             }
 
-            type = TypeMapper.parseClass(json.getString("class"));
+            type = TypeMapper.parseClass(json.getString(ScriptKey.Command.Param.Atomic.CLASS));
             if (type == int.class)
             {
-                value = json.getInt("value");
+                value = json.getInt(ScriptKey.Command.Param.Atomic.VALUE);
             }
             else if (type == float.class)
             {
-                value = json.getFloat("value");
+                value = json.getFloat(ScriptKey.Command.Param.Atomic.VALUE);
             }
             else if (type == String.class)
             {
-                value = json.getString("value");
+                value = json.getString(ScriptKey.Command.Param.Atomic.VALUE);
             }
             else if (type == boolean.class)
             {
-                value = json.getBoolean("value");
+                value = json.getBoolean(ScriptKey.Command.Param.Atomic.VALUE);
             }
             this.json = json;
             valid = true;

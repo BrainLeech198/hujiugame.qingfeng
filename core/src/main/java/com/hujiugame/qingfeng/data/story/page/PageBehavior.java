@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.script.data.command.ScriptCommand;
 import com.hujiugame.qingfeng.script.data.command.ScriptCommandParser;
+import com.hujiugame.qingfeng.type.key.ScriptKey;
 import com.hujiugame.qingfeng.script.data.trigger.Trigger;
 import com.hujiugame.qingfeng.util.system.LogUtils;
 
@@ -30,16 +31,16 @@ public class PageBehavior
         json = new JsonEntity();
 
         JsonEntity startJson = new JsonEntity();
-        startJson.put("type", "inline");
-        startJson.put("commands", startScriptCommands.stream().map(ScriptCommand::getJson).collect(Collectors.toList()));
-        json.put("start", startJson);
+        startJson.put(ScriptKey.PageBehavior.TYPE, "inline");
+        startJson.put(ScriptKey.COMMANDS, startScriptCommands.stream().map(ScriptCommand::getJson).collect(Collectors.toList()));
+        json.put(ScriptKey.PageBehavior.START, startJson);
 
         JsonEntity loopJson = new JsonEntity();
-        loopJson.put("type", "inline");
-        loopJson.put("commands", loopScriptCommands.stream().map(ScriptCommand::getJson).collect(Collectors.toList()));
-        json.put("loop", loopJson);
+        loopJson.put(ScriptKey.PageBehavior.TYPE, "inline");
+        loopJson.put(ScriptKey.COMMANDS, loopScriptCommands.stream().map(ScriptCommand::getJson).collect(Collectors.toList()));
+        json.put(ScriptKey.PageBehavior.LOOP, loopJson);
 
-        json.put("triggers", triggers.stream().map(Trigger::getJson).collect(Collectors.toList()));
+        json.put(ScriptKey.PageBehavior.TRIGGERS, triggers.stream().map(Trigger::getJson).collect(Collectors.toList()));
     }
 
     public PageBehavior (List<ScriptCommand> startScriptCommands, List<ScriptCommand> loopScriptCommands, List<Trigger> triggers)
@@ -66,22 +67,22 @@ public class PageBehavior
         if (json.isMap())
         {
             // start
-            if (json.containsKey("start"))
+            if (json.containsKey(ScriptKey.PageBehavior.START))
             {
-                JsonEntity startJson = json.getJsonEntityByKey("start");
-                String type = startJson.getString("type");
+                JsonEntity startJson = json.getJsonEntityByKey(ScriptKey.PageBehavior.START);
+                String type = startJson.getString(ScriptKey.PageBehavior.TYPE);
 
                 if (!"inline".equals(type))
                 {
                     LogUtils.debug(PageBehavior.class, "PageBehavior 解析失败 start未知type类型 (type): " + type);
                     return;
                 }
-                if (!startJson.containsKey("commands"))
+                if (!startJson.containsKey(ScriptKey.COMMANDS))
                 {
                     LogUtils.debug(PageBehavior.class, "PageBehavior 解析失败 start缺少commands字段 (json): " + json);
                     return;
                 }
-                List<ScriptCommand> commands = ScriptCommandParser.parseList(startJson.getJsonEntityByKey("commands"));
+                List<ScriptCommand> commands = ScriptCommandParser.parseList(startJson.getJsonEntityByKey(ScriptKey.COMMANDS));
                 if (commands == null)
                 {
                     LogUtils.debug(PageBehavior.class, "PageBehavior 解析失败 start commands解析失败 (json): " + json);
@@ -96,22 +97,22 @@ public class PageBehavior
             }
 
             // loop
-            if (json.containsKey("loop"))
+            if (json.containsKey(ScriptKey.PageBehavior.LOOP))
             {
-                JsonEntity loopJson = json.getJsonEntityByKey("loop");
-                String type = loopJson.getString("type");
+                JsonEntity loopJson = json.getJsonEntityByKey(ScriptKey.PageBehavior.LOOP);
+                String type = loopJson.getString(ScriptKey.PageBehavior.TYPE);
 
                 if (!"inline".equals(type))
                 {
                     LogUtils.debug(PageBehavior.class, "PageBehavior 解析失败 loop未知type类型 (type): " + type);
                     return;
                 }
-                if (!loopJson.containsKey("commands"))
+                if (!loopJson.containsKey(ScriptKey.COMMANDS))
                 {
                     LogUtils.debug(PageBehavior.class, "PageBehavior 解析失败 loop缺少commands字段 (json): " + json);
                     return;
                 }
-                List<ScriptCommand> commands = ScriptCommandParser.parseList(loopJson.getJsonEntityByKey("commands"));
+                List<ScriptCommand> commands = ScriptCommandParser.parseList(loopJson.getJsonEntityByKey(ScriptKey.COMMANDS));
                 if (commands == null)
                 {
                     LogUtils.debug(PageBehavior.class, "PageBehavior 解析失败 loop commands解析失败 (json): " + json);
@@ -126,9 +127,9 @@ public class PageBehavior
             }
 
             // triggers
-            if (json.containsKey("triggers"))
+            if (json.containsKey(ScriptKey.PageBehavior.TRIGGERS))
             {
-                List<Trigger> parsedTriggers = parseTriggers(json.getJsonEntityByKey("triggers"));
+                List<Trigger> parsedTriggers = parseTriggers(json.getJsonEntityByKey(ScriptKey.PageBehavior.TRIGGERS));
                 if (parsedTriggers == null)
                 {
                     LogUtils.debug(PageBehavior.class, "PageBehavior 解析失败 triggers解析失败 (json): " + json);

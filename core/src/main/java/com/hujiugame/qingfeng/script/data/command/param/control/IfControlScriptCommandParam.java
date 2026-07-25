@@ -5,6 +5,7 @@ import com.hujiugame.qingfeng.script.data.command.ScriptCommand;
 import com.hujiugame.qingfeng.script.data.command.ScriptCommandParser;
 import com.hujiugame.qingfeng.script.data.command.param.ScriptCommandParam;
 import com.hujiugame.qingfeng.script.data.value.LogicValue;
+import com.hujiugame.qingfeng.type.key.ScriptKey;
 
 import java.util.Collections;
 import java.util.List;
@@ -26,11 +27,11 @@ public class IfControlScriptCommandParam implements ScriptCommandParam
             throw new IllegalStateException("An invalid command parameter cannot be built.");
         }
         json = new JsonEntity();
-        json.put("condition", condition.getJson());
-        json.put("thenCommands", thenCommands != null
+        json.put(ScriptKey.Command.Param.Control.CONDITION, condition.getJson());
+        json.put(ScriptKey.Command.Param.Control.THEN_COMMANDS, thenCommands != null
             ? thenCommands.stream().map(ScriptCommand::getJson).collect(Collectors.toList())
             : Collections.emptyList());
-        json.put("elseCommands", elseCommands != null
+        json.put(ScriptKey.Command.Param.Control.ELSE_COMMANDS, elseCommands != null
             ? elseCommands.stream().map(ScriptCommand::getJson).collect(Collectors.toList())
             : Collections.emptyList());
     }
@@ -49,21 +50,21 @@ public class IfControlScriptCommandParam implements ScriptCommandParam
         valid = false;
         if (json.isMap())
         {
-            if (!json.containsKey("condition"))
+            if (!json.containsKey(ScriptKey.Command.Param.Control.CONDITION))
             {
-                throw new IllegalArgumentException("Command parameter must have \"condition\" field. (json): " + json);
+                throw new IllegalArgumentException("Command parameter must have \"" + ScriptKey.Command.Param.Control.CONDITION + "\" field. (json): " + json);
             }
-            if (!json.containsKey("thenCommands"))
+            if (!json.containsKey(ScriptKey.Command.Param.Control.THEN_COMMANDS))
             {
-                throw new IllegalArgumentException("Command parameter must have \"thenCommands\" field. (json): " + json);
+                throw new IllegalArgumentException("Command parameter must have \"" + ScriptKey.Command.Param.Control.THEN_COMMANDS + "\" field. (json): " + json);
             }
-            if (!json.containsKey("elseCommands"))
+            if (!json.containsKey(ScriptKey.Command.Param.Control.ELSE_COMMANDS))
             {
-                throw new IllegalArgumentException("Command parameter must have \"elseCommands\" field. (json): " + json);
+                throw new IllegalArgumentException("Command parameter must have \"" + ScriptKey.Command.Param.Control.ELSE_COMMANDS + "\" field. (json): " + json);
             }
-            condition = new LogicValue(json.getJsonEntityByKey("condition"));
-            thenCommands = ScriptCommandParser.parseList(json.getJsonEntityByKey("thenCommands"));
-            elseCommands = ScriptCommandParser.parseList(json.getJsonEntityByKey("elseCommands"));
+            condition = new LogicValue(json.getJsonEntityByKey(ScriptKey.Command.Param.Control.CONDITION));
+            thenCommands = ScriptCommandParser.parseList(json.getJsonEntityByKey(ScriptKey.Command.Param.Control.THEN_COMMANDS));
+            elseCommands = ScriptCommandParser.parseList(json.getJsonEntityByKey(ScriptKey.Command.Param.Control.ELSE_COMMANDS));
             this.json = json;
             valid = true;
         }

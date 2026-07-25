@@ -3,6 +3,7 @@ package com.hujiugame.qingfeng.script.data.command.param.control;
 import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.script.data.ArgumentInfo;
 import com.hujiugame.qingfeng.script.data.command.param.ScriptCommandParam;
+import com.hujiugame.qingfeng.type.key.ScriptKey;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,8 +23,8 @@ public class CallControlScriptCommandParam implements ScriptCommandParam
             throw new IllegalStateException("An invalid command parameter cannot be built.");
         }
         json = new JsonEntity();
-        json.put("script", script);
-        json.put("arguments", arguments.stream()
+        json.put(ScriptKey.Command.Param.Control.SCRIPT, script);
+        json.put(ScriptKey.ARGUMENTS, arguments.stream()
                 .map(ArgumentInfo::getJson)
                 .collect(Collectors.toList()));
     }
@@ -42,17 +43,17 @@ public class CallControlScriptCommandParam implements ScriptCommandParam
         if (json.isMap())
         {
             // script字段
-            if (!json.containsKey("script"))
+            if (!json.containsKey(ScriptKey.Command.Param.Control.SCRIPT))
             {
-                throw new IllegalArgumentException("Command parameter must have \"script\" field. (json): " + json);
+                throw new IllegalArgumentException("Command parameter must have \"" + ScriptKey.Command.Param.Control.SCRIPT + "\" field. (json): " + json);
             }
             // arguments字段
-            if (!json.containsKey("arguments"))
+            if (!json.containsKey(ScriptKey.ARGUMENTS))
             {
-                throw new IllegalArgumentException("Command parameter must have \"arguments\" field. (json): " + json);
+                throw new IllegalArgumentException("Command parameter must have \"" + ScriptKey.ARGUMENTS + "\" field. (json): " + json);
             }
-            script = json.getString("script");
-            arguments = json.getJsonEntityList("arguments").stream()
+            script = json.getString(ScriptKey.Command.Param.Control.SCRIPT);
+            arguments = json.getJsonEntityList(ScriptKey.ARGUMENTS).stream()
                     .map(ArgumentInfo::new)
                     .collect(Collectors.toList());
             this.json = json;

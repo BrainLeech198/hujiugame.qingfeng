@@ -3,6 +3,7 @@ package com.hujiugame.qingfeng.script.data;
 import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.script.data.command.ScriptCommand;
 import com.hujiugame.qingfeng.script.data.command.ScriptCommandParser;
+import com.hujiugame.qingfeng.type.key.ScriptKey;
 import com.hujiugame.qingfeng.util.system.LogUtils;
 
 import java.util.Collections;
@@ -38,8 +39,8 @@ public class Script
         private void buildJson ()
         {
             this.json = new JsonEntity();
-            this.json.put("class", TypeMapper.toTypeString(type));
-            this.json.put("name", name);
+            this.json.put(ScriptKey.Argument.CLASS, TypeMapper.toTypeString(type));
+            this.json.put(ScriptKey.Argument.NAME, name);
         }
 
         public Argument (Class<?> type, String name)
@@ -54,9 +55,9 @@ public class Script
         {
             if (json.isMap())
             {
-                String classString = json.getString("class");
+                String classString = json.getString(ScriptKey.Argument.CLASS);
                 this.type = TypeMapper.parseClassLenient(classString);
-                this.name = json.getString("name");
+                this.name = json.getString(ScriptKey.Argument.NAME);
                 this.json = json;
                 valid = true;
             }
@@ -105,9 +106,9 @@ public class Script
             return;
         }
         json = new JsonEntity();
-        json.put("arguments", arguments.stream().map(Argument::getJson).collect(Collectors.toList()));
-        json.put("commands", commands.stream().map(ScriptCommand::getJson).collect(Collectors.toList()));
-        json.put("return", returnValue.getJson());
+        json.put(ScriptKey.ARGUMENTS, arguments.stream().map(Argument::getJson).collect(Collectors.toList()));
+        json.put(ScriptKey.COMMANDS, commands.stream().map(ScriptCommand::getJson).collect(Collectors.toList()));
+        json.put(ScriptKey.RETURN, returnValue.getJson());
     }
 
     public Script (List<Argument> arguments, List<ScriptCommand> commands, Return returnValue)
@@ -124,23 +125,23 @@ public class Script
         if (json.isMap())
         {
             // commands
-            if (!json.containsKey("commands"))
+            if (!json.containsKey(ScriptKey.COMMANDS))
             {
-                LogUtils.error(Script.class, "Script 解析失败 缺少 commands 字段 (json): " + json);
+                LogUtils.error(Script.class, "Script 解析失败 缺少 " + ScriptKey.COMMANDS + " 字段 (json): " + json);
                 this.valid = false;
                 return;
             }
             // return
-            if (!json.containsKey("return"))
+            if (!json.containsKey(ScriptKey.RETURN))
             {
-                LogUtils.error(Script.class, "Script 解析失败 缺少 return 字段 (json): " + json);
+                LogUtils.error(Script.class, "Script 解析失败 缺少 " + ScriptKey.RETURN + " 字段 (json): " + json);
                 this.valid = false;
                 return;
             }
 
             this.arguments = parseArguments(json);
-            this.commands = ScriptCommandParser.parseList(json.getJsonEntityByKey("commands"));
-            this.returnValue = new Return(json.getJsonEntityByKey("return"));
+            this.commands = ScriptCommandParser.parseList(json.getJsonEntityByKey(ScriptKey.COMMANDS));
+            this.returnValue = new Return(json.getJsonEntityByKey(ScriptKey.RETURN));
 
             if (this.commands == null || !this.returnValue.isValid())
             {
@@ -187,11 +188,11 @@ public class Script
 
     private List<Argument> parseArguments (JsonEntity json)
     {
-        if (!json.containsKey("arguments"))
+        if (!json.containsKey(ScriptKey.ARGUMENTS))
         {
             return Collections.emptyList();
         }
-        List<JsonEntity> argumentList = json.getJsonEntityList("arguments");
+        List<JsonEntity> argumentList = json.getJsonEntityList(ScriptKey.ARGUMENTS);
         if (argumentList == null || argumentList.isEmpty())
         {
             return Collections.emptyList();
@@ -211,8 +212,8 @@ public class Script
         private void buildJson ()
         {
             this.json = new JsonEntity();
-            this.json.put("class", TypeMapper.toTypeString(type));
-            this.json.put("defaultValue", defaultValue);
+            this.json.put(ScriptKey.Return.CLASS, TypeMapper.toTypeString(type));
+            this.json.put(ScriptKey.Return.DEFAULT_VALUE, defaultValue);
         }
 
         public Return (Class<?> type, Object defaultValue)
@@ -227,24 +228,24 @@ public class Script
         {
             if (json.isMap())
             {
-                String classString = json.getString("class");
+                String classString = json.getString(ScriptKey.Return.CLASS);
                 this.type = TypeMapper.parseClass(classString);
 
                 if (this.type == int.class)
                 {
-                    this.defaultValue = json.getInt("defaultValue");
+                    this.defaultValue = json.getInt(ScriptKey.Return.DEFAULT_VALUE);
                 }
                 else if (this.type == float.class)
                 {
-                    this.defaultValue = json.getFloat("defaultValue");
+                    this.defaultValue = json.getFloat(ScriptKey.Return.DEFAULT_VALUE);
                 }
                 else if (this.type == boolean.class)
                 {
-                    this.defaultValue = json.getBoolean("defaultValue");
+                    this.defaultValue = json.getBoolean(ScriptKey.Return.DEFAULT_VALUE);
                 }
                 else if (this.type == String.class)
                 {
-                    this.defaultValue = json.getString("defaultValue");
+                    this.defaultValue = json.getString(ScriptKey.Return.DEFAULT_VALUE);
                 }
                 this.json = json;
                 valid = true;

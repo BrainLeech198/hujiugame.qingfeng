@@ -3,6 +3,7 @@ package com.hujiugame.qingfeng.script.data.command.param.control;
 import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.script.data.command.param.ScriptCommandParam;
 import com.hujiugame.qingfeng.script.data.value.MathValue;
+import com.hujiugame.qingfeng.type.key.ScriptKey;
 
 public class ReturnControlScriptCommandParam implements ScriptCommandParam
 {
@@ -18,7 +19,7 @@ public class ReturnControlScriptCommandParam implements ScriptCommandParam
             throw new IllegalStateException("An invalid command parameter cannot be built.");
         }
         json = new JsonEntity();
-        json.put("value", value.getJson());
+        json.put(ScriptKey.Command.Param.Control.VALUE, value.getJson());
     }
 
     public ReturnControlScriptCommandParam (MathValue value)
@@ -34,12 +35,12 @@ public class ReturnControlScriptCommandParam implements ScriptCommandParam
         if (json.isMap())
         {
             // value字段
-            if (!json.containsKey("value"))
+            if (!json.containsKey(ScriptKey.Command.Param.Control.VALUE))
             {
-                throw new IllegalArgumentException("Command parameter must have \"value\" field. (json): " + json);
+                throw new IllegalArgumentException("Command parameter must have \"" + ScriptKey.Command.Param.Control.VALUE + "\" field. (json): " + json);
             }
 
-            value = new MathValue(json.getJsonEntityByKey("value"));
+            value = new MathValue(json.getJsonEntityByKey(ScriptKey.Command.Param.Control.VALUE));
             this.json = json;
             valid = true;
         }

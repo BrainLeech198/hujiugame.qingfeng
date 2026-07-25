@@ -2,6 +2,7 @@ package com.hujiugame.qingfeng.script.data.command.param.story;
 
 import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.script.data.command.param.ScriptCommandParam;
+import com.hujiugame.qingfeng.type.key.ScriptKey;
 
 public class GotoPageStoryScriptCommandParam implements ScriptCommandParam
 {
@@ -18,8 +19,8 @@ public class GotoPageStoryScriptCommandParam implements ScriptCommandParam
             throw new IllegalStateException("An invalid command parameter cannot be built.");
         }
         json = new JsonEntity();
-        json.put("tree", tree);
-        json.put("page", page);
+        json.put(ScriptKey.Command.Param.Story.TREE, tree);
+        json.put(ScriptKey.Command.Param.Story.PAGE, page);
     }
 
     public GotoPageStoryScriptCommandParam (String targetPageId)
@@ -35,17 +36,17 @@ public class GotoPageStoryScriptCommandParam implements ScriptCommandParam
         if (json.isMap())
         {
             // tree字段
-            if (!json.containsKey("tree"))
+            if (!json.containsKey(ScriptKey.Command.Param.Story.TREE))
             {
-                throw new IllegalArgumentException("Command parameter must have \"tree\" field. (json): " + json);
+                throw new IllegalArgumentException("Command parameter must have \"" + ScriptKey.Command.Param.Story.TREE + "\" field. (json): " + json);
             }
             // page字段
-            if (!json.containsKey("page"))
+            if (!json.containsKey(ScriptKey.Command.Param.Story.PAGE))
             {
-                throw new IllegalArgumentException("Command parameter must have \"page\" field. (json): " + json);
+                throw new IllegalArgumentException("Command parameter must have \"" + ScriptKey.Command.Param.Story.PAGE + "\" field. (json): " + json);
             }
-            tree = json.getJsonEntityByKey("tree");
-            page = json.getString("page");
+            tree = json.getJsonEntityByKey(ScriptKey.Command.Param.Story.TREE);
+            page = json.getString(ScriptKey.Command.Param.Story.PAGE);
             this.json = json;
             valid = true;
         }

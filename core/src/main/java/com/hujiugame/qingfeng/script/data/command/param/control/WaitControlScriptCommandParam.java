@@ -2,6 +2,7 @@ package com.hujiugame.qingfeng.script.data.command.param.control;
 
 import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.script.data.command.param.ScriptCommandParam;
+import com.hujiugame.qingfeng.type.key.ScriptKey;
 
 public class WaitControlScriptCommandParam implements ScriptCommandParam
 {
@@ -17,7 +18,7 @@ public class WaitControlScriptCommandParam implements ScriptCommandParam
             throw new IllegalStateException("An invalid command parameter cannot be built.");
         }
         json = new JsonEntity();
-        json.put("time", time);
+        json.put(ScriptKey.Command.Param.Control.TIME, time);
     }
 
     public WaitControlScriptCommandParam (float time)
@@ -32,11 +33,11 @@ public class WaitControlScriptCommandParam implements ScriptCommandParam
         valid = false;
         if (json.isMap())
         {
-            if (!json.containsKey("time"))
+            if (!json.containsKey(ScriptKey.Command.Param.Control.TIME))
             {
-                throw new IllegalArgumentException("Command parameter must have \"time\" field. (json): " + json);
+                throw new IllegalArgumentException("Command parameter must have \"" + ScriptKey.Command.Param.Control.TIME + "\" field. (json): " + json);
             }
-            time = json.getFloat("time");
+            time = json.getFloat(ScriptKey.Command.Param.Control.TIME);
             this.json = json;
             valid = true;
         }

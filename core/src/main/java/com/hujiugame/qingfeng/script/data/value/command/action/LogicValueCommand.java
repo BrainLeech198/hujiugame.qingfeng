@@ -7,6 +7,7 @@ import com.hujiugame.qingfeng.script.data.value.command.param.ValueCommandParam;
 import com.hujiugame.qingfeng.script.data.value.command.param.logic.AndLogicValueCommandParam;
 import com.hujiugame.qingfeng.script.data.value.command.param.logic.NotLogicValueCommandParam;
 import com.hujiugame.qingfeng.script.data.value.command.param.logic.OrLogicValueCommandParam;
+import com.hujiugame.qingfeng.type.key.ScriptKey;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -55,9 +56,9 @@ public class LogicValueCommand implements ValueCommand
     private void buildJson ()
     {
         json = new JsonEntity();
-        json.put("type", valueCommandType.getDisplayString());
-        json.put("action", valueCommandAction.getDisplayString());
-        json.put("param", valueCommandParam.getJson());
+        json.put(ScriptKey.Command.TYPE, valueCommandType.getDisplayString());
+        json.put(ScriptKey.Command.ACTION, valueCommandAction.getDisplayString());
+        json.put(ScriptKey.Command.PARAM, valueCommandParam.getJson());
     }
 
     /**
