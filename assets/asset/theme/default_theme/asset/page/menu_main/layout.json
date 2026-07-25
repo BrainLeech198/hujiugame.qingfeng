@@ -1,7 +1,8 @@
 {
   "backgroundMusic" : ["Scorching Sun.mp3", "Title Music.mp3", "The Dragon Fell in Love wit.mp3"],
   "backgroundPicture" : "menu.background.png",
-  "picture" : {
+  "graphics" : {
+    "picture" : {
     "masker" : {
       "path" : "menu.masker.png",
       "position" : {
@@ -23,6 +24,7 @@
         "width" : 1170,
         "height" : 333
       }
+    }
     }
   },
   "ui" : {

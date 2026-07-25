@@ -5,6 +5,41 @@
 > - `develop/SCRIPT_INTERNAL_STANDARD.md` —— 修改脚本指令/值系统时
 > - `DOCUMENTATION_INDEX.md` —— 新增/重命名/删除文档时
 
+## 2026-07-25 — Story/Config/Version/游戏服务 常量收编 + TextManager/LogLevel 内部枚举 + 页面配置修复
+
+### 新增
+
+- **`StoryKey`** — Story 子系统 JSON 字段常量：`Tree` (BLOCK/TYPE/ID/IN/OUT/Type.ROOT/BRANCH/NODE/LEAF)、`Role` (ID/ROOT)、`PAGE`
+- **`ConfigKey`** — 配置文件 JSON 字段常量：`Game` (ID/NAME/VERSION/LAUNCHER_VERSION)、`Content` (COUNT/ROLE/SCRIPTS/TEMPLATES)、`Log` (LOG_LEVEL/FILE_LOG_LEVEL)、`Directory` (DIRECTORY/FILE)
+- **`VersionKey`** — 版本相关 JSON 字段常量：`APP_VERSION`/`APP_VERSION_TYPE`/`APP_VERSION_STRING`、`NEWEST_VERSION`/`NEWEST_VERSION_TYPE`/`NEWEST_VERSION_STRING`、`Update` (PROTECT/PROHIBIT)
+- **`TextManager.Field` 内部枚举** — 文本模板域标识符 `LANGUAGE("language")` / `GAME("game")`，含 `getValue()` 和 `fromValue()` 方法
+- **`LogLevel.Name` 内部枚举** — 日志等级字符串常量 `DEBUG`/`INFO`/`ERROR`，含 `getValue()` 方法
+
+### 重构
+
+- **常量收编** — 将 Story/Game/Config/Version/User 域所有散落的 JSON 字段名和日志标签替换为 `StoryKey`、`ConfigKey`、`VersionKey`、`ThemeKey` 常量引用。波及 15 文件：`TreeStructureInfo`、`Role`、`GameStoryManager`、`GameLogicService`、`GameRoleManager`、`GameScriptManager`、`GameTemplateManager`、`GameUserConfigManager`、`UserConfigManager`、`FileUtils`、`LogUtils`、`UpdateChecker`、`Main`、`Init`、`FileName`
+- **`UserConfigKey` → `ConfigKey.User`** — 将 `UserConfigKey`（含 SoundVolume 内部类）收编为 `ConfigKey.User`，删除旧文件
+- **`FileName` 补充** — 新增 `UPDATE_CONFIG = "update_config.json"`
+- **`TextManager.parseBraceText` 枚举派发** — switch 语句从字符串比较改为 `Field.fromValue()` + 枚举分支
+- **`LogLevel` 映射常量化** — `STRING_PARSE_LEVEL_MAP`/`LEVEL_DISPLAY_STRING_MAP` 的键值从硬编码字符串改为 `Name` 枚举引用
+- **`LogUtils` 默认配置常量化** — 默认日志等级值从 `"INFO"`/`"DEBUG"` 改为 `LogLevel.Name.INFO.getValue()`/`LogLevel.Name.DEBUG.getValue()`
+
+### 修复
+
+- **`GameStatePageInfo.GAME_STATE_CONFIG_MAP` 缺失子页面配置** — MENU 区块只注册了 `MENU_MAIN`，切换到 `MENU_LIST`(subState=1) 或 `MENU_LOAD`(subState=2) 时连锁报错"未定义的子页面配置"+"获取页面配置失败 null值"。已补上两项并设为 `true`
+
+### 提交分组合并说明
+
+> **注意**：以下同一日期条目的变更因依赖关系合并提交，非逐文件独立提交：
+> - ConfigKey + UserConfigKey 收编 + 波及 10 文件 → 1 提交
+> - ScriptKey 常量体系 + 波及 25 文件 → 1 提交
+> - StoryKey 常量体系 + 波及 3 文件 → 1 提交
+> - VersionKey + 波及 2 文件 → 1 提交
+> - 其他 Key 类新增 + 波及 20 文件 → 1 提交
+> - TextManager.Field 内部枚举 → 1 提交
+> - LogLevel.Name + LogUtils 常量化 → 1 提交
+> - GameStatePageInfo 修复 → 1 提交
+
 ## 2026-07-24 — UniversalKey/GameStateLayout 重命名 + 配置键修复 + MessageBox 调整
 
 ### 重构

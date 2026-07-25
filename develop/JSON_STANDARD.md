@@ -21,7 +21,7 @@
   - [3.1 Layout 顶层结构](#31-layout-顶层结构)
   - [3.2 背景音乐配置](#32-背景音乐配置)
   - [3.3 背景图片配置](#33-背景图片配置)
-  - [3.4 picture / gif 条目](#34-picture--gif-条目)
+  - [3.4 graphics 条目（picture / gif）](#34-graphics-条目picture--gif)
   - [3.5 ui.image 条目](#35-uiimage-条目)
   - [3.6 ui.label 条目](#36-uilabel-条目)
   - [3.7 ui.button 条目](#37-uibutton-条目)
@@ -404,8 +404,7 @@
 | `template` | String | 可选 | — | 模板布局名，加载后与本布局合并（`mergeLayout`） |
 | `backgroundMusic` | String 或 Array\<String\> | 可选 | — | 背景音乐，可单曲（String）或多曲（Array），随机播放 |
 | `backgroundPicture` | String | 可选 | — | 背景图片文件名，相对 `resource/image/` |
-| `picture` | Object | 可选 | — | 图片映射表，每一项见 [3.4](#34-picture--gif-条目) |
-| `gif` | Object | 可选 | — | 动图映射表，每一项见 [3.4](#34-picture--gif-条目) |
+| `graphics` | Object | 可选 | — | 图片/动图容器，内部分 `picture` / `gif` 子分类，每一项见 [3.4](#34-graphics-条目) |
 | `ui.image` | Object | 可选 | — | UI 图像映射表，每一项见 [3.5](#35-uiimage-条目) |
 | `ui.label` | Object | 可选 | — | 标签映射表，每一项见 [3.6](#36-uilabel-条目) |
 | `ui.button` | Object | 可选 | — | 按钮映射表，每一项见 [3.7](#37-uibutton-条目) |
@@ -413,7 +412,7 @@
 **模板合并行为**：
 当 `template` 指定后，会先加载模板布局，然后将两者的字段按以下规则合并：
 - 基础字段（backgroundPicture、backgroundMusicList、musicList）：merge 覆盖 main
-- 映射表字段（picture、gif、image、label、button）：相同 tag 时 merge 的字段覆盖 main，main 填补缺失字段
+- 映射表字段（graphics/picture、graphics/gif、image、label、button）：相同 tag 时 merge 的字段覆盖 main，main 填补缺失字段
 - JSON 数据：`layoutJson.combined(mergeJson)`
 
 ---
@@ -441,11 +440,11 @@
 
 ---
 
-### 3.4 picture / gif 条目
+### 3.4 graphics 条目（picture / gif）
 
 #### PictureInfo（静态图片）
 
-**位置**：Layout JSON 中的 `picture.{tag}`
+**位置**：Layout JSON 中的 `graphics.picture.{tag}`
 
 **解析**：`PictureInfo(JsonEntity)` → `PictureTag` → `JsonPathParser` + `JsonPositionParser` + `JsonSizeParser`
 
@@ -470,7 +469,7 @@
 
 #### GifInfo（动图/序列帧）
 
-**位置**：Layout JSON 中的 `gif.{tag}`
+**位置**：Layout JSON 中的 `graphics.gif.{tag}`
 
 **解析**：`GifInfo(JsonEntity)` 及 `LayoutManager.loadLayoutPicture()` 中的序列帧加载逻辑
 
