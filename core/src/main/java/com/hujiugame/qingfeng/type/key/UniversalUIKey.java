@@ -1,8 +1,8 @@
 package com.hujiugame.qingfeng.type.key;
 
-public final class UniversalUIKey
+public final class UniversalUiKey
 {
-    private UniversalUIKey ()
+    private UniversalUiKey ()
     {
         throw new UnsupportedOperationException("Utility class cannot be instantiated");
     }
