@@ -14,24 +14,29 @@
     "game_version_different.content.3" : "而當前版本為:",
     "game_version_different.content.4" : "強行執行可能導致崩潰"
   },
-  "menu" : {
-    "main.button.start" : "開始",
-    "main.button.create" : "創作",
-    "main.button.config" : "設定",
-    "main.button.quit" : "離開",
-    "list.button.back" : "返回",
-    "list.button.import" : "匯入",
-    "list.button.profile" : "檔案",
-    "list.button.share" : "分享",
-    "list.button.delete" : "刪除",
-    "list.button.last_page" : "上一頁",
-    "list.button.next_page" : "下一頁",
-    "list.label.absolute_path" : "目錄路徑",
-    "list.label.selected_path" : "選擇的游戏目錄",
-    "list.label.page" : "/",
-    "load.label.loading" : "載入中..."
+  "menu.main" : {
+    "button.start" : "開始",
+    "button.create" : "創作",
+    "button.config" : "設定",
+    "button.quit" : "離開"
   },
-  "config" : {
-    "basic.back" : "返回"
+  "menu.list" : {
+    "button.back" : "返回",
+    "button.import" : "匯入",
+    "button.profile" : "檔案",
+    "button.share" : "分享",
+    "button.delete" : "刪除",
+    "button.last_page" : "上一頁",
+    "button.next_page" : "下一頁",
+    "label.absolute_path" : "目錄路徑",
+    "label.selected_path" : "選擇的游戏目錄",
+    "label.page" : "/"
+  },
+  "menu.load" : {
+    "label.loading" : "載入中..."
+  },
+  "config.basic" : {
+    "back" : "返回",
+    "resolution" : "解析度"
   }
 }
