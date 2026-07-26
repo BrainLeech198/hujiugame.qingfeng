@@ -919,8 +919,11 @@ public final class UpdateChecker
         final int MAX_RETRY = 3;
         final long RETRY_DELAY_MS = 5000;
 
+        // 构建请求
         final String versionUrl = WebSite.OFFICIAL + "data/versions.json";
         final Net.HttpRequest request = new Net.HttpRequest(Net.HttpMethods.GET);
+
+        // 设置请求参数
         request.setUrl(versionUrl);
         request.setTimeOut(8000);
 
@@ -945,10 +948,12 @@ public final class UpdateChecker
                 {
                     try
                     {
+                        // 获取响应体
                         String responseBody = httpResponse.getResultAsString();
                         JsonReader reader = new JsonReader();
                         JsonValue json = reader.parse(responseBody);
 
+                        // 获取版本信息
                         int webVersionInt = json.getInt(VersionKey.NEWEST_VERSION, -1);
                         int webVersionType = json.getInt(VersionKey.NEWEST_VERSION_TYPE, -1);
                         String webVersionStr = json.getString(VersionKey.NEWEST_VERSION_STRING, null);
