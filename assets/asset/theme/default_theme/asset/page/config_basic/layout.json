@@ -44,7 +44,7 @@
         "fontColor" : "#FFFFFFFF",
         "fontFlag" : "w"
       },
-      "resolution" : {
+      "language" : {
         "kind" : "default2",
         "position" : {
           "x" : 595,
@@ -52,9 +52,24 @@
         },
         "size" : {
           "width" : 928,
-          "height" : 90
+          "height" : 100
         },
-        "textKey" : "",
+        "textKey" : "{language$requirement.json#config.basic.language} : {game$user.language.name} ({game$user.language})",
+        "fontSize" : 1,
+        "fontColor" : "#FFFFFFFF",
+        "fontFlag" : "w"
+      },
+      "language_selected" : {
+        "kind" : "default3",
+        "position" : {
+          "x" : 595,
+          "y" : 1075
+        },
+        "size" : {
+          "width" : 928,
+          "height" : 100
+        },
+        "textKey" : "{language$requirement.json#config.basic.language} : {game$user.language.name} ({game$user.language})",
         "fontSize" : 1,
         "fontColor" : "#FFFFFFFF",
         "fontFlag" : "w"

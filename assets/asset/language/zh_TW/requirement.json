@@ -37,6 +37,6 @@
   },
   "config.basic" : {
     "back" : "返回",
-    "resolution" : "解析度"
+    "language" : "語言"
   }
 }

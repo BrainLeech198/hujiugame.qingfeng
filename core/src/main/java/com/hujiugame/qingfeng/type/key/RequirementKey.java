@@ -44,6 +44,10 @@ public final class RequirementKey
         public static final String MENU_LIST_BUTTON_SELECT_LAST_PAGE = "select.last_page";
         public static final String MENU_LIST_BUTTON_SELECT_NEXT_PAGE = "select.next_page";
 
+        // config_basic
+        public static final String CONFIG_BASIC_LANGUAGE = "language";
+        public static final String CONFIG_BASIC_LANGUAGE_SELECTED = "language_selected";
+
         // game_menu
         public static final String GAME_MENU_BUTTON_START = "start";
         public static final String GAME_MENU_BUTTON_QUIT = UniversalUiKey.BUTTON_QUIT;
