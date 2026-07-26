@@ -14,24 +14,29 @@
     "game_version_different.content.3" : ", while the current version is:",
     "game_version_different.content.4" : ". Forcing it to run may cause crashes"
   },
-  "menu" : {
-    "main.button.start" : "Start",
-    "main.button.create" : "Create",
-    "main.button.config" : "Settings",
-    "main.button.quit" : "Quit",
-    "list.button.back" : "Back",
-    "list.button.import" : "Import",
-    "list.button.profile" : "Profile",
-    "list.button.share" : "Share",
-    "list.button.delete" : "Delete",
-    "list.button.last_page" : "Previous Page",
-    "list.button.next_page" : "Next Page",
-    "list.label.absolute_path" : "Folder Path",
-    "list.label.selected_path" : "Selected Folder",
-    "list.label.page" : "of",
-    "load.label.loading" : "Loading..."
+  "menu.main" : {
+    "button.start" : "Start",
+    "button.create" : "Create",
+    "button.config" : "Settings",
+    "button.quit" : "Quit"
   },
-  "config" : {
-    "basic.back" : "Back"
+  "menu.list" : {
+    "button.back" : "Back",
+    "button.import" : "Import",
+    "button.profile" : "Profile",
+    "button.share" : "Share",
+    "button.delete" : "Delete",
+    "button.last_page" : "Previous Page",
+    "button.next_page" : "Next Page",
+    "label.absolute_path" : "Folder Path",
+    "label.selected_path" : "Selected Folder",
+    "label.page" : "of"
+  },
+  "menu.load" : {
+    "label.loading" : "Loading..."
+  },
+  "config.basic" : {
+    "back" : "Back",
+    "resolution" : "Resolution"
   }
 }
