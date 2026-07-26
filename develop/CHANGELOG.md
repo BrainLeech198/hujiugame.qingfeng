@@ -13,6 +13,7 @@
 - **`LanguageManager.uploadTo` / `ThemeManager.uploadTo`** — 语言/主题管理器新增同名上载方法，将语言名称和主题名称写入 `GameInfoManager`
 - **`ConfigDisplay` 子页面** — 新增显示配置场景（新建 `ConfigDisplay.java`），注册 `GameSubState.CONFIG_DISPLAY = 1`，`GameStatePageInfo` 映射至 `config_display` 布局
 - **`ConfigBasic` 语言切换项** — 新增 `refreshItems()` 方法，根据 `itemSelectStateMap` 切换语言标签/语言选中标签的显示；`RequirementKey.Ui` 新增 `CONFIG_BASIC_LANGUAGE` / `CONFIG_BASIC_LANGUAGE_SELECTED`
+- **`RequirementKey.Config` 优先级 UI 常量** — 新增 `UNIVERSAL_PRIORITY_CONFIRM_UI` 系列常量，为后续配置驱动的优先级选中做准备
 - **语言文件补充** — 三语言 `requirement.json` 新增 `config.basic` 区块（`back` / `language`），旧 `resolution` 字段移至 `config.display`
 - **手柄模式轮换** — `ControllerInputHandler` 移除 X/Y 开/关虚拟鼠标，改为 START 键循环：`NONE → CONTROLLER_SELECT → CONTROLLER_VIRTUAL_MOUSE → NONE`
 - **虚拟选择框优先级对象** — `VirtualInputHandler` 新增 `setPrioritySelectObject(InteractableObject)`，在 `tryToKeepSameSelectObject` 失败时自动选中该优先级对象
@@ -30,6 +31,10 @@
 
 - **`uploadTo` 调用时机** — 从 `InstanceContent.init()` 移至 `Init.initUserConfig()` 中 `gameResolver.load()` 之后，避免 `UserConfigManager` 未初始化就尝试上载导致 NPE
 - **`ControllerInputHandler` 模式轮换超时** — 进入 `CONTROLLER_SELECT` 模式时立即调用 `resetVirtualSelectTime()`，防止计时器残余值导致选择框瞬间超时关闭
+
+### 重构
+
+- **`VirtualInputHandler.prioritySelectObject` 消耗型** — 成功选中优先对象后立即置 null，确保仅一次生效，防止后续页面刷新重复选中
 
 ## 2026-07-25 — Story/Config/Version/游戏服务 常量收编 + TextManager/LogLevel 内部枚举 + 页面配置修复
 

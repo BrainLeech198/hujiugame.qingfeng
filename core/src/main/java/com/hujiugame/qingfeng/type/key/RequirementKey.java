@@ -63,6 +63,11 @@ public final class RequirementKey
             throw new UnsupportedOperationException("Utility class cannot be instantiated");
         }
 
+        // 通用
+        public static final String UNIVERSAL_PRIORITY_CONFIRM_UI = "priorityConfirmUi";
+        public static final String UNIVERSAL_PRIORITY_CONFIRM_UI_TYPE = "type";
+        public static final String UNIVERSAL_PRIORITY_CONFIRM_UI_TAG = "tag";
+
         // menu list
         public static final String MENU_LIST_PAGE_MAX_GAME = "pageMaxGame";
     }
