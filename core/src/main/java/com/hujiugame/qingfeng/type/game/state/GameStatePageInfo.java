@@ -29,6 +29,7 @@ public final class GameStatePageInfo
         // CONFIG
         Map<Integer, String> configMap = new HashMap<>();
         configMap.put(GameSubState.CONFIG_BASIC, "config_basic");
+        configMap.put(GameSubState.CONFIG_DISPLAY, "config_display");
         map.put(GameState.CONFIG, Collections.unmodifiableMap(configMap));
 
         // GAME

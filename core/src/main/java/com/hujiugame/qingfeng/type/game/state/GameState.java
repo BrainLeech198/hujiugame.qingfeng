@@ -32,6 +32,7 @@ public final class GameState
 
         game_state_and_sub_state_name.put(CONFIG, new HashMap<Integer, String>(){{
             put(GameSubState.CONFIG_BASIC, "基础配置");
+            put(GameSubState.CONFIG_DISPLAY, "显示配置");
         }});
 
         game_state_and_sub_state_name.put(GAME, new HashMap<Integer, String>(){{

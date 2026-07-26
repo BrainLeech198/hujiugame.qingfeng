@@ -14,6 +14,7 @@ public final class GameSubState
     public final static int MENU_LOAD = 2;
 
     public final static int CONFIG_BASIC = 0;
+    public final static int CONFIG_DISPLAY = 1;
 
     public final static int GAME_MENU = 0;
     public final static int GAME_ROLE = 1;
