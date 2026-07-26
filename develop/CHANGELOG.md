@@ -5,6 +5,22 @@
 > - `develop/SCRIPT_INTERNAL_STANDARD.md` —— 修改脚本指令/值系统时
 > - `DOCUMENTATION_INDEX.md` —— 新增/重命名/删除文档时
 
+## 2026-07-26 — 用户配置上载至运行时 + GameInfoKey 内类化 + 设置界面语言补充
+
+### 新增
+
+- **`UserConfigManager.uploadTo(GameInfoManager)`** — 将用户配置（语言、主题、视窗、全屏、分辨率、音量）统一上载至运行时 `GameInfoManager`
+- **语言配置补充** — 三语言 `requirement.json` 新增 `config.basic.resolution` 字段
+
+### 重构
+
+- **`GameInfoKey` 内类化** — 29 个平铺常量重组为 6 个嵌套内部类（`Launcher`/`User`/`GameList`/`Game`/`Play`），`User` 含 `Resolution`/`SoundVolume` 子类，`Play` 含 `TreeStructure` 子类
+- **`GameUserConfigLoader` 清理** — 删除错位的 `putInfo(USER_LANGUAGE/USER_THEME)` 调用
+
+### 修复
+
+- **`uploadTo` 调用时机** — 从 `InstanceContent.init()` 移至 `Init.initUserConfig()` 中 `gameResolver.load()` 之后，避免 `UserConfigManager` 未初始化就尝试上载导致 NPE
+
 ## 2026-07-25 — Story/Config/Version/游戏服务 常量收编 + TextManager/LogLevel 内部枚举 + 页面配置修复
 
 ### 新增
