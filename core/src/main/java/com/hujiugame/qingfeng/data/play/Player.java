@@ -52,7 +52,7 @@ public final class Player
     public void setGamePath (FileHandle gamePathHandle)
     {
         this.gamePathHandle = gamePathHandle;
-        gameInfoManager.putInfo(GameInfoKey.GAME_PATH, gamePathHandle);//我也不确定传.path还是FileHandle
+        gameInfoManager.putInfo(GameInfoKey.Game.PATH, gamePathHandle);//我也不确定传.path还是FileHandle
     }
 
 
@@ -70,7 +70,7 @@ public final class Player
     public void setGameId (String gameId)
     {
         this.gameId = gameId;
-        gameInfoManager.putInfo(GameInfoKey.GAME_ID, gameId);
+        gameInfoManager.putInfo(GameInfoKey.Game.ID, gameId);
     }
 
     /**
@@ -87,7 +87,7 @@ public final class Player
     public void setGameName (String gameName)
     {
         this.gameName = gameName;
-        gameInfoManager.putInfo(GameInfoKey.GAME_NAME, gameName);
+        gameInfoManager.putInfo(GameInfoKey.Game.NAME, gameName);
     }
 
     /**
@@ -104,7 +104,7 @@ public final class Player
     public void setGameVersion (String gameVersion)
     {
         this.gameVersion = gameVersion;
-        gameInfoManager.putInfo(GameInfoKey.GAME_VERSION, gameVersion);
+        gameInfoManager.putInfo(GameInfoKey.Game.VERSION, gameVersion);
     }
 
     /**
@@ -121,7 +121,7 @@ public final class Player
     public void setGameLauncherVersion (String gameLauncherVersion)
     {
         this.gameLauncherVersion = gameLauncherVersion;
-        gameInfoManager.putInfo(GameInfoKey.GAME_LAUNCHER_VERSION, gameLauncherVersion);
+        gameInfoManager.putInfo(GameInfoKey.Game.LAUNCHER_VERSION, gameLauncherVersion);
     }
 
     // ===================================================================================================================
@@ -140,7 +140,7 @@ public final class Player
     public void setRole (Role role)
     {
         this.role = role;
-        gameInfoManager.putInfo(GameInfoKey.PLAY_ROLE_ID, role.getId());
+        gameInfoManager.putInfo(GameInfoKey.Play.ROLE_ID, role.getId());
     }
 
     /**
@@ -157,7 +157,7 @@ public final class Player
     public void setHoster (Hoster hoster)
     {
         this.hoster = hoster;
-        gameInfoManager.putInfo(GameInfoKey.PLAY_HOSTER, hoster.name());
+        gameInfoManager.putInfo(GameInfoKey.Play.HOSTER, hoster.name());
     }
 
     /**
@@ -174,7 +174,7 @@ public final class Player
     public void setIpp (String ipp)
     {
         this.ipp = ipp;
-        gameInfoManager.putInfo(GameInfoKey.PLAY_IPP, ipp);
+        gameInfoManager.putInfo(GameInfoKey.Play.IPP, ipp);
     }
 
     // ===================================================================================================================
@@ -200,8 +200,8 @@ public final class Player
             LogUtils.error(Player.class, "setTreeStructure treeStructure为null");
             return false;
         }
-        gameInfoManager.putInfo(GameInfoKey.PLAY_TREE_STRUCTURE_TYPE, treeStructure.getClass().getSimpleName());
-        gameInfoManager.putInfo(GameInfoKey.PLAY_TREE_STRUCTURE_ID, treeStructure.getTreeStructureInfo().getStructureId());
+        gameInfoManager.putInfo(GameInfoKey.Play.TreeStructure.TYPE, treeStructure.getClass().getSimpleName());
+        gameInfoManager.putInfo(GameInfoKey.Play.TreeStructure.ID, treeStructure.getTreeStructureInfo().getStructureId());
         return true;
     }
 
@@ -225,7 +225,7 @@ public final class Player
             return false;
         }
         this.lastPage = lastPage;
-        gameInfoManager.putInfo(GameInfoKey.PLAY_LAST_PAGE_ID, lastPage.getId());
+        gameInfoManager.putInfo(GameInfoKey.Play.LAST_PAGE_ID, lastPage.getId());
         return true;
     }
 
@@ -257,7 +257,7 @@ public final class Player
                 setLastPage(this.nowPage);
             }
             this.nowPage = nowPage;
-            gameInfoManager.putInfo(GameInfoKey.PLAY_NOW_PAGE_ID, nowPage.getId());
+            gameInfoManager.putInfo(GameInfoKey.Play.NOW_PAGE_ID, nowPage.getId());
         }
 
         return true;
@@ -280,11 +280,11 @@ public final class Player
         this.nextPage = nextPage;
         if (nextPage != null)
         {
-            gameInfoManager.putInfo(GameInfoKey.PLAY_NEXT_PAGE_ID, nextPage.getId());
+            gameInfoManager.putInfo(GameInfoKey.Play.NEXT_PAGE_ID, nextPage.getId());
         }
         else
         {
-            gameInfoManager.putInfo(GameInfoKey.PLAY_NEXT_PAGE_ID, null);
+            gameInfoManager.putInfo(GameInfoKey.Play.NEXT_PAGE_ID, null);
         }
         return true;
     }

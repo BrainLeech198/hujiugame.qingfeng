@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.type.Numeric;
 import com.hujiugame.qingfeng.type.Name;
+import com.hujiugame.qingfeng.game.GameInfoManager;
+import com.hujiugame.qingfeng.type.key.GameInfoKey;
 import com.hujiugame.qingfeng.type.key.ThemeKey;
 import com.hujiugame.qingfeng.type.file.FileName;
 import com.hujiugame.qingfeng.type.file.PathName;
@@ -487,5 +489,18 @@ public final class ThemeManager
     public float[] getFontUseSize ()
     {
         return fontUseSize;
+    }
+
+    // ===================================================================================================================
+    // 上载到 GameInfoManager
+
+    /**
+     * 将主题信息上载到运行时信息管理器
+     *
+     * @param gameInfoManager 运行时信息管理器
+     */
+    public void uploadTo (GameInfoManager gameInfoManager)
+    {
+        gameInfoManager.putInfo(GameInfoKey.User.THEME_NAME, name);
     }
 }

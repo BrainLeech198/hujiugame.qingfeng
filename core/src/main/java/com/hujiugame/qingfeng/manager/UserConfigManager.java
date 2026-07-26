@@ -5,7 +5,9 @@ import com.badlogic.gdx.files.FileHandle;
 import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.type.file.FileName;
 import com.hujiugame.qingfeng.type.file.PathName;
+import com.hujiugame.qingfeng.game.GameInfoManager;
 import com.hujiugame.qingfeng.type.key.ConfigKey;
+import com.hujiugame.qingfeng.type.key.GameInfoKey;
 import com.hujiugame.qingfeng.type.ui.UseViewport;
 import com.hujiugame.qingfeng.util.system.FileUtils;
 import com.hujiugame.qingfeng.util.system.LogUtils;
@@ -631,5 +633,26 @@ public final class UserConfigManager
     {
         this.soundVolumeSound = soundVolumeSound;
         json.getJsonEntityByKey(ConfigKey.User.Volume.KEY).put(ConfigKey.User.Volume.SOUND, soundVolumeSound);
+    }
+
+    // ===================================================================================================================
+    // 上载到 GameInfoManager
+
+    /**
+     * 将所有用户配置上载到运行时信息管理器
+     *
+     * @param gameInfoManager 运行时信息管理器
+     */
+    public void uploadTo (GameInfoManager gameInfoManager)
+    {
+        gameInfoManager.putInfo(GameInfoKey.User.USE_VIEWPORT, useViewport.name().toLowerCase());
+        gameInfoManager.putInfo(GameInfoKey.User.FULLSCREEN, fullscreen);
+        gameInfoManager.putInfo(GameInfoKey.User.LANGUAGE, language);
+        gameInfoManager.putInfo(GameInfoKey.User.THEME, theme);
+        gameInfoManager.putInfo(GameInfoKey.User.Resolution.WIDTH, resolutionWidth);
+        gameInfoManager.putInfo(GameInfoKey.User.Resolution.HEIGHT, resolutionHeight);
+        gameInfoManager.putInfo(GameInfoKey.User.SoundVolume.TOTAL, soundVolumeTotal);
+        gameInfoManager.putInfo(GameInfoKey.User.SoundVolume.MUSIC, soundVolumeMusic);
+        gameInfoManager.putInfo(GameInfoKey.User.SoundVolume.SOUND, soundVolumeSound);
     }
 }

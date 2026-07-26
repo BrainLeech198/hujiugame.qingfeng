@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.hujiugame.qingfeng.data.play.PlayLocalData;
 import com.hujiugame.qingfeng.type.file.PathName;
-import com.hujiugame.qingfeng.type.key.GameInfoKey;
 import com.hujiugame.qingfeng.manager.LanguageManager;
 import com.hujiugame.qingfeng.manager.TextManager;
 import com.hujiugame.qingfeng.manager.ThemeManager;
@@ -72,7 +71,6 @@ public final class GameUserConfigLoader
             else
             {
                 playLocalData.setLanguageManager(gameLanguageManager);
-                gameInfoManager.putInfo(GameInfoKey.USER_LANGUAGE, languagePathName);
                 LogUtils.debug(GameUserConfigLoader.class, "loadUserConfig 加载语言成功 (language): " + languagePathName);
             }
 
@@ -92,7 +90,6 @@ public final class GameUserConfigLoader
             else
             {
                 playLocalData.setThemeManager(gameThemeManager);
-                gameInfoManager.putInfo(GameInfoKey.USER_THEME, themePathName);
                 LogUtils.debug(GameUserConfigLoader.class, "loadUserConfig 加载主题成功 (theme): " + themePathName);
             }
 

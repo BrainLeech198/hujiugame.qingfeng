@@ -5,21 +5,31 @@
 > - `develop/SCRIPT_INTERNAL_STANDARD.md` —— 修改脚本指令/值系统时
 > - `DOCUMENTATION_INDEX.md` —— 新增/重命名/删除文档时
 
-## 2026-07-26 — 用户配置上载至运行时 + GameInfoKey 内类化 + 设置界面语言补充
+## 2026-07-26 — 用户配置上载 + GameInfoKey 内类化 + 配置界面语言 + 手柄虚拟控制重写
 
 ### 新增
 
 - **`UserConfigManager.uploadTo(GameInfoManager)`** — 将用户配置（语言、主题、视窗、全屏、分辨率、音量）统一上载至运行时 `GameInfoManager`
-- **语言配置补充** — 三语言 `requirement.json` 新增 `config.basic.resolution` 字段
+- **`LanguageManager.uploadTo` / `ThemeManager.uploadTo`** — 语言/主题管理器新增同名上载方法，将语言名称和主题名称写入 `GameInfoManager`
+- **`ConfigDisplay` 子页面** — 新增显示配置场景（新建 `ConfigDisplay.java`），注册 `GameSubState.CONFIG_DISPLAY = 1`，`GameStatePageInfo` 映射至 `config_display` 布局
+- **`ConfigBasic` 语言切换项** — 新增 `refreshItems()` 方法，根据 `itemSelectStateMap` 切换语言标签/语言选中标签的显示；`RequirementKey.Ui` 新增 `CONFIG_BASIC_LANGUAGE` / `CONFIG_BASIC_LANGUAGE_SELECTED`
+- **语言文件补充** — 三语言 `requirement.json` 新增 `config.basic` 区块（`back` / `language`），旧 `resolution` 字段移至 `config.display`
+- **手柄模式轮换** — `ControllerInputHandler` 移除 X/Y 开/关虚拟鼠标，改为 START 键循环：`NONE → CONTROLLER_SELECT → CONTROLLER_VIRTUAL_MOUSE → NONE`
+- **虚拟选择框优先级对象** — `VirtualInputHandler` 新增 `setPrioritySelectObject(InteractableObject)`，在 `tryToKeepSameSelectObject` 失败时自动选中该优先级对象
+- **取消选择保留** — `refreshSelectObject()` 拆分为 confirm/cancel 两段管线，取消框同确认框一样在页面刷新时保留上次选中对象
 
 ### 重构
 
 - **`GameInfoKey` 内类化** — 29 个平铺常量重组为 6 个嵌套内部类（`Launcher`/`User`/`GameList`/`Game`/`Play`），`User` 含 `Resolution`/`SoundVolume` 子类，`Play` 含 `TreeStructure` 子类
 - **`GameUserConfigLoader` 清理** — 删除错位的 `putInfo(USER_LANGUAGE/USER_THEME)` 调用
+- **`InstanceContent` 提取 `registerRenderRegistry()`** — 将内联的渲染注册表构建逻辑提取为独立静态方法
+- **`refreshSelectObject()` 管线拆分** — 确认框和取消框的逻辑分离为独立步骤，提高可维护性
+- **`ControllerInputHandler` DPAD 行为** — 方向键不再自动进入 `CONTROLLER_SELECT` 模式，仅当前已在该模式时执行方向移动
 
 ### 修复
 
 - **`uploadTo` 调用时机** — 从 `InstanceContent.init()` 移至 `Init.initUserConfig()` 中 `gameResolver.load()` 之后，避免 `UserConfigManager` 未初始化就尝试上载导致 NPE
+- **`ControllerInputHandler` 模式轮换超时** — 进入 `CONTROLLER_SELECT` 模式时立即调用 `resetVirtualSelectTime()`，防止计时器残余值导致选择框瞬间超时关闭
 
 ## 2026-07-25 — Story/Config/Version/游戏服务 常量收编 + TextManager/LogLevel 内部枚举 + 页面配置修复
 

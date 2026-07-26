@@ -6,6 +6,8 @@ import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.type.Name;
 import com.hujiugame.qingfeng.type.file.FileName;
 import com.hujiugame.qingfeng.type.file.PathName;
+import com.hujiugame.qingfeng.game.GameInfoManager;
+import com.hujiugame.qingfeng.type.key.GameInfoKey;
 import com.hujiugame.qingfeng.type.key.LanguageKey;
 import com.hujiugame.qingfeng.util.system.FileUtils;
 import com.hujiugame.qingfeng.util.system.LogUtils;
@@ -466,5 +468,18 @@ public final class LanguageManager
     public long getStateCode ()
     {
         return stateCode;
+    }
+
+    // ===================================================================================================================
+    // 上载到 GameInfoManager
+
+    /**
+     * 将语言信息上载到运行时信息管理器
+     *
+     * @param gameInfoManager 运行时信息管理器
+     */
+    public void uploadTo (GameInfoManager gameInfoManager)
+    {
+        gameInfoManager.putInfo(GameInfoKey.User.LANGUAGE_NAME, name);
     }
 }

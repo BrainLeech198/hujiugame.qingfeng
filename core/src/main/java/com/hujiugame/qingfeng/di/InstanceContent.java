@@ -78,6 +78,49 @@ public final class InstanceContent
         return instanceContent;
     }
 
+    /*
+     * 创建渲染注册表，注册所有状态对应的渲染机
+     */
+    private static void registerRenderRegistry ()
+    {
+        GameRenderRegistry registry = new GameRenderRegistry();
+        registry.register(GameState.INIT, GameSubState.INIT,
+            () -> new Init(instanceContent.updateChecker, instanceContent.gameHost,
+                instanceContent.userConfigManager,
+                instanceContent.languageManager, instanceContent.themeManager, instanceContent.audioManager,
+                instanceContent.graphicsManager, instanceContent.uiManager,
+                instanceContent.eventQueue));
+
+        registry.register(GameState.MENU, GameSubState.MENU_MAIN,
+            () -> new MenuMain(instanceContent.updateChecker, instanceContent.audioManager,
+                instanceContent.graphicsManager, instanceContent.themeManager,
+                instanceContent.uiManager,
+                instanceContent.eventQueue));
+        registry.register(GameState.MENU, GameSubState.MENU_LIST,
+            () -> new MenuList(instanceContent.updateChecker, instanceContent.audioManager,
+                instanceContent.graphicsManager, instanceContent.uiManager,
+                instanceContent.eventQueue,
+                instanceContent.gameHost, instanceContent.rootPath));
+        registry.register(GameState.MENU, GameSubState.MENU_LOAD,
+            () -> new MenuLoad(instanceContent.audioManager, instanceContent.graphicsManager,
+                instanceContent.uiManager, instanceContent.eventQueue,
+                instanceContent.gameHost));
+
+        registry.register(GameState.CONFIG, GameSubState.CONFIG_BASIC,
+            () -> new ConfigBasic(instanceContent.eventQueue, instanceContent.audioManager,
+                instanceContent.graphicsManager, instanceContent.uiManager));
+
+        registry.register(GameState.GAME, GameSubState.GAME_MENU,
+            () -> new GameMenu(instanceContent.eventQueue, instanceContent.gameHost));
+        registry.register(GameState.GAME, GameSubState.GAME_ROLE,
+            () -> new GameRole(instanceContent.eventQueue, instanceContent.layoutManager,
+                instanceContent.gameHost));
+        registry.register(GameState.GAME, GameSubState.GAME_PLAY,
+            () -> new GamePlay(instanceContent.eventQueue, instanceContent.layoutManager,
+                instanceContent.gameHost));
+        instanceContent.renderPipeline = new RenderPipeline(registry, deltaTime -> instanceContent.update(deltaTime));
+    }
+
     /**
      * 初始化 InstanceContent 单例并创建所有管理器和控制器实例
      *
@@ -137,39 +180,8 @@ public final class InstanceContent
             start = System.nanoTime();
 
             // 创建渲染注册表，注册所有状态对应的渲染机
-            GameRenderRegistry registry = new GameRenderRegistry();
-            registry.register(GameState.INIT, GameSubState.INIT,
-                () -> new Init(instanceContent.updateChecker, instanceContent.gameHost,
-                    instanceContent.themeManager, instanceContent.audioManager,
-                    instanceContent.graphicsManager, instanceContent.uiManager,
-                    instanceContent.eventQueue));
-            registry.register(GameState.MENU, GameSubState.MENU_MAIN,
-                () -> new MenuMain(instanceContent.updateChecker, instanceContent.audioManager,
-                    instanceContent.graphicsManager, instanceContent.themeManager,
-                    instanceContent.uiManager,
-                    instanceContent.eventQueue));
-            registry.register(GameState.MENU, GameSubState.MENU_LIST,
-                () -> new MenuList(instanceContent.updateChecker, instanceContent.audioManager,
-                    instanceContent.graphicsManager, instanceContent.uiManager,
-                    instanceContent.eventQueue,
-                    instanceContent.gameHost, instanceContent.rootPath));
-            registry.register(GameState.MENU, GameSubState.MENU_LOAD,
-                () -> new MenuLoad(instanceContent.audioManager, instanceContent.graphicsManager,
-                    instanceContent.uiManager, instanceContent.eventQueue,
-                    instanceContent.gameHost));
-            registry.register(GameState.CONFIG, GameSubState.CONFIG_BASIC,
-                () -> new ConfigBasic(instanceContent.eventQueue, instanceContent.audioManager,
-                    instanceContent.graphicsManager, instanceContent.uiManager));
-            registry.register(GameState.GAME, GameSubState.GAME_MENU,
-                () -> new GameMenu(instanceContent.eventQueue, instanceContent.gameHost));
-            registry.register(GameState.GAME, GameSubState.GAME_ROLE,
-                () -> new GameRole(instanceContent.eventQueue, instanceContent.layoutManager,
-                    instanceContent.gameHost));
-            registry.register(GameState.GAME, GameSubState.GAME_PLAY,
-                () -> new GamePlay(instanceContent.eventQueue, instanceContent.layoutManager,
-                    instanceContent.gameHost));
+            registerRenderRegistry();
 
-            instanceContent.renderPipeline = new RenderPipeline(registry, deltaTime -> instanceContent.update(deltaTime));
             LogUtils.debug(InstanceContent.class, "init - RenderPipeline 耗时: " + (System.nanoTime() - start) / 1000000 + "ms");
             start = System.nanoTime();
             instanceContent.sceneStack = new SceneStack();

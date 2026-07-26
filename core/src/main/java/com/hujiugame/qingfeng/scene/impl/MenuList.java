@@ -192,8 +192,8 @@ public final class MenuList implements GameRender
         }
 
         // 设置页数显示
-        gameHost.getGameInfoManager().putInfo(GameInfoKey.GAME_LIST_NOW_PAGE, nowPage);
-        gameHost.getGameInfoManager().putInfo(GameInfoKey.GAME_LIST_MAX_PAGE, maxPage);
+        gameHost.getGameInfoManager().putInfo(GameInfoKey.GameList.NOW_PAGE, nowPage);
+        gameHost.getGameInfoManager().putInfo(GameInfoKey.GameList.MAX_PAGE, maxPage);
 
         // 判断是否单独一页
         if (maxPage == 1)
@@ -271,9 +271,9 @@ public final class MenuList implements GameRender
 
         // 存储数据
         String selectedGamePathAbsolutePath = Gdx.files.external(selectedGamePath).file().getAbsolutePath();
-        gameHost.getGameInfoManager().putInfo(GameInfoKey.GAME_LIST_SELECTED_PATH, selectedGamePathAbsolutePath);// 修正显示为绝对路径，方便查找
-        gameHost.getGameInfoManager().putInfo(GameInfoKey.GAME_LIST_SELECTED_NAME, selectedGameName);
-        gameHost.getGameInfoManager().putInfo(GameInfoKey.GAME_LIST_SELECTED_LAUNCHER_VERSION, selectedGameLauncherVersion);
+        gameHost.getGameInfoManager().putInfo(GameInfoKey.GameList.SELECTED_PATH, selectedGamePathAbsolutePath);// 修正显示为绝对路径，方便查找
+        gameHost.getGameInfoManager().putInfo(GameInfoKey.GameList.SELECTED_NAME, selectedGameName);
+        gameHost.getGameInfoManager().putInfo(GameInfoKey.GameList.SELECTED_LAUNCHER_VERSION, selectedGameLauncherVersion);
 
         refreshPage();
         LogUtils.info(MenuList.class, "detectClickGameCover 选中游戏 (path): " + selectedGamePath);
@@ -325,11 +325,11 @@ public final class MenuList implements GameRender
             uiManager.getMessageBox().showInfo(RequirementKey.Language.MESSAGE_BOX_GAME_VERSION_DIFFERENT_KEY,
                 "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_GAME_VERSION_DIFFERENT_TITLE + "}",
                 "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_GAME_VERSION_DIFFERENT_CONTENT_1 + "}"
-                    + "{game$" + GameInfoKey.GAME_LIST_SELECTED_NAME + "}"
+                    + "{game$" + GameInfoKey.GameList.SELECTED_NAME + "}"
                     + "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_GAME_VERSION_DIFFERENT_CONTENT_2 + "}"
-                    + "{game$" + GameInfoKey.GAME_LIST_SELECTED_LAUNCHER_VERSION + "}"
+                    + "{game$" + GameInfoKey.GameList.SELECTED_LAUNCHER_VERSION + "}"
                     + "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_GAME_VERSION_DIFFERENT_CONTENT_3 + "}"
-                    + "{game$" + GameInfoKey.LAUNCHER_VERSION + "}"
+                    + "{game$" + GameInfoKey.Launcher.VERSION + "}"
                     + "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_GAME_VERSION_DIFFERENT_CONTENT_4 + "}"
             );
         }
@@ -374,8 +374,8 @@ public final class MenuList implements GameRender
         // 获取游戏列表路径
         gameListAbsolutePath = FileUtils.pathJoin(rootPath, PathName.BASE, PathName.GAME);
         gameListPath = FileUtils.pathJoin(PathName.BASE, PathName.GAME);
-        gameHost.getGameInfoManager().putInfo(GameInfoKey.GAME_LIST_ABSOLUTE_PATH, gameListAbsolutePath);
-        gameHost.getGameInfoManager().putInfo(GameInfoKey.GAME_LIST_SELECTED_PATH, "");
+        gameHost.getGameInfoManager().putInfo(GameInfoKey.GameList.ABSOLUTE_PATH, gameListAbsolutePath);
+        gameHost.getGameInfoManager().putInfo(GameInfoKey.GameList.SELECTED_PATH, "");
 
         // 检查游戏列表
         checkGameList();

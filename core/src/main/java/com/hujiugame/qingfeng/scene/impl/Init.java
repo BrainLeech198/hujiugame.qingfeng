@@ -23,7 +23,9 @@ import com.hujiugame.qingfeng.scene.GameRender;
 import com.hujiugame.qingfeng.ui.UiManager;
 import com.hujiugame.qingfeng.event.EventQueue;
 import com.hujiugame.qingfeng.event.imp.EventPushGameState;
+import com.hujiugame.qingfeng.manager.LanguageManager;
 import com.hujiugame.qingfeng.manager.ThemeManager;
+import com.hujiugame.qingfeng.manager.UserConfigManager;
 import com.hujiugame.qingfeng.util.StringPolisher;
 import com.hujiugame.qingfeng.util.system.FileUtils;
 import com.hujiugame.qingfeng.util.system.LogUtils;
@@ -32,6 +34,8 @@ public final class Init implements GameRender
 {
     private final UpdateChecker updateChecker;
     private final GameHost gameHost;
+    private final UserConfigManager userConfigManager;
+    private final LanguageManager languageManager;
     private final ThemeManager themeManager;
     private final AudioManager audioManager;
     private final GraphicsManager graphicsManager;
@@ -55,12 +59,15 @@ public final class Init implements GameRender
     // ===================================================================================================================
 
     public Init (UpdateChecker updateChecker, GameHost gameHost,
-                 ThemeManager themeManager, AudioManager audioManager,
+                 UserConfigManager userConfigManager,
+                 LanguageManager languageManager, ThemeManager themeManager, AudioManager audioManager,
                  GraphicsManager graphicsManager, UiManager uiManager,
                  EventQueue eventQueue)
     {
         this.updateChecker = updateChecker;
         this.gameHost = gameHost;
+        this.userConfigManager = userConfigManager;
+        this.languageManager = languageManager;
         this.themeManager = themeManager;
         this.audioManager = audioManager;
         this.graphicsManager = graphicsManager;
@@ -146,7 +153,7 @@ public final class Init implements GameRender
         if (updateChecker.doFileUpdateFinish())
         {
             // 记录版本，以及读取用户&游戏配置
-            gameHost.getGameInfoManager().putInfo(GameInfoKey.LAUNCHER_VERSION, updateChecker.getInternalVersionString());
+            gameHost.getGameInfoManager().putInfo(GameInfoKey.Launcher.VERSION, updateChecker.getInternalVersionString());
             if (!gameHost.getGameResolver().load())
             {
                 LogUtils.error(Init.class, "initUserConfig 读取游戏配置失败");
@@ -154,6 +161,10 @@ public final class Init implements GameRender
                 return;
             }
             LogUtils.debug(Init.class, "initUserConfig 读取游戏配置成功");
+            // 上传用户&游戏配置 到游戏信息管理器
+            userConfigManager.uploadTo(gameHost.getGameInfoManager());
+            languageManager.uploadTo(gameHost.getGameInfoManager());
+            themeManager.uploadTo(gameHost.getGameInfoManager());
             initState++;
         }
     }
