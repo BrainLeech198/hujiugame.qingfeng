@@ -638,10 +638,11 @@ public class VirtualInputHandler
                 if (row.get(j) == prioritySelectObject)
                 {
                     confirmSelectObject = prioritySelectObject;
+                    prioritySelectObject = null; // 消耗型，仅一次有效
                     virtualConfirmSelectRaw = i;
                     virtualConfirmSelectCol = j;
                     LogUtils.debug(VirtualInputHandler.class,
-                        "tryPrioritySelectObject 选中优先对象 (raw): " + i + " (col): " + j + " (obj): " + prioritySelectObject);
+                        "tryPrioritySelectObject 选中优先对象 (raw): " + i + " (col): " + j);
                     return;
                 }
             }
