@@ -48,6 +48,7 @@ public class VirtualInputHandler
 
     private InteractableObject cancelSelectObject;
     private InteractableObject lastCancelSelectObject;
+    private InteractableObject prioritySelectObject;
     private float virtualCancelSelectBottom;
     private float virtualCancelSelectLeft;
     private float virtualCancelSelectWidth;
@@ -138,13 +139,24 @@ public class VirtualInputHandler
     }
 
     /**
-     * 更新虚拟选择剩余时间，重置为默认值
+     * 设置页面级优先选中对象。当进入新页面时，如果原确认选中对象已消失，
+     * 将自动选中此对象。
+     *
+     * @param object 优先选中的交互对象，传 null 取消
      */
-    private void updateVirtualSelectTime ()
+    public void setPrioritySelectObject (InteractableObject object)
+    {
+        prioritySelectObject = object;
+    }
+
+    /**
+     * 重置虚拟选择剩余时间
+     */
+    public void resetVirtualSelectTime ()
     {
         remainingVirtualSelectTime = DEFAULT_REMAINING_VIRTUAL_SELECT_TIME;
         lastVirtualSelectTime = System.currentTimeMillis()/1000.0;
-        LogUtils.debug(VirtualInputHandler.class, "updateVirtualSelectTime 更新虚拟输入时间: " + remainingVirtualSelectTime);
+        LogUtils.debug(VirtualInputHandler.class, "resetVirtualSelectTime 重置虚拟输入时间: " + remainingVirtualSelectTime);
     }
 
     /**
@@ -264,7 +276,7 @@ public class VirtualInputHandler
      */
     public boolean moveVirtualConfirmSelectUp ()
     {
-        updateVirtualSelectTime();
+        resetVirtualSelectTime();
         return moveVirtualConfirmSelect(-1, 0);
     }
 
@@ -274,7 +286,7 @@ public class VirtualInputHandler
      */
     public boolean moveVirtualConfirmSelectDown ()
     {
-        updateVirtualSelectTime();
+        resetVirtualSelectTime();
         return moveVirtualConfirmSelect(1, 0);
     }
 
@@ -284,7 +296,7 @@ public class VirtualInputHandler
      */
     public boolean moveVirtualConfirmSelectLeft ()
     {
-        updateVirtualSelectTime();
+        resetVirtualSelectTime();
         return moveVirtualConfirmSelect(0, -1);
     }
 
@@ -294,7 +306,7 @@ public class VirtualInputHandler
      */
     public boolean moveVirtualConfirmSelectRight ()
     {
-        updateVirtualSelectTime();
+        resetVirtualSelectTime();
         return moveVirtualConfirmSelect(0, 1);
     }
 
@@ -307,7 +319,7 @@ public class VirtualInputHandler
         try
         {
             // 更新虚拟选择时间
-            updateVirtualSelectTime();
+            resetVirtualSelectTime();
             if (confirmSelectObject != null)
             {
                 LogUtils.debug(VirtualInputHandler.class, "clickVirtualConfirmSelect 点击虚拟确认选择: " + confirmSelectObject);
@@ -335,7 +347,7 @@ public class VirtualInputHandler
         try
         {
             // 更新虚拟选择时间
-            updateVirtualSelectTime();
+            resetVirtualSelectTime();
             if (cancelSelectObject != null)
             {
                 LogUtils.debug(VirtualInputHandler.class, "clickVirtualCancelSelect 点击虚拟取消选择: " + cancelSelectObject);
@@ -563,7 +575,8 @@ public class VirtualInputHandler
                 }
             }
 
-            // 无
+            // 无优先级按钮，保留 tryToKeepSameCancelObject 的结果
+            if (cancelSelectObject != null) return;
             cancelSelectObject = null;
         }
         catch (Exception e)
@@ -573,22 +586,21 @@ public class VirtualInputHandler
     }
 
     /**
-     * 交互对象集合刷新后，尝试保持之前在网格中选中的对象不变，避免选中框跳跃
+     * 交互对象集合刷新后，尝试保持之前在网格中选中的确认对象不变，避免选中框跳跃
+     *
+     * @return 保持成功返回 true
      */
-    /**
-     * 交互对象集合刷新后，尝试保持之前在网格中选中的对象不变，避免选中框跳跃
-     */
-    private void tryToKeepSameSelectObject ()
+    private boolean tryToKeepSameSelectObject ()
     {
         if (confirmSelectObject == null)
         {
             LogUtils.debug(VirtualInputHandler.class, "tryToKeepSameSelectObject 当前无选中对象");
-            return;
+            return false;
         }
         if (interactableObjectMap.isEmpty())
         {
             LogUtils.debug(VirtualInputHandler.class, "tryToKeepSameSelectObject 交互对象列表为空");
-            return;
+            return false;
         }
         for (int i = 0; i < interactableObjectMap.size(); i++)
         {
@@ -602,11 +614,74 @@ public class VirtualInputHandler
                     virtualConfirmSelectCol = j;
                     LogUtils.debug(VirtualInputHandler.class,
                         "tryToKeepSameSelectObject 保持选中 (raw): " + i + " (col): " + j + " (obj): " + confirmSelectObject);
-                    return;
+                    return true;
                 }
             }
         }
         LogUtils.debug(VirtualInputHandler.class, "tryToKeepSameSelectObject 原对象已不在新列表中，走默认选中");
+        return false;
+    }
+
+    /**
+     * 确认对象丢失后，尝试选中预设的优先对象
+     */
+    private void tryPrioritySelectObject ()
+    {
+        if (prioritySelectObject == null) return;
+
+        // 在网格中找到优先对象
+        for (int i = 0; i < interactableObjectMap.size(); i++)
+        {
+            List<InteractableObject> row = interactableObjectMap.get(i);
+            for (int j = 0; j < row.size(); j++)
+            {
+                if (row.get(j) == prioritySelectObject)
+                {
+                    confirmSelectObject = prioritySelectObject;
+                    virtualConfirmSelectRaw = i;
+                    virtualConfirmSelectCol = j;
+                    LogUtils.debug(VirtualInputHandler.class,
+                        "tryPrioritySelectObject 选中优先对象 (raw): " + i + " (col): " + j + " (obj): " + prioritySelectObject);
+                    return;
+                }
+            }
+        }
+    }
+
+    /**
+     * 交互对象集合刷新后，尝试保持之前在网格中选中的取消对象不变，避免选中框跳跃
+     *
+     * @return 保持成功返回 true
+     */
+    private boolean tryToKeepSameCancelObject ()
+    {
+        if (cancelSelectObject == null)
+        {
+            return false;
+        }
+        if (interactableObjectMap.isEmpty())
+        {
+            cancelSelectObject = null;
+            return false;
+        }
+        for (int i = 0; i < interactableObjectMap.size(); i++)
+        {
+            List<InteractableObject> row = interactableObjectMap.get(i);
+            for (int j = 0; j < row.size(); j++)
+            {
+                // 用 == 引用比较找原对象在新 map 中的位置
+                if (row.get(j) == cancelSelectObject)
+                {
+                    LogUtils.debug(VirtualInputHandler.class,
+                        "tryToKeepSameCancelObject 保持取消选中 (raw): " + i + " (col): " + j + " (obj): " + cancelSelectObject);
+                    return true;
+                }
+            }
+        }
+        // 原对象已不在新列表中
+        cancelSelectObject = null;
+        LogUtils.debug(VirtualInputHandler.class, "tryToKeepSameCancelObject 原对象已不在新列表中");
+        return false;
     }
 
     /**
@@ -616,12 +691,17 @@ public class VirtualInputHandler
     {
         try
         {
-            // 尽量保证选择对象和刷新之前一致
-            tryToKeepSameSelectObject();
-            // 空移动刷新
+            // 尽量保证确认选择对象和刷新之前一致
+            // 保持失败时再尝试优先对象
+            if (!tryToKeepSameSelectObject()) tryPrioritySelectObject();
+            // 空移动刷新确认选中
             moveVirtualConfirmSelect(0, 0);
-            // 设置快捷 确认&取消
+            // 设置快捷确认（优先级覆盖）
             refreshConfirmSelectObject();
+
+            // 尽量保证取消选择对象和刷新之前一致
+            tryToKeepSameCancelObject();
+            // 设置快捷取消（优先级覆盖）
             refreshCancelSelectObject();
         }
         catch (Exception e)
@@ -721,6 +801,22 @@ public class VirtualInputHandler
     private boolean isInteractableObjectInInteractableObjectSet (InteractableObject interactableObject)
     {
         return interactableObjectSet.contains(interactableObject);
+    }
+
+    /**
+     * 检查交互对象是否在当前选择网格中（引用比较）
+     */
+    private boolean isInGrid (InteractableObject target)
+    {
+        if (target == null) return false;
+        for (List<InteractableObject> row : interactableObjectMap)
+        {
+            for (InteractableObject obj : row)
+            {
+                if (obj == target) return true;
+            }
+        }
+        return false;
     }
 
     /**

@@ -62,8 +62,7 @@ public class ControllerInputHandler implements ControllerListener
     private static final int BUTTON_RIGHT = 14;
 
     // 功能映射
-    private static final int OPEN_VIRTUAL_MOUSE_KEY = BUTTON_X;
-    private static final int CLOSE_VIRTUAL_MOUSE_KEY = BUTTON_Y;
+    private static final int CYCLE_MODE_KEY = BUTTON_START;
 
     private static final int MOVE_VIRTUAL_INDEX_UP = BUTTON_UP;
     private static final int MOVE_VIRTUAL_INDEX_DOWN = BUTTON_DOWN;
@@ -182,21 +181,27 @@ public class ControllerInputHandler implements ControllerListener
     }
 
     /**
-     * 打开虚拟鼠标模式
+     * 轮换输入模式：NONE → CONTROLLER_SELECT → CONTROLLER_VIRTUAL_MOUSE → NONE
      */
-    private void openVirtualMouse ()
+    private void cycleInputMode ()
     {
-        virtualInputHandler.setVirtualInputType(VirtualInputType.CONTROLLER_VIRTUAL_MOUSE);
-        LogUtils.debug(ControllerInputHandler.class, "虚拟鼠标已打开");
-    }
-
-    /**
-     * 关闭虚拟鼠标模式
-     */
-    private void closeVirtualMouse ()
-    {
-        virtualInputHandler.setVirtualInputType(VirtualInputType.NONE);
-        LogUtils.debug(ControllerInputHandler.class, "虚拟鼠标已关闭");
+        VirtualInputType current = virtualInputHandler.getVirtualInputType();
+        VirtualInputType next;
+        switch (current)
+        {
+            case NONE:
+                next = VirtualInputType.CONTROLLER_SELECT;
+                virtualInputHandler.resetVirtualSelectTime();
+                break;
+            case CONTROLLER_SELECT:
+                next = VirtualInputType.CONTROLLER_VIRTUAL_MOUSE;
+                break;
+            default:
+                next = VirtualInputType.NONE;
+                break;
+        }
+        virtualInputHandler.setVirtualInputType(next);
+        LogUtils.debug(ControllerInputHandler.class, "cycleInputMode 切换输入模式: " + current + " → " + next);
     }
 
     // ==================== 业务逻辑 ====================
@@ -284,20 +289,17 @@ public class ControllerInputHandler implements ControllerListener
     {
         LogUtils.debug(ControllerInputHandler.class, "buttonDown 按钮按下 (code): " + buttonCode);
 
-        // 虚拟鼠标功能
-        if (buttonCode == OPEN_VIRTUAL_MOUSE_KEY)
+        // 轮换输入模式
+        if (buttonCode == CYCLE_MODE_KEY)
         {
-            openVirtualMouse();
-            return true;
-        }
-        else if (buttonCode == CLOSE_VIRTUAL_MOUSE_KEY)
-        {
-            closeVirtualMouse();
+            cycleInputMode();
             return true;
         }
 
-        // 默认的按钮处理
-        if (virtualInputHandler.getVirtualInputType() == VirtualInputType.NONE)
+        VirtualInputType currentType = virtualInputHandler.getVirtualInputType();
+
+        // 默认的按钮处理（NONE 模式）
+        if (currentType == VirtualInputType.NONE)
         {
             if (buttonCode == CONFIRM_KEY)
             {
@@ -308,8 +310,8 @@ public class ControllerInputHandler implements ControllerListener
                 return handleCancel();
             }
         }
-        // 虚拟鼠标功能
-        else if (virtualInputHandler.getVirtualInputType() == VirtualInputType.CONTROLLER_VIRTUAL_MOUSE)
+        // 虚拟鼠标模式
+        else if (currentType == VirtualInputType.CONTROLLER_VIRTUAL_MOUSE)
         {
             if (buttonCode == CONFIRM_KEY)
             {
@@ -320,8 +322,8 @@ public class ControllerInputHandler implements ControllerListener
                 return handleCancel();
             }
         }
-        // 虚拟选择功能
-        else if (virtualInputHandler.getVirtualInputType() == VirtualInputType.CONTROLLER_SELECT)
+        // 虚拟选择模式
+        else if (currentType == VirtualInputType.CONTROLLER_SELECT)
         {
             if (buttonCode == CONFIRM_KEY)
             {
@@ -331,44 +333,35 @@ public class ControllerInputHandler implements ControllerListener
             {
                 return virtualInputHandler.clickVirtualCancelSelect();
             }
+            else if (buttonCode == MOVE_VIRTUAL_INDEX_UP)
+            {
+                return virtualInputHandler.moveVirtualConfirmSelectUp();
+            }
+            else if (buttonCode == MOVE_VIRTUAL_INDEX_DOWN)
+            {
+                return virtualInputHandler.moveVirtualConfirmSelectDown();
+            }
+            else if (buttonCode == MOVE_VIRTUAL_INDEX_LEFT)
+            {
+                return virtualInputHandler.moveVirtualConfirmSelectLeft();
+            }
+            else if (buttonCode == MOVE_VIRTUAL_INDEX_RIGHT)
+            {
+                return virtualInputHandler.moveVirtualConfirmSelectRight();
+            }
         }
-        // 夺回控制权功能
-        else if (virtualInputHandler.getVirtualInputType() == VirtualInputType.KEYBOARD_SELECT)
+        // 抢回控制权（键盘模式下按手柄 A/B 切回手柄模式）
+        else if (currentType == VirtualInputType.KEYBOARD_SELECT)
         {
-            if (buttonCode == CONFIRM_KEY)
+            if (buttonCode == CONFIRM_KEY || buttonCode == CANCEL_KEY)
             {
                 virtualInputHandler.setVirtualInputType(VirtualInputType.CONTROLLER_SELECT);
+                return true;
             }
-            else if (buttonCode == CANCEL_KEY)
-            {
-                virtualInputHandler.setVirtualInputType(VirtualInputType.CONTROLLER_SELECT);
-            }
-        }
-
-        // 移动虚拟鼠标功能
-        if (buttonCode == MOVE_VIRTUAL_INDEX_UP)
-        {
-            virtualInputHandler.setVirtualInputType(VirtualInputType.CONTROLLER_SELECT);
-            return virtualInputHandler.moveVirtualConfirmSelectUp();
-        }
-        else if (buttonCode == MOVE_VIRTUAL_INDEX_DOWN)
-        {
-            virtualInputHandler.setVirtualInputType(VirtualInputType.CONTROLLER_SELECT);
-            return virtualInputHandler.moveVirtualConfirmSelectDown();
-        }
-        else if (buttonCode == MOVE_VIRTUAL_INDEX_LEFT)
-        {
-            virtualInputHandler.setVirtualInputType(VirtualInputType.CONTROLLER_SELECT);
-            return virtualInputHandler.moveVirtualConfirmSelectLeft();
-        }
-        else if (buttonCode == MOVE_VIRTUAL_INDEX_RIGHT)
-        {
-            virtualInputHandler.setVirtualInputType(VirtualInputType.CONTROLLER_SELECT);
-            return virtualInputHandler.moveVirtualConfirmSelectRight();
         }
 
         // 全屏功能
-        else if (buttonCode == FULLSCREEN_KEY)
+        if (buttonCode == FULLSCREEN_KEY)
         {
             return handleFullscreen();
         }
