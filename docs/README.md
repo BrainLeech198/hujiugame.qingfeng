@@ -1,36 +1,33 @@
-# QingFeng Launcher - Installer Repository
+# QingFeng Launcher — 安装包分发站
 
-This repository is used solely for distributing the installation packages of QingFeng Launcher, including the Windows version (.exe) and Android version (.apk).
+本仓库的 `docs/` 目录为 **GitHub Pages 发布站**，提供 Windows (.exe) 和 Android (.apk) 安装包下载。
 
-## Launcher Features
+> 源代码仓库位于 Gitee：<https://gitee.com/Mr_brainleech/hujiugame.qingfeng>
 
-QingFeng Launcher is a visual novel game launcher that follows the standardized file structure defined by our development team. It supports but is not limited to the following features:
+## 功能简介
 
-- **Extended Game Content**  
-  Beyond traditional dialogue-based storytelling, the core engine supports 2D map exploration, video playback, and other expansion features, providing creators with richer means of expression.
+氢风启动器是一款以 [libGDX](https://libgdx.com/) 构建的视觉小说游戏启动器，遵循开发团队统一规范的标准化文件结构。主要特性：
 
-- **Creator Tools**  
-  Built-in story development tools, including a visual editor, enable rapid construction of game narratives and logic. The launcher also supports multilingual text configuration, allowing creators to add desired languages for their target audiences.
+- **扩展游戏内容** — 除传统对话叙事外，支持 2D 地图探索、视频播放等扩展功能
+- **创作者工具** — 内置可视化编辑器，支持多语言文本配置
+- **界面定制** — 支持多套主题与多语言界面
 
-- **Interface Customization**  
-  The launcher itself supports multiple themes, allowing users to choose different appearances based on preference. It also provides multilingual interface configuration to accommodate users from different regions.
+## 获取最新版本
 
-## Get the Latest Version
+请访问官方网站：
 
-Please visit the official website to obtain the latest version and update logs:
+<https://brainleech198.github.io/hujiugame-qingfeng/>
 
-[https://brainleech198.github.io/hujiugame-qingfeng/](https://brainleech198.github.io/hujiugame-qingfeng/)
+## 历史版本
 
-## Historical Versions
+在官方网站「历史版本」页面可查阅并下载所有历史版本。
 
-All historical versions can be found and downloaded directly from the "Historical Versions" page on the official website.
+## 说明
 
-## Notes
-
-- This repository does not contain source code; it is used only for storing GitHub Releases files.
-- If download speeds are slow, you may try the acceleration tools recommended on the official website.
-- For any questions or suggestions, please provide feedback through the official website community or GitHub Issues.
-- For source code, please visit: [https://github.com/BrainLeech198/hujiugame-qingfeng-source](https://github.com/BrainLeech198/hujiugame-qingfeng-source)
+- 本目录仅用于 GitHub Pages 分发，不包含源代码
+- 中国大陆用户如遇下载缓慢，可尝试官网推荐的加速工具
+- 问题反馈请通过 GitHub Issues：<https://github.com/BrainLeech198/hujiugame-qingfeng/issues>
+- 源代码请访问 Gitee：<https://gitee.com/Mr_brainleech/hujiugame.qingfeng>
 
 ---
 

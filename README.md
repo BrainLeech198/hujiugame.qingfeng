@@ -83,8 +83,6 @@
 
 ### 社区架构（规划中）
 
-### 社区架构（规划中）
-
 采用云服务快速搭建：
 
 - 后端采用托管数据库，处理用户认证、作品元数据、评论与评分
@@ -178,7 +176,7 @@
 
 ## 文档
 
-所有项目文档（贡献指南、架构审查、代码规范、测试清单、提交规范等）统一收录于 **[DOCUMENTATION_INDEX.md](DOCUMENTATION_INDEX.md)**，按读者角色分层组织，方便快速定位。
+所有项目文档（贡献指南、代码规范、提交规范等）统一收录于 **[DOCUMENTATION_INDEX.md](DOCUMENTATION_INDEX.md)**，按读者角色分层组织，方便快速定位。
 
 ## 反馈与贡献
 
@@ -323,7 +321,7 @@
 
 ## 文档
 
-所有项目文档（贡献指南、架构审查、代码规范、测试清单、提交规范等）统一收录于 **[DOCUMENTATION_INDEX.md](DOCUMENTATION_INDEX.md)**，按读者角色分层组织，方便快速定位。
+所有项目文档（贡献指南、代码规范、提交规范等）统一收录于 **[DOCUMENTATION_INDEX.md](DOCUMENTATION_INDEX.md)**，按读者角色分层组织，方便快速定位。
 
 ## 反馈與貢獻
 
@@ -505,7 +503,7 @@ Visit it at: **[https://brainleech198.github.io/hujiugame-qingfeng/](https://bra
 
 ## Docs
 
-All project documentation (contributing guide, architecture review, code style, test checklist, commit conventions, etc.) is indexed in **[DOCUMENTATION_INDEX.md](DOCUMENTATION_INDEX.md)**, organized by reader role for quick reference.
+All project documentation (contributing guide, code style, commit conventions, etc.) is indexed in **[DOCUMENTATION_INDEX.md](DOCUMENTATION_INDEX.md)**, organized by reader role for quick reference.
 
 ## Feedback & Contributions
 
