@@ -16,7 +16,7 @@
 > 5. 【如果】新增/重命名/删除 `.md` 文件 → 同步更新 `DOCUMENTATION_INDEX.md`
 > 6. 【如果】新建设计方案文档 → 建议在 `develop/plans/` 目录记录
 
-## 2026-07-29 — 文档更新规范自描述 + 主题版权自动生成方案
+## 2026-07-29 — 文档更新规范自描述 + 主题版权自动生成方案 + BGM 双播修复 + Android 视口适配 + 配置驱动优先选中 + 打包稳健性
 
 ### 文档
 
@@ -27,6 +27,27 @@
 - **CHANGELOG.md 头部检查项补充** — 新增 `develop/CHANGELOG.md` 自身（每次提交必须更新）和 `develop/plans/` 目录（新建设计方案时建议记录）
 - **`develop/plans/2026-07-29-theme-copyright-generator.md`** — 主题第三方版权声明自动生成方案，声明清单 JSON + 运行时生成器模式，含许可模板库、校验告警、增量维护策略
 - **`DOCUMENTATION_INDEX.md`** — 新增主题版权自动生成方案条目
+
+---
+
+### 修复
+
+- **AudioManager BGM 双播** — `playLayout()` 改用 `bgMusicPlayingObjectMap.containsKey()` 判断曲目是否已启动，不再依赖 Android 生命周期后不可靠的 `Music.isPlaying()`
+- **AudioManager BGM 自然播完无下一首** — `loadBackgroundMusic()` 新增 `setOnCompletionListener`，自然播完后从播放记录中移除 tag，下一帧 `playLayout()` 自动随机下一首
+- **Android 主菜单版本号点击无效** — `MenuMain` 手动坐标转换公式与 `FitViewport` 不兼容，改用 `useViewport.getViewport().unproject()` 正确转换屏幕坐标到虚拟坐标系
+- **Android 启动崩溃** — `directory_structure.json` 移除 `.claude` 目录条目（开发机独有目录，APK 中不存在）
+
+### 新增
+
+- **VirtualInputHandler.setPriorityConfirmSelectObject(JsonEntity)** — 从配置中读取 `priorityConfirmUi.type/tag`，按 tag 匹配交互对象并设为优先选中，供各页面统一调用
+
+### 变更
+
+- **MenuMain 构造函数新增 useViewport 参数** — 从 InstanceContent 传入，用于屏幕坐标到虚拟坐标的视口转换
+
+### 构建
+
+- **build_package.py try/finally** — Android 打包 `step_build_apk()` 无论成功或失败，`finally` 块确保 `useViewport` 恢复为 `stretch`
 
 ## 2026-07-26 — 用户配置上载 + GameInfoKey 内类化 + 配置界面语言 + 手柄虚拟控制重写
 
