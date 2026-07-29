@@ -1,9 +1,32 @@
 # 更新日志
 
-> **每次提交前**：更新本日志后，检查此次变更是否需要同步更新以下文档：
-> - `develop/JSON_STANDARD.md` —— 新增/修改 JSON 配置格式时
-> - `develop/SCRIPT_INTERNAL_STANDARD.md` —— 修改脚本指令/值系统时
-> - `DOCUMENTATION_INDEX.md` —— 新增/重命名/删除文档时
+> **文档定位**：项目变更日志，按时间倒序记录每次提交的变更内容。
+>
+> **文档结构**：
+> - 按日期倒序排列，每个日期一个条目
+> - 每个日期条目标题格式：`日期 — 核心主题1 + 核心主题2 + ...`
+> - 条目内段落按 `新增 → 功能 → 变更 → 重构 → 修复 → 资产 → 文档 → 构建 → 网站 → 类型 → 移除 → 编码规范 → 优化 → 其他` 顺序排列
+> - 同一日期多条独立变更用 `---` 分隔
+>
+> **更新规范**：
+> 1. 【必须】每次提交前更新本文档，新条目插在最前面
+> 2. 【必须】遵循上述文档结构的格式要求
+> 3. 【如果】新增/修改 JSON 配置格式 → 同步更新 `develop/JSON_STANDARD.md`
+> 4. 【如果】修改脚本指令/值系统 → 同步更新 `develop/SCRIPT_INTERNAL_STANDARD.md`
+> 5. 【如果】新增/重命名/删除 `.md` 文件 → 同步更新 `DOCUMENTATION_INDEX.md`
+> 6. 【如果】新建设计方案文档 → 建议在 `develop/plans/` 目录记录
+
+## 2026-07-29 — 文档更新规范自描述 + 主题版权自动生成方案
+
+### 文档
+
+- **所有文档头部新增自描述规范** — develop/ 下 8 份文档（CHANGELOG.md、JSON_STANDARD.md、SCRIPT_INTERNAL_STANDARD.md、DOCUMENTATION_INDEX.md、COMMIT_STYLE.md、CODING_STYLE.md、THIRDPARTY_LICENSES_STANDARD.md、output/README.md）各自头部补充三区块：**文档定位**（职责范围）、**文档结构**（编排顺序和格式要求）、**更新规范**（变更时需遵循的规则和同步更新指引）
+- **CLAUDE.md 新增启动必读指令** — 顶部添加 `> **启动必读**`，指令新会话首次回复前先读取 `temp/CLAUDE_MEMORY.md` 恢复历史上下文
+- **CLAUDE.md 文档维护章节更新** — 移除已删除的 `develop/REVIEW.md` 引用，补充 `develop/plans/` 设计方案目录、CONTRIBUTING.md、docs/README.md、develop/output/README.md 等多份文档的维护提醒，新增"各文档头部自描述规范"说明；新增"本地工作记忆"章节引用 `temp/CLAUDE_MEMORY.md`
+- **`temp/CLAUDE_MEMORY.md` 头部补充自描述规范** — 按统一三区块格式（文档定位/文档结构/更新规范）补充头部，gitignored 文件纳入本地工作记忆管理体系
+- **CHANGELOG.md 头部检查项补充** — 新增 `develop/CHANGELOG.md` 自身（每次提交必须更新）和 `develop/plans/` 目录（新建设计方案时建议记录）
+- **`develop/plans/2026-07-29-theme-copyright-generator.md`** — 主题第三方版权声明自动生成方案，声明清单 JSON + 运行时生成器模式，含许可模板库、校验告警、增量维护策略
+- **`DOCUMENTATION_INDEX.md`** — 新增主题版权自动生成方案条目
 
 ## 2026-07-26 — 用户配置上载 + GameInfoKey 内类化 + 配置界面语言 + 手柄虚拟控制重写
 
@@ -26,15 +49,12 @@
 - **`InstanceContent` 提取 `registerRenderRegistry()`** — 将内联的渲染注册表构建逻辑提取为独立静态方法
 - **`refreshSelectObject()` 管线拆分** — 确认框和取消框的逻辑分离为独立步骤，提高可维护性
 - **`ControllerInputHandler` DPAD 行为** — 方向键不再自动进入 `CONTROLLER_SELECT` 模式，仅当前已在该模式时执行方向移动
+- **`VirtualInputHandler.prioritySelectObject` 消耗型** — 成功选中优先对象后立即置 null，确保仅一次生效，防止后续页面刷新重复选中
 
 ### 修复
 
 - **`uploadTo` 调用时机** — 从 `InstanceContent.init()` 移至 `Init.initUserConfig()` 中 `gameResolver.load()` 之后，避免 `UserConfigManager` 未初始化就尝试上载导致 NPE
 - **`ControllerInputHandler` 模式轮换超时** — 进入 `CONTROLLER_SELECT` 模式时立即调用 `resetVirtualSelectTime()`，防止计时器残余值导致选择框瞬间超时关闭
-
-### 重构
-
-- **`VirtualInputHandler.prioritySelectObject` 消耗型** — 成功选中优先对象后立即置 null，确保仅一次生效，防止后续页面刷新重复选中
 
 ## 2026-07-25 — Story/Config/Version/游戏服务 常量收编 + TextManager/LogLevel 内部枚举 + 页面配置修复
 
@@ -73,14 +93,18 @@
 
 ## 2026-07-24 — UniversalKey/GameStateLayout 重命名 + 配置键修复 + MessageBox 调整
 
-### 重构
+### 新增
 
-- **`UniversalKey`→`UniversalUIKey` 重命名** — 类名从 `UniversalKey` 统一为 `UniversalUIKey`，明确其通用 UI 按键常量的职责；新增私有构造器防止工具类实例化。波及 5 文件：`UniversalInputHandlerFunction`、`VirtualInputHandler`、`ConfigBasic`、`GameRole`、`RequirementUiKey` 的旧引用全部同步更新
-- **`GameStateLayout`→`GameStatePageInfo` 重命名** — 类名从 `GameStateLayout` 改为 `GameStatePageInfo`，更准确反映其页面信息映射的职责；新增私有构造器。`SceneStack` 中的旧引用同步更新
+- **3D 场景支持预想方案** — `develop/plans/2026-07-24-3d-scene-support.md`，通过 page 目录 3d.json 实现可选 3D 场景，最小架构入侵
 
 ### 变更
 
 - **`MessageBox` UI 参数调整** — 标题高度占比从 `100/600`→`120/600`，标题内容间距从 `5/600`→`10/600`，优化视觉效果
+
+### 重构
+
+- **`UniversalKey`→`UniversalUIKey` 重命名** — 类名从 `UniversalKey` 统一为 `UniversalUIKey`，明确其通用 UI 按键常量的职责；新增私有构造器防止工具类实例化。波及 5 文件：`UniversalInputHandlerFunction`、`VirtualInputHandler`、`ConfigBasic`、`GameRole`、`RequirementUiKey` 的旧引用全部同步更新
+- **`GameStateLayout`→`GameStatePageInfo` 重命名** — 类名从 `GameStateLayout` 改为 `GameStatePageInfo`，更准确反映其页面信息映射的职责；新增私有构造器。`SceneStack` 中的旧引用同步更新
 
 ### 修复
 
@@ -94,16 +118,7 @@
 
 - **`DOCUMENTATION_INDEX.md`** — 添加 3D 场景支持预想方案条目
 
-### 新增
-
-- **3D 场景支持预想方案** — `develop/plans/2026-07-24-3d-scene-support.md`，通过 page 目录 3d.json 实现可选 3D 场景，最小架构入侵
-
 ## 2026-07-23 — SceneStack 重构 + 配置加载 + 文件夹化 + 语言配置合并
-
-### 重构
-
-- **`SceneStack` 更新流程拆分** — `updateGameState()` 从单一方法拆分为三阶段：`loadGameLayout()` → `loadGameConfig()` → `updateGameRender(layout, configJson)`。`loadGameLayout()` 返回类型从 `boolean` 改为 `Layout`，对无需布局的状态（INIT）返回空 `Layout` 而非 `null`，消除空布局误判崩溃
-- **`GameStateDataContainer`** — 新增 `configJson` 构造参数及 `getConfigJson()` 方法，config 作为独立数据公民传递
 
 ### 新增
 
@@ -111,28 +126,19 @@
 - **`loadGameConfig()`** — `SceneStack` 新增私有方法，遵循 `loadGameLayout()` 模式：查映射 → 拼路径 → 加载 `config.json`，文件不存在则返回空 `JsonEntity`
 - **`FileName` 常量** — 新增 `PAGE_LAYOUT`/`PAGE_CONFIG`/`IN_GAME_PAGE_LAYOUT`/`IN_GAME_PAGE_CONFIG`
 
+### 功能
+
+- **`MenuList.pageMaxGame` 从页面配置读取** — 原硬编码 8 改为从 `configJson` 的 `GAME_LIST_PAGE_MAX_GAME` 键读取，布局配置可控制每页游戏数量。同时补充选中项为空时隐藏 profile 按钮的遗漏逻辑
+
 ### 变更
 
 - **`PathName` 常量重命名** — `ASSET_S_LAYOUT`→`ASSET_S_PAGE`，`IN_GAME_ASSET_S_LAYOUT`→`IN_GAME_ASSET_S_PAGE`
 - **`GameStateLayout` 布局映射** — 去掉 `.json` 后缀（`"menu_main"` 而非 `"menu_main.json"`），适配文件夹化路径
 
-### 资产
-
-- **布局文件文件夹化** — 四个页面从扁平 JSON 迁移至 `page/页面名/layout.json` 结构：
-  - `layout/config_basic.json` → `page/config_basic/layout.json`
-  - `layout/menu_list.json` → `page/menu_list/layout.json`
-  - `layout/menu_load.json` → `page/menu_load/layout.json`
-  - `layout/menu_main.json` → `page/menu_main/layout.json`
-- **语言配置合并** — 将 `main.json` 中的 UI 文本键（menu/config 块）平面合并入 `requirement.json`，`language.json` 默认块从 `"main"` 改为 `"requirement"`，三语言已合并的 `main.json` 删除
-- **`RequirementLanguageKey`** — 新增启动器菜单/配置页面的语言键常量定义
-- **`RequirementUiKey`** — 新增 `MENU_LIST_BUTTON_PROFILE = "profile"`
-
-### 文档
-
-- **`directory_structure.json`** — 同步更新为 `page/` 目录结构
-
 ### 重构
 
+- **`SceneStack` 更新流程拆分** — `updateGameState()` 从单一方法拆分为三阶段：`loadGameLayout()` → `loadGameConfig()` → `updateGameRender(layout, configJson)`。`loadGameLayout()` 返回类型从 `boolean` 改为 `Layout`，对无需布局的状态（INIT）返回空 `Layout` 而非 `null`，消除空布局误判崩溃
+- **`GameStateDataContainer`** — 新增 `configJson` 构造参数及 `getConfigJson()` 方法，config 作为独立数据公民传递
 - **`LayoutConfig`→`Layout` 类重命名** — 类声明、构造器、toString 同步更新。波及 11 文件：`Layout.java`、`LayoutManager.java`、`AudioManager.java`、`GraphicsManager.java`、`UiManager.java`、`GamePlay.java`、`GameRole.java`、`Role.java`、`Page.java`、`GameTemplateManager.java`。全部参数/变量/注释同步更名
 
 ### 修复
@@ -144,12 +150,16 @@
 - **三级 OpenGL 降级仅对 GL/GLFW 异常生效** — `Lwjgl3Launcher` 新增 `isGlCompatibilityError()` 判断，NPE 等游戏逻辑异常直接抛出，不再被降级流程掩盖
 - **虚拟鼠标光标路径 `external`→`internal`** — `ControllerInputHandler` 的虚拟鼠标图片文件句柄从 `Gdx.files.external` 改为 `Gdx.files.internal`，修复打包后光标图片找不到的问题
 
-### 功能
-
-- **`MenuList.pageMaxGame` 从页面配置读取** — 原硬编码 8 改为从 `configJson` 的 `GAME_LIST_PAGE_MAX_GAME` 键读取，布局配置可控制每页游戏数量。同时补充选中项为空时隐藏 profile 按钮的遗漏逻辑
-
 ### 资产
 
+- **布局文件文件夹化** — 四个页面从扁平 JSON 迁移至 `page/页面名/layout.json` 结构：
+  - `layout/config_basic.json` → `page/config_basic/layout.json`
+  - `layout/menu_list.json` → `page/menu_list/layout.json`
+  - `layout/menu_load.json` → `page/menu_load/layout.json`
+  - `layout/menu_main.json` → `page/menu_main/layout.json`
+- **语言配置合并** — 将 `main.json` 中的 UI 文本键（menu/config 块）平面合并入 `requirement.json`，`language.json` 默认块从 `"main"` 改为 `"requirement"`，三语言已合并的 `main.json` 删除
+- **`RequirementLanguageKey`** — 新增启动器菜单/配置页面的语言键常量定义
+- **`RequirementUiKey`** — 新增 `MENU_LIST_BUTTON_PROFILE = "profile"`
 - **`assets/THIRDPARTY_LICENSES.md` 按钮/标签图片更新** — `de.img.*.png`、`mb.img.background.png` 从待替换清单移至原创素材（自行绘制）
 - **de 默认按钮纹理替换** — 三态 PNG 替换为自生成 UI 纹理，约 260px→680px，消除第三方素材依赖
 - **mb 旧按钮纹理删除** — 三态 PNG 已无引用，对应 UI 配置已迁移至 de
@@ -162,6 +172,11 @@
 - **新增 `default2` 按钮/标签样式** — 使用透明纹理 `black16.png`/`black32.png`，适用于纯文字 UI 元素
 - **UI 纹理生成脚本入库** — `temp_ui_preview/generate.py`（8 配色）、`generate_styles.py`（6 样式变体）、六种风格预览图集
 
+### 文档
+
+- **`directory_structure.json`** — 同步更新为 `page/` 目录结构
+- **`docs/THIRDPARTY_LICENSES.html`** — 新增官网素材版权声明页面，涵盖平台下载图标（Smashicons CC BY 4.0 + 自创混合）、Fugaz One 字体（SIL OFL 1.1）、原创素材清单
+
 ### 构建
 
 - **`android/build.gradle` 签名验证加固** — 在 `projectsEvaluated` 外部捕获 `android` 扩展引用，避免 lint 等非 release 任务的同名属性遮蔽导致 doFirst 中 NPE
@@ -173,10 +188,6 @@
 - **9 语言 `community_description` 移除 ✨** — 符号移至 HTML，对齐符号分离策略
 - **讨论区链接更新** — `docs/data/community.json` 更新为新的 Gitee/GitHub Issue 地址，仓库名从 `hujiugame-qingfeng` → `hujiugame.qingfeng`
 
-### 文档
-
-- **`docs/THIRDPARTY_LICENSES.html`** — 新增官网素材版权声明页面，涵盖平台下载图标（Smashicons CC BY 4.0 + 自创混合）、Fugaz One 字体（SIL OFL 1.1）、原创素材清单
-
 ### 类型
 
 - **`RequirementConfigKey` 工具类填充** — 空类补全为 final utility class，新增 `MENU_LIST_PAGE_MAX_GAME = "page_max_game"` 配置键常量
@@ -187,6 +198,10 @@
 
 ## 2026-07-22 — 主菜单标题图替换为 Fugaz One 字体
 
+### 新增
+
+- **`temp_ui_preview/generate_title.py`** — 标题图生成脚本（Font: Fugaz One, PIL 渲染）
+
 ### 变更
 
 - **`menu.title.png`** — 主菜单标题字体从 Pacifico 替换为 **Fugaz One**（Google Fonts / SIL OFL 1.1），"Qing"=#3F48CCFF（蓝），"Feng"=#FDA1FFFF（粉）
@@ -195,32 +210,28 @@
 
 - **`assets/THIRDPARTY_LICENSES.md` 条目 #9** — 更新为 Fugaz One 字体声明（作者：LatinoType Limitada / Luciano Vergara）
 
-### 新增
-
-- **`temp_ui_preview/generate_title.py`** — 标题图生成脚本（Font: Fugaz One, PIL 渲染）
-
 ---
 
 ## 2026-07-19 — loadPicture 首次加载失败用 errorTexture 占位 + UI 纹理生成工具 + 第三方素材版权清查
-
-### 修复
-
-- **`GraphicsManager.loadPicture` 首次加载失败无限重试** — 当 `getTexture` 返回 `errorTexture` 时，对首次加载的 tag 将其写入 `pictureMap` 占位，避免 `hasPicture` 永远返 false 导致每帧重试和日志刷屏
 
 ### 新增
 
 - **`temp_ui_preview/generate.py`** — UI 纹理 Python 生成工具，8 套配色方案（蓝紫/翠绿/暖橙红/暗黑透明/粉紫/极简黑白/深蓝海洋/琥珀怀旧），圆角渐变风格
 - **`temp_ui_preview/generate_styles.py`** — UI 纹理样式变体生成器，支持 6 种样式（线框风格/新粗野主义 4px 2px 1px/极简细边框/磨砂质感），2x 输出分辨率 + 8x AA 超采样抗锯齿
 
+### 变更
+
+- **`assets/THIRDPARTY_LICENSES.md` 条目 #12 待替换素材** — 将 MC 摺纸材质包纹理列明替换计划
+
+### 修复
+
+- **`GraphicsManager.loadPicture` 首次加载失败无限重试** — 当 `getTexture` 返回 `errorTexture` 时，对首次加载的 tag 将其写入 `pictureMap` 占位，避免 `hasPicture` 永远返 false 导致每帧重试和日志刷屏
+
 ### 文档
 
 - **`assets/THIRDPARTY_LICENSES.md`** — 完整补全第三方素材声明条目 #9~#12，涵盖 Pacifico 字体、豆包 AI 图像合集、原创素材、待替换素材
 - **`C:\Users\11067\hujiugame\qingfeng\game\swxq\THIRDPARTY_LICENSES.md`** — 新增 swxq 游戏完整的第三方版权声明
 - **`assets/asset/resource/image/error.png`** — 替换为自生成的 2×2 像素占位图，消除版权风险
-
-### 变更
-
-- **`assets/THIRDPARTY_LICENSES.md` 条目 #12 待替换素材** — 将 MC 摺纸材质包纹理列明替换计划
 
 ---
 
@@ -230,14 +241,14 @@
 
 - **`develop/JSON_STANDARD.md`** — JSON 配置标准总览文档，覆盖全部 32 种 JSON 格式，含字段类型、默认值、解析类、新增标准流程
 
+### 变更
+
+- **`LabelManager` 打字速度常量重命名** — `LABEL_TEXT_TYPING_SPEED` → `DEFAULT_LABEL_TEXT_TYPING_SPEED`，与命名规范对齐
+
 ### 修复
 
 - **`GameSessionManager.enterGame` 失败回滚** — `loadResource`/`loadData` 失败或 `enterGame` 异常时按 LIFO 顺序回滚已加载的资源、数据和用户配置，避免残留加载状态
 - **`GameUserConfigLoader` 主题加载失败语言回滚** — 主题加载失败或异常时回滚已切换的语言管理器，避免 `textManager` 停留在游戏语言
-
-### 变更
-
-- **`LabelManager` 打字速度常量重命名** — `LABEL_TEXT_TYPING_SPEED` → `DEFAULT_LABEL_TEXT_TYPING_SPEED`，与命名规范对齐
 
 ### 文档
 
@@ -279,17 +290,17 @@
 
 ## 2026-07-18 — 颜色配置修复 + 死代码清理
 
+### 变更
+
+- **`ThemeManager.java` 默认颜色** — 三个兜底色值从 `#FF000000`（全透明红）改为 `#000000FF`（纯黑不透明）
+- **`Init.java` 默认进度条颜色** — 硬编码 int 移位改为 `Color.valueOf("#3F47B5FF")` 可读形式
+
 ### 修复
 
 - **颜色读取 String→Int 不匹配** — `Init.java` 进度条颜色、`UiManager.java` 标签/按钮颜色通过 `getInt()` 读取 hex 字符串，静默返回 0 导致颜色不生效。统一改为 `getString()` + `Color.valueOf()`
 - **`theme.json` 字体颜色透明** — `fontColor` 值为 `#00000100`（alpha=0），改为 `#000000FF`（纯黑不透明）
 - **`app_config.json` 尾随逗号** — 删除 JSON 末尾多余逗号
 - **`MessageBox.java` 颜色格式** — `Color.valueOf("#FFD700")` 缺少 alpha 位，补全为 `#FFD700FF`
-
-### 变更
-
-- **`ThemeManager.java` 默认颜色** — 三个兜底色值从 `#FF000000`（全透明红）改为 `#000000FF`（纯黑不透明）
-- **`Init.java` 默认进度条颜色** — 硬编码 int 移位改为 `Color.valueOf("#3F47B5FF")` 可读形式
 
 ### 移除
 
@@ -474,17 +485,17 @@
 - **按钮文字切换** — 点击"查看修复方法"/"收起修复步骤"切换，点击面板外部自动关闭
 - **多语言支持** — 全部 9 个语言文件新增 7 个 i18n 键（步骤标题/说明/图片加载提示）
 
-### 修复
-
-- **`:last-child` / `:first-child` 选择器失效** — `.tip-card:last-child` 因 `<body>` 中后续元素（`div.card`、`div.modal`、`<script>` 等）存在而匹配不到任何元素，导致 `bindRepairButton()` 形同虚设。改为 ID 选择器（`#tipCardWatt`、`#tipCardRepair`）
-- **`applyI18n` 中的 Watt/Repair 文本选择器** — 同上问题统一修复
-
 ### 重构
 
 - **HTML 结构语义化** — `div.hero-card` → `<header>`；内容区域包裹 `<main>`；`div.tip-card`/`div.card` → `<section>`；`div.footnote` → `<footer>`；品牌名称 `div` → `<h1>`
 - **内联样式提取为 CSS 类** — 游戏介绍卡片的内联 `font-size/line-height/color/padding/margin` → `.intro-body`/`.intro-body p`/`.card-intro`；`download-header`/`share-header` 合并为 `.card-header`；模态框错误文本 → `.modal-error` 类
 - **CSS 按组件分节** — 基础重置/头部/提示卡片/修复步骤/通用卡片/下载/更新日志/社区/页脚/模态框/响应式
 - **卡片间距统一** — `.card + .card` 替代手动 `margin-bottom`
+
+### 修复
+
+- **`:last-child` / `:first-child` 选择器失效** — `.tip-card:last-child` 因 `<body>` 中后续元素（`div.card`、`div.modal`、`<script>` 等）存在而匹配不到任何元素，导致 `bindRepairButton()` 形同虚设。改为 ID 选择器（`#tipCardWatt`、`#tipCardRepair`）
+- **`applyI18n` 中的 Watt/Repair 文本选择器** — 同上问题统一修复
 
 ### 文档
 
@@ -494,15 +505,15 @@
 
 ## 2026-07-13 — 更新检测三段式判断 + 打包脚本版本管理体系增强
 
-### 重构
-
-- **`UpdateChecker` 版本检测三段式逻辑** — `doFileVersionDifferent()` 补充读取 `appVersion` 整型字段并存储为 `internalAppVersion`/`internalAppVersionType`；`checkWebVersion()` 重写为双段判断：正常时使用 `newest_version` 整型比较，整型字段不存在时回退字符串比较，字符串一致时进一步对比版本类型（beta→release 升级检测）
-- **`appVersion` 整型字段完整链路** — 从 `app_version.json` 读取 → `UpdateChecker` 存储 → 远程 `newest_version` 整型对比，覆盖了此前只比较版本字符串的盲区
-
 ### 新增
 
 - **JAR manifest `Implementation-Version`** — `lwjgl3/build.gradle` manifest 增加 `Implementation-Version` 属性，编译时自动从 `projectVersion` 注入，运行时可通过 `Package.getImplementationVersion()` 读取
 - **打包工具文档** — `develop/output/README.md` 覆盖打包工具使用方法、7 步流水线详解、版本管理体系（三字段 × 六存储位置）、运行时更新检测机制
+
+### 重构
+
+- **`UpdateChecker` 版本检测三段式逻辑** — `doFileVersionDifferent()` 补充读取 `appVersion` 整型字段并存储为 `internalAppVersion`/`internalAppVersionType`；`checkWebVersion()` 重写为双段判断：正常时使用 `newest_version` 整型比较，整型字段不存在时回退字符串比较，字符串一致时进一步对比版本类型（beta→release 升级检测）
+- **`appVersion` 整型字段完整链路** — 从 `app_version.json` 读取 → `UpdateChecker` 存储 → 远程 `newest_version` 整型对比，覆盖了此前只比较版本字符串的盲区
 
 ### 构建
 
@@ -510,11 +521,6 @@
 - **`DOCUMENTATION_INDEX.md`** 打包工具条目从 `build_package.py` 指向 `develop/output/README.md`
 
 ## 2026-07-11 — repairGame 保护文件还原修复 + init 重入守卫
-
-### 修复
-
-- **restoreProtectExternalFile 保护文件还原丢失** — 还原前先删除目标文件，避免 Windows `File.renameTo` 因目标已存在而静默失败；检查 `moveFile` 返回值，失败时中断流程而非继续清理 temp — 修复 `user_config.json` 等保护文件被内部默认文件覆盖的问题
-- **init() 重入守卫** — 新增 `volatile initRunning` 标志位，`finally` 块确保所有退出路径复位；防止 `Main.threadUpdateVersion()` 和 `repairGame` 并发调用 `init()` 导致文件状态不一致
 
 ### 新增
 
@@ -525,6 +531,11 @@
 ### 重构
 
 - **Init 场景集成修复流程** — 修复中设置 `isRepairing` 标志跳过状态机，完成后弹出原生对话框并退出，不再直接 `CrashUtils.crash()`
+
+### 修复
+
+- **restoreProtectExternalFile 保护文件还原丢失** — 还原前先删除目标文件，避免 Windows `File.renameTo` 因目标已存在而静默失败；检查 `moveFile` 返回值，失败时中断流程而非继续清理 temp — 修复 `user_config.json` 等保护文件被内部默认文件覆盖的问题
+- **init() 重入守卫** — 新增 `volatile initRunning` 标志位，`finally` 块确保所有退出路径复位；防止 `Main.threadUpdateVersion()` 和 `repairGame` 并发调用 `init()` 导致文件状态不一致
 
 ## 2026-07-11 — NinePatch 边框视觉缩放：sourceBorder/renderBorder 分离
 
@@ -572,6 +583,11 @@
   - `CrashUtils.java`（2 处）：`logFile`、`crashFile`
 - **FileUtils `copyDirectoryRecursiveFix` 参数/局部变量重命名** — `oldFile`/`newFile` → `sourceDirectoryPath`/`destDirectory`，消除误导性命名；`old_DIRECTORY_STRUCTURE` 等局部变量同步精简
 
+### 修复
+
+- **`.list()` 安全替换** — 将 `FileUtils.deleteDirectoryRecursive` 中的原始 `file.list()` 替换为 `FileUtils.getList(file)`，确保 Android Internal 目录安全删除
+- **`GameScriptManager` 循环变量修正** — `scriptFile` → `scriptFileHandle`，保持命名一致
+
 ### 文档
 
 - **FileUtils.java 全量 JavaDoc 完善** — 为 14 个公开/私有方法补充详细的 @param 和 @return 描述：
@@ -581,12 +597,13 @@
   - `createStringFileOfLog` 说明日志专用场景和 UTF-8 编码
   - `copyDirectoryRecursiveFix` 说明 Android Internal 专用遍历策略
 
-### 修复
-
-- **`.list()` 安全替换** — 将 `FileUtils.deleteDirectoryRecursive` 中的原始 `file.list()` 替换为 `FileUtils.getList(file)`，确保 Android Internal 目录安全删除
-- **`GameScriptManager` 循环变量修正** — `scriptFile` → `scriptFileHandle`，保持命名一致
-
 ## 2026-07-08 — PathType→FileHandle 全量迁移 + QfFiles 包装 + 路径翻倍调试
+
+### 新增
+
+- **QfFiles/QfFileHandle** — `util/system/` 下新增 Files 包装层，`toString()` 输出 `"type:path"` 格式，便于日志中区分 External/Internal 等文件类型。`Main.create()` 中通过 `Gdx.files = new QfFiles(Gdx.files)` 一行替换全局生效
+- **LogUtils 日志目录预创建** — `updateFileByDayTime()` 创建日志文件句柄后主动 `file.parent().mkdirs()`，避免首次写入时因目录不存在而失败
+- **FileUtils.createStringFileOfLog mkdirs** — 写入前调用 `file.parent().mkdirs()`，确保日志文件父目录已创建
 
 ### 重构
 
@@ -595,20 +612,14 @@
 - **FileUtils 精简** — 删除所有 `PathType` 重载方法（`createStringFile`/`readStringFile`/`isExist` 等的 PathType 变体），保留纯 `FileHandle` API；`DIRECTORY_STRUCTURE` 重命名为 `INTERNAL_DIRECTORY_STRUCTURE`
 - **Main.java 路径修复** — `rootPath` 不再通过 `Gdx.files.external("").file().getAbsolutePath()` 获取（QfFiles 包装后路径翻倍），改为直接 `System.getProperty("user.home")`
 
-### 新增
-
-- **QfFiles/QfFileHandle** — `util/system/` 下新增 Files 包装层，`toString()` 输出 `"type:path"` 格式，便于日志中区分 External/Internal 等文件类型。`Main.create()` 中通过 `Gdx.files = new QfFiles(Gdx.files)` 一行替换全局生效
-- **LogUtils 日志目录预创建** — `updateFileByDayTime()` 创建日志文件句柄后主动 `file.parent().mkdirs()`，避免首次写入时因目录不存在而失败
-- **FileUtils.createStringFileOfLog mkdirs** — 写入前调用 `file.parent().mkdirs()`，确保日志文件父目录已创建
-
-### 待修复
-
-- **QfFiles 路径翻倍** — QfFiles 包装启用后，`Gdx.files.external()` 产生的路径出现翻倍（如 `C:\Users\11067\C:\Users\11067\hujiugame\...`），从第 2 次调用起持续累加。临时禁用 QfFiles 包装（Main.java:162 已注释），QfFiles/QfFileHandle 源文件保留供后续排查。根因推测为 QfFileHandle 包装链与 Lwjgl3Files.delegate 交互中的状态污染，具体待二次介入
-
 ### 编码规范
 
 - **JsonEntity** — 移除 `FileUtils`/`LogUtils` 导入（不再使用 `readStringFile` 和日志）
 - **import 清理** — `PathType` 删除后波及文件同步移除已不再使用的 import
+
+### 待修复
+
+- **QfFiles 路径翻倍** — QfFiles 包装启用后，`Gdx.files.external()` 产生的路径出现翻倍（如 `C:\Users\11067\C:\Users\11067\hujiugame\...`），从第 2 次调用起持续累加。临时禁用 QfFiles 包装（Main.java:162 已注释），QfFiles/QfFileHandle 源文件保留供后续排查。根因推测为 QfFileHandle 包装链与 Lwjgl3Files.delegate 交互中的状态污染，具体待二次介入
 
 ---
 
@@ -619,6 +630,12 @@
 - **CrashUtils.java** — 从 Main.java 提取崩溃处理逻辑到 `util/system/CrashUtils.java`，提供 `crash(Throwable)` 和 `crash(Exception)` 两个重载，自动生成独立崩溃日志 + 弹窗通知 + 阻塞退出
 - **SafePostRunnable.java** — 安全的 GL 线程调度工具，包装 `Gdx.app.postRunnable`，异常时自动触发 CrashUtils.crash()
 
+### 重构
+
+- **EventDispatcher.java** — `handleEvent()` 外层 catch 改为 `throw new RuntimeException(e)`，7 个子 handler 移除冗余 try-catch，异常自然传播到 GameHost → Main → CrashUtils.crash()；保留 `handleEventOfLoadGameConfig` 内层 catch（L2 降级）
+- **Main.java** — 移除 `crash()` 方法（已提取到 CrashUtils）；移除 `import com.hujiugame.qingfeng.Main` 的无效引用的传播
+- **所有 postRunnable** — 关键路径（GraphicsManager/UiManager 的纹理销毁）保留 SafePostRunnable.crash；非关键路径（TextInputUtils/FileChooser/FileExplorer 的回调）降级为内部辅助方法 + 仅日志，避免对话框/文件选择器异常导致游戏崩溃
+
 ### 修复
 
 - **Main.render()** — `catch (Exception)` 改为 `catch (Throwable)`，所有未捕获异常弹出崩溃对话框而非静默闪退
@@ -626,12 +643,6 @@
 - **RenderPipeline.updateFrame/render** — catch 块追加 `throw e`，异常传播到 GameHost → crash
 - **Init.java** — `initAudio`/`initGraphics`/`initUi` 三处 CrashUtils.crash() 后补加 `return`，消除"崩溃后仍执行后续代码"的逻辑错误
 - **SceneStack.java** — `popGameState`/`setGameState`/`resetGameState` 外层 catch 追加 `CrashUtils.crash(e)`，意外异常不再静默吞掉
-
-### 重构
-
-- **EventDispatcher.java** — `handleEvent()` 外层 catch 改为 `throw new RuntimeException(e)`，7 个子 handler 移除冗余 try-catch，异常自然传播到 GameHost → Main → CrashUtils.crash()；保留 `handleEventOfLoadGameConfig` 内层 catch（L2 降级）
-- **Main.java** — 移除 `crash()` 方法（已提取到 CrashUtils）；移除 `import com.hujiugame.qingfeng.Main` 的无效引用的传播
-- **所有 postRunnable** — 关键路径（GraphicsManager/UiManager 的纹理销毁）保留 SafePostRunnable.crash；非关键路径（TextInputUtils/FileChooser/FileExplorer 的回调）降级为内部辅助方法 + 仅日志，避免对话框/文件选择器异常导致游戏崩溃
 
 ### 优化
 
@@ -708,20 +719,6 @@
 
 ## 2026-06-16 — P0/P1 逻辑漏洞修复 + 页面进入机制 + 编码规范对齐 + 树结构修复
 
-### 修复
-
-- **ScriptExecutor P0 死循环** — `executeCallAtomicValueCommand` 缺少脚本时返回 0 不推进指令，导致 `executeValueTask` while 循环无限执行同一条指令。改为推入默认值 0 并 `nextCommand()`
-- **ScriptExecutor P0 参数错位** — `executeCallAtomicValueCommand` 创建子任务时 `new HashMap<>()` 误传入 `defaultReturnValue` 位置（应为 0 或脚本声明的默认值），导致脚本返回值被替换为空 HashMap，参与后续计算时 ClassCastException 崩溃
-- **ScriptExecutor P1 CONST 参数 key=null** — `parseArguments` 中 CONST 类型参数的 `getName()` 返回 null，导致所有 CONST 参数以 null 为 key 存入 Map，无法被调用脚本访问。新增 `ArgumentInfo.argumentName` 字段区分参数名与变量名
-- **ScriptExecutor P1 并发修改** — `removeTriggerTask` 在 for-each 遍历 `triggerTaskList` 的同时调用 `removeTask` 间接修改同一列表，修复为遍历快照副本 `new ArrayList<>(triggerTaskList)`
-- **ScriptExecutor 低版本 JDK 兼容** — `String.repeat()` 替换为 `StringBuilder` 循环拼接，兼容 JDK 8
-
-- **GameVariableManager.setVariable 静默创建** — 对未定义变量赋值时先打 ERROR 日志再继续创建，行为矛盾。改为直接 `put`，不再误报
-- **GameScriptManager 扫描排除自身** — `loadScriptData` 在无配置清单时扫描目录全部 `.json`，将 `script_config.json` 自身也当作 Script 加载，导致 `缺少 commands 字段` 误报。新增文件名过滤排除配置清单自身
-
-- **TreeStructure setNowPageId 硬编码返回 false** — `RootStructure`/`NodeStructure`/`LeafStructure` 的 `setNowPageId` 之前一律返回 false，导致 `storyGotoPage` 对非 Branch 类型永远跳转失败。改为与各自单页 ID 比对
-- **TreeStructure getPageIdList 返回 null** — 三个树结构实现类返回 null 改为 `Collections.singletonList`，消除 `storyGotoPage` 中 NPE 隐患
-
 ### 新增
 
 - **页面进入机制** — `Player` 新增 `nextPage` + `setNextPage`/`enterNextPage`/`getNextPage` 双缓冲页面切换；`GamePlay.localHostUpdate` 新增完整页面进入流程：初始脚本（start）→ 循环任务（loop）→ 触发器任务（trigger）+ `ScriptExecutor.update` 每帧驱动
@@ -734,6 +731,18 @@
 - **PlayLocalData 字段精简** — 移除 `gamePath`/`gamePathType` 字段，改为由 `gamePathDirectory` 推导
 - **GameInfoKey** — 新增 `PLAY_NEXT_PAGE_ID`
 - **Name** — 新增 `GAME_LOOP_TASK_NAME`、`GAME_START_TASK_NAME`、`GAME_TRIGGER_TASK_NAME`
+
+### 修复
+
+- **ScriptExecutor P0 死循环** — `executeCallAtomicValueCommand` 缺少脚本时返回 0 不推进指令，导致 `executeValueTask` while 循环无限执行同一条指令。改为推入默认值 0 并 `nextCommand()`
+- **ScriptExecutor P0 参数错位** — `executeCallAtomicValueCommand` 创建子任务时 `new HashMap<>()` 误传入 `defaultReturnValue` 位置（应为 0 或脚本声明的默认值），导致脚本返回值被替换为空 HashMap，参与后续计算时 ClassCastException 崩溃
+- **ScriptExecutor P1 CONST 参数 key=null** — `parseArguments` 中 CONST 类型参数的 `getName()` 返回 null，导致所有 CONST 参数以 null 为 key 存入 Map，无法被调用脚本访问。新增 `ArgumentInfo.argumentName` 字段区分参数名与变量名
+- **ScriptExecutor P1 并发修改** — `removeTriggerTask` 在 for-each 遍历 `triggerTaskList` 的同时调用 `removeTask` 间接修改同一列表，修复为遍历快照副本 `new ArrayList<>(triggerTaskList)`
+- **ScriptExecutor 低版本 JDK 兼容** — `String.repeat()` 替换为 `StringBuilder` 循环拼接，兼容 JDK 8
+- **GameVariableManager.setVariable 静默创建** — 对未定义变量赋值时先打 ERROR 日志再继续创建，行为矛盾。改为直接 `put`，不再误报
+- **GameScriptManager 扫描排除自身** — `loadScriptData` 在无配置清单时扫描目录全部 `.json`，将 `script_config.json` 自身也当作 Script 加载，导致 `缺少 commands 字段` 误报。新增文件名过滤排除配置清单自身
+- **TreeStructure setNowPageId 硬编码返回 false** — `RootStructure`/`NodeStructure`/`LeafStructure` 的 `setNowPageId` 之前一律返回 false，导致 `storyGotoPage` 对非 Branch 类型永远跳转失败。改为与各自单页 ID 比对
+- **TreeStructure getPageIdList 返回 null** — 三个树结构实现类返回 null 改为 `Collections.singletonList`，消除 `storyGotoPage` 中 NPE 隐患
 
 ---
 
@@ -774,14 +783,14 @@
 
 ## 2026-06-15 — ScriptExecutor 栈安全修复 + PageBehavior 纯内联化
 
-### 修复
-
-- **ScriptExecutor.executeScriptTask** — IF/WHILE 指令 push 子任务后，while 循环仍用局部缓存的 `task` 引用消费指令，导致子任务未执行时父任务已 advance 到后续指令。新增栈大小对比检测（`stackSize != taskStack.size()` 时 break），每帧只处理单层栈顶，下一帧 `executeTaskStack` re-peek 后自动消费子任务。同步修复 `executeBreakControlScriptCommand` 缺少 `forceFinish()` 和 `return 1` 的问题
-
 ### 重构
 
 - **PageBehavior** — 移除 reference 脚本引用模式，仅保留 inline 内联。删除字段 `isStartScriptInline`/`isLoopScriptInline`/`startScriptName`/`loopScriptName`/`startScript`/`loopScript`；删除三个引用构造器（预加载 Script、动态加载 .script、路径参数）；删除 `buildScriptFromCommands()`/`parseScriptByName()` 及关联 Getter；JSON 解析构造器简化去掉 `scriptPath`/`pathType` 参数
 - **Page** — `new PageBehavior(pageBehaviorJson, scriptPath, scriptPathType)` 同步改为 `new PageBehavior(pageBehaviorJson)`
+
+### 修复
+
+- **ScriptExecutor.executeScriptTask** — IF/WHILE 指令 push 子任务后，while 循环仍用局部缓存的 `task` 引用消费指令，导致子任务未执行时父任务已 advance 到后续指令。新增栈大小对比检测（`stackSize != taskStack.size()` 时 break），每帧只处理单层栈顶，下一帧 `executeTaskStack` re-peek 后自动消费子任务。同步修复 `executeBreakControlScriptCommand` 缺少 `forceFinish()` 和 `return 1` 的问题
 
 ### 编码规范
 
@@ -871,15 +880,15 @@
 
 ## 2026-06-07 — 布局字段级融合 + Label 全方向对齐修复
 
+### 新增
+
+- **Linux `.deb` 文件关联** — `build_package.py` 的 `.desktop` 添加 `MimeType` 和 `%f` 参数；新增 freedesktop MIME XML 注册 `.qfg` → `application/x-qingfeng-game`；`postinst`/`postrm` 添加 `update-mime-database` 刷新
+
 ### 修复
 
 - **`FileChooser.java`** — `EXT_GAME` 常量从 `.qgf` 修正为 `.qfg`，与 README 文档及用户流程一致
 - **`AndroidManifest.xml` / `AndroidLauncher.java`** — `pathPattern`、注释、临时文件名同步修正 `.qgf` → `.qfg`
 - **README / docs / locales** — 三语言及网站文案中 `.qgf` 全部替换为 `.qfg`
-
-### 新增
-
-- **Linux `.deb` 文件关联** — `build_package.py` 的 `.desktop` 添加 `MimeType` 和 `%f` 参数；新增 freedesktop MIME XML 注册 `.qfg` → `application/x-qingfeng-game`；`postinst`/`postrm` 添加 `update-mime-database` 刷新
 
 ### 文档
 
@@ -920,6 +929,12 @@
 
 ## 2026-06-06 — 命名对齐 + GamePlay 主机模式 + 布局安全增强 + 数据结构扩展
 
+### 新增
+
+- **`PlayRuntimeData`** — 新增 `playerList` 字段及 CRUD 方法（`getPlayerList`/`setPlayerList`/`addPlayer`/`removePlayer`），支持多人玩家列表管理
+- **`Player`** — 新增 `ipp` 网络地址字段，`setIpp` 同步写入 `GameInfoManager`
+- **`GameInfoKey`** — 新增 `PLAY_IPP` 常量并注册到 keys 列表
+
 ### 命名优化
 
 - **`GameController.getGameDataContent` → `getPlayLocalData`** — 与 `playLocalData` 字段名对齐，消除歧义，统一 6 个文件 24 处调用点（GameMenu、GameRole、3 个 InputHandler）
@@ -928,19 +943,13 @@
 
 - **`GamePlay` 主机模式布局系统** — 新增 `generateLayout()` / `localHostUpdate()` / `remoteHostUpdate()` 方法；`update()` 按 `Hoster` 类型分发（LOCAL_HOST 从 Page 获取真实布局，REMOTE_HOST 预留）；`doInit()` 移除直接赋值 `layout`，由主机更新逻辑负责
 
-### 优化
-
-- **`GameStateService.updateGameLayout` 布局安全增强** — 子状态映射值为 null 时跳过布局加载；获取布局文件失败时重置为空 `LayoutConfig`，避免残留前一状态的布局数据
-
-### 新增
-
-- **`PlayRuntimeData`** — 新增 `playerList` 字段及 CRUD 方法（`getPlayerList`/`setPlayerList`/`addPlayer`/`removePlayer`），支持多人玩家列表管理
-- **`Player`** — 新增 `ipp` 网络地址字段，`setIpp` 同步写入 `GameInfoManager`
-- **`GameInfoKey`** — 新增 `PLAY_IPP` 常量并注册到 keys 列表
-
 ### 修复
 
 - **`inno_setup.iss`** — `.qfg` 文件关联的 `DefaultIcon` 从 `{app}\launcher.exe,0`（console.ico）改为 `{app}\icon.ico`，修复 .qfg 文件图标显示控制台图标的问题
+
+### 优化
+
+- **`GameStateService.updateGameLayout` 布局安全增强** — 子状态映射值为 null 时跳过布局加载；获取布局文件失败时重置为空 `LayoutConfig`，避免残留前一状态的布局数据
 
 ## 2026-06-04 — 文档体系重构 + 启动器错误捕获增强 + 崩溃日志独立输出
 
@@ -992,6 +1001,10 @@
 
 ## 2026-06-02 — Linux 安装包改为自解压 .sh 一键安装
 
+### 文档更新
+
+- **`CONTRIBUTING.md`** — 输出成品表更新：Linux `.tar.gz` / `.deb` 列替换为 `.sh` 一键安装包
+
 ### 打包优化
 
 - **`build_package.py`** — Linux 打包产物从 `.deb` + `.tar.gz` 改为单个自解压 `.sh` 文件（`.deb` 内嵌于脚本末尾），用户双击即可通过 `pkexec` 图形化安装，无需手动输入终端命令
@@ -1004,20 +1017,7 @@
 - **`develop/output/build_package_server.py`** — 新增局域网文件分享服务器脚本，双击即可运行，自动显示本机 IP 地址和端口，无需手动输入 `python -m http.server`
 - **移除 `server.py`** — 重命名为 `build_package_server.py`，与 `build_package.py` 命名风格统一
 
-### 文档更新
-
-- **`CONTRIBUTING.md`** — 输出成品表更新：Linux `.tar.gz` / `.deb` 列替换为 `.sh` 一键安装包
-
 ## 2026-06-01 — 官网下载区支持 Linux + 打包脚本瘦身优化
-
-### 官网下载
-
-- **`docs/index.html` / `docs/html/history_versions.html`** — 新增 Linux 下载面板，网格布局从 2 列扩为 3 列，旧版本缺少某平台字段时优雅降级提示
-- **`docs/data/locales/*.json`（9 种语言）** — 新增 `linux_button` 字段
-- **`docs/data/image.json`** — 新增 `download-linux` 路径配置（后因 CDN 加载问题回退，改用本地文件 + SVG fallback）
-- **`docs/data/versions.json`** — v1.0.0-beta 新增 linux 下载入口；版本日志增加英文国际化
-- **`docs/resource/image/download-linux.png`** — Linux 下载图标
-- **README 介绍同步至官网** — 游戏介绍板块更新为 README 平台生态文案
 
 ### 打包优化
 
@@ -1027,6 +1027,15 @@
 - **修复 ISS 冗余引用** — 移除 `inno_setup.iss` 中重复的 JAR 引用，避免瘦身结果被覆盖
 - **Linux 打包默认开启** — `build_package.py` 默认同时打包 Linux，不再需要 `--linux` 参数
 - **jlink 补充 `java.desktop` 模块** — 修复 Linux 端文件选择器（Swing/JFileChooser）闪退问题
+
+### 官网下载
+
+- **`docs/index.html` / `docs/html/history_versions.html`** — 新增 Linux 下载面板，网格布局从 2 列扩为 3 列，旧版本缺少某平台字段时优雅降级提示
+- **`docs/data/locales/*.json`（9 种语言）** — 新增 `linux_button` 字段
+- **`docs/data/image.json`** — 新增 `download-linux` 路径配置（后因 CDN 加载问题回退，改用本地文件 + SVG fallback）
+- **`docs/data/versions.json`** — v1.0.0-beta 新增 linux 下载入口；版本日志增加英文国际化
+- **`docs/resource/image/download-linux.png`** — Linux 下载图标
+- **README 介绍同步至官网** — 游戏介绍板块更新为 README 平台生态文案
 
 ### 提交规范
 
@@ -1144,6 +1153,11 @@ Python 版已稳定，`.bat` 版因 Windows cmd.exe 在 UTF-8 BOM + 中文环境
 - **全部调用点更新**（8 文件）：`GameRole.java`、`GameMenu.java`、`MenuLoad.java`、`MenuList.java`、`ControllerInputHandler.java`、`UniversalInputHandlerFunction.java`、`VirtualInputHandler.java` 统一改为 `gameController.getGameSessionManager().xxx()` 模式
 - **清理未使用导入**：`GameController.java` 移除 `FileHandle`、`Role`、`Hoster` 三个不再需要的 import
 
+### UI 架构改进
+
+- **Layout Group 支持（a）**：`addLayout` 现在将同一布局的所有 Actor 归入一个 scene2d `Group`，通过 `layoutGroupMap` 跟踪。`showLayout`/`hideLayout` 直接调用 `group.setVisible()`（O(1)），不再逐元素迭代。`deleteLayout`/`deleteAllObject`/`dispose` 同步清理 Group。未通过 `addLayout` 添加的元素仍然兼容旧逐元素路径
+- **按钮点击回调（b）**：新增 `setButtonClickCallback(tag, Runnable)` 方法，在按钮点击时同时触发回调 + 保留 `isButtonClicked()` 状态标记。`createButton` 的 clickRunnable 增加回调调用，`deleteButton` 同步清理回调映射。现有轮询代码无需改动，逐步迁移即可
+
 ### 编码修复
 
 - **修复 LWJGL3 窗口标题中文乱码**：`lwjgl3/build.gradle` 缺少 UTF-8 编译编码配置，`setTitle("氢风")` 在 Windows 默认 GBK 编码下编译产生乱码。将 `compileJava.options.encoding = 'UTF-8'` 提升到根 `build.gradle` 的 `configure(subprojects...)` 块中，对所有非 Android 子项目生效；同步添加
@@ -1154,11 +1168,6 @@ Python 版已稳定，`.bat` 版因 Windows cmd.exe 在 UTF-8 BOM + 中文环境
 - **文件选择器关闭后自动聚焦游戏窗口**：`FileChooser` 新增 `setWindowFocusRequester` 注入回调，在 `onFileChosen`/`onCancellation`/`onError` 三种结束路径均通过 `Gdx.app.postRunnable` 触发窗口聚焦
 - **LWJGL3 端注入 GLFW 聚焦**：`Lwjgl3Launcher.getDefaultConfiguration()` 中注入实现，通过 `((Lwjgl3Application) Gdx.app).getWindow().focusWindow()` 将游戏窗口调到前台
 
-### UI 架构改进
-
-- **Layout Group 支持（a）**：`addLayout` 现在将同一布局的所有 Actor 归入一个 scene2d `Group`，通过 `layoutGroupMap` 跟踪。`showLayout`/`hideLayout` 直接调用 `group.setVisible()`（O(1)），不再逐元素迭代。`deleteLayout`/`deleteAllObject`/`dispose` 同步清理 Group。未通过 `addLayout` 添加的元素仍然兼容旧逐元素路径
-- **按钮点击回调（b）**：新增 `setButtonClickCallback(tag, Runnable)` 方法，在按钮点击时同时触发回调 + 保留 `isButtonClicked()` 状态标记。`createButton` 的 clickRunnable 增加回调调用，`deleteButton` 同步清理回调映射。现有轮询代码无需改动，逐步迁移即可
-
 ## 2026-05-31 — 日志标签统一、全量 Javadoc 与方法注释补全
 
 ### 日志标签统一（25+ 文件）
@@ -1168,16 +1177,16 @@ Python 版已稳定，`.bat` 版因 Windows cmd.exe 在 UTF-8 BOM + 中文环境
 - 修复跨类误用标签：`UiManager.java` 中 `LogUtils.error("GameStateServiceImp", ...)` → `"UiManager"`
 - 修复 `GraphicsManager.java` 中 `LogUtils.error` 参数顺序颠倒（tag/message 互换）的 bug
 
+### Bug 修复
+
+- **GamePlay.java 空指针修复**：`layout` 字段在 `init()` 中从未初始化，`render()` 和 `dispose()` 使用时始终为 null。改为从 `gameStateDataContainer.getLayoutConfig()` 获取
+- **硬编码字符串 → 常量引用**：`ConfigBasic.java` 中的 `"back"` → `UniversalKey.BUTTON_BACK`；`GameMenu.java` 中的 `"start"/"quit"` → `RequirementUiKey.MENU_MAIN_BUTTON_START` / `UniversalKey.BUTTON_QUIT`；`GameRole.java` 中的 `"back"` → `UniversalKey.BUTTON_BACK`
+
 ### 全量 Javadoc 与方法注释补全
 
 - 为全部 ~92 个 Java 源文件的公开 API 方法添加 `/** */` Javadoc（含 `@param`、`@return`）
 - 为全部私有方法添加 `/** */` 功能描述注释
 - 覆盖范围：8 个 GameRender 实现、6 个核心 Controller、7 个 Manager、4 个 GameManager、5 个 GameLogic 类、AudioManager（992 行）、GraphicsManager（836 行）、UiManager（4221 行 / ~180 方法）、MessageBox、20 个 Event/Handler/Interact 类、36 个 Data/Define/Parser 类
-
-### Bug 修复
-
-- **GamePlay.java 空指针修复**：`layout` 字段在 `init()` 中从未初始化，`render()` 和 `dispose()` 使用时始终为 null。改为从 `gameStateDataContainer.getLayoutConfig()` 获取
-- **硬编码字符串 → 常量引用**：`ConfigBasic.java` 中的 `"back"` → `UniversalKey.BUTTON_BACK`；`GameMenu.java` 中的 `"start"/"quit"` → `RequirementUiKey.MENU_MAIN_BUTTON_START` / `UniversalKey.BUTTON_QUIT`；`GameRole.java` 中的 `"back"` → `UniversalKey.BUTTON_BACK`
 
 ### 命名规范
 
@@ -1204,12 +1213,6 @@ Python 版已稳定，`.bat` 版因 Windows cmd.exe 在 UTF-8 BOM + 中文环境
 
 ## 2026-05-31 — UI 样式系统增强与多 bug 修复
 
-### MessageBox 遮盖层残留修复
-
-- **修复 MessageBox 遮盖层（mask）在游戏→主菜单状态切换后残留的问题。** 根本原因：`handleAsk` 中 `onYes.run()`（触发 `quitGame` → `disposeResource` → `messageBox.dispose()` 清空 `askMap`）在 `hideAsk` 之前执行，导致 `hideAsk` 因 `askMap` 为空而跳过 `removeMaskLayer`，遮盖层永久留在 Stage 上
-- `MessageBox.dispose()` 增加遮盖层显式移除逻辑：遍历 `showingBoxTypeStack` 并调用 `uiManager.getMaskLayer().remove()`，同时清空 `showingBoxTypeStack`、`enterButtonTagStack`、`escapeButtonTagStack`
-- 日志验证：`removeMaskLayer 移除遮盖` → `hideAsk 移除弹窗` → `disposeResource messageBox销毁成功`，状态切换后遮盖层正确移除
-
 ### UiManager 样式运行时更新支持
 
 - `updateImage`、`updateLabel`、`updateButton` 由 `private` 提升为 `public`，支持在 UI 创建后动态切换样式（kind）、位置、大小
@@ -1224,17 +1227,23 @@ Python 版已稳定，`.bat` 版因 Windows cmd.exe 在 UTF-8 BOM + 中文环境
 - 图片/标签/按钮的添加逻辑改为：**无条件创建全部元素**，再根据 `getShow()` 隐藏不需要显示的。旧逻辑仅在 `show=true` 时才创建元素，导致反复 `addLayout/deleteLayout` 时元素注册不一致
 - 修复由此引发的 `deleteLayout` 报 `"标签不存在 (tag): path"` 的误报（因之前跳过的元素从未被注册到 UiManager）
 
-### MenuList 游戏封面渲染优化
-
-- `refreshGameCover()` 改为 `updateImage` + `showImage/hideImage` 模式，替代旧的 `deleteImage + addImage` 模式
-- 消除页面切换时的封面闪烁问题，提升翻页流畅度
-
 ### Map 顺序一致性保障
 
 - **MergeUtils**: `mergedMap`、`deepCopyMapGeneric` 的返回值由 `HashMap` 改为 `LinkedHashMap`，保证合并后的 Map 按插入顺序迭代
 - **JsonUtils**: `jsonStringToObject` 添加 `Feature.OrderedField`，使 JSON 反序列化保持字段声明顺序
 - **JsonEntity**: `deepCopy` 改为 `LinkedHashMap`，保持深拷贝后的字段顺序
 - **LayoutManager**: `loadLayoutUiImage` 中的 `imageMap` 改为 `LinkedHashMap`，确保 UI 图像的 z-order 按配置顺序渲染
+
+### MessageBox 遮盖层残留修复
+
+- **修复 MessageBox 遮盖层（mask）在游戏→主菜单状态切换后残留的问题。** 根本原因：`handleAsk` 中 `onYes.run()`（触发 `quitGame` → `disposeResource` → `messageBox.dispose()` 清空 `askMap`）在 `hideAsk` 之前执行，导致 `hideAsk` 因 `askMap` 为空而跳过 `removeMaskLayer`，遮盖层永久留在 Stage 上
+- `MessageBox.dispose()` 增加遮盖层显式移除逻辑：遍历 `showingBoxTypeStack` 并调用 `uiManager.getMaskLayer().remove()`，同时清空 `showingBoxTypeStack`、`enterButtonTagStack`、`escapeButtonTagStack`
+- 日志验证：`removeMaskLayer 移除遮盖` → `hideAsk 移除弹窗` → `disposeResource messageBox销毁成功`，状态切换后遮盖层正确移除
+
+### MenuList 游戏封面渲染优化
+
+- `refreshGameCover()` 改为 `updateImage` + `showImage/hideImage` 模式，替代旧的 `deleteImage + addImage` 模式
+- 消除页面切换时的封面闪烁问题，提升翻页流畅度
 
 ## 2026-05-30 — 构建配置调整
 
