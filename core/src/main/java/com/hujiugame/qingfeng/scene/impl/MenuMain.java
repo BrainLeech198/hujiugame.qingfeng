@@ -2,15 +2,16 @@ package com.hujiugame.qingfeng.scene.impl;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.math.Vector3;
 import com.hujiugame.qingfeng.core.UpdateChecker;
 import com.hujiugame.qingfeng.data.game.GameStateDataContainer;
 import com.hujiugame.qingfeng.manager.ThemeManager;
-import com.hujiugame.qingfeng.type.ScreenSize;
 import com.hujiugame.qingfeng.type.file.FileName;
 import com.hujiugame.qingfeng.type.file.PathName;
 import com.hujiugame.qingfeng.type.game.state.GameState;
 import com.hujiugame.qingfeng.type.game.state.GameSubState;
 import com.hujiugame.qingfeng.type.key.RequirementKey;
+import com.hujiugame.qingfeng.type.ui.UseViewport;
 import com.hujiugame.qingfeng.type.url.WebSite;
 import com.hujiugame.qingfeng.audio.AudioManager;
 import com.hujiugame.qingfeng.graphic.GraphicsManager;
@@ -28,12 +29,14 @@ public final class MenuMain implements GameRender
     private final ThemeManager themeManager;
     private final UiManager uiManager;
     private final EventQueue eventQueue;
+    private final UseViewport useViewport;
     private GameStateDataContainer gameStateDataContainer;
 
     public MenuMain (UpdateChecker updateChecker, AudioManager audioManager,
                      GraphicsManager graphicsManager, ThemeManager themeManager,
                      UiManager uiManager,
-                     EventQueue eventQueue)
+                     EventQueue eventQueue,
+                     UseViewport useViewport)
     {
         this.updateChecker = updateChecker;
         this.audioManager = audioManager;
@@ -41,6 +44,7 @@ public final class MenuMain implements GameRender
         this.themeManager = themeManager;
         this.uiManager = uiManager;
         this.eventQueue = eventQueue;
+        this.useViewport = useViewport;
     }
 
     /**
@@ -69,12 +73,12 @@ public final class MenuMain implements GameRender
     @Override
     public void update (float deltaTime)
     {
-        // 点击左下角版本号区域打开官方网站（将屏幕坐标转换到虚拟坐标系）
+        // 点击左下角版本号区域打开官方网站（通过视口将屏幕坐标转换到虚拟坐标系）
         if (Gdx.input.justTouched())
         {
-            float touchX = Gdx.input.getX() * ((float) ScreenSize.WIDTH / Gdx.graphics.getWidth());
-            float touchY = (Gdx.graphics.getHeight() - Gdx.input.getY()) * ((float) ScreenSize.HEIGHT / Gdx.graphics.getHeight());
-            if (touchX >= 0 && touchX <= 180 && touchY >= 0 && touchY <= 40)
+            Vector3 touchPos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
+            useViewport.getViewport().unproject(touchPos);
+            if (touchPos.x >= 0 && touchPos.x <= 180 && touchPos.y >= 0 && touchPos.y <= 40)
             {
                 uiManager.getMessageBox().showAsk(RequirementKey.Language.MESSAGE_BOX_OPEN_OFFICIAL_WEBSITE_KEY,
                     "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_OPEN_OFFICIAL_WEBSITE_TITLE + "}",

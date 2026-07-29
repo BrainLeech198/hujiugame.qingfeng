@@ -95,7 +95,8 @@ public final class InstanceContent
             () -> new MenuMain(instanceContent.updateChecker, instanceContent.audioManager,
                 instanceContent.graphicsManager, instanceContent.themeManager,
                 instanceContent.uiManager,
-                instanceContent.eventQueue));
+                instanceContent.eventQueue,
+                instanceContent.useViewport));
         registry.register(GameState.MENU, GameSubState.MENU_LIST,
             () -> new MenuList(instanceContent.updateChecker, instanceContent.audioManager,
                 instanceContent.graphicsManager, instanceContent.uiManager,
