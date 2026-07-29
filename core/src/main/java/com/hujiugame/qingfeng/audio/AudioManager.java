@@ -857,6 +857,19 @@ public final class AudioManager
                 if (FileUtils.isFileExist(file))
                 {
                     Music music = Gdx.audio.newMusic(file);
+                    music.setOnCompletionListener(m ->
+                    {
+                        synchronized (bgMusicPlayingObjectMap)
+                        {
+                            if (bgMusicPlayingObjectMap.get(tag) == m)
+                            {
+                                bgMusicPlayingObjectMap.remove(tag);
+                                bgMusicPlayingPathMap.remove(tag);
+                                LogUtils.debug(AudioManager.class,
+                                    "loadBackgroundMusic 背景音乐自然播放完毕 (tag): " + tag + " 已从播放记录中移除，允许 playLayout 随机下一首");
+                            }
+                        }
+                    });
                     bgMusicLoadedObjectMap.put(tag, music);
                     bgMusicLoadedPathMap.put(tag, file.path());
                     LogUtils.debug(AudioManager.class, "loadBackgroundMusic 加载背景音乐 (tag): " + tag + " (file): " + file.path());
@@ -1125,13 +1138,16 @@ public final class AudioManager
                 List<String> bgmList = layout.getBackgroundMusicList();
                 if (bgmList != null && !bgmList.isEmpty())
                 {
-                    // 检查列表中是否有曲目正在播放（避免每帧切换）
+                    // 检查列表中是否有曲目已在播放记录中（避免每帧切换）
+                    // 注意：不用 Music.isPlaying() 判断，因为 Android 生命周期后
+                    // 该状态不可靠。用 playingObjectMap 的 containsKey 代替——
+                    // BGM 只要通过 playBackgroundMusic 启动过就会在该表中登记，
+                    // 显式停止/销毁时才移除。不受 native 音频状态影响。
                     synchronized (bgMusicPlayingObjectMap)
                     {
                         for (String tag : bgmList)
                         {
-                            Music playing = bgMusicPlayingObjectMap.get(tag);
-                            if (playing != null && playing.isPlaying())
+                            if (bgMusicPlayingObjectMap.containsKey(tag))
                             {
                                 // 已有曲目在播，保持当前播放不切换
                                 return true;
@@ -1140,9 +1156,6 @@ public final class AudioManager
                     }
 
                     // 没有曲目在播：随机选一首播放
-                    // 此时 playBackgroundMusic 的 needSwitch 检测到 playingPath == null，
-                    // 会走首次启动路径。旧页面的背景音乐由 LayoutManager 的
-                    // 页面切换逻辑负责调用 stopAllBackgroundMusic 清理。
                     String selected = bgmList.get(MathUtils.random(bgmList.size() - 1));
                     return playBackgroundMusic(selected, false);
                 }
