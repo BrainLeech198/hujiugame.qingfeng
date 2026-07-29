@@ -1,5 +1,7 @@
 # CLAUDE.md
 
+> **启动必读**：新会话首次回复前，先读取 `temp/CLAUDE_MEMORY.md` 了解历史设计决策和协作约定。
+
 ## 代码规范
 
 本项目编码规范详见 `develop/CODING_STYLE.md`，以下为摘要：
@@ -49,7 +51,15 @@ Allman 风格（左括号独占一行）：
 
 ## 文档维护
 
-- **项目文档统一索引**：[DOCUMENTATION_INDEX.md](DOCUMENTATION_INDEX.md) — 新增/重命名/删除任何 .md 文件后，必须同步更新此索引
-- **Windows 启动器说明**：[lwjgl3/setup/README.md](lwjgl3/setup/README.md) — 修改启动器行为或 Win7 兼容策略后同步更新
-- **更新日志**：`develop/CHANGELOG.md` 每次提交前必须更新
-- **翻新进度**：`develop/REVIEW.md` 实现新功能后更新对应条目
+- **文档统一索引**：[DOCUMENTATION_INDEX.md](DOCUMENTATION_INDEX.md) — 新增/重命名/删除任何 `.md` 文件后，必须同步更新此索引
+- **变更日志**：`develop/CHANGELOG.md` — 每次提交前必须更新，条目按时间倒序，段落按标准顺序排列
+- **各文档头部自描述规范** — develop/ 下每份文档头部均包含"文档定位 + 文档结构 + 更新规范"，修改文档前先读头部了解其维护要求
+- **设计方案**：`develop/plans/` 目录 — 新建设计方案/预想方案时在此记录，文件名格式 `yyyy-MM-dd-topic.md`
+- **贡献指南**：[CONTRIBUTING.md](CONTRIBUTING.md) — 修改构建流程、技术栈或开发环境时同步更新
+- **Windows 启动器**：[lwjgl3/setup/README.md](lwjgl3/setup/README.md) — 修改启动器行为或 Win7 兼容策略后同步更新
+- **官方网站**：[docs/README.md](docs/README.md) — 修改网站功能或下载入口时同步更新
+- **打包工具**：[develop/output/README.md](develop/output/README.md) — 修改打包流程或版本管理体系时同步更新
+
+## 本地工作记忆
+
+- **设计决策日志**：[temp/CLAUDE_MEMORY.md](temp/CLAUDE_MEMORY.md) — gitignored 的本地工作记忆，记录精确的设计决策、架构分析记录。新记录追加到末尾，设计决策用表格呈现。此文件仅当前开发机可见，不随项目分发。
