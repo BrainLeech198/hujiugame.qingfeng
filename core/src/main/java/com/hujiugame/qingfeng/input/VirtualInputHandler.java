@@ -2,8 +2,10 @@ package com.hujiugame.qingfeng.input;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.di.InstanceContent;
 import com.hujiugame.qingfeng.core.GameHost;
+import com.hujiugame.qingfeng.type.key.RequirementKey;
 import com.hujiugame.qingfeng.ui.kind.InteractableObject;
 import com.hujiugame.qingfeng.type.ScreenSize;
 import com.hujiugame.qingfeng.type.VirtualInputType;
@@ -147,6 +149,54 @@ public class VirtualInputHandler
     public void setPrioritySelectObject (InteractableObject object)
     {
         prioritySelectObject = object;
+    }
+
+    /**
+     * 根据页面配置设置优先选中对象。从 configJson 中读取 priorityConfirmUi 配置，
+     * 按 tag 匹配交互对象并设为优先选中。
+     *
+     * @param configJson 页面配置数据，包含 priorityConfirmUi.type + tag 字段
+     */
+    public void setPriorityConfirmSelectObject (JsonEntity configJson)
+    {
+        try
+        {
+            if (configJson == null || !configJson.containsKey(RequirementKey.Config.UNIVERSAL_PRIORITY_CONFIRM_UI))
+            {
+                return;
+            }
+
+            JsonEntity priorityConfig = configJson.getJsonEntityByKey(RequirementKey.Config.UNIVERSAL_PRIORITY_CONFIRM_UI);
+
+            String type = priorityConfig.containsKey(RequirementKey.Config.UNIVERSAL_PRIORITY_CONFIRM_UI_TYPE)
+                ? priorityConfig.getString(RequirementKey.Config.UNIVERSAL_PRIORITY_CONFIRM_UI_TYPE) : "";
+            String tag = priorityConfig.containsKey(RequirementKey.Config.UNIVERSAL_PRIORITY_CONFIRM_UI_TAG)
+                ? priorityConfig.getString(RequirementKey.Config.UNIVERSAL_PRIORITY_CONFIRM_UI_TAG) : "";
+
+            if (!"tag".equals(type) || tag.isEmpty())
+            {
+                LogUtils.error(VirtualInputHandler.class, "setPriorityConfirmSelectObject 配置格式错误 (type): " + type + " (tag): " + tag);
+                return;
+            }
+
+            // 从 UiManager 全量交互对象集合中按 tag 查找
+            for (InteractableObject obj : uiManager.getInteractableObjectSet())
+            {
+                if (tag.equals(obj.getTag()))
+                {
+                    setPrioritySelectObject(obj);
+                    LogUtils.debug(VirtualInputHandler.class,
+                        "setPriorityConfirmSelectObject 配置驱动优先选中 (tag): " + tag + " (obj): " + obj);
+                    return;
+                }
+            }
+
+            LogUtils.debug(VirtualInputHandler.class, "setPriorityConfirmSelectObject 未找到匹配 (tag): " + tag);
+        }
+        catch (Exception e)
+        {
+            LogUtils.error(VirtualInputHandler.class, "setPriorityConfirmSelectObject", e);
+        }
     }
 
     /**
