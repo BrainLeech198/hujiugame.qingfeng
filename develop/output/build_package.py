@@ -476,14 +476,16 @@ class Builder:
         # Android 使用 fit 视口模式，编译后恢复 stretch（桌面端）
         self._set_use_viewport("fit")
 
-        # 读取签名密码（环境变量 or 交互输入）
-        store_pass = os.environ.get("STORE_PASSWORD") or input("请输入 Android storePassword: ").strip()
-        key_pass = os.environ.get("KEY_PASSWORD") or input("请输入 Android keyPassword: ").strip()
-        password_flags = f"-PstorePassword={store_pass} -PkeyPassword={key_pass}"
+        try:
+            # 读取签名密码（环境变量 or 交互输入）
+            store_pass = os.environ.get("STORE_PASSWORD") or input("请输入 Android storePassword: ").strip()
+            key_pass = os.environ.get("KEY_PASSWORD") or input("请输入 Android keyPassword: ").strip()
+            password_flags = f"-PstorePassword={store_pass} -PkeyPassword={key_pass}"
 
-        ok = self.run_gradle(f"android:assembleRelease {password_flags}")
-
-        self._set_use_viewport("stretch")
+            ok = self.run_gradle(f"android:assembleRelease {password_flags}")
+        finally:
+            # 确保无论打包成败，user_config.json 都恢复为桌面端视口模式
+            self._set_use_viewport("stretch")
 
         if not ok:
             print("[错误] Android 打包失败")
