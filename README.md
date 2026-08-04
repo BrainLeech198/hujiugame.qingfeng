@@ -125,7 +125,7 @@
 
 ## 下载与发布
 
-最新版本（Windows `.exe`、Android `.apk`）可在**[官方网站](https://brainleech198.github.io/hujiugame-qingfeng/)**与 **[GitHub Releases](https://github.com/BrainLeech198/hujiugame-qingfeng/releases)** 页面获取。
+最新版本（Windows `.exe`、Android `.apk`）可在**[官方网站](https://brainleech198.github.io/hujiugame.qingfeng/)**与 **[GitHub Releases](https://github.com/BrainLeech198/hujiugame.qingfeng/releases)** 页面获取。
 
 历史版本及更新日志亦可在官方网站查阅。
 
@@ -170,7 +170,7 @@
 ## 网站
 
 官方网站通过 **GitHub Pages** 托管，内容来自本仓库的 `docs/` 目录。  
-访问地址：**[https://brainleech198.github.io/hujiugame-qingfeng/](https://brainleech198.github.io/hujiugame-qingfeng/)**
+访问地址：**[https://brainleech198.github.io/hujiugame.qingfeng/](https://brainleech198.github.io/hujiugame.qingfeng/)**
 
 ---
 
@@ -180,7 +180,7 @@
 
 ## 反馈与贡献
 
-- 问题报告与功能请求请使用 **[GitHub Issues](https://github.com/BrainLeech198/hujiugame-qingfeng/issues)**。
+- 问题报告与功能请求请使用 **[GitHub Issues](https://github.com/BrainLeech198/hujiugame.qingfeng/issues)**。
 - 也欢迎在官方网站上进行讨论与社区反馈。
 
 ---
@@ -270,7 +270,7 @@
 
 ## 下載與發佈
 
-最新版本（Windows `.exe`、Android `.apk`）可在**[官方網站](https://brainleech198.github.io/hujiugame-qingfeng/)**與 **[GitHub Releases](https://github.com/BrainLeech198/hujiugame-qingfeng/releases)** 頁面取得。
+最新版本（Windows `.exe`、Android `.apk`）可在**[官方網站](https://brainleech198.github.io/hujiugame.qingfeng/)**與 **[GitHub Releases](https://github.com/BrainLeech198/hujiugame.qingfeng/releases)** 頁面取得。
 
 歷史版本及更新日誌亦可在官方網站查閱。
 
@@ -315,7 +315,7 @@
 ## 網站
 
 官方網站透過 **GitHub Pages** 託管，內容來自本倉庫的 `docs/` 目錄。  
-訪問位址：**[https://brainleech198.github.io/hujiugame-qingfeng/](https://brainleech198.github.io/hujiugame-qingfeng/)**
+訪問位址：**[https://brainleech198.github.io/hujiugame.qingfeng/](https://brainleech198.github.io/hujiugame.qingfeng/)**
 
 ---
 
@@ -325,7 +325,7 @@
 
 ## 反馈與貢獻
 
-- 問題回報與功能請求請使用 **[GitHub Issues](https://github.com/BrainLeech198/hujiugame-qingfeng/issues)**。
+- 問題回報與功能請求請使用 **[GitHub Issues](https://github.com/BrainLeech198/hujiugame.qingfeng/issues)**。
 - 也歡迎在官方網站上進行討論與社群回饋。
 
 ---
@@ -452,7 +452,7 @@ Built with cloud services:
 
 ## Download & Releases
 
-The latest versions (Windows `.exe`, Android `.apk`) are available on the **[Official Website](https://brainleech198.github.io/hujiugame-qingfeng/)** and the **[GitHub Releases](https://github.com/BrainLeech198/hujiugame-qingfeng/releases)** page.
+The latest versions (Windows `.exe`, Android `.apk`) are available on the **[Official Website](https://brainleech198.github.io/hujiugame.qingfeng/)** and the **[GitHub Releases](https://github.com/BrainLeech198/hujiugame.qingfeng/releases)** page.
 
 Historical versions and update logs can also be found on the official website.
 
@@ -497,7 +497,7 @@ The Gradle wrapper is included, so you can run tasks using `gradlew.bat` (Window
 ## Website
 
 The official website is hosted with **GitHub Pages** from the `docs/` directory of this repository.  
-Visit it at: **[https://brainleech198.github.io/hujiugame-qingfeng/](https://brainleech198.github.io/hujiugame-qingfeng/)**
+Visit it at: **[https://brainleech198.github.io/hujiugame.qingfeng/](https://brainleech198.github.io/hujiugame.qingfeng/)**
 
 ---
 
@@ -507,7 +507,7 @@ All project documentation (contributing guide, code style, commit conventions, e
 
 ## Feedback & Contributions
 
-- For bug reports and feature requests, use **[GitHub Issues](https://github.com/BrainLeech198/hujiugame-qingfeng/issues)**.
+- For bug reports and feature requests, use **[GitHub Issues](https://github.com/BrainLeech198/hujiugame.qingfeng/issues)**.
 - Discussions and community feedback are also welcome on the official website.
 
 ---
