@@ -4,7 +4,7 @@
   "graphics" : {
     "picture" : {
     "path_tab" : {
-      "path" : "transparent/black32.png",
+      "path" : "transparent/black48.png",
       "position" : {
         "x" : 0,
         "y" : 1220
@@ -15,7 +15,7 @@
       }
     },
     "function_tab" : {
-      "path" : "transparent/black16.png",
+      "path" : "transparent/black32.png",
       "position" : {
         "x" : 0,
         "y" : 0
