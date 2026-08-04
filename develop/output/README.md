@@ -165,7 +165,7 @@ step_copy_outputs     → 输出成品
 
 ## 运行时更新检测机制
 
-`UpdateChecker` 在应用启动后异步请求 `https://brainleech198.github.io/hujiugame-qingfeng/data/versions.json`，三段式判断是否需要更新：
+`UpdateChecker` 在应用启动后异步请求 `https://brainleech198.github.io/hujiugame.qingfeng/data/versions.json`，三段式判断是否需要更新：
 
 ```
 远程 newest_version  >  本地 appVersion    → 需要更新
