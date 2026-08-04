@@ -31,6 +31,12 @@
 - **`MenuList` 未收编字符常量收编至 `DialogKey`** — 替换 `"import_game"` / `"选择游戏"` 字面量为 `DialogKey.FileChooser` 常量
 - **`VirtualInputHandler.setPriorityConfirmSelectObject` 补全注释** — 补充优先选中配置 json 解析与格式校验相关中文注释
 
+---
+
+### 编码规范
+
+- **命名统一 `qing-feng` → `qingfeng`** — 项目内残留的连字符命名统一为无连字符：`build_package.py` 安装包文件名前缀、`inno_setup.iss` Windows 安装器注释与安装目录、`CONTRIBUTING.md` / `develop/output/README.md` 安装包命名文档；Android 应用显示名（label）与包名（applicationId）本已是"氢风" / `com.hujiugame.qingfeng`，无需改动
+
 ## 2026-07-29 — 文档更新规范自描述 + 主题版权自动生成方案 + BGM 双播修复 + Android 视口适配 + 配置驱动优先选中 + 打包稳健性
 
 ### 文档
