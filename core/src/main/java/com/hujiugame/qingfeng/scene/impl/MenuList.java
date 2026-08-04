@@ -2,20 +2,21 @@ package com.hujiugame.qingfeng.scene.impl;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.hujiugame.qingfeng.audio.AudioManager;
 import com.hujiugame.qingfeng.core.GameHost;
 import com.hujiugame.qingfeng.core.UpdateChecker;
 import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.data.game.GameStateDataContainer;
-import com.hujiugame.qingfeng.type.key.RequirementKey;
-import com.hujiugame.qingfeng.ui.kind.image.ImageInfo;
-import com.hujiugame.qingfeng.type.file.PathName;
-import com.hujiugame.qingfeng.type.key.GameInfoKey;
-import com.hujiugame.qingfeng.audio.AudioManager;
-import com.hujiugame.qingfeng.graphic.GraphicsManager;
-import com.hujiugame.qingfeng.scene.GameRender;
-import com.hujiugame.qingfeng.ui.UiManager;
 import com.hujiugame.qingfeng.event.EventQueue;
 import com.hujiugame.qingfeng.event.imp.EventPopGameState;
+import com.hujiugame.qingfeng.graphic.GraphicsManager;
+import com.hujiugame.qingfeng.scene.GameRender;
+import com.hujiugame.qingfeng.type.file.PathName;
+import com.hujiugame.qingfeng.type.key.DialogKey;
+import com.hujiugame.qingfeng.type.key.GameInfoKey;
+import com.hujiugame.qingfeng.type.key.RequirementKey;
+import com.hujiugame.qingfeng.ui.UiManager;
+import com.hujiugame.qingfeng.ui.kind.image.ImageInfo;
 import com.hujiugame.qingfeng.util.interact.FileChooser;
 import com.hujiugame.qingfeng.util.interact.FileExplorer;
 import com.hujiugame.qingfeng.util.system.FileUtils;
@@ -337,10 +338,10 @@ public final class MenuList implements GameRender
 
     private void functionImport ()
     {
-        if (FileChooser.isFileChosen("import_game"))
+        if (FileChooser.isFileChosen(DialogKey.FileChooser.IMPORT_GAME_TAG))
         {
             // TODO: 实现游戏文件导入功能
-            FileHandle file = FileChooser.getChosenFile("import_game");
+            FileHandle file = FileChooser.getChosenFile(DialogKey.FileChooser.IMPORT_GAME_TAG);
         }
     }
 
@@ -437,8 +438,9 @@ public final class MenuList implements GameRender
         // 功能按钮
         if (uiManager.isButtonClicked(RequirementKey.Ui.MENU_LIST_BUTTON_IMPORT))
         {
-            FileChooser.createFileChooser("import_game");
-            FileChooser.showFileChooser("import_game", "选择游戏", null, FileChooser.EXT_GAME);
+            FileChooser.createFileChooser(DialogKey.FileChooser.IMPORT_GAME_TAG);
+            FileChooser.showFileChooser(DialogKey.FileChooser.IMPORT_GAME_TAG, DialogKey.FileChooser.IMPORT_GAME_NAME,
+                null, FileChooser.EXT_GAME);
         }
 
         // 按下上一页按钮
