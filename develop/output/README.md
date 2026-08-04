@@ -127,10 +127,10 @@ step_copy_outputs     → 输出成品
 
 | 平台 | 命名格式 | 说明 |
 |------|---------|------|
-| Windows | `qing-feng_setup_windows_v{version}-{type}.exe` | 安装包 |
-| Android | `qing-feng_setup_android_v{version}-{type}.apk` | APK |
-| Linux | `qing-feng_setup_linux_v{version}-{type}.deb` | deb 安装包 |
-| Linux | `qing-feng_setup_linux_v{version}-{type}.sh` | 自解压一键安装脚本 |
+| Windows | `qingfeng_setup_windows_v{version}-{type}.exe` | 安装包 |
+| Android | `qingfeng_setup_android_v{version}-{type}.apk` | APK |
+| Linux | `qingfeng_setup_linux_v{version}-{type}.deb` | deb 安装包 |
+| Linux | `qingfeng_setup_linux_v{version}-{type}.sh` | 自解压一键安装脚本 |
 
 ---
 
