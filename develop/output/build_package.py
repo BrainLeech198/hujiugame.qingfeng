@@ -318,7 +318,7 @@ class Builder:
         self.release_type = ""
         self.app_version_int = 0
         self.version_tag = ""
-        self.filename_base = "qing-feng_setup"
+        self.filename_base = "qingfeng_setup"
         self.linux_only = linux_only
         self.extra_targets = extra_targets or []
 
@@ -841,9 +841,9 @@ class Builder:
         输出单个 .sh 文件，用户双击即可图形化安装。
         Linux 版 Windows .exe 安装包。
         """
-        # 命名: qing-feng_setup_linux_v1.0.0-beta.deb → qing-feng_setup_linux_v1.0.0-beta.sh
-        platform_tag = deb_path.stem.replace("qing-feng_setup_", "")
-        installer_path = deb_path.parent / f"qing-feng_setup_{platform_tag}.sh"
+        # 命名: qingfeng_setup_linux_v1.0.0-beta.deb → qingfeng_setup_linux_v1.0.0-beta.sh
+        platform_tag = deb_path.stem.replace("qingfeng_setup_", "")
+        installer_path = deb_path.parent / f"qingfeng_setup_{platform_tag}.sh"
 
         deb_data = deb_path.read_bytes()
 
