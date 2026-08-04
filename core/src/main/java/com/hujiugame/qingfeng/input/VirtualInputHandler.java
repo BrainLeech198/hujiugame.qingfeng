@@ -2,19 +2,19 @@ package com.hujiugame.qingfeng.input;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.hujiugame.qingfeng.core.GameHost;
 import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.di.InstanceContent;
-import com.hujiugame.qingfeng.core.GameHost;
-import com.hujiugame.qingfeng.type.key.RequirementKey;
-import com.hujiugame.qingfeng.ui.kind.InteractableObject;
+import com.hujiugame.qingfeng.graphic.GraphicsManager;
 import com.hujiugame.qingfeng.type.ScreenSize;
 import com.hujiugame.qingfeng.type.VirtualInputType;
 import com.hujiugame.qingfeng.type.file.FileName;
 import com.hujiugame.qingfeng.type.file.PathName;
+import com.hujiugame.qingfeng.type.key.RequirementKey;
 import com.hujiugame.qingfeng.type.key.UniversalUiKey;
-import com.hujiugame.qingfeng.graphic.GraphicsManager;
 import com.hujiugame.qingfeng.ui.MessageBox;
 import com.hujiugame.qingfeng.ui.UiManager;
+import com.hujiugame.qingfeng.ui.kind.InteractableObject;
 import com.hujiugame.qingfeng.util.StringPolisher;
 import com.hujiugame.qingfeng.util.system.LogUtils;
 
@@ -166,13 +166,16 @@ public class VirtualInputHandler
                 return;
             }
 
+            // 优先选中配置json
             JsonEntity priorityConfig = configJson.getJsonEntityByKey(RequirementKey.Config.UNIVERSAL_PRIORITY_CONFIRM_UI);
 
+            // 优先选中控件解析
             String type = priorityConfig.containsKey(RequirementKey.Config.UNIVERSAL_PRIORITY_CONFIRM_UI_TYPE)
                 ? priorityConfig.getString(RequirementKey.Config.UNIVERSAL_PRIORITY_CONFIRM_UI_TYPE) : "";
             String tag = priorityConfig.containsKey(RequirementKey.Config.UNIVERSAL_PRIORITY_CONFIRM_UI_TAG)
                 ? priorityConfig.getString(RequirementKey.Config.UNIVERSAL_PRIORITY_CONFIRM_UI_TAG) : "";
 
+            // 配置格式校验
             if (!"tag".equals(type) || tag.isEmpty())
             {
                 LogUtils.error(VirtualInputHandler.class, "setPriorityConfirmSelectObject 配置格式错误 (type): " + type + " (tag): " + tag);
