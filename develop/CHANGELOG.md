@@ -16,7 +16,7 @@
 > 5. 【如果】新增/重命名/删除 `.md` 文件 → 同步更新 `DOCUMENTATION_INDEX.md`
 > 6. 【如果】新建设计方案文档 → 建议在 `develop/plans/` 目录记录
 
-## 2026-08-04 — 原生弹窗关键字常量收编 + 仓库名统一
+## 2026-08-04 — 原生弹窗关键字常量收编 + 仓库名统一 + 半透明遮罩纹理升级
 
 ### 新增
 
@@ -36,6 +36,17 @@
 ### 编码规范
 
 - **命名统一 `qing-feng` → `qingfeng`** — 项目内残留的连字符命名统一为无连字符：`build_package.py` 安装包文件名前缀、`inno_setup.iss` Windows 安装器注释与安装目录、`CONTRIBUTING.md` / `develop/output/README.md` 安装包命名文档；Android 应用显示名（label）与包名（applicationId）本已是"氢风" / `com.hujiugame.qingfeng`，无需改动
+
+---
+
+### 变更
+
+- **UI 遮罩不透明度整体上调一档** — `black16 → black32`、`black32 → black48`：config_basic/config_display/menu_list 三个页面的 tab 遮罩、`button/de2` 三态、`label/de2` 与 `label/de3` 背景同步升级；`black64` 引用与 white 系列不变
+- **`directory_structure.json` 同步** — transparent 目录清单追加 `black48.png` 与 `white48.png`
+
+### 资产
+
+- **新增半透明纹理 `black48.png` / `white48.png`** — 1×1 纯色纹理，48% 不透明度（RGBA alpha 122），与现有 16/32/64 系列取整规则一致，供 UI 遮罩使用
 
 ## 2026-07-29 — 文档更新规范自描述 + 主题版权自动生成方案 + BGM 双播修复 + Android 视口适配 + 配置驱动优先选中 + 打包稳健性
 
