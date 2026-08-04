@@ -16,6 +16,21 @@
 > 5. 【如果】新增/重命名/删除 `.md` 文件 → 同步更新 `DOCUMENTATION_INDEX.md`
 > 6. 【如果】新建设计方案文档 → 建议在 `develop/plans/` 目录记录
 
+## 2026-08-04 — 原生弹窗关键字常量收编 + 仓库名统一
+
+### 新增
+
+- **`DialogKey` 原生弹窗关键字常量枚举类** — 新增 `DialogKey.FileChooser` 常量（`IMPORT_GAME_TAG` / `IMPORT_GAME_NAME`），收编文件选择弹窗的 tag 与标题关键字
+
+### 文档
+
+- **官网与仓库地址统一** — 仓库名从 `hujiugame-qingfeng` 统一为 `hujiugame.qingfeng`：`README.md`（三语言官网/Releases/Issues 链接）、`docs/README.md`（官网分发站）、`develop/output/README.md`（UpdateChecker versions.json 检测地址）、`assets/THIRDPARTY_LICENSES.md`（项目主页，原误写 `BrainLeech198/qingfeng`）
+
+### 编码规范
+
+- **`MenuList` 未收编字符常量收编至 `DialogKey`** — 替换 `"import_game"` / `"选择游戏"` 字面量为 `DialogKey.FileChooser` 常量
+- **`VirtualInputHandler.setPriorityConfirmSelectObject` 补全注释** — 补充优先选中配置 json 解析与格式校验相关中文注释
+
 ## 2026-07-29 — 文档更新规范自描述 + 主题版权自动生成方案 + BGM 双播修复 + Android 视口适配 + 配置驱动优先选中 + 打包稳健性
 
 ### 文档
