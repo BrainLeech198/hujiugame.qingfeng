@@ -1,4 +1,4 @@
-; 氢风 (qing-feng) Windows Installer
+; 氢风 (qingfeng) Windows Installer
 ; 构建前需要先运行 package.bat 构建 launcher，并编译 JAR
 
 #define MyAppName "氢风"
@@ -18,7 +18,7 @@ AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
-DefaultDirName={autopf}\qing-feng
+DefaultDirName={autopf}\qingfeng
 UninstallDisplayIcon={app}\{#MyAppExeName}
 ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
