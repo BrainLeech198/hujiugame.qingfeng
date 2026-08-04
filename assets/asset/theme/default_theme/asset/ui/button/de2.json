@@ -2,9 +2,9 @@
   "name" : "default2",
   "font" : "default",
   "image" : {
-    "up" : "transparent/black32.png",
-    "down" : "transparent/black16.png",
-    "disabled" : "transparent/black32.png"
+    "up" : "transparent/black48.png",
+    "down" : "transparent/black32.png",
+    "disabled" : "transparent/black48.png"
   },
   "audio" : {
     "click" : "button/862694__cat-fox_alex__random-click-2.wav"
