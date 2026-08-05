@@ -1249,6 +1249,22 @@ public final class AudioManager
             boolean soundResult = stopAllSound();
             boolean musicResult = stopAllMusic();
             boolean bgMusicResult = stopAllBackgroundMusic();
+
+            // 清空播放记录，允许 playLayout/playMusic 之后重新触发播放。
+            // 保留 loaded 表，音乐资源仍缓存，无需重新加载。
+            // 背景：stop 系列为支持 stop→resume 不移除 playing 表，
+            // 但 playLayout 以 containsKey 判断"是否在播"；stopAll 后残留记录
+            // 会让退出游戏回主菜单时启动器 BGM 被误判为"仍在播"而静音。
+            synchronized (musicPlayingObjectMap)
+            {
+                musicPlayingObjectMap.clear();
+                musicPlayingPathMap.clear();
+            }
+            synchronized (bgMusicPlayingObjectMap)
+            {
+                bgMusicPlayingObjectMap.clear();
+                bgMusicPlayingPathMap.clear();
+            }
             return soundResult && musicResult && bgMusicResult;
         }
         catch (Exception e)
