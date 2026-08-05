@@ -16,6 +16,12 @@
 > 5. 【如果】新增/重命名/删除 `.md` 文件 → 同步更新 `DOCUMENTATION_INDEX.md`
 > 6. 【如果】新建设计方案文档 → 建议在 `develop/plans/` 目录记录
 
+## 2026-08-05 — 修复退出游戏后启动器主题 BGM 不自动播放
+
+### 修复
+
+- **启动器主题 BGM 退出游戏后不自动播放** — 进入游戏时 `GameResourceLoader.loadResource` 调 `AudioManager.stopAll()` 只停声不移除 playing 表，退出回主菜单后 `playLayout` 以 `containsKey` 判断"是否在播"把已停止的 BGM 误判为仍在播，导致不再随机重播（静音）。修复：`stopAll()` 清空 `musicPlayingObjectMap`/`musicPlayingPathMap`/`bgMusicPlayingObjectMap`/`bgMusicPlayingPathMap` 播放记录，保留 loaded 表缓存资源，`playLayout` 见 map 为空自动重播启动器主题 BGM
+
 ## 2026-08-04 — 原生弹窗关键字常量收编 + 仓库名统一 + 半透明遮罩纹理升级
 
 ### 新增
