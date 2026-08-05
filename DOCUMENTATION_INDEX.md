@@ -69,6 +69,7 @@
 | **InstanceContent 拆分** | [develop/plans/refactor-instancecontent.md](develop/plans/refactor-instancecontent.md) | 初始化链/上帝对象重构方案 |
 | **3D 场景支持预想方案** | [develop/plans/2026-07-24-3d-scene-support.md](develop/plans/2026-07-24-3d-scene-support.md) | 通过 page 目录 3d.json 实现可选 3D 场景，最小架构入侵 |
 | **主题版权声明自动生成** | [develop/plans/2026-07-29-theme-copyright-generator.md](develop/plans/2026-07-29-theme-copyright-generator.md) | 玩家主题第三方版权声明的自动生成机制，声明清单 JSON + 运行时生成器 |
+| **macOS 打包支持预想方案** | [develop/plans/2026-08-05-macos-packaging.md](develop/plans/2026-08-05-macos-packaging.md) | mac 打包现状盘点 + 差距清单（XstartOnFirstThread/签名/M1 接线），一条龙可行性结论 |
 
 ---
 
