@@ -15,6 +15,7 @@
 > 4. 【如果】修改脚本指令/值系统 → 同步更新 `develop/SCRIPT_INTERNAL_STANDARD.md`
 > 5. 【如果】新增/重命名/删除 `.md` 文件 → 同步更新 `DOCUMENTATION_INDEX.md`
 > 6. 【如果】新建设计方案文档 → 建议在 `develop/plans/` 目录记录
+> 7. 【如果】本次更新比较重要、与项目关键设计相关 → 同步写入 `temp/CLAUDE_MEMORY.md`（gitignored 本地工作记忆，仅当前开发机可见），便于后续 AI 对话延续上下文
 
 ## 2026-08-05 — 修复启动器 BGM 退出游戏后不自动播放 + macOS 打包预想方案入库
 
