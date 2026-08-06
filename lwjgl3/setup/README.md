@@ -19,6 +19,7 @@
 
 ```
 launcher.exe
+├─ 0. 单实例检测：已有氢风在运行则弹窗「氢风已经在运行中了」并退出
 ├─ 1. 获取自身所在目录
 ├─ 2. 读取 lib/set.json（控制台显隐等配置）
 ├─ 3. 隐藏控制台（若 set.json 中 console=false）
@@ -34,6 +35,14 @@ launcher.exe
 ├─ 9. 若退出码非零，弹窗显示 Java 的错误输出和退出码
 └─ 10. 正常退出
 ```
+
+## 单实例限制
+
+启动器使用命名互斥体（`CreateMutexW`，`Local\com.hujiugame.qingfeng.launcher`）限制同一登录会话内只能运行一个氢风实例：
+
+- 双击 `launcher.exe`（或经文件关联双击 `.qfg`）时，若已有氢风在运行，会弹出「氢风已经在运行中了」提示并立即退出，不再启动第二个进程
+- 互斥体句柄在整个进程存活期间保持，随进程退出自动释放
+- 命名使用 `Local\` 前缀限定当前登录会话，避免跨 RDP/服务会话误判
 
 ## 编译
 
@@ -69,7 +78,7 @@ x86_64-w64-mingw32-gcc -O2 -s -static -mwindows ^
 
 ```
 lwjgl3/setup/
-├── launcher.c          # 启动器源码（469 行）
+├── launcher.c          # 启动器源码（826 行）
 ├── launcher.rc         # 图标资源脚本
 ├── console.ico         # 控制台图标
 ├── package.bat         # 一键编译脚本（自动检测 MinGW）
