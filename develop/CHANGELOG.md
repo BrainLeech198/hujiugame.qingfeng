@@ -17,7 +17,7 @@
 > 6. 【如果】新建设计方案文档 → 建议在 `develop/plans/` 目录记录
 > 7. 【如果】本次更新比较重要、与项目关键设计相关 → 同步写入 `temp/CLAUDE_MEMORY.md`（gitignored 本地工作记忆，仅当前开发机可见），便于后续 AI 对话延续上下文
 
-## 2026-08-06 — 官方语言/主题 Internal 句柄化 + 默认配置损坏恢复预想方案入库
+## 2026-08-06 — 官方语言/主题 Internal 句柄化 + 默认配置损坏恢复预想方案入库 + 版权素材清理替换
 
 ### 新增
 
@@ -41,6 +41,21 @@
 
 - **新增默认配置损坏恢复预想方案** — `develop/plans/2026-08-06-language-theme-default-recovery.md`：盘点 Internal 化现状 + "用户删除默认配置"场景差距（外部词典官方条目被删时融合仅在回退分支触发）+ 将来实现方向（融合前置/词典校验/用户配置完整性）；同步更新文档索引
 - **JSON_STANDARD** — 1.1 主题词典、11.1 语言词典更新为嵌套 `{name, kind}` 结构，补充 `kind` 字段说明与自动修复行为变化
+
+---
+
+### 资产
+
+- **版权隐患素材清理与替换** — 5 个 icon-icons.com 来源不明确的图片（`app_repair.png`、`icon.png`、`download-windows/android/linux.png`）从 git 历史彻底抹除（filter-repo 历史重写 + Gitee/GitHub 双远程 force push），全部以同名的可商用新素材回填：
+  - `app_repair.png`（512×512）— Muhamad Taupik / CC BY 4.0（icon-icons.com/230003）
+  - `icon.png`（512×512）— Thalita Torres / 免费商用无需署名（icon-icons.com/75465）
+  - `download-windows/android/linux.png`（256×256）— Microdot Graphic（windows/linux，CC BY 4.0）/ RoundIcons（android，免费商用）
+  - `setup.ico`/`setup.png` — Lokatara Studio / 免费商用无需署名（icon-icons.com/181413）二次创作
+
+### 文档
+
+- **THIRDPARTY_LICENSES.md** — 素材来源全面登记：图标替换条目重写（app_repair/icon/setup.ico 记录作者+具体链接）；补登记原创素材（icon.ico、console.ico、logo.*、error.png、icon128.png、android launcher 系列）；背景音乐补具体 B站来源链接（BV1uFcwe1EDV）并修正轻音乐包编号为③
+- **THIRDPARTY_LICENSES.html** — 官网平台下载图标拆分为三个独立来源条目（Windows/Linux=Microdot Graphic CC BY 4.0，Android=RoundIcons 免费商用），补充作者链接与商标声明
 
 ## 2026-08-05 — 修复启动器 BGM 退出游戏后不自动播放 + macOS 打包预想方案入库
 
