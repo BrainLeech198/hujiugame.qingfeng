@@ -52,7 +52,7 @@ Allman 风格（左括号独占一行）：
 ## 文档维护
 
 - **文档统一索引**：[DOCUMENTATION_INDEX.md](DOCUMENTATION_INDEX.md) — 新增/重命名/删除任何 `.md` 文件后，必须同步更新此索引
-- **变更日志**：`develop/CHANGELOG.md` — 每次提交前必须更新，条目按时间倒序，段落按标准顺序排列
+- **变更日志**：`develop/CHANGELOG.md` — 每次提交前必须更新，条目按时间倒序，段落按标准顺序排列；**CHANGELOG 条目不独立提交**，每个内容改动 = 一笔提交（对应改动文件 + 该改动对应的 CHANGELOG 条目一并提交），按内容逐条拆分，禁止攒一堆条目最后统一提交
 - **各文档头部自描述规范** — develop/ 下每份文档头部均包含"文档定位 + 文档结构 + 更新规范"，修改文档前先读头部了解其维护要求
 - **设计方案**：`develop/plans/` 目录 — 新建设计方案/预想方案时在此记录，文件名格式 `yyyy-MM-dd-topic.md`
 - **贡献指南**：[CONTRIBUTING.md](CONTRIBUTING.md) — 修改构建流程、技术栈或开发环境时同步更新

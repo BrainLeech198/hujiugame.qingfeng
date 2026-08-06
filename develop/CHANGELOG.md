@@ -31,6 +31,12 @@
 
 - **`RequirementKey.Language` 按真实 requirement.json 嵌套重构** — 第一层 key（`message_box`/`menu_main`/`menu_list`/`menu_load`/`config_basic`）对应嵌套类 `MessageBox`/`MenuMain`/`MenuList`/`MenuLoad`/`ConfigBasic`；游戏语言集独立为 `InGame`（对应游戏独立语言包）；弹窗标识常量（`*_KEY`）在 `MessageBox` 中单列并注释"非 JSON key"；`MenuMain`/`MenuList`/`GameMenu` 引用同步更新
 
+---
+
+### 文档
+
+- **CLAUDE.md 提交规则补充** — "变更日志"条目写明 CHANGELOG 条目不独立提交，每个内容改动 = 一笔提交（改动文件 + 该改动对应的 CHANGELOG 条目一并提交），按内容逐条拆分，禁止攒一堆条目最后统一提交
+
 ## 2026-08-06 — 官方语言/主题 Internal 句柄化 + 默认配置损坏恢复预想方案入库 + 版权素材清理替换 + 文件后缀关联补全与四类资源包注册 + 启动器单实例限制 + 启动器源码整理 + 启动器说明文档同步
 
 ### 新增
