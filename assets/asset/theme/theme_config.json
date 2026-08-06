@@ -1,3 +1,6 @@
 {
-  "default_theme" : "默认主题"
+  "default_theme" : {
+    "name" : "默认主题",
+    "kind" : "internal"
+  }
 }
