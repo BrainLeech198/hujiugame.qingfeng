@@ -15,4 +15,13 @@ public final class LanguageKey
 
     /** 语言适配版本号 */
     public static final String VERSION = "version";
+
+    public static class Config
+    {
+        /** 语言显示名称 */
+        public static final String NAME = "name";
+
+        /** 语言路径类型 */
+        public static final String KIND = "kind";
+    }
 }
