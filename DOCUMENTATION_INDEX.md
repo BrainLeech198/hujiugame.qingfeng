@@ -70,6 +70,7 @@
 | **3D 场景支持预想方案** | [develop/plans/2026-07-24-3d-scene-support.md](develop/plans/2026-07-24-3d-scene-support.md) | 通过 page 目录 3d.json 实现可选 3D 场景，最小架构入侵 |
 | **主题版权声明自动生成** | [develop/plans/2026-07-29-theme-copyright-generator.md](develop/plans/2026-07-29-theme-copyright-generator.md) | 玩家主题第三方版权声明的自动生成机制，声明清单 JSON + 运行时生成器 |
 | **macOS 打包支持预想方案** | [develop/plans/2026-08-05-macos-packaging.md](develop/plans/2026-08-05-macos-packaging.md) | mac 打包现状盘点 + 差距清单（XstartOnFirstThread/签名/M1 接线），一条龙可行性结论 |
+| **语言/主题默认配置损坏恢复** | [develop/plans/2026-08-06-language-theme-default-recovery.md](develop/plans/2026-08-06-language-theme-default-recovery.md) | "用户删除默认配置"场景盘点 + 将来实现方向（融合前置/词典校验），Internal 化已消除主路径 |
 
 ---
 
