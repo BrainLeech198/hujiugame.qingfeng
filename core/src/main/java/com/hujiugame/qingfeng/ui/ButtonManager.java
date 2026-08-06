@@ -113,19 +113,19 @@ public final class ButtonManager
             style.downFontColor = new Color(1f - fontColor.r, 1f - fontColor.g, 1f - fontColor.b, fontColor.a);
             style.disabledFontColor = fontColor.cpy().mul(0.5f, 0.5f, 0.5f, 1f);
 
-            JsonEntity imageJson = buttonKindJson.getJsonEntityByKey(UiKey.Button.IMAGE);
+            JsonEntity imageJson = buttonKindJson.getJsonEntityByKey(UiKey.Button.Image.KEY);
             FileHandle resImgDir = themePath.child(PathName.ASSET_S_RESOURCE_IMAGE);
-            Pixmap upPix = new Pixmap(resImgDir.child(imageJson.getString(UiKey.Button.IMAGE_UP)));
-            Pixmap downPix = new Pixmap(resImgDir.child(imageJson.getString(UiKey.Button.IMAGE_DOWN)));
-            Pixmap disabledPix = new Pixmap(resImgDir.child(imageJson.getString(UiKey.Button.IMAGE_DISABLED)));
+            Pixmap upPix = new Pixmap(resImgDir.child(imageJson.getString(UiKey.Button.Image.UP)));
+            Pixmap downPix = new Pixmap(resImgDir.child(imageJson.getString(UiKey.Button.Image.DOWN)));
+            Pixmap disabledPix = new Pixmap(resImgDir.child(imageJson.getString(UiKey.Button.Image.DISABLED)));
 
             pendingPixmapMap.put(UiManager.PIXMAP_BUTTON + buttonKindName + "_up", upPix);
             pendingPixmapMap.put(UiManager.PIXMAP_BUTTON + buttonKindName + "_down", downPix);
             pendingPixmapMap.put(UiManager.PIXMAP_BUTTON + buttonKindName + "_disabled", disabledPix);
 
-            JsonEntity audioJson = buttonKindJson.getJsonEntityByKey(UiKey.Button.AUDIO);
+            JsonEntity audioJson = buttonKindJson.getJsonEntityByKey(UiKey.Button.Audio.KEY);
             FileHandle audioFileHandle = themePath.child(PathName.ASSET_S_RESOURCE_AUDIO)
-                .child(audioJson.getString(UiKey.Button.AUDIO_CLICK));
+                .child(audioJson.getString(UiKey.Button.Audio.CLICK));
 
             pendingButtonStyles.put(buttonKindName, style);
             pendingButtonAudios.put(buttonKindName, audioFileHandle);

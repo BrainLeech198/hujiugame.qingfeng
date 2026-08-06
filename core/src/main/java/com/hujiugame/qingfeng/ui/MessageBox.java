@@ -206,32 +206,32 @@ public final class MessageBox
         try
         {
             // 上载label样式
-            if (!uiMessageBoxKindJson.containsKey(UiKey.MessageBox.LABEL))
+            if (!uiMessageBoxKindJson.containsKey(UiKey.MessageBox.Label.KEY))
             {
                 LogUtils.error(MessageBox.class, "loadMessageBoxKindFromTheme 缺少label字段");
                 return false;
             }
-            JsonEntity labelKindJson = uiMessageBoxKindJson.getJsonEntityByKey(UiKey.MessageBox.LABEL);
+            JsonEntity labelKindJson = uiMessageBoxKindJson.getJsonEntityByKey(UiKey.MessageBox.Label.KEY);
 
             // title
-            if (!labelKindJson.containsKey(UiKey.MessageBox.LABEL_TITLE))
+            if (!labelKindJson.containsKey(UiKey.MessageBox.Label.TITLE))
             {
                 LogUtils.error(MessageBox.class, "loadMessageBoxKindFromTheme 缺少label.title字段");
                 return false;
             }
-            JsonEntity titleLabelJson = labelKindJson.getJsonEntityByKey(UiKey.MessageBox.LABEL_TITLE);
+            JsonEntity titleLabelJson = labelKindJson.getJsonEntityByKey(UiKey.MessageBox.Label.TITLE);
             if (!loadTitleLabelKind(titleLabelJson))
             {
                 return false;
             }
 
             // content
-            if (!labelKindJson.containsKey(UiKey.MessageBox.LABEL_CONTENT))
+            if (!labelKindJson.containsKey(UiKey.MessageBox.Label.CONTENT))
             {
                 LogUtils.error(MessageBox.class, "loadMessageBoxKindFromTheme 缺少label.content字段");
                 return false;
             }
-            JsonEntity contentLabelJson = labelKindJson.getJsonEntityByKey(UiKey.MessageBox.LABEL_CONTENT);
+            JsonEntity contentLabelJson = labelKindJson.getJsonEntityByKey(UiKey.MessageBox.Label.CONTENT);
             if (!loadContentLabelKind(contentLabelJson))
             {
                 return false;
@@ -278,17 +278,17 @@ public final class MessageBox
         try
         {
             // 读取按钮样式
-            if (!uiMessageBoxKindJson.containsKey(UiKey.MessageBox.BUTTON))
+            if (!uiMessageBoxKindJson.containsKey(UiKey.MessageBox.Button.KEY))
             {
                 LogUtils.error(MessageBox.class, "loadMessageBoxKindFromTheme 缺少button字段");
                 return false;
             }
-            else if (!uiMessageBoxKindJson.getJsonEntityByKey(UiKey.MessageBox.BUTTON).containsKey(UiKey.MessageBox.BUTTON_NORMAL))
+            else if (!uiMessageBoxKindJson.getJsonEntityByKey(UiKey.MessageBox.Button.KEY).containsKey(UiKey.MessageBox.Button.NORMAL))
             {
                 LogUtils.error(MessageBox.class, "loadMessageBoxKindFromTheme 缺少button.normal字段");
                 return false;
             }
-            JsonEntity buttonKindJson = uiMessageBoxKindJson.getJsonEntityByKey(UiKey.MessageBox.BUTTON).getJsonEntityByKey(UiKey.MessageBox.BUTTON_NORMAL);
+            JsonEntity buttonKindJson = uiMessageBoxKindJson.getJsonEntityByKey(UiKey.MessageBox.Button.KEY).getJsonEntityByKey(UiKey.MessageBox.Button.NORMAL);
             if (!loadButtonKind(buttonKindJson))
             {
                 return false;

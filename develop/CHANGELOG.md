@@ -18,6 +18,13 @@
 > 7. 【如果】本次更新比较重要、与项目关键设计相关 → 同步写入 `temp/CLAUDE_MEMORY.md`（gitignored 本地工作记忆，仅当前开发机可见），便于后续 AI 对话延续上下文
 > 8. 【必须】CHANGELOG 条目不独立提交：每个内容改动 = 一笔提交，同时包含对应改动的文件 + 本文档中该改动对应的条目。先改文件并写对应条目 → 一并提交 → 再改下一个文件、写下一条目；按内容逐条拆分提交，禁止攒一堆 CHANGELOG 更新最后统一提交（例：文件 `a`、`b` 均有改动 → 提交 1 = `a` + 「更新了 a」条目；提交 2 = `b` + 「更新了 b」条目）
 
+## 2026-08-07 — UiKey/LayoutKey 布局字段 kind/show 单一来源 + RequirementKey.Language 嵌套重构 + 提交规范
+
+### 重构
+
+- **`UiKey` 布局引用字段转发 `LayoutKey.Ui`** — `Button`/`Label`/`Image` 组件的 `KIND`/`SHOW` 由硬编码字符串改为转发引用 `LayoutKey.Ui.KIND`/`LayoutKey.Ui.SHOW`，字符串值以 `LayoutKey` 为唯一来源，调用方语义不变；`ButtonInfo`/`LabelInfo`/`ImageInfo` kind 解析改用各自组件类常量，`JsonShowParser` show 解析改用 `LayoutKey.Ui.SHOW`
+- **`LayoutKey` 新增 `Ui` 嵌套类** — 收编 layout.json 的 ui 节元素引用字段 `KIND="kind"`/`SHOW="show"`，作为字符串唯一来源
+
 ## 2026-08-06 — 官方语言/主题 Internal 句柄化 + 默认配置损坏恢复预想方案入库 + 版权素材清理替换 + 文件后缀关联补全与四类资源包注册 + 启动器单实例限制 + 启动器源码整理 + 启动器说明文档同步
 
 ### 新增

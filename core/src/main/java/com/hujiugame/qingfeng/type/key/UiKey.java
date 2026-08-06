@@ -1,5 +1,12 @@
 package com.hujiugame.qingfeng.type.key;
 
+/**
+ * UI 主题配置 JSON 字段常量。
+ *
+ * 嵌套结构对齐真实 JSON：ui_config.json 第一层是组件类型 key（{@link #Button#KEY} 等），
+ * 各组件内部类字段对应 kind 配置文件（asset/ui/xxx/*.json）的实际嵌套。
+ * 布局引用字段（kind/show）转发自 {@link LayoutKey.Ui}，字符串值以 LayoutKey 为唯一来源。
+ */
 public final class UiKey
 {
     private UiKey()
@@ -8,7 +15,7 @@ public final class UiKey
     }
 
     // ====================================================================================================
-    // Button 组件
+    // Button 组件（对应 asset/ui/button/*.json）
 
     public static final class Button
     {
@@ -20,32 +27,17 @@ public final class UiKey
         /** ui_config.json 中的组件类型 key */
         public static final String KEY = "button";
 
-        /** kind 唯一标识名 */
-        public static final String NAME = "name";
+        /** 元素引用的 kind 名（转发自 {@link LayoutKey.Ui}） */
+        public static final String KIND = LayoutKey.Ui.KIND;
 
-        /** 引用哪个 kind */
-        public static final String KIND = "kind";
+        /** 元素是否显示（转发自 {@link LayoutKey.Ui}） */
+        public static final String SHOW = LayoutKey.Ui.SHOW;
+
+        /** kind 配置中的 name 字段（kind 名） */
+        public static final String NAME = "name";
 
         /** kind 配置中的字体引用名 */
         public static final String FONT = "font";
-
-        /** kind 配置中的图片状态对象 */
-        public static final String IMAGE = "image";
-
-        /** 按钮普通状态图片 */
-        public static final String IMAGE_UP = "up";
-
-        /** 按钮按下状态图片 */
-        public static final String IMAGE_DOWN = "down";
-
-        /** 按钮禁用状态图片 */
-        public static final String IMAGE_DISABLED = "disabled";
-
-        /** kind 配置中的音频对象 */
-        public static final String AUDIO = "audio";
-
-        /** 按钮点击音效 */
-        public static final String AUDIO_CLICK = "click";
 
         /** kind 配置中的字体颜色 */
         public static final String FONT_COLOR = "fontColor";
@@ -53,12 +45,45 @@ public final class UiKey
         /** 按钮边框缩放 */
         public static final String BORDER_SCALE = "borderScale";
 
-        /** 是否显示 */
-        public static final String SHOW = "show";
+        /** image 对象（按钮状态图片） */
+        public static final class Image
+        {
+            private Image()
+            {
+                throw new UnsupportedOperationException("Utility class cannot be instantiated");
+            }
+
+            /** image 对象在 kind 配置中的 key */
+            public static final String KEY = "image";
+
+            /** 按钮普通状态图片 */
+            public static final String UP = "up";
+
+            /** 按钮按下状态图片 */
+            public static final String DOWN = "down";
+
+            /** 按钮禁用状态图片 */
+            public static final String DISABLED = "disabled";
+        }
+
+        /** audio 对象（按钮音效） */
+        public static final class Audio
+        {
+            private Audio()
+            {
+                throw new UnsupportedOperationException("Utility class cannot be instantiated");
+            }
+
+            /** audio 对象在 kind 配置中的 key */
+            public static final String KEY = "audio";
+
+            /** 按钮点击音效 */
+            public static final String CLICK = "click";
+        }
     }
 
     // ====================================================================================================
-    // Label 组件
+    // Label 组件（对应 asset/ui/label/*.json）
 
     public static final class Label
     {
@@ -70,20 +95,17 @@ public final class UiKey
         /** ui_config.json 中的组件类型 key */
         public static final String KEY = "label";
 
-        /** kind 唯一标识名 */
-        public static final String NAME = "name";
+        /** 元素引用的 kind 名（转发自 {@link LayoutKey.Ui}） */
+        public static final String KIND = LayoutKey.Ui.KIND;
 
-        /** 引用哪个 kind */
-        public static final String KIND = "kind";
+        /** 元素是否显示（转发自 {@link LayoutKey.Ui}） */
+        public static final String SHOW = LayoutKey.Ui.SHOW;
+
+        /** kind 配置中的 name 字段（kind 名） */
+        public static final String NAME = "name";
 
         /** kind 配置中的字体引用名 */
         public static final String FONT = "font";
-
-        /** kind 配置中的图片对象 */
-        public static final String IMAGE = "image";
-
-        /** 标签背景图片 */
-        public static final String IMAGE_BACKGROUND = "background";
 
         /** kind 配置中的字体颜色 */
         public static final String FONT_COLOR = "fontColor";
@@ -94,12 +116,24 @@ public final class UiKey
         /** 标签边框缩放 */
         public static final String BORDER_SCALE = "borderScale";
 
-        /** 是否显示 */
-        public static final String SHOW = "show";
+        /** image 对象（标签背景图片） */
+        public static final class Image
+        {
+            private Image()
+            {
+                throw new UnsupportedOperationException("Utility class cannot be instantiated");
+            }
+
+            /** image 对象在 kind 配置中的 key */
+            public static final String KEY = "image";
+
+            /** 标签背景图片 */
+            public static final String BACKGROUND = "background";
+        }
     }
 
     // ====================================================================================================
-    // Image 组件
+    // Image 组件（对应 asset/ui/image/*.json）
 
     public static final class Image
     {
@@ -111,24 +145,47 @@ public final class UiKey
         /** ui_config.json 中的组件类型 key */
         public static final String KEY = "image";
 
-        /** kind 唯一标识名 */
-        public static final String NAME = "name";
+        /** 元素引用的 kind 名（转发自 {@link LayoutKey.Ui}） */
+        public static final String KIND = LayoutKey.Ui.KIND;
 
-        /** 引用哪个 kind */
-        public static final String KIND = "kind";
+        /** 元素是否显示（转发自 {@link LayoutKey.Ui}） */
+        public static final String SHOW = LayoutKey.Ui.SHOW;
+
+        /** kind 配置中的 name 字段（kind 名） */
+        public static final String NAME = "name";
 
         /** kind 配置中的颜色值 */
         public static final String COLOR = "color";
 
         /** kind 配置中的图片文件路径 */
         public static final String SOURCE = "image";
-
-        /** 是否显示 */
-        public static final String SHOW = "show";
     }
 
     // ====================================================================================================
-    // MessageBox 组件
+    // Font 配置（对应 asset/ui/font/*/font.json）
+
+    public static final class Font
+    {
+        private Font()
+        {
+            throw new UnsupportedOperationException("Utility class cannot be instantiated");
+        }
+
+        /** ui_config.json 中的组件类型 key */
+        public static final String KEY = "font";
+
+        /** kind 配置中的 name 字段（kind 名） */
+        public static final String NAME = "name";
+
+        /** 字体文件路径 */
+        public static final String PATH = "path";
+
+        /** 字体缩放 */
+        public static final String SCALE = "scale";
+    }
+
+    // ====================================================================================================
+    // MessageBox 组件（对应 asset/ui/message_box/message_box.json）
 
     public static final class MessageBox
     {
@@ -143,43 +200,37 @@ public final class UiKey
         /** 弹窗音效 */
         public static final String AUDIO = "audio";
 
-        /** 弹窗标签对象 */
-        public static final String LABEL = "label";
-
-        /** 弹窗标题标签 */
-        public static final String LABEL_TITLE = "title";
-
-        /** 弹窗内容标签 */
-        public static final String LABEL_CONTENT = "content";
-
-        /** 弹窗按钮对象 */
-        public static final String BUTTON = "button";
-
-        /** 弹窗普通按钮 */
-        public static final String BUTTON_NORMAL = "normal";
-    }
-
-    // ====================================================================================================
-    // Font 配置
-
-    public static final class Font
-    {
-        private Font()
+        /** label 对象（弹窗标题/内容标签） */
+        public static final class Label
         {
-            throw new UnsupportedOperationException("Utility class cannot be instantiated");
+            private Label()
+            {
+                throw new UnsupportedOperationException("Utility class cannot be instantiated");
+            }
+
+            /** label 对象在 kind 配置中的 key */
+            public static final String KEY = "label";
+
+            /** 弹窗标题标签 */
+            public static final String TITLE = "title";
+
+            /** 弹窗内容标签 */
+            public static final String CONTENT = "content";
         }
 
-        /** ui_config.json 中的组件类型 key */
-        public static final String KEY = "font";
+        /** button 对象（弹窗按钮） */
+        public static final class Button
+        {
+            private Button()
+            {
+                throw new UnsupportedOperationException("Utility class cannot be instantiated");
+            }
 
-        /** kind 唯一标识名 */
-        public static final String NAME = "name";
+            /** button 对象在 kind 配置中的 key */
+            public static final String KEY = "button";
 
-        /** 字体文件路径 */
-        public static final String PATH = "path";
-
-        /** 字体缩放 */
-        public static final String SCALE = "scale";
+            /** 弹窗普通按钮 */
+            public static final String NORMAL = "normal";
+        }
     }
-
 }

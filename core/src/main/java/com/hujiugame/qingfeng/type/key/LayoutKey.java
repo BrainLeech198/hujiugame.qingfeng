@@ -30,4 +30,21 @@ public final class LayoutKey
 
     /** UI 组件容器 */
     public static final String UI = "ui";
+
+    // ====================================================================================================
+    // layout.json 的 ui 节内部元素引用字段
+
+    public static final class Ui
+    {
+        private Ui()
+        {
+            throw new UnsupportedOperationException("Utility class cannot be instantiated");
+        }
+
+        /** 元素引用的 kind 名 */
+        public static final String KIND = "kind";
+
+        /** 元素是否显示 */
+        public static final String SHOW = "show";
+    }
 }

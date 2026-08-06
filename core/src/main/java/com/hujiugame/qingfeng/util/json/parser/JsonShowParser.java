@@ -1,7 +1,7 @@
 package com.hujiugame.qingfeng.util.json.parser;
 
 import com.hujiugame.qingfeng.data.JsonEntity;
-import com.hujiugame.qingfeng.type.key.UiKey;
+import com.hujiugame.qingfeng.type.key.LayoutKey;
 import com.hujiugame.qingfeng.util.system.LogUtils;
 
 public final class JsonShowParser
@@ -21,10 +21,10 @@ public final class JsonShowParser
     public static boolean parseShow (JsonEntity json)
     {
         if (json == null) return true;
-        if (json.containsKey(UiKey.Button.SHOW))
+        if (json.containsKey(LayoutKey.Ui.SHOW))
         {
-            LogUtils.debug(JsonShowParser.class, "parseShow 获取显示状态 (show): " + json.getBoolean(UiKey.Button.SHOW));
-            return json.getBoolean(UiKey.Button.SHOW);
+            LogUtils.debug(JsonShowParser.class, "parseShow 获取显示状态 (show): " + json.getBoolean(LayoutKey.Ui.SHOW));
+            return json.getBoolean(LayoutKey.Ui.SHOW);
         }
         else
         {

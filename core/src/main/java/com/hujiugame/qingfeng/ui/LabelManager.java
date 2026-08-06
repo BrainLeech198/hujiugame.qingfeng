@@ -108,7 +108,7 @@ public final class LabelManager
 
             // 生成背景 Pixmap
             Pixmap bgPixmap = null;
-            JsonEntity imageJson = labelKindJson.getJsonEntityByKey(UiKey.Label.IMAGE);
+            JsonEntity imageJson = labelKindJson.getJsonEntityByKey(UiKey.Label.Image.KEY);
             FileHandle resImagePath = themePath.child(PathName.ASSET_S_RESOURCE_IMAGE);
 
             if (imageJson.isEmpty())
@@ -117,9 +117,9 @@ public final class LabelManager
                 bgPixmap.setColor(Color.CLEAR);
                 bgPixmap.fill();
             }
-            else if (imageJson.containsKey(UiKey.Label.IMAGE_BACKGROUND))
+            else if (imageJson.containsKey(UiKey.Label.Image.BACKGROUND))
             {
-                FileHandle bgFileHandle = resImagePath.child(imageJson.getString(UiKey.Label.IMAGE_BACKGROUND));
+                FileHandle bgFileHandle = resImagePath.child(imageJson.getString(UiKey.Label.Image.BACKGROUND));
                 if (!bgFileHandle.exists())
                 {
                     LogUtils.error(LabelManager.class, "loadLabelKind 背景文件不存在: " + bgFileHandle.path());
