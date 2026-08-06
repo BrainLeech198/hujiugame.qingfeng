@@ -168,26 +168,33 @@
 
 ### 1.1 theme_config.json（主题词典）
 
-**位置**：`assets/asset/theme/theme_config.json`
+**位置**：
+- 启动器：`assets/asset/theme/theme_config.json`
+- 游戏：`{game_path}/{game_id}/asset/theme/theme_config.json`
 
-将主题目录名映射为人类可读的主题名称。每个 key 是主题目录名，value 是显示名称。
+将主题目录名映射为主题配置（显示名称 + 路径类型）。每个 key 是主题目录名，value 是嵌套对象。
 
 **解析**：`ThemeManager.parseThemePath()` 读取
 
 | 字段 | 类型 | 必需 | 默认值 | 说明 |
 |------|------|------|--------|------|
-| `{dir_name}` | String | — | — | 键为主题目录名，值为主题显示名称。可以有多个条目 |
+| `{dir_name}` | Object | — | — | 键为主题目录名，值为主题配置对象 |
+| `{dir_name}.name` | String | 是 | — | 主题显示名称 |
+| `{dir_name}.kind` | String | 否 | `external` | 路径类型：`internal`（官方，Internal 句柄直读）或省略（外部主题，External 句柄） |
 
 **示例**：
 ```json
 {
-  "default_theme": "默认主题"
+  "default_theme": {
+    "name": "默认主题",
+    "kind": "internal"
+  }
 }
 ```
 
 **无主题时的自动修复行为**：
 1. 如果 `theme_config.json` 不存在，从 internal 复制到 external
-2. 如果指定的主题目录不存在，回退到 `default_theme` 并自动从 internal 复制
+2. 如果指定的主题目录不存在，回退到 `default_theme`（Internal 句柄，不再复制目录到 external），修复用户配置并融合内部词典补回官方条目
 
 ---
 
@@ -923,16 +930,31 @@
 - 启动器：`assets/asset/language/language_config.json`
 - 游戏：`{game_path}/{game_id}/asset/language/language_config.json`
 
-**解析**：`LanguageManager`
+**解析**：`LanguageManager.parseLanguagePath()` 读取
 
-将语言目录名映射为人类可读的语言名称。每个 key 是语言目录名，value 是显示名称。
+将语言目录名映射为语言配置（显示名称 + 路径类型）。每个 key 是语言目录名，value 是嵌套对象。
+
+| 字段 | 类型 | 必需 | 默认值 | 说明 |
+|------|------|------|--------|------|
+| `{lang}` | Object | — | — | 键为语言目录名，值为语言配置对象 |
+| `{lang}.name` | String | 是 | — | 语言显示名称 |
+| `{lang}.kind` | String | 否 | `external` | 路径类型：`internal`（官方，Internal 句柄直读）或省略（第三方语言，External 句柄） |
 
 **示例**：
 ```json
 {
-  "zh_CN": "简体中文",
-  "zh_TW": "繁體中文 (台灣)",
-  "en_US": "English (US)"
+  "zh_CN": {
+    "name": "简体中文",
+    "kind": "internal"
+  },
+  "zh_TW": {
+    "name": "繁體中文 (台灣)",
+    "kind": "internal"
+  },
+  "en_US": {
+    "name": "English (US)",
+    "kind": "internal"
+  }
 }
 ```
 
