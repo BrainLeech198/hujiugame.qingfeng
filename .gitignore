@@ -163,11 +163,12 @@ Thumbs.db
 *#*#
 /.kotlin/
 /assets/assets.txt
-/develop/output/*.apk
-/develop/output/*.deb
-/develop/output/*.sh
-/develop/output/*.exe
-/develop/output/*.tar.gz
+# develop/output 打包产物（命名：qingfeng_setup_{platform}_v{ver}-{type}.{ext}）
+/develop/output/qingfeng_setup_*.apk
+/develop/output/qingfeng_setup_*.deb
+/develop/output/qingfeng_setup_*.sh
+/develop/output/qingfeng_setup_*.exe
+/develop/output/qingfeng_setup_*.tar.gz
 /develop/output/build_config.env
 /develop/output/build/
 /develop/output/dist/

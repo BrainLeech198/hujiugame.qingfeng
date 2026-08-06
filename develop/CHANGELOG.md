@@ -68,6 +68,12 @@
 
 - **`inno_setup.iss` .qfg 文件关联补默认 ProgID** — 新增 `HKCR\.qfg` 默认 ProgID 绑定（`Software\Classes\.qfg` 默认值 → `QFGameFile.qfg`），双击 `.qfg` 文件直接触发 `launcher.exe "%1"` 带参运行，无需手动选择打开方式；与原有 OpenWithProgids 打开方式候选并存，卸载时 `uninsdeletevalue` 一并清除
 
+---
+
+### 其他
+
+- **`.gitignore` 打包产物忽略规则对齐新命名** — `develop/output` 产物忽略从通配扩展名（`*.apk`/`*.deb`/`*.sh`/`*.exe`/`*.tar.gz`）改为明确匹配新产物命名 `qingfeng_setup_*` 前缀（无连字符）；删除磁盘上旧命名 `qing-feng_setup_*` 产物
+
 ## 2026-08-05 — 修复启动器 BGM 退出游戏后不自动播放 + macOS 打包预想方案入库
 
 ### 修复
