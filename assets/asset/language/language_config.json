@@ -1,5 +1,14 @@
 {
-  "zh_CN": "简体中文",
-  "zh_TW": "繁體中文 (台灣)",
-  "en_US": "English (US)"
+  "zh_CN": {
+    "name":"简体中文",
+    "kind": "internal"
+  },
+  "zh_TW": {
+    "name":"繁體中文 (台灣)",
+    "kind": "internal"
+  },
+  "en_US": {
+    "name": "English (US)",
+    "kind": "internal"
+  }
 }
