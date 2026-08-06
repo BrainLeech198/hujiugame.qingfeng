@@ -51,6 +51,7 @@
   - `icon.png`（512×512）— Thalita Torres / 免费商用无需署名（icon-icons.com/75465）
   - `download-windows/android/linux.png`（256×256）— Microdot Graphic（windows/linux，CC BY 4.0）/ RoundIcons（android，免费商用）
   - `setup.ico`/`setup.png` — Lokatara Studio / 免费商用无需署名（icon-icons.com/181413）二次创作
+  - `repair1.png`/`repair2.png`（官网维修步骤截图）— 截图内嵌旧版维修图标（版权隐患），从 git 历史抹除后重新截图回填
 
 ### 文档
 
