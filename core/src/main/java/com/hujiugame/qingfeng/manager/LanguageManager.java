@@ -7,6 +7,7 @@ import com.hujiugame.qingfeng.type.Name;
 import com.hujiugame.qingfeng.type.file.FileName;
 import com.hujiugame.qingfeng.type.file.PathName;
 import com.hujiugame.qingfeng.game.GameInfoManager;
+import com.hujiugame.qingfeng.type.key.FileHandleKey;
 import com.hujiugame.qingfeng.type.key.GameInfoKey;
 import com.hujiugame.qingfeng.type.key.LanguageKey;
 import com.hujiugame.qingfeng.util.system.FileUtils;
@@ -26,6 +27,9 @@ public final class LanguageManager
 
     // 使用的语言
     private String name = null;
+
+    // 语言路径类型
+    private String kind = null;
 
     // 语言路径句柄
     private FileHandle pathHandle = null;
@@ -96,17 +100,37 @@ public final class LanguageManager
             boolean isExist = false;
             if (dictionaryJson.containsKey(pathName))
             {
-                // 存在对应语言索引
-                name = dictionaryJson.getString(pathName);
-                pathHandle = directoryPathHandle.child(pathName);
+                // 解析语言配置
+                JsonEntity languageJson = dictionaryJson.getJsonEntityByKey(pathName);
 
-                LogUtils.debug(LanguageManager.class, "parsePath 用户使用的语言 (name): " + name);
-                LogUtils.debug(LanguageManager.class, "parsePath 用户使用的语言 (path): " + pathHandle);
-
-                // 判断文件夹是否存在
-                if (FileUtils.isDirectoryExist(pathHandle))
+                // 配置合法
+                if (!languageJson.isEmpty())
                 {
-                    isExist = true;
+                    // 存在对应键
+                    if (languageJson.containsKey(LanguageKey.Config.NAME))
+                    {
+                        // 解析名称和类型
+                        name = languageJson.getString(LanguageKey.Config.NAME);
+                        kind = languageJson.getString(LanguageKey.Config.KIND);
+                        if (FileHandleKey.INTERNAL.equals(kind))
+                        {
+                            pathHandle = Gdx.files.internal(FileUtils.pathJoin(PathName.ASSET_S_LANGUAGE, pathName));
+                        }
+                        else
+                        {
+                            pathHandle = directoryPathHandle.child(pathName);
+                        }
+
+                        LogUtils.debug(LanguageManager.class, "parsePath 用户使用的语言 (name): " + name);
+                        LogUtils.debug(LanguageManager.class, "parsePath 用户使用的语言 (kind): " + kind);
+                        LogUtils.debug(LanguageManager.class, "parsePath 用户使用的语言 (path): " + pathHandle);
+
+                        // 判断文件夹是否存在
+                        if (FileUtils.isDirectoryExist(pathHandle))
+                        {
+                            isExist = true;
+                        }
+                    }
                 }
             }
 
@@ -122,23 +146,26 @@ public final class LanguageManager
 
                 // 不存在对应语言索引 默认使用默认语言
                 name = Name.DEFAULT_LANGUAGE_NAME;
-                pathHandle = directoryPathHandle.child(FileName.DEFAULT_LANGUAGE_PATH);
+                kind = FileHandleKey.INTERNAL;
+                pathHandle = Gdx.files.internal(FileUtils.pathJoin(PathName.ASSET_S_LANGUAGE, FileName.DEFAULT_LANGUAGE_PATH));
 
                 // 修复用户配置
                 userConfigManager.setLanguage(FileName.DEFAULT_LANGUAGE_PATH);
                 userConfigManager.save(userConfigManager.getPathHandle());
                 LogUtils.debug(LanguageManager.class, "parsePath 修复用户配置 (language): " + name);
 
-                // 添加到语言集(使用相对路径)
-                dictionaryJson.put(FileName.DEFAULT_LANGUAGE_PATH, name);
-                FileUtils.createStringFile(dictionaryJson.getJsonString(), dictionaryJsonPathHandle, false);
-
-                // 复制标准的默认语言
-                FileHandle internalDefaultThemePathHandle = Gdx.files.internal(FileUtils.pathJoin(PathName.ASSET_S_LANGUAGE, FileName.DEFAULT_LANGUAGE_PATH));
-                FileHandle externalDefaultThemePathHandle = directoryPathHandle.child(FileName.DEFAULT_LANGUAGE_PATH);
-                FileUtils.copyDirectory(internalDefaultThemePathHandle, externalDefaultThemePathHandle);
+                // 融合内部语言集配置：外部语言集作为 mainJson（主体保留），内部语言集作为 mergeJson（补入缺失的官方语言条目）
+                FileHandle internalDictionaryJsonPathHandle = Gdx.files.internal(FileUtils.pathJoin(PathName.ASSET_S_LANGUAGE, FileName.LANGUAGE_DICTIONARY_CONFIG));
+                JsonEntity internalDictionaryJson = new JsonEntity(internalDictionaryJsonPathHandle);
+                if (!internalDictionaryJson.isEmpty())
+                {
+                    dictionaryJson = dictionaryJson.combined(internalDictionaryJson);
+                    FileUtils.createStringFile(dictionaryJson.getJsonString(), dictionaryJsonPathHandle, false);
+                    LogUtils.debug(LanguageManager.class, "parsePath 融合内部语言集配置成功 (json): " + dictionaryJson);
+                }
 
                 LogUtils.debug(LanguageManager.class, "parsePath 添加默认语言 (name): " + name);
+                LogUtils.debug(LanguageManager.class, "parsePath 添加默认语言 (kind): " + kind);
                 LogUtils.debug(LanguageManager.class, "parsePath 添加默认语言 (path): " + pathHandle);
             }
 
@@ -338,6 +365,16 @@ public final class LanguageManager
     public String getName ()
     {
         return name;
+    }
+
+    /**
+     * 获取语言种类
+     *
+     * @return 语言种类
+     */
+    public String getKind  ()
+    {
+        return kind;
     }
 
     /**
