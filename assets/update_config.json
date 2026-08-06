@@ -9,7 +9,7 @@
     "asset_trash/trash_config.json",
     "game/game_config.json",
     "project/project_config.json",
-    "save/save_config.json",
+    "save/save_config.json"
   ],
   "prohibit" : [
     "assets.txt",
@@ -26,6 +26,10 @@
     "asset/resource/image/keyboard_button_enter_or_escape.png",
     "asset/resource/image/virtual_confirm_rect.png",
     "asset/resource/image/virtual_cancel_rect.png",
+    "asset/language/zh_CN",
+    "asset/language/zh_TW",
+    "asset/language/en_US",
+    "asset/theme/default_theme",
     "game/sample"
   ]
 }
