@@ -56,19 +56,19 @@
 #### 1.2.1 app_repair.png（维修状态图标）
 
 - **文件：** `asset/resource/image/app_repair.png`
-- **作者：** Smashicons（icon-icons.com）
-- **来源：** [icon-icons.com](https://icon-icons.com/)
+- **作者：** Muhamad Taupik（icon-icons.com）
+- **来源：** [icon-icons.com - work-construction-tools-repair-technical](https://icon-icons.com/icon/work-construction-tools-repair-technical/230003)
 - **许可：** [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 - **修改：** 否
 
-本作品使用了 Smashicons 提供的图标素材，按 CC BY 4.0 协议声明如下：
+本作品使用了 Muhamad Taupik 提供的图标素材，按 CC BY 4.0 协议声明如下：
 
 **署名：**
-> Icons by [Smashicons](https://smashicons.com/)
+> Icons by [Muhamad Taupik](https://icon-icons.com/icon/work-construction-tools-repair-technical/230003)
 
 **使用条款：**
 - 可用于商业项目（网站、应用、印刷品、游戏等），无需额外支付版权费用
-- 必须署名作者 Smashicons 并提供来源链接
+- 必须署名作者 Muhamad Taupik 并提供来源链接
 - 可修改图标（颜色、大小、方向、形状等），修改后仍需署名
 - 不得作为独立文件转售、再许可或分发
 - 不得作为商标、服务标志或 Logo/应用图标使用
@@ -77,14 +77,30 @@
 #### 1.2.2 icon.png（主题封面图标）
 
 - **文件：** `asset/theme/default_theme/icon.png`
-- **作者：** Smashicons（icon-icons.com）
-- **来源：** [icon-icons.com](https://icon-icons.com/)
-- **许可：** [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
-- **修改：** 是（原始图标来自 Smashicons，已做尺寸调整）
-- **注意：** CC BY 4.0 禁止将图标用作商标/Logo/应用图标，当前作为游戏主题封面图标，若用于商标需替换
+- **作者：** Thalita Torres（icon-icons.com）
+- **来源：** [icon-icons.com - colors-painting-paint-erasers](https://icon-icons.com/icon/colors-painting-paint-erasers/75465)
+- **许可：** icon-icons.com 免费许可（Free for commercial use，无需署名）
+- **修改：** 否（直接使用下载的原图，512×512）
 
-**署名：**
-> Icons by [Smashicons](https://smashicons.com/)
+本作品使用了 Thalita Torres 提供的图标素材，按 icon-icons.com 免费许可使用：
+
+- 可免费用于商业项目（Free for commercial use）
+- 不强制署名（可选感谢作者）
+- 不得作为独立文件转售、再许可或分发
+
+#### 1.2.3 setup.ico（安装程序图标）
+
+- **文件：** `lwjgl3/setup/setup.ico`（源图 `lwjgl3/setup/setup.png`）
+- **作者：** Lokatara Studio（icon-icons.com）
+- **来源：** [icon-icons.com - music-cd-disk-dvd](https://icon-icons.com/icon/music-cd-disk-dvd/181413)
+- **许可：** icon-icons.com 免费许可（Free for commercial use，无需署名）
+- **修改：** 是（在原始 CD 图标基础上二次创作，制作安装程序图标）
+
+本作品使用了 Lokatara Studio 提供的图标素材，按 icon-icons.com 免费许可使用：
+
+- 可免费用于商业项目（Free for commercial use）
+- 不强制署名（可选感谢作者）
+- 不得作为独立文件转售、再许可或分发
 
 ---
 
@@ -130,7 +146,7 @@
 
 - **文件：** `asset/theme/default_theme/asset/resource/audio/Scorching Sun.mp3`
 - **作者：** 乌鸦Producer
-- **来源：** 乌鸦的免费可商用音乐包 — ④轻音乐&Gal包-Scorching Sun
+- **来源：** [乌鸦的免费可商用音乐包（B站视频）](https://www.bilibili.com/video/BV1uFcwe1EDV) — ③轻音乐&Gal包-Scorching Sun
 - **许可：** 免费可商用，须署名
 - **修改：** 否
 
@@ -151,7 +167,7 @@
 
 - **文件：** `asset/theme/default_theme/asset/resource/audio/Title Music.mp3`
 - **作者：** 乌鸦Producer
-- **来源：** 乌鸦的免费可商用音乐包 — ②平台游戏包-标题音乐
+- **来源：** [乌鸦的免费可商用音乐包（B站视频）](https://www.bilibili.com/video/BV1uFcwe1EDV) — ②平台游戏包-标题音乐
 - **许可：** 免费可商用，须署名
 - **修改：** 否
 
@@ -170,7 +186,7 @@
 
 - **文件：** `asset/theme/default_theme/asset/resource/audio/The Dragon Fell in Love wit.mp3`
 - **作者：** 乌鸦Producer
-- **来源：** 乌鸦的免费可商用音乐包 — ④轻音乐&Gal包-The Dragon Fell in Love wit
+- **来源：** [乌鸦的免费可商用音乐包（B站视频）](https://www.bilibili.com/video/BV1uFcwe1EDV) — ③轻音乐&Gal包-The Dragon Fell in Love wit
 - **许可：** 免费可商用，须署名
 - **修改：** 否
 
@@ -225,3 +241,12 @@
 | `asset/theme/default_theme/asset/resource/image/label/mb.img.background.png` | 弹窗标签背景图（自行绘制） |
 | `asset/resource/image/virtual_confirm_rect.png` | 虚拟输入确认框（程序生成） |
 | `asset/resource/image/virtual_cancel_rect.png` | 虚拟输入取消框（程序生成） |
+| `asset/resource/image/error.png` | 加载失败占位图（2×2 程序生成） |
+| `lwjgl3/setup/icon.ico` | 安装程序应用图标（自行制作） |
+| `lwjgl3/setup/console.ico` | 控制台图标（与 icon.ico 同源，自行制作） |
+| `lwjgl3/icons/logo.png` | 游戏应用图标源图（自行制作） |
+| `lwjgl3/icons/logo.ico` | Windows 应用图标（由 logo.png 生成） |
+| `lwjgl3/icons/logo.icns` | macOS 应用图标（由 logo.png 生成） |
+| `lwjgl3/src/main/resources/icon128.png` | 游戏窗口图标（由 logo.png 衍生） |
+| `android/ic_launcher-web.png` | Android 应用图标（由 logo.png 衍生） |
+| `android/res/drawable-*/my_ic_launcher.png` | Android 各分辨率应用图标（由 logo.png 衍生） |
