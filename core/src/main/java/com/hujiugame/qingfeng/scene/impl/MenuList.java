@@ -11,6 +11,7 @@ import com.hujiugame.qingfeng.event.EventQueue;
 import com.hujiugame.qingfeng.event.imp.EventPopGameState;
 import com.hujiugame.qingfeng.graphic.GraphicsManager;
 import com.hujiugame.qingfeng.scene.GameRender;
+import com.hujiugame.qingfeng.type.file.FileSuffix;
 import com.hujiugame.qingfeng.type.file.PathName;
 import com.hujiugame.qingfeng.type.key.DialogKey;
 import com.hujiugame.qingfeng.type.key.GameInfoKey;
@@ -440,7 +441,7 @@ public final class MenuList implements GameRender
         {
             FileChooser.createFileChooser(DialogKey.FileChooser.IMPORT_GAME_TAG);
             FileChooser.showFileChooser(DialogKey.FileChooser.IMPORT_GAME_TAG, DialogKey.FileChooser.IMPORT_GAME_NAME,
-                null, FileChooser.EXT_GAME);
+                null, FileSuffix.EXT_GAME);
         }
 
         // 按下上一页按钮

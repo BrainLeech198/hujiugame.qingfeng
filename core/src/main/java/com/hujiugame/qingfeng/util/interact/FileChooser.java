@@ -29,33 +29,6 @@ public final class FileChooser
     // 本次运行中最后选择的文件目录（程序重启后消失）
     private static FileHandle lastSelectedDirectory;
 
-    // ==================== 后缀常量 ====================
-    /** 不过滤 */
-    public static final String EXT_ALL = "";
-
-    /** 游戏文件 */
-    public static final String EXT_GAME = ".qfg";
-
-    /** 压缩包 */
-    public static final String EXT_ZIP  = ".zip";
-    public static final String EXT_RAR  = ".rar";
-    public static final String EXT_7Z   = ".7z";
-    public static final String EXT_TAR  = ".tar";
-    public static final String EXT_GZ   = ".gz";
-
-    /** 图片 */
-    public static final String EXT_PNG  = ".png";
-    public static final String EXT_JPG  = ".jpg";
-    public static final String EXT_JPEG = ".jpeg";
-    public static final String EXT_BMP  = ".bmp";
-    public static final String EXT_GIF  = ".gif";
-
-    /** 文本 */
-    public static final String EXT_TXT  = ".txt";
-    public static final String EXT_JSON = ".json";
-    public static final String EXT_XML  = ".xml";
-    public static final String EXT_CSV  = ".csv";
-
     // ---------- 全局存储 ----------
     private static final Map<String, FileChooserResult> resultMap = new ConcurrentHashMap<>();
     private static final Map<String, Object> activeChoosers = new ConcurrentHashMap<>();

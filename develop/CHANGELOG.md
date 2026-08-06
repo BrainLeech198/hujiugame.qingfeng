@@ -23,6 +23,7 @@
 ### 新增
 
 - **`FileHandleKey` 常量类** — `type/key/FileHandleKey.java`，收编文件句柄类型字符串：`INTERNAL="internal"` / `EXTERNAL="external"`，取代散落的字符串字面量
+- **`FileSuffix` 后缀常量类** — `type/file/FileSuffix.java`，收编文件后缀常量：游戏文件 `.qfg`、资源包（语言 `.qfl`/主题 `.qft`/游戏语言 `.qfgl`/游戏主题 `.qfgt`）、压缩包（zip/rar/7z/tar/gz）、图片（png/jpg/jpeg/bmp/gif）、文本（txt/json/xml/csv）；`FileChooser` 移除 21 个 `EXT_*` 常量改用 `FileSuffix`，`MenuList` 游戏文件导入改用 `FileSuffix.EXT_GAME`
 
 ### 功能
 
