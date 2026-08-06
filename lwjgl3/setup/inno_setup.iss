@@ -10,6 +10,20 @@
 #define MyAppAssocExt ".qfg"
 #define MyAppAssocKey StringChange(MyAppAssocName, " ", "") + MyAppAssocExt
 
+; 资源包文件关联（语言包/主题包/游戏语言包/游戏主题包）
+#define MyAppAssocExtQfl ".qfl"
+#define MyAppAssocNameQfl "QF Language Pack"
+#define MyAppAssocKeyQfl StringChange(MyAppAssocNameQfl, " ", "") + MyAppAssocExtQfl
+#define MyAppAssocExtQft ".qft"
+#define MyAppAssocNameQft "QF Theme Pack"
+#define MyAppAssocKeyQft StringChange(MyAppAssocNameQft, " ", "") + MyAppAssocExtQft
+#define MyAppAssocExtQfgl ".qfgl"
+#define MyAppAssocNameQfgl "QF Game Language Pack"
+#define MyAppAssocKeyQfgl StringChange(MyAppAssocNameQfgl, " ", "") + MyAppAssocExtQfgl
+#define MyAppAssocExtQfgt ".qfgt"
+#define MyAppAssocNameQfgt "QF Game Theme Pack"
+#define MyAppAssocKeyQfgt StringChange(MyAppAssocNameQfgt, " ", "") + MyAppAssocExtQfgt
+
 [Setup]
 AppId={{CCD1AB7D-528E-4681-A79E-49183550CABA}
 AppName={#MyAppName}
@@ -49,10 +63,40 @@ Source: "dist\launcher\lib\*"; DestDir: "{app}\lib"; Flags: ignoreversion recurs
 Source: ".\icon.ico"; DestDir: "{app}"; Flags: ignoreversion
 
 [Registry]
+; 绑定 .qfg 默认 ProgID，使双击 .qfg 直接调用 launcher.exe "%1"
+Root: HKA; Subkey: "Software\Classes\{#MyAppAssocExt}"; ValueType: string; ValueName: ""; ValueData: "{#MyAppAssocKey}"; Flags: uninsdeletevalue
 Root: HKA; Subkey: "Software\Classes\{#MyAppAssocExt}\OpenWithProgids"; ValueType: string; ValueName: "{#MyAppAssocKey}"; ValueData: ""; Flags: uninsdeletevalue
 Root: HKA; Subkey: "Software\Classes\{#MyAppAssocKey}"; ValueType: string; ValueName: ""; ValueData: "{#MyAppAssocName}"; Flags: uninsdeletekey
 Root: HKA; Subkey: "Software\Classes\{#MyAppAssocKey}\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\icon.ico"
 Root: HKA; Subkey: "Software\Classes\{#MyAppAssocKey}\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+
+; .qfl 语言包关联
+Root: HKA; Subkey: "Software\Classes\{#MyAppAssocExtQfl}"; ValueType: string; ValueName: ""; ValueData: "{#MyAppAssocKeyQfl}"; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\{#MyAppAssocExtQfl}\OpenWithProgids"; ValueType: string; ValueName: "{#MyAppAssocKeyQfl}"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\{#MyAppAssocKeyQfl}"; ValueType: string; ValueName: ""; ValueData: "{#MyAppAssocNameQfl}"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#MyAppAssocKeyQfl}\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\icon.ico"
+Root: HKA; Subkey: "Software\Classes\{#MyAppAssocKeyQfl}\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+
+; .qft 主题包关联
+Root: HKA; Subkey: "Software\Classes\{#MyAppAssocExtQft}"; ValueType: string; ValueName: ""; ValueData: "{#MyAppAssocKeyQft}"; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\{#MyAppAssocExtQft}\OpenWithProgids"; ValueType: string; ValueName: "{#MyAppAssocKeyQft}"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\{#MyAppAssocKeyQft}"; ValueType: string; ValueName: ""; ValueData: "{#MyAppAssocNameQft}"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#MyAppAssocKeyQft}\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\icon.ico"
+Root: HKA; Subkey: "Software\Classes\{#MyAppAssocKeyQft}\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+
+; .qfgl 游戏语言包关联
+Root: HKA; Subkey: "Software\Classes\{#MyAppAssocExtQfgl}"; ValueType: string; ValueName: ""; ValueData: "{#MyAppAssocKeyQfgl}"; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\{#MyAppAssocExtQfgl}\OpenWithProgids"; ValueType: string; ValueName: "{#MyAppAssocKeyQfgl}"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\{#MyAppAssocKeyQfgl}"; ValueType: string; ValueName: ""; ValueData: "{#MyAppAssocNameQfgl}"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#MyAppAssocKeyQfgl}\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\icon.ico"
+Root: HKA; Subkey: "Software\Classes\{#MyAppAssocKeyQfgl}\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
+
+; .qfgt 游戏主题包关联
+Root: HKA; Subkey: "Software\Classes\{#MyAppAssocExtQfgt}"; ValueType: string; ValueName: ""; ValueData: "{#MyAppAssocKeyQfgt}"; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\{#MyAppAssocExtQfgt}\OpenWithProgids"; ValueType: string; ValueName: "{#MyAppAssocKeyQfgt}"; ValueData: ""; Flags: uninsdeletevalue
+Root: HKA; Subkey: "Software\Classes\{#MyAppAssocKeyQfgt}"; ValueType: string; ValueName: ""; ValueData: "{#MyAppAssocNameQfgt}"; Flags: uninsdeletekey
+Root: HKA; Subkey: "Software\Classes\{#MyAppAssocKeyQfgt}\DefaultIcon"; ValueType: string; ValueName: ""; ValueData: "{app}\icon.ico"
+Root: HKA; Subkey: "Software\Classes\{#MyAppAssocKeyQfgt}\shell\open\command"; ValueType: string; ValueName: ""; ValueData: """{app}\{#MyAppExeName}"" ""%1"""
 
 [Icons]
 Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\icon.ico"

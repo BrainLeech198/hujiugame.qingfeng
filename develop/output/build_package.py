@@ -950,7 +950,7 @@ class Builder:
             f"Exec=/usr/lib/qingfeng/qingfeng %f\n"
             f"Icon=qingfeng\n"
             "Categories=Game;\n"
-            "MimeType=application/x-qingfeng-game;\n"
+            "MimeType=application/x-qingfeng-game;application/x-qingfeng-language;application/x-qingfeng-theme;application/x-qingfeng-game-language;application/x-qingfeng-game-theme;\n"
             "Terminal=false\n"
         )
 
@@ -1021,13 +1021,33 @@ class Builder:
         if icon_path.exists():
             data_files["usr/share/icons/hicolor/256x256/apps/qingfeng.png"] = icon_path.read_bytes()
 
-        # MIME 类型注册（.qfg 文件关联）
-        data_files["usr/share/mime/packages/x-qingfeng-game.xml"] = (
+        # MIME 类型注册（.qfg 游戏包 / .qfl 语言包 / .qft 主题包 / .qfgl 游戏语言包 / .qfgt 游戏主题包）
+        data_files["usr/share/mime/packages/x-qingfeng.xml"] = (
             '<?xml version="1.0" encoding="UTF-8"?>\n'
             '<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">\n'
             '    <mime-type type="application/x-qingfeng-game">\n'
             '        <comment>QingFeng Game Package</comment>\n'
             '        <glob pattern="*.qfg"/>\n'
+            '        <icon name="qingfeng"/>\n'
+            '    </mime-type>\n'
+            '    <mime-type type="application/x-qingfeng-language">\n'
+            '        <comment>QingFeng Language Pack</comment>\n'
+            '        <glob pattern="*.qfl"/>\n'
+            '        <icon name="qingfeng"/>\n'
+            '    </mime-type>\n'
+            '    <mime-type type="application/x-qingfeng-theme">\n'
+            '        <comment>QingFeng Theme Pack</comment>\n'
+            '        <glob pattern="*.qft"/>\n'
+            '        <icon name="qingfeng"/>\n'
+            '    </mime-type>\n'
+            '    <mime-type type="application/x-qingfeng-game-language">\n'
+            '        <comment>QingFeng Game Language Pack</comment>\n'
+            '        <glob pattern="*.qfgl"/>\n'
+            '        <icon name="qingfeng"/>\n'
+            '    </mime-type>\n'
+            '    <mime-type type="application/x-qingfeng-game-theme">\n'
+            '        <comment>QingFeng Game Theme Pack</comment>\n'
+            '        <glob pattern="*.qfgt"/>\n'
             '        <icon name="qingfeng"/>\n'
             '    </mime-type>\n'
             '</mime-info>\n'

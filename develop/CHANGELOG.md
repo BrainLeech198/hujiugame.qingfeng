@@ -18,12 +18,13 @@
 > 7. 【如果】本次更新比较重要、与项目关键设计相关 → 同步写入 `temp/CLAUDE_MEMORY.md`（gitignored 本地工作记忆，仅当前开发机可见），便于后续 AI 对话延续上下文
 > 8. 【必须】CHANGELOG 条目不独立提交：每个内容改动 = 一笔提交，同时包含对应改动的文件 + 本文档中该改动对应的条目。先改文件并写对应条目 → 一并提交 → 再改下一个文件、写下一条目；按内容逐条拆分提交，禁止攒一堆 CHANGELOG 更新最后统一提交（例：文件 `a`、`b` 均有改动 → 提交 1 = `a` + 「更新了 a」条目；提交 2 = `b` + 「更新了 b」条目）
 
-## 2026-08-06 — 官方语言/主题 Internal 句柄化 + 默认配置损坏恢复预想方案入库 + 版权素材清理替换
+## 2026-08-06 — 官方语言/主题 Internal 句柄化 + 默认配置损坏恢复预想方案入库 + 版权素材清理替换 + 文件后缀关联补全与四类资源包注册
 
 ### 新增
 
 - **`FileHandleKey` 常量类** — `type/key/FileHandleKey.java`，收编文件句柄类型字符串：`INTERNAL="internal"` / `EXTERNAL="external"`，取代散落的字符串字面量
 - **`FileSuffix` 后缀常量类** — `type/file/FileSuffix.java`，收编文件后缀常量：游戏文件 `.qfg`、资源包（语言 `.qfl`/主题 `.qft`/游戏语言 `.qfgl`/游戏主题 `.qfgt`）、压缩包（zip/rar/7z/tar/gz）、图片（png/jpg/jpeg/bmp/gif）、文本（txt/json/xml/csv）；`FileChooser` 移除 21 个 `EXT_*` 常量改用 `FileSuffix`，`MenuList` 游戏文件导入改用 `FileSuffix.EXT_GAME`
+- **四类资源包后缀平台关联注册** — 语言包 `.qfl`/主题包 `.qft`/游戏语言包 `.qfgl`/游戏主题包 `.qfgt` 三平台文件关联：Windows `inno_setup.iss` 新增四组 ProgID 注册（双击带参运行 `launcher.exe "%1"`）；Linux `build_package.py` MIME 注册由 1 个扩展为 5 个 mime-type（含 4 个新包类型），文件名 `x-qingfeng-game.xml` 改名 `x-qingfeng.xml`；Android `AndroidManifest.xml` intent-filter 追加 4 个 `pathPattern`
 
 ### 功能
 
@@ -59,6 +60,12 @@
 
 - **THIRDPARTY_LICENSES.md** — 素材来源全面登记：图标替换条目重写（app_repair/icon/setup.ico 记录作者+具体链接）；补登记原创素材（icon.ico、console.ico、logo.*、error.png、icon128.png、android launcher 系列）；背景音乐补具体 B站来源链接（BV1uFcwe1EDV）并修正轻音乐包编号为③
 - **THIRDPARTY_LICENSES.html** — 官网平台下载图标拆分为三个独立来源条目（Windows/Linux=Microdot Graphic CC BY 4.0，Android=RoundIcons 免费商用），补充作者链接与商标声明
+
+---
+
+### 修复
+
+- **`inno_setup.iss` .qfg 文件关联补默认 ProgID** — 新增 `HKCR\.qfg` 默认 ProgID 绑定（`Software\Classes\.qfg` 默认值 → `QFGameFile.qfg`），双击 `.qfg` 文件直接触发 `launcher.exe "%1"` 带参运行，无需手动选择打开方式；与原有 OpenWithProgids 打开方式候选并存，卸载时 `uninsdeletevalue` 一并清除
 
 ## 2026-08-05 — 修复启动器 BGM 退出游戏后不自动播放 + macOS 打包预想方案入库
 

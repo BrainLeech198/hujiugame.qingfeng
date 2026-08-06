@@ -22,7 +22,7 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-            <!-- 文件关联：处理 .qfg 文件 -->
+            <!-- 文件关联：处理 .qfg/.qfl/.qft/.qfgl/.qfgt 包文件 -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -31,6 +31,10 @@
                 <data android:scheme="content" />
                 <data android:mimeType="*/*" />
                 <data android:pathPattern=".*\\.qfg" />
+                <data android:pathPattern=".*\\.qfl" />
+                <data android:pathPattern=".*\\.qft" />
+                <data android:pathPattern=".*\\.qfgl" />
+                <data android:pathPattern=".*\\.qfgt" />
                 <data android:host="*" />
             </intent-filter>
         </activity>
