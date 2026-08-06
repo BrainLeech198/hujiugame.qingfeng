@@ -1,6 +1,6 @@
 package com.hujiugame.qingfeng.type.key;
 
-public class DialogKey
+public final class DialogKey
 {
     private DialogKey ()
     {
