@@ -82,69 +82,144 @@ public final class RequirementKey
             throw new UnsupportedOperationException("Utility class cannot be instantiated");
         }
 
+        /** 语言块文件名（language.json 的 blocks 元素） */
         public static final String REQUIREMENT_BLOCK = "requirement.json";
 
         // ====================================================================================================
-        // 启动器语言
+        // 启动器语言集 requirement.json 第一层 key（含点）
 
-        // 弹窗系
-        public static final String MESSAGE_BOX_FIRST_KEY = "message_box";
-
-        public static final String MESSAGE_BOX_OPEN_OFFICIAL_WEBSITE_KEY = "open_official_website";
-        public static final String MESSAGE_BOX_OPEN_OFFICIAL_WEBSITE_TITLE = "open_official_website.title";
-        public static final String MESSAGE_BOX_OPEN_OFFICIAL_WEBSITE_CONTENT = "open_official_website.content";
-
-        public static final String MESSAGE_BOX_QUIT_GAME_KEY = "quit_game";
-        public static final String MESSAGE_BOX_QUIT_GAME_TITLE = "quit_game.title";
-        public static final String MESSAGE_BOX_QUIT_GAME_CONTENT = "quit_game.content";
-
-        public static final String MESSAGE_BOX_UPDATE_DETECTED_KEY = "update_detected";
-        public static final String MESSAGE_BOX_UPDATE_DETECTED_TITLE = "update_detected.title";
-        public static final String MESSAGE_BOX_UPDATE_DETECTED_CONTENT = "update_detected.content";
-        public static final String MESSAGE_BOX_UPDATE_REQUEST_FAILED_KEY = "update_request_failed";
-        public static final String MESSAGE_BOX_UPDATE_REQUEST_FAILED_TITLE = "update_request_failed.title";
-        public static final String MESSAGE_BOX_UPDATE_REQUEST_FAILED_CONTENT = "update_request_failed.content";
-
-        public static final String MESSAGE_BOX_GAME_VERSION_DIFFERENT_KEY = "game_version_different";
-        public static final String MESSAGE_BOX_GAME_VERSION_DIFFERENT_TITLE = "game_version_different.title";
-        public static final String MESSAGE_BOX_GAME_VERSION_DIFFERENT_CONTENT_1 = "game_version_different.content.1";
-        public static final String MESSAGE_BOX_GAME_VERSION_DIFFERENT_CONTENT_2 = "game_version_different.content.2";
-        public static final String MESSAGE_BOX_GAME_VERSION_DIFFERENT_CONTENT_3 = "game_version_different.content.3";
-        public static final String MESSAGE_BOX_GAME_VERSION_DIFFERENT_CONTENT_4 = "game_version_different.content.4";
-
-        // Menu 系
-        public static final String MENU_FIRST_KEY = "menu";
-
-        public static final String MENU_MAIN_BUTTON_START = "main.button.start";
-        public static final String MENU_MAIN_BUTTON_CREATE = "main.button.create";
-        public static final String MENU_MAIN_BUTTON_CONFIG = "main.button.config";
-        public static final String MENU_MAIN_BUTTON_QUIT = "main.button.quit";
-
-        public static final String MENU_LIST_BUTTON_BACK = "list.button.back";
-        public static final String MENU_LIST_BUTTON_IMPORT = "list.button.import";
-        public static final String MENU_LIST_BUTTON_PROFILE = "list.button.profile";
-        public static final String MENU_LIST_BUTTON_SHARE = "list.button.share";
-        public static final String MENU_LIST_BUTTON_DELETE = "list.button.delete";
-        public static final String MENU_LIST_BUTTON_LAST_PAGE = "list.button.last_page";
-        public static final String MENU_LIST_BUTTON_NEXT_PAGE = "list.button.next_page";
-        public static final String MENU_LIST_LABEL_ABSOLUTE_PATH = "list.label.absolute_path";
-        public static final String MENU_LIST_LABEL_SELECTED_PATH = "list.label.selected_path";
-        public static final String MENU_LIST_LABEL_PAGE = "list.label.page";
-        public static final String MENU_LOAD_LABEL_LOADING = "load.label.loading";
-
-        // Config 系
-        public static final String CONFIG_FIRST_KEY = "config";
-
-        public static final String CONFIG_BASIC_BACK = "basic.back";
+        public static final String MESSAGE_BOX = "message_box";
+        public static final String MENU_MAIN = "menu.main";
+        public static final String MENU_LIST = "menu.list";
+        public static final String MENU_LOAD = "menu.load";
+        public static final String CONFIG_BASIC = "config.basic";
 
         // ====================================================================================================
-        // 游戏内语言
+        // message_box 节点（启动器 requirement.json）
 
-        // 弹窗系
-        public static final String IN_GAME_MESSAGE_BOX_FIRST_KEY = "message_box";
+        public static final class MessageBox
+        {
+            private MessageBox()
+            {
+                throw new UnsupportedOperationException("Utility class cannot be instantiated");
+            }
 
-        public static final String IN_GAME_MESSAGE_BOX_QUIT_GAME_KEY = "quit_game";
-        public static final String IN_GAME_MESSAGE_BOX_QUIT_GAME_TITLE = "quit_game.title";
-        public static final String IN_GAME_MESSAGE_BOX_QUIT_GAME_CONTENT = "quit_game.content";
+            // 弹窗标识（非 JSON key，showAsk/handleAsk 匹配用）
+            public static final String OPEN_OFFICIAL_WEBSITE = "open_official_website";
+            public static final String QUIT_GAME = "quit_game";
+            public static final String UPDATE_DETECTED = "update_detected";
+            public static final String UPDATE_REQUEST_FAILED = "update_request_failed";
+            public static final String GAME_VERSION_DIFFERENT = "game_version_different";
+
+            // JSON 子 key
+            public static final String OPEN_OFFICIAL_WEBSITE_TITLE = "open_official_website.title";
+            public static final String OPEN_OFFICIAL_WEBSITE_CONTENT = "open_official_website.content";
+            public static final String QUIT_GAME_TITLE = "quit_game.title";
+            public static final String QUIT_GAME_CONTENT = "quit_game.content";
+            public static final String UPDATE_DETECTED_TITLE = "update_detected.title";
+            public static final String UPDATE_DETECTED_CONTENT = "update_detected.content";
+            public static final String UPDATE_REQUEST_FAILED_TITLE = "update_request_failed.title";
+            public static final String UPDATE_REQUEST_FAILED_CONTENT = "update_request_failed.content";
+            public static final String GAME_VERSION_DIFFERENT_TITLE = "game_version_different.title";
+            public static final String GAME_VERSION_DIFFERENT_CONTENT_1 = "game_version_different.content.1";
+            public static final String GAME_VERSION_DIFFERENT_CONTENT_2 = "game_version_different.content.2";
+            public static final String GAME_VERSION_DIFFERENT_CONTENT_3 = "game_version_different.content.3";
+            public static final String GAME_VERSION_DIFFERENT_CONTENT_4 = "game_version_different.content.4";
+        }
+
+        // ====================================================================================================
+        // menu.main 节点（启动器 requirement.json）
+
+        public static final class MenuMain
+        {
+            private MenuMain()
+            {
+                throw new UnsupportedOperationException("Utility class cannot be instantiated");
+            }
+
+            public static final String BUTTON_START = "button.start";
+            public static final String BUTTON_CREATE = "button.create";
+            public static final String BUTTON_CONFIG = "button.config";
+            public static final String BUTTON_QUIT = "button.quit";
+        }
+
+        // ====================================================================================================
+        // menu.list 节点（启动器 requirement.json）
+
+        public static final class MenuList
+        {
+            private MenuList()
+            {
+                throw new UnsupportedOperationException("Utility class cannot be instantiated");
+            }
+
+            public static final String BUTTON_BACK = "button.back";
+            public static final String BUTTON_IMPORT = "button.import";
+            public static final String BUTTON_PROFILE = "button.profile";
+            public static final String BUTTON_SHARE = "button.share";
+            public static final String BUTTON_DELETE = "button.delete";
+            public static final String BUTTON_LAST_PAGE = "button.last_page";
+            public static final String BUTTON_NEXT_PAGE = "button.next_page";
+            public static final String LABEL_ABSOLUTE_PATH = "label.absolute_path";
+            public static final String LABEL_SELECTED_PATH = "label.selected_path";
+            public static final String LABEL_PAGE = "label.page";
+        }
+
+        // ====================================================================================================
+        // menu.load 节点（启动器 requirement.json）
+
+        public static final class MenuLoad
+        {
+            private MenuLoad()
+            {
+                throw new UnsupportedOperationException("Utility class cannot be instantiated");
+            }
+
+            public static final String LABEL_LOADING = "label.loading";
+        }
+
+        // ====================================================================================================
+        // config.basic 节点（启动器 requirement.json）
+
+        public static final class ConfigBasic
+        {
+            private ConfigBasic()
+            {
+                throw new UnsupportedOperationException("Utility class cannot be instantiated");
+            }
+
+            public static final String BACK = "back";
+            public static final String LANGUAGE = "language";
+        }
+
+        // ====================================================================================================
+        // 游戏语言集 requirement.json（如 game/swxq/asset/language/chinese/requirement.json）
+
+        public static final class InGame
+        {
+            private InGame()
+            {
+                throw new UnsupportedOperationException("Utility class cannot be instantiated");
+            }
+
+            /** 游戏 requirement.json 第一层 key */
+            public static final String MESSAGE_BOX = "message_box";
+
+            /** message_box 节点（游戏 requirement.json） */
+            public static final class MessageBox
+            {
+                private MessageBox()
+                {
+                    throw new UnsupportedOperationException("Utility class cannot be instantiated");
+                }
+
+                /** 游戏弹窗标识（非 JSON key，showAsk/handleAsk 匹配用） */
+                public static final String QUIT_GAME = "quit_game";
+
+                /** JSON 子 key */
+                public static final String QUIT_GAME_TITLE = "quit_game.title";
+                public static final String QUIT_GAME_CONTENT = "quit_game.content";
+            }
+        }
     }
 }

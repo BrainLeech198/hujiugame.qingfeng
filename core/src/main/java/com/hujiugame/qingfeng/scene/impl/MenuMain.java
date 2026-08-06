@@ -80,9 +80,9 @@ public final class MenuMain implements GameRender
             useViewport.getViewport().unproject(touchPos);
             if (touchPos.x >= 0 && touchPos.x <= 180 && touchPos.y >= 0 && touchPos.y <= 40)
             {
-                uiManager.getMessageBox().showAsk(RequirementKey.Language.MESSAGE_BOX_OPEN_OFFICIAL_WEBSITE_KEY,
-                    "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_OPEN_OFFICIAL_WEBSITE_TITLE + "}",
-                    "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_OPEN_OFFICIAL_WEBSITE_CONTENT + "}");
+                uiManager.getMessageBox().showAsk(RequirementKey.Language.MessageBox.OPEN_OFFICIAL_WEBSITE,
+                    "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX + "." + RequirementKey.Language.MessageBox.OPEN_OFFICIAL_WEBSITE_TITLE + "}",
+                    "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX + "." + RequirementKey.Language.MessageBox.OPEN_OFFICIAL_WEBSITE_CONTENT + "}");
             }
         }
 
@@ -104,9 +104,9 @@ public final class MenuMain implements GameRender
         // 按下退出按钮
         else if (uiManager.isButtonClicked(RequirementKey.Ui.MENU_MAIN_BUTTON_QUIT))
         {
-            uiManager.getMessageBox().showAsk(RequirementKey.Language.MESSAGE_BOX_QUIT_GAME_KEY,
-                "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_QUIT_GAME_TITLE + "}",
-                "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_QUIT_GAME_CONTENT+ "}");
+            uiManager.getMessageBox().showAsk(RequirementKey.Language.MessageBox.QUIT_GAME,
+                "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX + "." + RequirementKey.Language.MessageBox.QUIT_GAME_TITLE + "}",
+                "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX + "." + RequirementKey.Language.MessageBox.QUIT_GAME_CONTENT+ "}");
         }
 
         // 更新检测
@@ -117,32 +117,32 @@ public final class MenuMain implements GameRender
             {
                 if (updateChecker.isNeedVersionUpdate())
                 {
-                    uiManager.getMessageBox().showAsk(RequirementKey.Language.MESSAGE_BOX_UPDATE_DETECTED_KEY,
-                        "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_UPDATE_DETECTED_TITLE + "}",
-                        "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_UPDATE_DETECTED_CONTENT + "}");
+                    uiManager.getMessageBox().showAsk(RequirementKey.Language.MessageBox.UPDATE_DETECTED,
+                        "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX + "." + RequirementKey.Language.MessageBox.UPDATE_DETECTED_TITLE + "}",
+                        "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX + "." + RequirementKey.Language.MessageBox.UPDATE_DETECTED_CONTENT + "}");
                 }
             }
             // 请求失败
             else
             {
-                uiManager.getMessageBox().showAsk(RequirementKey.Language.MESSAGE_BOX_UPDATE_REQUEST_FAILED_KEY,
-                    "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_UPDATE_REQUEST_FAILED_TITLE + "}",
-                    "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_UPDATE_REQUEST_FAILED_CONTENT + "}");
+                uiManager.getMessageBox().showAsk(RequirementKey.Language.MessageBox.UPDATE_REQUEST_FAILED,
+                    "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX + "." + RequirementKey.Language.MessageBox.UPDATE_REQUEST_FAILED_TITLE + "}",
+                    "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX + "." + RequirementKey.Language.MessageBox.UPDATE_REQUEST_FAILED_CONTENT + "}");
             }
             // 重置检测更新完成状态
             updateChecker.setDoDetectUpdateFinish(false);
         }
 
-        uiManager.getMessageBox().handleAsk(RequirementKey.Language.MESSAGE_BOX_OPEN_OFFICIAL_WEBSITE_KEY,
+        uiManager.getMessageBox().handleAsk(RequirementKey.Language.MessageBox.OPEN_OFFICIAL_WEBSITE,
             () -> Gdx.net.openURI(WebSite.OFFICIAL));
 
-        uiManager.getMessageBox().handleAsk(RequirementKey.Language.MESSAGE_BOX_QUIT_GAME_KEY,
+        uiManager.getMessageBox().handleAsk(RequirementKey.Language.MessageBox.QUIT_GAME,
             Gdx.app::exit);
 
-        uiManager.getMessageBox().handleAsk(RequirementKey.Language.MESSAGE_BOX_UPDATE_DETECTED_KEY,
+        uiManager.getMessageBox().handleAsk(RequirementKey.Language.MessageBox.UPDATE_DETECTED,
             () -> Gdx.net.openURI(WebSite.OFFICIAL));
 
-        uiManager.getMessageBox().handleAsk(RequirementKey.Language.MESSAGE_BOX_UPDATE_REQUEST_FAILED_KEY,
+        uiManager.getMessageBox().handleAsk(RequirementKey.Language.MessageBox.UPDATE_REQUEST_FAILED,
             () -> Gdx.net.openURI(WebSite.OFFICIAL));
 
     }

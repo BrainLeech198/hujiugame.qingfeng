@@ -25,6 +25,12 @@
 - **`UiKey` 布局引用字段转发 `LayoutKey.Ui`** — `Button`/`Label`/`Image` 组件的 `KIND`/`SHOW` 由硬编码字符串改为转发引用 `LayoutKey.Ui.KIND`/`LayoutKey.Ui.SHOW`，字符串值以 `LayoutKey` 为唯一来源，调用方语义不变；`ButtonInfo`/`LabelInfo`/`ImageInfo` kind 解析改用各自组件类常量，`JsonShowParser` show 解析改用 `LayoutKey.Ui.SHOW`
 - **`LayoutKey` 新增 `Ui` 嵌套类** — 收编 layout.json 的 ui 节元素引用字段 `KIND="kind"`/`SHOW="show"`，作为字符串唯一来源
 
+---
+
+### 重构
+
+- **`RequirementKey.Language` 按真实 requirement.json 嵌套重构** — 第一层 key（`message_box`/`menu_main`/`menu_list`/`menu_load`/`config_basic`）对应嵌套类 `MessageBox`/`MenuMain`/`MenuList`/`MenuLoad`/`ConfigBasic`；游戏语言集独立为 `InGame`（对应游戏独立语言包）；弹窗标识常量（`*_KEY`）在 `MessageBox` 中单列并注释"非 JSON key"；`MenuMain`/`MenuList`/`GameMenu` 引用同步更新
+
 ## 2026-08-06 — 官方语言/主题 Internal 句柄化 + 默认配置损坏恢复预想方案入库 + 版权素材清理替换 + 文件后缀关联补全与四类资源包注册 + 启动器单实例限制 + 启动器源码整理 + 启动器说明文档同步
 
 ### 新增

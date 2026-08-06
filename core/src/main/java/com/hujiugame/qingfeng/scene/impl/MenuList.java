@@ -324,15 +324,15 @@ public final class MenuList implements GameRender
         // 判断版本是否一致
         if (!updateChecker.doMinorCompatible(selectedGameLauncherVersion))
         {
-            uiManager.getMessageBox().showInfo(RequirementKey.Language.MESSAGE_BOX_GAME_VERSION_DIFFERENT_KEY,
-                "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_GAME_VERSION_DIFFERENT_TITLE + "}",
-                "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_GAME_VERSION_DIFFERENT_CONTENT_1 + "}"
+            uiManager.getMessageBox().showInfo(RequirementKey.Language.MessageBox.GAME_VERSION_DIFFERENT,
+                "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX + "." + RequirementKey.Language.MessageBox.GAME_VERSION_DIFFERENT_TITLE + "}",
+                "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX + "." + RequirementKey.Language.MessageBox.GAME_VERSION_DIFFERENT_CONTENT_1 + "}"
                     + "{game$" + GameInfoKey.GameList.SELECTED_NAME + "}"
-                    + "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_GAME_VERSION_DIFFERENT_CONTENT_2 + "}"
+                    + "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX + "." + RequirementKey.Language.MessageBox.GAME_VERSION_DIFFERENT_CONTENT_2 + "}"
                     + "{game$" + GameInfoKey.GameList.SELECTED_LAUNCHER_VERSION + "}"
-                    + "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_GAME_VERSION_DIFFERENT_CONTENT_3 + "}"
+                    + "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX + "." + RequirementKey.Language.MessageBox.GAME_VERSION_DIFFERENT_CONTENT_3 + "}"
                     + "{game$" + GameInfoKey.Launcher.VERSION + "}"
-                    + "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.MESSAGE_BOX_GAME_VERSION_DIFFERENT_CONTENT_4 + "}"
+                    + "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX + "." + RequirementKey.Language.MessageBox.GAME_VERSION_DIFFERENT_CONTENT_4 + "}"
             );
         }
     }
@@ -456,7 +456,7 @@ public final class MenuList implements GameRender
         }
 
         // 检测弹窗返回值
-        uiManager.getMessageBox().handleInfo(RequirementKey.Language.MESSAGE_BOX_GAME_VERSION_DIFFERENT_KEY, () ->
+        uiManager.getMessageBox().handleInfo(RequirementKey.Language.MessageBox.GAME_VERSION_DIFFERENT, () ->
         {
         });
     }

@@ -63,14 +63,14 @@ public final class GameMenu implements GameRender
         // 按下返回按钮
         if (gameUiManager.isButtonClicked(RequirementKey.Ui.GAME_MENU_BUTTON_QUIT))
         {
-            gameUiManager.getMessageBox().showAsk(RequirementKey.Language.IN_GAME_MESSAGE_BOX_QUIT_GAME_KEY,
-                "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.IN_GAME_MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.IN_GAME_MESSAGE_BOX_QUIT_GAME_TITLE + "}",
-                "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.IN_GAME_MESSAGE_BOX_FIRST_KEY + "." + RequirementKey.Language.IN_GAME_MESSAGE_BOX_QUIT_GAME_CONTENT + "}"
+            gameUiManager.getMessageBox().showAsk(RequirementKey.Language.InGame.MessageBox.QUIT_GAME,
+                "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.InGame.MESSAGE_BOX + "." + RequirementKey.Language.InGame.MessageBox.QUIT_GAME_TITLE + "}",
+                "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.InGame.MESSAGE_BOX + "." + RequirementKey.Language.InGame.MessageBox.QUIT_GAME_CONTENT + "}"
             );
         }
 
         // 检测弹窗
-        gameUiManager.getMessageBox().handleAsk(RequirementKey.Language.IN_GAME_MESSAGE_BOX_QUIT_GAME_KEY,
+        gameUiManager.getMessageBox().handleAsk(RequirementKey.Language.InGame.MessageBox.QUIT_GAME,
             () ->
             {
                 gameHost.getGameSessionManager().quitGame();
