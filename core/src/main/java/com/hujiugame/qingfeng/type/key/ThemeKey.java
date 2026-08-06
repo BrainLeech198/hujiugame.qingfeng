@@ -30,4 +30,13 @@ public final class ThemeKey
 
     /** 进度条颜色（写入 app_config.json） */
     public static final String PROCESS_COLOR = "process_color";
+
+    public static class Config
+    {
+        /** 主题显示名称 */
+        public static final String NAME = "name";
+
+        /** 主题路径类型 */
+        public static final String KIND = "kind";
+    }
 }
