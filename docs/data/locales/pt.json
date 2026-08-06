@@ -12,7 +12,7 @@
   "repair_step1_title": "Passo 1: Clique no ícone de reparação",
   "repair_step1_text": "Clique no ícone de reparação no canto inferior direito do ecrã de carregamento do launcher. O programa detetará e reparará automaticamente ficheiros de recursos ausentes ou corrompidos.",
   "repair_step2_title": "Passo 2: Clique em OK para sair",
-  "repair_step2_text": "Após a reparação, uma janela de aviso aparecerá. Clique em "OK" para sair do programa. Reinicie o QingFeng Launcher e os ficheiros de recursos estarão totalmente restaurados.",
+  "repair_step2_text": "Após a reparação, uma janela de aviso aparecerá. Clique em \"OK\" para sair do programa. Reinicie o QingFeng Launcher e os ficheiros de recursos estarão totalmente restaurados.",
   "repair_img_placeholder": "Falha ao carregar a imagem. Verifique a sua ligação à rede.",
   "download_section_title": "Downloads",
   "history_button": "Histórico →",
@@ -57,9 +57,10 @@
   "discussion_platform_gitee": "Gitee",
   "discussion_platform_txc": "Tuxiaochao",
   "game_intro_title": "Sobre o Jogo",
-  "game_intro_desc1": "O QingFeng Launcher é um mecanismo de romance visual multiplataforma construído com libGDX. Ele vai além da narrativa tradicional baseada em diálogos, suportando exploração de mapas 2D, reprodução de vídeo e outros recursos expandidos, oferecendo aos criadores meios de expressão mais ricos.",
-  "game_intro_desc2": "Ferramentas integradas de desenvolvimento de histórias e um editor visual permitem a construção rápida da narrativa e lógica do jogo. A configuração de texto multilíngue atende às necessidades de distribuição global.",
-  "game_intro_desc3": "O lançador em si suporta vários temas e interfaces multilíngues, adaptando-se às preferências personalizadas de usuários em diferentes regiões.",
+  "game_intro_desc1": "O QingFeng é um motor de visual novel e um lançador de jogos multiplataforma desenvolvido com libGDX. O projeto adota uma estrutura de arquivos padronizada e um sistema de recursos orientado por JSON, organizando o conteúdo do jogo em um formato claro e consistente para oferecer aos criadores um ambiente de execução unificado e estável.",
+  "game_intro_desc2": "O lançador suporta nativamente três idiomas de interface — chinês simplificado, chinês tradicional e inglês — além de um sistema de temas alternável, atendendo às preferências de usuários de diferentes regiões. Ele funciona em Windows, Linux e Android, cobrindo cenários de uso em desktop e dispositivos móveis.",
+  "game_intro_desc3": "O QingFeng conta com um sistema completo de gerenciamento de pacotes de recursos, com suporte à importação e alternância de pacotes de idioma, pacotes de tema, pacotes de idioma de jogo e pacotes de tema de jogo, permitindo que os criadores expandam o conteúdo do jogo com flexibilidade. A verificação de versão e o reparo de recursos com um clique garantem que seus recursos de jogo permaneçam sempre completos e utilizáveis.",
   "linux_button": "Linux",
-  "community_description": "Um espaço da comunidade para sugestões de funcionalidades, feedback de melhorias, compartilhamento de conteúdo criativo e discussões entre jogadores. Mantenha a conversa civilizada!"
+  "community_description": "Um espaço da comunidade para sugestões de funcionalidades, feedback de melhorias, compartilhamento de conteúdo criativo e discussões entre jogadores. Mantenha a conversa civilizada!",
+  "game_intro_desc4": "Jogos e pacotes de recursos usam formatos de arquivo dedicados (.qfg, .qfl, .qft, .qfgl, .qfgt), registrados em Windows, Linux e Android, permitindo carregamento e execução diretos com um clique duplo. Editores visuais, mapas 2D e reprodução de vídeo estão em planejamento, abrindo mais possibilidades para os criadores."
 }

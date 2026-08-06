@@ -12,7 +12,7 @@
   "repair_step1_title": "Schritt 1: Reparatursymbol klicken",
   "repair_step1_text": "Klicken Sie auf das Reparatursymbol in der unteren rechten Ecke des Ladebildschirms. Das Programm erkennt und repariert automatisch fehlende oder beschädigte Ressourcendateien.",
   "repair_step2_title": "Schritt 2: OK zum Beenden klicken",
-  "repair_step2_text": "Nach der Reparatur erscheint ein Hinweisfenster. Klicken Sie auf „OK", um das Programm zu beenden. Starten Sie QingFeng Launcher neu – die Ressourcendateien sind dann vollständig wiederhergestellt.",
+  "repair_step2_text": "Nach der Reparatur erscheint ein Hinweisfenster. Klicken Sie auf „OK\", um das Programm zu beenden. Starten Sie QingFeng Launcher neu – die Ressourcendateien sind dann vollständig wiederhergestellt.",
   "repair_img_placeholder": "Bild konnte nicht geladen werden. Bitte überprüfen Sie Ihre Netzwerkverbindung.",
   "download_section_title": "Downloads",
   "history_button": "Verlauf →",
@@ -57,9 +57,10 @@
   "discussion_platform_gitee": "Gitee",
   "discussion_platform_txc": "Tuxiaochao",
   "game_intro_title": "Über das Spiel",
-  "game_intro_desc1": "Der QingFeng Launcher ist eine plattformübergreifende Visual-Novel-Engine, die mit libGDX entwickelt wurde. Sie geht über traditionelles dialogbasiertes Storytelling hinaus und unterstützt 2D-Kartenerkundung, Videowiedergabe und andere Erweiterungsfunktionen, die den Entwicklern reichhaltigere Ausdrucksmöglichkeiten bieten.",
-  "game_intro_desc2": "Integrierte Story-Entwicklungstools und ein visueller Editor ermöglichen die schnelle Erstellung von Spielhandlung und -logik. Mehrsprachige Textkonfiguration erfüllt die Anforderungen globaler Veröffentlichungen.",
-  "game_intro_desc3": "Der Launcher selbst unterstützt mehrere Designs und mehrsprachige Oberflächen, die sich an die individuellen Vorlieben von Benutzern in verschiedenen Regionen anpassen.",
+  "game_intro_desc1": "QingFeng ist eine mit libGDX entwickelte Visual-Novel-Engine und ein plattformübergreifender Game-Launcher. Das Projekt nutzt eine standardisierte Dateistruktur und ein JSON-gesteuertes Ressourcensystem, das Spielinhalte in einem klaren, konsistenten Format organisiert und Entwicklern eine einheitliche, stabile Laufzeitumgebung bietet.",
+  "game_intro_desc2": "Der Launcher unterstützt nativ drei Benutzeroberflächensprachen – Vereinfachtes Chinesisch, Traditionelles Chinesisch und Englisch – sowie ein wechselbares Designsystem, das den persönlichen Vorlieben der Nutzer gerecht wird. Er läuft gleichzeitig auf Windows, Linux und Android und deckt damit Desktop- und Mobilgeräte ab.",
+  "game_intro_desc3": "QingFeng verfügt über ein umfassendes Ressourcenpaket-Verwaltungssystem, das den Import und Wechsel von Sprachpaketen, Designschemata-Paketen, Spielsprachpaketen und Spielthemenpaketen unterstützt und Entwicklern eine flexible Erweiterung der Spielinhalte ermöglicht. Versionsprüfung und eine Ein-Klick-Reparaturfunktion stellen sicher, dass Ihre Spielressourcen stets vollständig und nutzbar bleiben.",
   "linux_button": "Linux",
-  "community_description": "Ein Community-Bereich für Funktionsvorschläge, Verbesserungsfeedback, kreative Inhalte und Spielerdiskussionen. Bitte bleibt freundlich und respektvoll!"
+  "community_description": "Ein Community-Bereich für Funktionsvorschläge, Verbesserungsfeedback, kreative Inhalte und Spielerdiskussionen. Bitte bleibt freundlich und respektvoll!",
+  "game_intro_desc4": "Spiele und Ressourcenpakete verwenden eigene Dateiformate (.qfg, .qfl, .qft, .qfgl, .qfgt), die unter Windows, Linux und Android registriert sind, sodass Sie sie per Doppelklick direkt laden und ausführen können. Visuelle Editoren, 2D-Karten und Videowiedergabe sind geplant und eröffnen Entwicklern künftig noch mehr Möglichkeiten."
 }

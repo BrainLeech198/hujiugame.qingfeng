@@ -57,9 +57,10 @@
   "discussion_platform_gitee": "Gitee",
   "discussion_platform_txc": "Tuxiaochao",
   "game_intro_title": "À propos du jeu",
-  "game_intro_desc1": "QingFeng Launcher est un moteur de roman visuel multiplateforme construit avec libGDX. Il va au-delà de la narration dialoguée traditionnelle en prenant en charge l exploration de cartes 2D, la lecture vidéo et d autres fonctionnalités étendues, offrant aux créateurs des moyens d expression plus riches.",
-  "game_intro_desc2": "Des outils de développement d histoires intégrés et un éditeur visuel permettent une construction rapide du scénario et de la logique du jeu. La configuration multilingue du texte répond aux besoins de distribution mondiale.",
-  "game_intro_desc3": "Le lanceur lui-même prend en charge plusieurs thèmes et interfaces multilingues, s adaptant aux préférences personnalisées des utilisateurs de différentes régions.",
+  "game_intro_desc1": "QingFeng est un moteur de visual novel et un lanceur de jeux multiplateforme développé avec libGDX. Le projet adopte une structure de fichiers standardisée et un système de ressources piloté par JSON, organisant le contenu du jeu dans un format clair et cohérent pour offrir aux créateurs un environnement d'exécution unifié et stable.",
+  "game_intro_desc2": "Le lanceur prend en charge nativement trois langues d'interface — chinois simplifié, chinois traditionnel et anglais — ainsi qu'un système de thèmes commutable, adapté aux préférences individuelles des utilisateurs. Il fonctionne sur Windows, Linux et Android, couvrant les usages de bureau et mobiles.",
+  "game_intro_desc3": "QingFeng dispose d'un système complet de gestion de packs de ressources, prenant en charge l'importation et le changement de packs de langue, packs de thème, packs de langue de jeu et packs de thème de jeu, permettant aux créateurs d'étendre le contenu du jeu en toute flexibilité. La vérification des versions et la réparation des ressources en un clic garantissent que vos ressources de jeu restent complètes et utilisables à tout moment.",
   "linux_button": "Linux",
-  "community_description": "Un espace communautaire pour les suggestions de fonctionnalités, les retours d'amélioration, le partage de contenu créatif et les discussions entre joueurs. Merci de rester courtois !"
+  "community_description": "Un espace communautaire pour les suggestions de fonctionnalités, les retours d'amélioration, le partage de contenu créatif et les discussions entre joueurs. Merci de rester courtois !",
+  "game_intro_desc4": "Les jeux et packs de ressources utilisent des formats de fichiers dédiés (.qfg, .qfl, .qft, .qfgl, .qfgt), enregistrés sur Windows, Linux et Android, pour un chargement et un lancement directs en un double-clic. Éditeurs visuels, cartes 2D et lecture vidéo sont en cours de planification, ouvrant davantage de possibilités aux créateurs."
 }

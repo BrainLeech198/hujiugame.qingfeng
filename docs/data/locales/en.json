@@ -12,7 +12,7 @@
   "repair_step1_title": "Step 1: Click the Repair Icon",
   "repair_step1_text": "Click the repair icon in the lower-right corner of the launcher loading screen. The program will automatically detect and fix missing or corrupted resource files.",
   "repair_step2_title": "Step 2: Click OK to Exit",
-  "repair_step2_text": "After repair, a prompt window will appear. Click "OK" to exit the program. Restart QingFeng Launcher and the resource files will be fully restored.",
+  "repair_step2_text": "After repair, a prompt window will appear. Click \"OK\" to exit the program. Restart QingFeng Launcher and the resource files will be fully restored.",
   "repair_img_placeholder": "Image failed to load. Please check your network connection.",
   "download_section_title": "Downloads",
   "history_button": "History →",
@@ -57,10 +57,10 @@
   "discussion_platform_gitee": "Gitee",
   "discussion_platform_txc": "Tuxiaochao",
   "game_intro_title": "About the Game",
-  "game_intro_desc1": "QingFeng Launcher is a visual novel game launcher built with libGDX, following the standardized file structure defined by our development team.",
-  "game_intro_desc2": "Beyond traditional dialogue-based storytelling, the core engine supports 2D map exploration, video playback, and more. The built-in visual editor enables real-time editing of story content, character dialogues, branching choices, and map scenes — no external tools required.",
-  "game_intro_desc3": "QingFeng Launcher is more than a visual novel engine — it is an integrated editor + launcher platform for narrative game creation and sharing. Like Roblox, RPG Maker, or Flash, the goal is a closed-loop ecosystem where creators can create, distribute, and play in one seamless flow.",
+  "game_intro_desc1": "QingFeng is a visual novel game engine and cross-platform game launcher built with libGDX. The project adopts a standardized file structure and a JSON-driven resource system, organizing game content in a clear, consistent format to provide creators with a unified and stable runtime environment.",
+  "game_intro_desc2": "The launcher natively supports three interface languages — Simplified Chinese, Traditional Chinese, and English — along with a switchable theme system to suit users' individual preferences. It runs on Windows, Linux, and Android, covering both desktop and mobile use cases.",
+  "game_intro_desc3": "QingFeng features a comprehensive resource pack management system, supporting the import and switching of language packs, theme packs, game language packs, and game theme packs, helping creators extend game content flexibly. Version checking and one-click resource repair ensure that game resources remain complete and usable at all times.",
   "linux_button": "Linux",
-  "game_intro_desc4": "Export games as .qfg packages with one click, ready to load and play directly. Share works with other players or publish them to the community. The launcher also supports multiple themes and multilingual interfaces to suit users from different regions.",
+  "game_intro_desc4": "Games and resource packs use dedicated file formats (.qfg, .qfl, .qft, .qfgl, .qfgt), registered across Windows, Linux, and Android, so you can load and run them directly with a double-click. Visual editors, 2D maps, and video playback are on the roadmap, opening up more possibilities for creators.",
   "community_description": "A community space for feature suggestions, feedback, creative content sharing, and player discussions. Please keep the conversation civil!"
 }

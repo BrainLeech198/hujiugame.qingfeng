@@ -25,6 +25,7 @@
 - **`FileHandleKey` 常量类** — `type/key/FileHandleKey.java`，收编文件句柄类型字符串：`INTERNAL="internal"` / `EXTERNAL="external"`，取代散落的字符串字面量
 - **`FileSuffix` 后缀常量类** — `type/file/FileSuffix.java`，收编文件后缀常量：游戏文件 `.qfg`、资源包（语言 `.qfl`/主题 `.qft`/游戏语言 `.qfgl`/游戏主题 `.qfgt`）、压缩包（zip/rar/7z/tar/gz）、图片（png/jpg/jpeg/bmp/gif）、文本（txt/json/xml/csv）；`FileChooser` 移除 21 个 `EXT_*` 常量改用 `FileSuffix`，`MenuList` 游戏文件导入改用 `FileSuffix.EXT_GAME`
 - **四类资源包后缀平台关联注册** — 语言包 `.qfl`/主题包 `.qft`/游戏语言包 `.qfgl`/游戏主题包 `.qfgt` 三平台文件关联：Windows `inno_setup.iss` 新增四组 ProgID 注册（双击带参运行 `launcher.exe "%1"`）；Linux `build_package.py` MIME 注册由 1 个扩展为 5 个 mime-type（含 4 个新包类型），文件名 `x-qingfeng-game.xml` 改名 `x-qingfeng.xml`；Android `AndroidManifest.xml` intent-filter 追加 4 个 `pathPattern`
+- **官网游戏介绍文案重写** — `docs/index.html` 游戏介绍四段文案基于项目真实功能重写（视觉小说引擎与跨平台启动器定位、三语言界面/主题系统/三平台支持、资源包管理与版本检测修复、专属文件格式多平台关联与规划中的扩展能力），移除 2D 地图/视频播放/可视化编辑器/一键导出 `.qfg` 等未实现的不实宣传；同步更新 9 种语言 locales（zh/zh-TW/en/de/fr/ja/ko/pt/ru）与 fallback 文本，并顺带修复 en/de/ko/pt 四个语言文件 `repair_step2_text` 中未转义的 ASCII 引号导致的 JSON 解析错误
 
 ### 功能
 
