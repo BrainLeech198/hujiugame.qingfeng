@@ -17,6 +17,31 @@
 > 6. 【如果】新建设计方案文档 → 建议在 `develop/plans/` 目录记录
 > 7. 【如果】本次更新比较重要、与项目关键设计相关 → 同步写入 `temp/CLAUDE_MEMORY.md`（gitignored 本地工作记忆，仅当前开发机可见），便于后续 AI 对话延续上下文
 
+## 2026-08-06 — 官方语言/主题 Internal 句柄化 + 默认配置损坏恢复预想方案入库
+
+### 新增
+
+- **`FileHandleKey` 常量类** — `type/key/FileHandleKey.java`，收编文件句柄类型字符串：`INTERNAL="internal"` / `EXTERNAL="external"`，取代散落的字符串字面量
+
+### 功能
+
+- **官方语言/主题不对外暴露（Internal 句柄化）** — `LanguageManager`/`ThemeManager` 增加 `kind` 路径类型字段与 `getKind()`；命中词典时读取 `name`/`kind`，`kind="internal"` 用 Internal 句柄直读官方内容，省略 `kind`（或非 internal）用 External 句柄读第三方独立目录。官方备选语言/主题不再复制到 External，从根上消除"清空 External 后只恢复默认"的目录缺失问题
+
+### 变更
+
+- **语言/主题词典配置改为嵌套结构** — `language_config.json` / `theme_config.json` 每个 key 的 value 从字符串改为 `{name, kind}` 对象（如 `{"default_theme": {"name": "默认主题", "kind": "internal"}}`），同步新增 `LanguageKey.Config`/`ThemeKey.Config` 的 `NAME`/`KIND` 常量
+- **回退分支不再复制官方目录** — 词典缺省回退时不再 `copyDirectory` 官方目录到 External，改为 Internal 句柄直读 + 修复用户配置 + 融合内部词典（`combined()` 旧优先）补回官方条目，保留第三方字段
+- **`update_config.json` prohibit 新增官方语言/主题目录** — `asset/language/zh_CN`/`zh_TW`/`en_US`、`asset/theme/default_theme`，官方内容不再随更新覆盖 External
+
+### 重构
+
+- **`DialogKey` 声明为 final 类** — 工具常量类禁止继承，与 `FileHandleKey`/`LanguageKey`/`ThemeKey` 保持一致
+
+### 文档
+
+- **新增默认配置损坏恢复预想方案** — `develop/plans/2026-08-06-language-theme-default-recovery.md`：盘点 Internal 化现状 + "用户删除默认配置"场景差距（外部词典官方条目被删时融合仅在回退分支触发）+ 将来实现方向（融合前置/词典校验/用户配置完整性）；同步更新文档索引
+- **JSON_STANDARD** — 1.1 主题词典、11.1 语言词典更新为嵌套 `{name, kind}` 结构，补充 `kind` 字段说明与自动修复行为变化
+
 ## 2026-08-05 — 修复启动器 BGM 退出游戏后不自动播放 + macOS 打包预想方案入库
 
 ### 修复
