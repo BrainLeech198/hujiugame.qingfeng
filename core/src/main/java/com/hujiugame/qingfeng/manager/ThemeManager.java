@@ -7,6 +7,7 @@ import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.type.Numeric;
 import com.hujiugame.qingfeng.type.Name;
 import com.hujiugame.qingfeng.game.GameInfoManager;
+import com.hujiugame.qingfeng.type.key.FileHandleKey;
 import com.hujiugame.qingfeng.type.key.GameInfoKey;
 import com.hujiugame.qingfeng.type.key.ThemeKey;
 import com.hujiugame.qingfeng.type.file.FileName;
@@ -25,6 +26,9 @@ public final class ThemeManager
 
     // 使用的语主题
     private String name = null;
+
+    // 主题路径类型
+    private String kind = null;
 
     // 主题路径句柄
     private FileHandle pathHandle = null;
@@ -79,17 +83,37 @@ public final class ThemeManager
             boolean isExist = false;
             if (dictionaryJson.containsKey(pathName))
             {
-                // 存在对应主题索引
-                name = dictionaryJson.getString(pathName);
-                pathHandle = directoryPathHandle.child(pathName);
+                // 解析主题配置
+                JsonEntity themeJson = dictionaryJson.getJsonEntityByKey(pathName);
 
-                LogUtils.debug(ThemeManager.class, "parseTheme 用户使用的主题 (name): " + name);
-                LogUtils.debug(ThemeManager.class, "parseTheme 用户使用的主题 (path): " + pathHandle);
-
-                // 判断文件夹存不存在
-                if (FileUtils.isDirectoryExist(pathHandle))
+                // 配置合法
+                if (!themeJson.isEmpty())
                 {
-                    isExist = true;
+                    // 存在对应键
+                    if (themeJson.containsKey(ThemeKey.Config.NAME))
+                    {
+                        // 解析名称和类型
+                        name = themeJson.getString(ThemeKey.Config.NAME);
+                        kind = themeJson.getString(ThemeKey.Config.KIND);
+                        if (FileHandleKey.INTERNAL.equals(kind))
+                        {
+                            pathHandle = Gdx.files.internal(FileUtils.pathJoin(PathName.ASSET_S_THEME, pathName));
+                        }
+                        else
+                        {
+                            pathHandle = directoryPathHandle.child(pathName);
+                        }
+
+                        LogUtils.debug(ThemeManager.class, "parseTheme 用户使用的主题 (name): " + name);
+                        LogUtils.debug(ThemeManager.class, "parseTheme 用户使用的主题 (kind): " + kind);
+                        LogUtils.debug(ThemeManager.class, "parseTheme 用户使用的主题 (path): " + pathHandle);
+
+                        // 判断文件夹存不存在
+                        if (FileUtils.isDirectoryExist(pathHandle))
+                        {
+                            isExist = true;
+                        }
+                    }
                 }
             }
 
@@ -105,23 +129,26 @@ public final class ThemeManager
 
                 // 不存在对应主题索引 默认使用默认主题
                 name = Name.DEFAULT_THEME_NAME;
-                pathHandle = directoryPathHandle.child(FileName.DEFAULT_THEME);
+                kind = FileHandleKey.INTERNAL;
+                pathHandle = Gdx.files.internal(FileUtils.pathJoin(PathName.ASSET_S_THEME, FileName.DEFAULT_THEME));
 
                 // 修复用户配置
                 userConfigManager.setTheme(FileName.DEFAULT_THEME);
                 userConfigManager.save(userConfigManager.getPathHandle());
                 LogUtils.debug(ThemeManager.class, "parseTheme 修复用户配置 (theme): " + name);
 
-                // 添加到主题集(使用相对路径)
-                dictionaryJson.put(FileName.DEFAULT_THEME, name);
-                FileUtils.createStringFile(dictionaryJson.getJsonString(), dictionaryJsonPathHandle, false);
+                // 融合内部主题集配置：外部主题集作为 mainJson（主体保留），内部主题集作为 mergeJson（补入缺失的官方主题条目）
+                FileHandle internalDictionaryJsonPathHandle = Gdx.files.internal(FileUtils.pathJoin(PathName.ASSET_S_THEME, FileName.THEME_DICTIONARY_CONFIG));
+                JsonEntity internalDictionaryJson = new JsonEntity(internalDictionaryJsonPathHandle);
+                if (!internalDictionaryJson.isEmpty())
+                {
+                    dictionaryJson = dictionaryJson.combined(internalDictionaryJson);
+                    FileUtils.createStringFile(dictionaryJson.getJsonString(), dictionaryJsonPathHandle, false);
+                    LogUtils.debug(ThemeManager.class, "parseTheme 融合内部主题集配置成功 (json): " + dictionaryJson);
+                }
 
-                // 复制标准的默认主题文件
-                FileHandle internalDefaultThemePathHandle = Gdx.files.internal(FileUtils.pathJoin(PathName.ASSET_S_THEME, FileName.DEFAULT_THEME));
-                FileHandle externalDefaultThemePathHandle = directoryPathHandle.child(FileName.DEFAULT_THEME);
-                FileUtils.copyDirectory(internalDefaultThemePathHandle, externalDefaultThemePathHandle);
-
-                LogUtils.debug(ThemeManager.class, "parseTheme 添加默认主题 (json): " + name);
+                LogUtils.debug(ThemeManager.class, "parseTheme 添加默认主题 (name): " + name);
+                LogUtils.debug(ThemeManager.class, "parseTheme 添加默认主题 (kind): " + kind);
                 LogUtils.debug(ThemeManager.class, "parseTheme 添加默认主题 (path): " + pathHandle);
             }
 
@@ -459,6 +486,16 @@ public final class ThemeManager
     public String getName ()
     {
         return name;
+    }
+
+    /**
+     * 获取主题路径类型
+     *
+     * @return 主题路径类型
+     */
+    public String getKind ()
+    {
+        return kind;
     }
 
     /**
