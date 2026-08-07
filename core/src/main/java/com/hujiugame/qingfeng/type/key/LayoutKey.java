@@ -10,8 +10,8 @@ public final class LayoutKey
     // ====================================================================================================
     // layout.json 顶层字段
 
-    /** 背景音乐列表 */
-    public static final String BACKGROUND_MUSIC = "backgroundMusic";
+    /** audio 音频节点 */
+    public static final String AUDIO = "audio";
 
     /** 背景图片文件名 */
     public static final String BACKGROUND_PICTURE = "backgroundPicture";
@@ -25,11 +25,25 @@ public final class LayoutKey
     /** 模板布局名 */
     public static final String TEMPLATE = "template";
 
-    /** 音乐列表 */
-    public static final String MUSIC = "music";
-
     /** UI 组件容器 */
     public static final String UI = "ui";
+
+    // ====================================================================================================
+    // layout.json 的 audio 节内部字段
+
+    public static final class Audio
+    {
+        private Audio()
+        {
+            throw new UnsupportedOperationException("Utility class cannot be instantiated");
+        }
+
+        /** 背景音乐列表 */
+        public static final String BACKGROUND_MUSIC = "backgroundMusic";
+
+        /** 音乐映射（tag → 文件名） */
+        public static final String MUSIC = "music";
+    }
 
     // ====================================================================================================
     // layout.json 的 ui 节内部元素引用字段

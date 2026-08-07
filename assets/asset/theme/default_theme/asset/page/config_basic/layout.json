@@ -1,5 +1,7 @@
 {
-  "backgroundMusic" : ["Scorching Sun.mp3", "Title Music.mp3", "The Dragon Fell in Love wit.mp3"],
+  "audio" : {
+    "backgroundMusic" : ["Scorching Sun.mp3", "Title Music.mp3", "The Dragon Fell in Love wit.mp3"]
+  },
   "backgroundPicture" : "menu.background.png",
   "graphics" : {
     "picture" : {

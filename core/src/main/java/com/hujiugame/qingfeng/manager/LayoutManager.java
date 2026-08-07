@@ -142,14 +142,15 @@ public final class LayoutManager
         {
             // 解析背景音乐
             // ===================================================================================================================
-            // 支持两种 JSON 格式：
-            //   "backgroundMusic" : "menu.mp3"               → 单曲，自动包装为单值列表
-            //   "backgroundMusic" : ["menu.mp3", "menu2.mp3"] → 列表，每首分别加载
+            // 音频字段统一收敛到 audio 节点：
+            //   "audio" : { "backgroundMusic" : "menu.mp3" }               → 单曲，自动包装为单值列表
+            //   "audio" : { "backgroundMusic" : ["menu.mp3", "menu2.mp3"] } → 列表，每首分别加载
             // ===================================================================================================================
+            JsonEntity audioJson = layoutJson.getJsonEntityByKey(LayoutKey.AUDIO);
             List<String> backgroundMusicNames = null;
 
             // 优先尝试解析为列表（JSON 数组）
-            List<String> nameList = layoutJson.getStringList(LayoutKey.BACKGROUND_MUSIC);
+            List<String> nameList = audioJson.getStringList(LayoutKey.Audio.BACKGROUND_MUSIC);
             if (nameList != null && !nameList.isEmpty())
             {
                 backgroundMusicNames = nameList;
@@ -157,7 +158,7 @@ public final class LayoutManager
             else
             {
                 // 回退到单个字符串（JSON 单值，向后兼容）
-                String singleName = layoutJson.getString(LayoutKey.BACKGROUND_MUSIC);
+                String singleName = audioJson.getString(LayoutKey.Audio.BACKGROUND_MUSIC);
                 if (singleName != null)
                 {
                     backgroundMusicNames = Collections.singletonList(singleName);
@@ -192,7 +193,7 @@ public final class LayoutManager
 
             // 解析音乐list
             // ===================================================================================================================
-            JsonEntity musicMap = layoutJson.getJsonEntityByKey(LayoutKey.MUSIC);
+            JsonEntity musicMap = audioJson.getJsonEntityByKey(LayoutKey.Audio.MUSIC);
             List<String> newMusicList = new ArrayList<>();
             if (!musicMap.isEmpty())
             {

@@ -18,10 +18,11 @@
 > 7. 【如果】本次更新比较重要、与项目关键设计相关 → 同步写入 `temp/CLAUDE_MEMORY.md`（gitignored 本地工作记忆，仅当前开发机可见），便于后续 AI 对话延续上下文
 > 8. 【必须】CHANGELOG 条目不独立提交：每个内容改动 = 一笔提交，同时包含对应改动的文件 + 本文档中该改动对应的条目。先改文件并写对应条目 → 一并提交 → 再改下一个文件、写下一条目；按内容逐条拆分提交，禁止攒一堆 CHANGELOG 更新最后统一提交（例：文件 `a`、`b` 均有改动 → 提交 1 = `a` + 「更新了 a」条目；提交 2 = `b` + 「更新了 b」条目）
 
-## 2026-08-07 — UiKey/LayoutKey 布局字段 kind/show 单一来源 + RequirementKey.Language 嵌套重构 + 提交规范 + 文件关联图标独立化 + 许可证三文件拆分
+## 2026-08-07 — UiKey/LayoutKey 布局字段 kind/show 单一来源 + RequirementKey.Language 嵌套重构 + 提交规范 + 文件关联图标独立化 + 许可证三文件拆分 + BGM 播放记录同步 + 页面切换过渡动画方案
 
 ### 文档
 
+- **新增页面切换过渡动画设计方案** — `develop/plans/2026-08-07-page-transition-animation.md`：切页淡出淡入动画，先顺序（内容 alpha + 主题底色清屏）后交叉（双渲染机/截图）迭代路线；config.json 新增 `animation` 节点（`immediatelyOut/In` 强制立即、`outDuration/inDuration` 时长），user_config 新增 `allowFadeOut/In` 总开关；激活判定 `!immediately && allowFade`；控件级 animation（graphics/ui 元素切入切出）列为待确认扩展；同步更新文档索引
 - **官网说明补充许可证与版权页面** — `docs/README.md` 新增「许可证与版权」小节，说明官网提供三语许可证查看页 `LICENSE.html` 与项目素材第三方版权声明页 `PROJECT_THIRDPARTY.html`，由首页页脚进入
 
 ---
@@ -79,6 +80,25 @@
 ### 修复
 
 - **LICENSE 中文版 Notice 段混入官网导航文本** — `LICENSE.zh-CN`/`LICENSE.zh-TW` 的 Creative Commons Notice 段因提取截断范围过大，混入 CC 官网页脚导航文本（"Learn more about our work"、"Who we are"、"PO Box 1866" 等）；修正提取逻辑（截断到 Notice 段 `</div>` 结束），重新生成三语许可证及所有副本（assets/、lwjgl3/setup/、`LICENSE.combined.txt`、官网 `LICENSE.html`），并同步 `PROJECT_THIRDPARTY.html` 头部引用文案
+- **页面切换背景音乐未切换（双播）** — `AudioManager.playLayout` 新增播放记录同步：切页后清理不在当前页面 BGM 列表的旧曲目（`disposeBackgroundMusic`），新旧列表无交集时立即停旧播新、有交集保留共享曲目继续播、新页面空列表时静音；`playLayout` 是启动器与游戏内两个 AudioManager 实例共用的入口，两端行为统一
+
+---
+
+### 重构
+
+- **`backgroundMusic`/`music` 收编进 `audio` 节点（Java 端）** — `LayoutKey` 新增 `Audio` 嵌套类（`BACKGROUND_MUSIC`/`MUSIC`），顶层同名常量移除；`LayoutManager.loadLayoutMusic` 改从 `audio` 节点读取，单曲/多曲语义不变
+
+---
+
+### 资产
+
+- **4 个 layout.json 音频节点收编** — `menu_main`/`menu_list`/`config_basic`/`config_display` 顶层 `backgroundMusic` 移入 `audio` 节点
+
+---
+
+### 文档
+
+- **JSON_STANDARD.md 背景音乐配置同步** — 顶层字段表新增 `audio` 行；3.2 节字段位置改为 `audio.backgroundMusic` 并补充结构示例与单曲/多曲说明
 
 ## 2026-08-06 — 官方语言/主题 Internal 句柄化 + 默认配置损坏恢复预想方案入库 + 版权素材清理替换 + 文件后缀关联补全与四类资源包注册 + 启动器单实例限制 + 启动器源码整理 + 启动器说明文档同步
 

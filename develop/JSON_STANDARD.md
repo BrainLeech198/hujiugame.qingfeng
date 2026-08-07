@@ -422,7 +422,7 @@
 |------|------|------|--------|----------|
 | `name` | String | 可选 | 文件名（不含扩展名） | 页面名称 |
 | `template` | String | 可选 | — | 模板布局名，加载后与本布局合并（`mergeLayout`） |
-| `backgroundMusic` | String 或 Array\<String\> | 可选 | — | 背景音乐，可单曲（String）或多曲（Array），随机播放 |
+| `audio` | Object | 可选 | — | 音频节点，子字段 `backgroundMusic`（背景音乐）与 `music`（点播音乐），见 [3.2](#32-背景音乐配置) |
 | `backgroundPicture` | String | 可选 | — | 背景图片文件名，相对 `resource/image/` |
 | `graphics` | Object | 可选 | — | 图片/动图容器，内部分 `picture` / `gif` 子分类，每一项见 [3.4](#34-graphics-条目) |
 | `ui.image` | Object | 可选 | — | UI 图像映射表，每一项见 [3.5](#35-uiimage-条目) |
@@ -439,12 +439,23 @@
 
 ### 3.2 背景音乐配置
 
-**字段**：`backgroundMusic`（Layout 顶层）
+**字段**：`audio.backgroundMusic`（Layout 的 `audio` 节点下）
+
+**结构示例**：
+
+```json
+{
+  "audio" : {
+    "backgroundMusic" : ["menu.mp3", "menu2.mp3"],
+    "music" : { "tag1" : "bgm1.mp3" }
+  }
+}
+```
 
 | 值类型 | 示例 | 说明 |
 |--------|------|------|
-| String（单曲） | `"menu.mp3"` | 单首背景音乐 |
-| Array（多曲） | `["bgm1.mp3", "bgm2.mp3"]` | 多首背景音乐，运行时随机选择一首播放 |
+| String（单曲） | `"backgroundMusic" : "menu.mp3"` | 单首背景音乐 |
+| Array（多曲） | `"backgroundMusic" : ["bgm1.mp3", "bgm2.mp3"]` | 多首背景音乐，运行时随机选择一首播放 |
 
 **加载**：音频文件放置在 `resource/audio/` 目录下。
 
