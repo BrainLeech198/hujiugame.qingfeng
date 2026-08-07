@@ -72,6 +72,7 @@
 | **macOS 打包支持预想方案** | [develop/plans/2026-08-05-macos-packaging.md](develop/plans/2026-08-05-macos-packaging.md) | mac 打包现状盘点 + 差距清单（XstartOnFirstThread/签名/M1 接线），一条龙可行性结论 |
 | **语言/主题默认配置损坏恢复** | [develop/plans/2026-08-06-language-theme-default-recovery.md](develop/plans/2026-08-06-language-theme-default-recovery.md) | "用户删除默认配置"场景盘点 + 将来实现方向（融合前置/词典校验），Internal 化已消除主路径 |
 | **页面切换 BGM 自动切换** | [develop/plans/2026-08-07-bgm-page-switch.md](develop/plans/2026-08-07-bgm-page-switch.md) | 页面切换旧 BGM 未停导致双播，playLayout 播放记录同步方案 |
+| **页面切换过渡动画** | [develop/plans/2026-08-07-page-transition-animation.md](develop/plans/2026-08-07-page-transition-animation.md) | 切页淡出淡入动画，先顺序后交叉迭代，config/user_config 动画开关与优先级 |
 
 ---
 
