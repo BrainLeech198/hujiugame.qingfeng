@@ -44,6 +44,23 @@ launcher.exe
 - 互斥体句柄在整个进程存活期间保持，随进程退出自动释放
 - 命名使用 `Local\` 前缀限定当前登录会话，避免跨 RDP/服务会话误判
 
+## 文件关联
+
+安装器（`inno_setup.iss`）注册 5 种文件类型关联，双击后通过 `launcher.exe "%1"` 打开：
+
+| 后缀 | 关联名 | 用途 | 图标文件 |
+|------|--------|------|----------|
+| `.qfg` | QF Game File | 游戏文件 | `qfg.ico` |
+| `.qfl` | QF Language Pack | 语言包 | `qfl.ico` |
+| `.qft` | QF Theme Pack | 主题包 | `qft.ico` |
+| `.qfgl` | QF Game Language Pack | 游戏语言包 | `qfgl.ico` |
+| `.qfgt` | QF Game Theme Pack | 游戏主题包 | `qfgt.ico` |
+
+> 每种后缀可独立设置图标：替换 `lwjgl3/setup/` 下对应的 `qf?.ico` 文件后重新打包即可。
+> 当前 5 个图标已基于默认主题配色二创填充（主主题色 `#3F48CC` + 副主题色 `#FDA1FF` + 黑色描边）。
+> `.ico` 已包含 16/24/32/48/64/128/256 多尺寸，避免小图标模式下模糊。
+> 安装后若资源管理器未刷新图标，需刷新图标缓存（`ie4uinit.exe -show` 或重启资源管理器）。
+
 ## 编译
 
 ### 前置条件
@@ -81,6 +98,12 @@ lwjgl3/setup/
 ├── launcher.c          # 启动器源码（826 行）
 ├── launcher.rc         # 图标资源脚本
 ├── console.ico         # 控制台图标
+├── icon.ico            # 通用图标（默认占位）
+├── qfg.ico             # .qfg 游戏文件关联图标
+├── qfl.ico             # .qfl 语言包关联图标
+├── qft.ico             # .qft 主题包关联图标
+├── qfgl.ico            # .qfgl 游戏语言包关联图标
+├── qfgt.ico            # .qfgt 游戏主题包关联图标
 ├── package.bat         # 一键编译脚本（自动检测 MinGW）
 ├── inno_setup.iss      # Windows 安装包配置
 ├── dist/launcher/      # 编译产物（gitignore）
