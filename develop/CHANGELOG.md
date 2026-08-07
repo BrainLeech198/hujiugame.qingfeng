@@ -20,6 +20,12 @@
 
 ## 2026-08-07 — UiKey/LayoutKey 布局字段 kind/show 单一来源 + RequirementKey.Language 嵌套重构 + 提交规范 + 文件关联图标独立化 + 许可证三文件拆分
 
+### 文档
+
+- **官网说明补充许可证与版权页面** — `docs/README.md` 新增「许可证与版权」小节，说明官网提供三语许可证查看页 `LICENSE.html` 与项目素材第三方版权声明页 `PROJECT_THIRDPARTY.html`，由首页页脚进入
+
+---
+
 ### 变更
 
 - **许可证改为三文件拆分（英文官方原文为主文件）** — 根目录 `LICENSE` 更换为知识共享官方英文全文（含 Section 1-8 与 Creative Commons Notice，SPDX 文本，GitHub/Gitee 可识别为 CC BY-NC 4.0）；新增 `LICENSE.zh-CN`（简体）与 `LICENSE.zh-TW`（繁体）官方中文全文，替换原「简体→繁体→英文」单文件拼接；`README.md` 三语许可链接与 `assets/THIRDPARTY_LICENSES.md` 头部引用同步更新
