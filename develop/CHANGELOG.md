@@ -68,6 +68,7 @@
 ### 网站
 
 - **官网新增许可证与项目素材版权页** — 新增 `docs/LICENSE.html`（三语许可证查看页，简体/繁體/English tab 切换）与 `docs/PROJECT_THIRDPARTY.html`（项目素材第三方版权声明，由 `assets/THIRDPARTY_LICENSES.md` 渲染）；`docs/index.html` 页脚改为三链接排列：项目许可证 → 项目素材第三方版权声明 → 网站素材第三方版权声明；9 种语言 locale 新增 `footer_license`/`footer_project_thirdparty`/`footer_website_thirdparty` 页脚文案
+- **官网子页面页脚同步三链接** — `docs/html/community_share.html` 与 `docs/html/history_versions.html` 页脚同步为与首页一致的三链接排列（项目许可证 / 项目素材第三方版权声明 / 网站素材第三方版权声明），复用 `footer_license` 等 i18n 文案
 
 ## 2026-08-06 — 官方语言/主题 Internal 句柄化 + 默认配置损坏恢复预想方案入库 + 版权素材清理替换 + 文件后缀关联补全与四类资源包注册 + 启动器单实例限制 + 启动器源码整理 + 启动器说明文档同步
 
