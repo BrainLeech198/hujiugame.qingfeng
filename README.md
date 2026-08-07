@@ -187,7 +187,7 @@
 
 ## 许可证
 
-本项目基于 **CC BY-NC 4.0（署名-非商业）** 许可授权发布。详情见 [LICENSE](LICENSE) 文件。
+本项目基于 **CC BY-NC 4.0（署名-非商业）** 许可授权发布。详情见 [LICENSE](LICENSE)（官方英文原文）、[LICENSE.zh-CN](LICENSE.zh-CN)（简体中文）、[LICENSE.zh-TW](LICENSE.zh-TW)（繁体中文）。
 
 ---
 
@@ -332,7 +332,7 @@
 
 ## 授權條款
 
-本專案基於 **CC BY-NC 4.0（姓名標示-非商業）** 授權發佈。詳情見 [LICENSE](LICENSE) 檔案。
+本專案基於 **CC BY-NC 4.0（姓名標示-非商業）** 授權發佈。詳情見 [LICENSE](LICENSE)（官方英文原文）、[LICENSE.zh-CN](LICENSE.zh-CN)（簡體中文）、[LICENSE.zh-TW](LICENSE.zh-TW)（繁體中文）。
 
 ---
 
@@ -514,7 +514,7 @@ All project documentation (contributing guide, code style, commit conventions, e
 
 ## License
 
-This project is licensed under the **CC BY-NC 4.0** (Attribution-NonCommercial). See the [LICENSE](LICENSE) file for details.
+This project is licensed under the **CC BY-NC 4.0** (Attribution-NonCommercial). See the [LICENSE](LICENSE) file (official English text), [LICENSE.zh-CN](LICENSE.zh-CN) (Simplified Chinese), and [LICENSE.zh-TW](LICENSE.zh-TW) (Traditional Chinese) for details.
 
 ---
 
