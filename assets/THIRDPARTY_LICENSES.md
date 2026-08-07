@@ -104,17 +104,18 @@
 
 #### 1.2.4 文件关联图标（qfl.ico / qft.ico / qfgl.ico / qfgt.ico）
 
-以下 4 个文件关联图标均以 icon-icons.com 的 document 图标为基础二次创作（替换为主题色 `#3F48CC` + 副主题色 `#FDA1FF`），qfl/qft 额外叠加了独立素材，qfgl/qfgt 分别为 qfl/qft 的配色互换变体：
+以下 4 个文件关联图标涉及 **3 个第三方素材版权**：document 5_122642 为共用基础素材（4 个图标都有），language-setting 159167 供 qfl/qfgl 一组使用，color-lens 90605 供 qft/qfgt 一组使用；图标均替换为主题色 `#3F48CC` + 副主题色 `#FDA1FF`：
 
-| 文件 | 基础素材 | 额外素材 |
-|------|----------|----------|
-| `lwjgl3/setup/qfl.ico` | document 5_122642 | language-setting 159167 |
-| `lwjgl3/setup/qfgl.ico` | qfl 的配色互换变体 | — |
-| `lwjgl3/setup/qft.ico` | document 5_122642 | color-lens 90605 |
-| `lwjgl3/setup/qfgt.ico` | qft 的配色互换变体 | — |
+| 文件 | 使用素材 | 说明 |
+|------|----------|------|
+| `lwjgl3/setup/qfl.ico` | document + language-setting | 语言包图标 |
+| `lwjgl3/setup/qfgl.ico` | document + language-setting | qfl 的配色互换变体（游戏语言包） |
+| `lwjgl3/setup/qft.ico` | document + color-lens | 主题包图标 |
+| `lwjgl3/setup/qfgt.ico` | document + color-lens | qft 的配色互换变体（游戏主题包） |
 
 **document-page-notes-text（5_122642）**
 
+- **使用范围：** 4 个图标的共用基础素材（qfl/qfgl/qft/qfgt）
 - **作者：** Free-psd-templates（icon-icons.com）
 - **来源：** [icon-icons.com - document-page-notes-text](https://icon-icons.com/icon/document-page-notes-text/122642)
 - **许可：** icon-icons.com 免费许可（Free for commercial use，无需署名）
@@ -122,17 +123,19 @@
 
 **language-setting（159167）**
 
+- **使用范围：** qfl.ico、qfgl.ico（语言包一组）
 - **作者：** Chanut（icon-icons.com）
 - **来源：** [icon-icons.com - language-setting](https://icon-icons.com/icon/language-setting/159167)
 - **许可：** icon-icons.com 免费许可（Free for commercial use，无需署名）
-- **修改：** 是（整合进 qfl.ico）
+- **修改：** 是（整合进 qfl.ico，qfgl.ico 为其配色互换变体）
 
 **color-lens（90605）**
 
+- **使用范围：** qft.ico、qfgt.ico（主题包一组）
 - **作者：** Google（icon-icons.com，Material 系列）
 - **来源：** [icon-icons.com - color-lens](https://icon-icons.com/icon/color-lens/90605)
 - **许可：** icon-icons.com 免费许可（Free for commercial use，无需署名）
-- **修改：** 是（整合进 qft.ico）
+- **修改：** 是（整合进 qft.ico，qfgt.ico 为其配色互换变体）
 
 以上素材均按 icon-icons.com 免费许可使用：
 
