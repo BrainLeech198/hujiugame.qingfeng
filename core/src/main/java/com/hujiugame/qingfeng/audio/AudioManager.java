@@ -10,6 +10,7 @@ import com.hujiugame.qingfeng.manager.UserConfigManager;
 import com.hujiugame.qingfeng.util.system.FileUtils;
 import com.hujiugame.qingfeng.util.system.LogUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -1136,6 +1137,26 @@ public final class AudioManager
             if (layout != null)
             {
                 List<String> bgmList = layout.getBackgroundMusicList();
+
+                // 同步播放记录到当前页面列表：
+                // 页面切换后旧页面 BGM 不在新列表，先停止并销毁，避免与新 BGM 双播；
+                // 新页面无 BGM（空列表）时全部清理，保持静音。
+                List<String> toDispose = new ArrayList<>();
+                synchronized (bgMusicPlayingObjectMap)
+                {
+                    for (String tag : bgMusicPlayingObjectMap.keySet())
+                    {
+                        if (bgmList == null || !bgmList.contains(tag))
+                        {
+                            toDispose.add(tag);
+                        }
+                    }
+                }
+                for (String tag : toDispose)
+                {
+                    disposeBackgroundMusic(tag);
+                }
+
                 if (bgmList != null && !bgmList.isEmpty())
                 {
                     // 检查列表中是否有曲目已在播放记录中（避免每帧切换）
