@@ -187,7 +187,7 @@
 
 ## 许可证
 
-本项目基于 **非商业许可** 授权发布（个人使用免费；商业使用须取得授权并协商分成）。详情见 [LICENSE](LICENSE) 文件。
+本项目基于 **CC BY-NC 4.0（署名-非商业）** 许可授权发布。详情见 [LICENSE](LICENSE) 文件。
 
 ---
 
@@ -332,7 +332,7 @@
 
 ## 授權條款
 
-本專案基於 **非商業授權** 發佈（個人使用免費；商業使用須取得授權並協商分成）。詳情見 [LICENSE](LICENSE) 檔案。
+本專案基於 **CC BY-NC 4.0（姓名標示-非商業）** 授權發佈。詳情見 [LICENSE](LICENSE) 檔案。
 
 ---
 
@@ -514,7 +514,7 @@ All project documentation (contributing guide, code style, commit conventions, e
 
 ## License
 
-This project is licensed under the **Non-Commercial License** (personal use free of charge; commercial use requires prior authorization and agreed revenue-sharing). See the [LICENSE](LICENSE) file for details.
+This project is licensed under the **CC BY-NC 4.0** (Attribution-NonCommercial). See the [LICENSE](LICENSE) file for details.
 
 ---
 

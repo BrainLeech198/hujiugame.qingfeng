@@ -1,89 +1,657 @@
-# 氢风（Qingfeng）非商业许可证
-
-版权所有 (c) 2026 BrainLeech198
-
-## 一、适用范围
-
-本许可证适用于"氢风"项目的原创代码与原创素材（以下合称"本软件"）。
-项目内的第三方组件（如 libGDX 等开源库、第三方图标/音效/字体素材）
-按其各自许可证单独授权，不适用本许可证的授予与限制。
-
-## 二、授予的权利
-
-在遵守第三条的前提下，任何人可以免费：
-
-1. 使用、复制本软件；
-2. 修改、改编本软件，用于个人学习、自用或创作；
-3. 以非商业方式再分发本软件及其修改版本。
-
-## 三、商业使用与授权
-
-1. **个人与非商业使用免费**：用于个人学习、自用或非商业目的，无需
-   授权、无需付费。
-2. **商业使用须取得授权**：将本软件或其修改版本用于商业目的（包括
-   但不限于销售、收费分发、捆绑销售或提供盈利性服务）时，须事先取得
-   原作者的书面授权，分成比例与方式由双方协商确定。
-3. **保留声明**：本软件的所有副本或重要部分须保留上述版权声明及本
-   许可证文本。
-
-## 四、二次创作作品
-
-使用本软件创作的内容作品（剧本、立绘、音频等由创作者自行创作的部分）
-归创作者所有，不受第三条商业使用与授权条款的限制。
-
-## 五、免责声明
-
-本软件按"现状"提供，不提供任何明示或默示的担保，包括但不限于适销性、
-特定用途适用性及不侵权。任何情况下，作者不对因使用本软件产生的任何
-损害承担责任。
+署名—非商业性使用 4.0 协议国际版
+通过行使本协议所授予的权利（定义如下），您接受并同意受到知识共享(Creative
+Commons)署名—非商业性使用4.0国际公共许可协议（以下简称“本公共许可协议”）的约束。从合同解释的角度来看，您获得授权的对价是接受本协议的条款，许可人授予您这些权利的对价是可以通过采用本协议条款发布授权作品(material)而获得利益。
+第一条 定义
+1.
+演绎作品(Adapted Material)：
+指受到著作权与类似权利保护的，基于授权作品(Licensed
+Material)而创作的作品(material)，例如对授权作品(Licensed
+Material)的翻译、改编、编排、改写或其他依据著作权与类似权利需要获得所有人许可的修改。为本公共许可协议之目的，当授权作品(Licensed
+Material)为音乐作品、表演或录音时，将其依时间序列关系与动态影像配合一致而形成的作品，视为演绎作品(Adapted
+Material)。
+2.
+演绎作者的许可：
+指您依据本公共许可协议对在演绎作品(Adapted
+Material)中自己所贡献的部分所享有的著作权与类似权利进行授权的协议。
+3.
+著作权与类似权利：
+指著作权和/或与著作权紧密联系的类似权利。类似权利包括但不限于：表演者权、广播组织权、录音录像制作者权、以及数据库特别权利，而不论上述权利的定义和归类如何。为本公共许可协议之目的，
+第二条b款第(1)项与第(2)项
+所列权利不属于著作权与类似权利。
+4.
+有效的技术措施：
+指根据各司法管辖区遵循《世界知识产权组织版权条约》（1996年12月20日通过）第十一条或类似国际协定项下的义务所制定的法律，在没有适当的授权的情况下，禁止使用者规避的技术措施。
+5.
+例外与限制：
+指合理使用(Fair Dealing and Fair
+Use)和/或其他适用于您对授权作品(Licensed
+Material)的使用的著作权与类似权利的例外或限制。
+6.
+授权作品(Licensed Material)：
+指许可人通过本公共许可协议授权的文学、艺术作品(artistic or
+literary work)，数据库或其他作品(material)。
+7.
+协议所授予的权利：
+指依据本公共许可协议的条款和条件所授予您的各项权利，限于适用于您对授权作品(Licensed
+Material)的使用且许可人有权许可的著作权与类似权利。
+8.
+许可人：
+指通过本公共许可协议进行授权的个人或组织。
+9.
+非商业性使用：
+指该使用的主要意图或者指向并非获取商业优势或金钱报酬。为本公共许可协议之目的，以数字文件共享或类似方式，用授权作品(Licensed
+Material)交换其他受到著作权与类似权利保护的作品(material)是非商业性使用，只要该交换不涉及金钱报酬的支付。
+10.
+分享：
+指以需要“协议所授予的权利”许可的任何方法或程序向公众提供作品(material)，包括复制、公共展示、公开表演、发行、散布、传播、进口或提供作品(material)给公众以便其能在其选定的时间和地点接收作品(material)。
+11.
+数据库特别权利：
+指除了著作权之外，衍生于1996年3月11日通过的《欧洲议会与欧盟理事会关于数据库法律保护的指令》(Directive
+96/9/EC)及其修改或后续版本的权利，或其他国家或地区本质上与之等同的权利。
+12.
+您：
+指依据本公共许可协议行使其所获得授予之权利的个人或机构。
+“您的” 有相应的含义。
+第二条 授权范围
+1.
+授权.
+1.
+根据本公共许可协议的条款，许可人授予您在全球范围内，免费的、不可再许可、非独占、不可撤销的许可，以对授权作品(Licensed
+Material)行使以下“协议所授予的权利”：
+1.
+复制和分享授权作品(Licensed
+Material)的全部或部分，仅限于非商业性使用；以及
+2.
+为非商业目的创作、复制和分享演绎作品(Adapted Material)。
+-
+例外和限制为避免疑义，若著作权的例外和限制适用于您对授权作品(Licensed
+Material)的使用，本公共许可协议将不适用，您也无须遵守本公共许可协议之条款。
+-
+期限本公共许可协议的期限规定于第六条 a
+款。
+-
+媒介和形式；允许的技术修改许可人授权您在任何媒介以任何形式（不论目前已知的或未来出现的）行使本协议授予的权利，并为之进行必要的技术修改。许可人放弃和/或同意不主张任何权利以阻止您为了行使协议项下权利进行必要的技术修改，包括为规避有效技术措施所必须的技术修改。为了本公共许可协议之目的，
+基于第二条a款第(4)项
+进行的技术修改不构成演绎作品(Adapted Material)。
+-
+后续接受者.
+1.
+来自许可人的要约——授权作品(Licensed Material)本授权作品(Licensed
+Material)的每一个后续接受者都自动取得许可人的要约，以按照本公共许可协议的条款行使协议授予的权利。
+2.
+禁止下游限制若会限制授权作品(Licensed
+Material)后续接受者行使本协议所授予的权利，则您不得对授权作品(Licensed
+Material)提出或增加任何额外的或不同的条款，或使用任何有效技术措施。
+-
+并非背书本公共许可协议不构成、或不得被解释为允许您声明或主张：您或您对授权作品(Licensed
+Material)的使用与许可人或
+第三条a款第(1)项(A)目(i)所规定要求提供署名的权利人相关联，或得到其赞助、同意或被授予正式地位。
+-
+其他权利.
+1.
+依据本公共许可协议，著作人身权，例如保护作品完整权、形象权、隐私权或其他类似的人格权利，不在许可范围内。但是，在条件允许的情况下，许可人可以在必要范围内放弃和/或同意不主张其权利，以便您行使本协议所授予的权利。
+2.
+本公共许可协议不适用于任何专利权或商标权许可。
+3.
+在自愿的或可放弃的法定或强制许可机制下，许可人在最大可能范围内放弃对您因行使本协议所授予的权利而产生的使用费的权利，不论是直接收取或通过集体管理组织收取。在其他任何情况下（包括授权作品(Licensed
+Material)被商业性使用的情形），许可人明确保留收取使用费的任何权利。
+第三条 授权条件
+您行使被许可的权利明确受以下条件限制：
+1.
+署名.
+1.
+若您分享本授权作品(Licensed
+Material)（包含修改格式），您必须：
+1.
+保留如下标识（如果许可人提供授权作品(Licensed
+Material)的同时提供如下标识）：
+1.
+以许可人要求的任何合理方式，标识本授权作品(Licensed
+Material)创作者和其他被指定署名的人的身份（包括指定的笔名）；
+2. 著作权声明；
+3. 有关本公共许可协议的声明；
+4. 有关免责的声明；
+5.
+在合理可行情况下，本授权作品(Licensed
+Material)的网址(URI)或超链接；
+-
+表明您是否修改本授权作品(Licensed
+Material)及保留任何先前修改的标记；及
+-
+表明授权作品(Licensed
+Material)依据本公共许可协议授权，并提供本公共许可协议全文，或者本公共许可协议的网址(URI)或超链接。
+-
+依据您分享本授权作品(Licensed
+Material)的媒介、方法及情況，您可以采用任何合理方式满足第三条a款第(1)项的条件 。
+例如，提供包含所要求信息来源的网址(URI)或超链接可算是合理地满足此处的条件。
+-
+如果许可人要求，您必须在合理可行的范围内移除第三条a款第(1)项(A)目
+所要求的任何信息。
+-
+如果您分享您创作的演绎作品（Adapted
+Material），您适用的“演绎作者的许可”协议，不得使演绎作品（Adapted
+Material）的接收者无法遵守本公共许可协议。
+第四条 数据库特别权利
+当协议所授予的权利包含数据库特别权利，而该数据库特别权利适用于您对授权作品(Licensed
+Material)的使用时：
+1.
+为避免疑义， 第二条a款第(1) 项授权您，
+仅限于以非商业性目的，摘录、再利用、复制和分享全部或绝大部分数据库资料；
+2.
+如果您将数据库资料的全部或绝大部分纳入您享有数据库特别权利的另一数据库，则您享有数据库特别权利的该数据库（而非其中的单个内容）视为演绎作品(Adapted
+Material)；
+3.
+如果您分享全部或大部分该数据库的资料，您必须遵守
+第三条a款 规定的条件。
+为避免疑义，当协议所授予的权利包含其他著作权与类似权利时，
+第四条
+补充且不取代本公共许可协议所规定的您的义务。
+第五条 免责声明及责任限制条款
+1.
+除非许可人另有保证，否则在最大可能范围内，许可人按其现状和现有之基础提供授权作品(Licensed
+Material)，且没有就授权作品(Licensed
+Material)做出任何形式的陈述或保证：无论明示、默示、法定或其他形式，包括但不限于任何有关本授权作品(Licensed
+Material)的权属保证、可交易性、适于特定目的、未侵害他人权利、没有潜在或其他瑕疵、精确性或是否有错误，不管是否已知或可发现。当免责声明全部或部分不被允许时，此免责声明可能不适用于您。
+2.
+在最大可能范围内，
+对于任何因本公共许可协议或使用授权作品(Licensed
+Material)引起的直接的、特殊的、间接的、附随的、连带的、惩罚性的、警告性的，或其他的损失、成本、费用或损害，许可人不对您负任何法律上或其他的责任（包括但不限于过失责任）。当责任限制部分或全部不被允许时，该限制不适用于您。
+3.
+前述免责及责任限制声明，应尽可能以最接近于完全排除全部责任的方式解释。
+第六条 期限与终止
+1.
+本公共许可协议在著作权与类似权利存续期间内有效。然而，如果您没有遵守此公共许可协议，则您依据此公共许可协议享有的权利自动终止。
+2.
+当您使用本授权作品(Licensed
+Material)的权利根据第六条a款终止时，您的权利在下述情况下恢复：
+1.
+自违反协议的行为纠正之日起自动恢复，但须在您发现违反情形后30日内纠正；或
+2. 根据许可人明示恢复权利的意思表达。
+为避免疑义，本公共许可协议第六条b款
+不影响许可人就您违反本公共许可协议的行为寻求法律救济。
+-
+为避免疑义，许可人也可在任何时间，以另外的条款或条件提供本授权作品(Licensed
+Material)，或者停止传播本授权作品(Licensed
+Material)；然而，许可人此种行为不会终止本公共许可协议。
+-
+本协议第一、五、六、七及第八条，不因本公共许可协议终止而失效。
+第七条 其他条款和条件
+1.
+除非明示同意，否则许可人不受您表达的任何附加或不同条款或条件约束。
+2.
+本公共许可协议未提及的关于授权作品(Licensed
+Material)之任何安排、共识或协议，不属于且独立于本公共许可协议的条款及条件。
+第八条 解释
+1.
+为避免疑义，本许可协议不会也不应被解释为减少、限制、约束或施加条件于无需本公共许可协议授权即可依法行使的对授权作品(Licensed
+Material)的任何使用。
+2.
+在最大可能范围内，如果本公共许可协议的任何条款被视为无法执行，该条款在必要的最小限度内，自动调整至可以执行。如果该条款不能被调整，其应自本公共许可协议中排除适用，不影响其余条款的效力。
+3.
+除非许可人明示同意，本公共许可协议的任何条款或条件均不得放弃。
+4.
+本公共许可协议条款不构成、也不得被解释为限制或者放弃适用于许可人或您的特权或豁免，包括豁免于任何司法管辖区或行政机构的法律程序。
 
 ---
 
-# Qingfeng Non-Commercial License
+姓名標示─非商業性 4.0 國際
+當行使本授權權利時（定義如下），您承諾並同意受本CC「姓名標示─非商業性」
+4.0 國際
+公眾授權條款（「公眾授權條款」）之拘束。如本公眾授權條款被解釋是契約時，您被授與本授權權利的對價是您承諾受這些條款及條件的約束，並且，授權人授與您這些權利的對價是授權人依據這些條款及條件來提供本授權素材而獲得利益。
+第1條 定義
+1.
+「改用素材」
+指素材根據著作權及相似權利，其衍生自或基於本授權素材而來，且在此素材中本授權素材已經被翻譯、變更、改編、變形或以其他需要獲得擁有著作權及相似權利的授權人許可的方式被修改。為本公眾授權條款之目的，當本授權素材是音樂著作、表演或錄音時，將本授權素材依時間序列關係附著於動態影像時必會產生改用素材。
+2.
+「改用者授權條款」
+指依照本公眾授權條款之條款及條件，您為您在改用素材中您擁有著作權及相似權利的貢獻部分所適用的授權條款。
+3.
+「著作權及相似權利」 / 「版權及相似權利」
+指著作權及/或和著作權緊密相關的相似權利，包含但不限於，表演、廣播、錄音及資料庫保護權，和該等權利如何歸類或分類無關。為本公眾授權條款之目的，第2條第(b)項(1)-(2)款所指明的權利非著作權及相似權利。
+4.
+「有效科技措施」
+指在缺乏適當授權的情況下，依據法律不得被規避以符合西元1996年12月20日正式通過的世界智慧財產權組織著作權條約（WIPO
+Copyright Treaty）第11條及/或相似國際條約的義務規定的那些措施。
+5.
+「例外及限制」
+指合理使用、公平使用和公平處理，及/或適用於您對本授權素材的使用的著作權及相似權利的任何其他例外或限制。
+6.
+「本授權素材」
+指授權人適用本公眾授權條款的文學或藝術創作、資料庫或其他素材。
+7.
+「本授權權利」
+指根據本公眾授權條款之條款及條件所授與您的權利，該等權利限制在適用於您對本授權素材的使用的所有著作權及相似權利以及那些授權人有權為授權的範圍內。
+8.
+「授權人」
+指根據本公眾授權條款授與權利的個人或組織。
+9.
+「非商業性」
+指並非主要為了或直接關於商業利益或金錢報酬。為本公眾授權條款之目的，藉著數位檔案分享或其他相似方法，將本授權素材用來交換其他受著作權及相似權利保護的素材是非商業性，但前提是此交換無關金錢報酬的給付。
+10.
+「分享」
+指以需要本授權權利許可的任何方法或程序向公眾提供素材，例如重製、公開展示、公開演出、散布、散播、傳達或進口，及使公眾得自其各自選定之地點及時間接收前述素材的方式向公眾提供素材。
+11.
+「資料庫權利」
+指除了著作權之外的權利，其衍生自歐洲議會及理事會在1996年3月11日通過編號96/9/EC的「歐洲資料庫法律保護指令」、其修改及/或後續版本，以及其他和全球任何地方本質上相等的權利。
+12.
+「您」
+指依據本公眾授權條款行使本授權權利之個人或組織。「您的」有相同意思。
+第2條 範圍
+1.
+授權.
+1.
+根據本公眾授權條款之條款及條件，授權人授與您全球、免權利金、不可再授權、非專屬、不可撤回的許可，就本授權素材行使本授權權利：
+1.
+重製及分享本授權素材之全部或一部，然僅限於非商業性目的；以及
+2.
+產生、重製及分享改用素材，然僅限於非商業性目的。
+-
+例外及限制。為避免疑義，當「例外及限制」適用於您對本授權素材的使用，則本公眾授權條款將不適用，且您毋須遵守此條款及條件。
+-
+期間。本公眾授權條款之期間載明於第6條第(a)項。
+-
+媒介及形式；許可的技術修改。授權人許可您得在不論已知或將來被創造出來的所有媒介及形式上行使本授權權利，以及作必要的技術修改。本授權人拋棄及/或同意不主張任何權利或權力來阻礙您做必要的技術修改以行使本授權權利，包含必要的技術修改以規避有效科技措施。為本公眾授權條款之目的，為第2條第(a)項第(4)款所許可的修改不會產生改用素材。
+-
+後續接受者.
+1.
+來自授權人的要約 – 授權素材。本授權素材的每位接受者自動獲得來自授權人的要約，依據本公眾授權條款之條款及條件來行使本授權權利。
+2.
+禁止對後手限制。您不得就本授權素材提出或加入任何額外或不同的條款或條件，或適用任何有效科技措施，若如此做會限制本授權素材的任何接受者行使本授權權利。
+-
+禁止背書。本公眾授權條款不構成或不得被解釋為許可您得主張或暗示您或您對本授權素材的使用與授權人或其他如第3條第(a)項第(1)款第(A)目第(i)規定被指定以取得姓名標示的對象有關聯、獲得其贊助、背書或被授與正式的地位。
+-
+其他權利.
+1.
+著作人格權 /
+精神權利，例如禁止不當修改權，形象權、隱私權及/或其他相似人格權，皆不在本公眾授權條款授權範圍內；然而，在可行範圍內，授權人放棄及/或同意在有限必要範圍內不主張該等授權人擁有的權利，以允許您行使本授權權利，但以前述情形為限。
+2. 專利權及商標權並未依本公眾授權條款被授權。
+3.
+在可行範圍內，被授權人放棄向您因行使本授權權利而收取權利金的任何權利，不論直接收取或透過著作權集體管理機構收取。在所有其他情形，授權人明示保留收取權利金的任何權利，包含當本授權素材被用於商業性目的。
+第3條 授權條件
+您行使本授權權利需受到下列條件明確的拘束。
+1.
+姓名標示 / 署名.
+1.
+若您分享本授權素材（包含修改格式），您必須：
+1.
+保留下列標示，若授權人有將其和本授權素材一併提供：
+1.
+以授權人要求的任何合理方式，本授權素材創作者及其他被指定接受姓名標示者的識別（若有指定筆名，亦包含在內）；
+2. 著作權聲明；
+3. 提及本公眾授權條款的聲明；
+4. 提及免除保證責任的聲明；
+5.
+於實際可行合理範圍內，本授權素材的「統一資源識別符」(URI)或超連結；
+-
+表明您是否曾修改本授權素材及保留任何先前修改部分的標記；及
+-
+表明本授權素材係依據本公眾授權條款授權，且包含本公眾授權條款全文，或其「統一資源識別符」(URI)或超連結。
+-
+依據您分享本授權素材的媒介、方法及情況，您得以任何合理方式滿足第3條第(a)項第(1)款的條件。例如，提供包含所要求資訊的資源的「統一資源識別符」(URI)或超連結，可算是合理地滿足此處的條件。
+-
+若授權人要求，您必須在實際可行合理範圍內移除第3條第(a)項第(1)款第(A)目所定的任何資訊。
+-
+若您分享您產生的改用素材，則您適用的改用者授權條款不得妨礙此改用素材的接受者遵守本公眾授權條款。
+第4條 資料庫權利
+當本授權權利包含資料庫權利，而該資料庫權利適用於您對本授權素材的使用時：
+1.
+為避免疑義，第2條第(a)項第(1)款授與您擷取、再利用、重製及分享資料庫內容之全部或相當部份的權利，然僅限於非商業性目的；
+2.
+若您將資料庫內容之全部或相當部分納入另一資料庫中，而您對該另外的資料庫擁有資料庫權利，則您擁有資料庫權利的資料庫（但非其個別內容）係改用素材；及
+3.
+若您分享資料庫內容之全部或相當部分，您必須遵守第3條第(a)項的條件。
+為避免疑義，當本授權權利包含其他著作權及相似權利時，
+第4條
+補充且不取代您依據本公眾授權條款需負擔的義務。
+第5條 免責聲明及責任限制條款
+1.
+除非由授權人個別保證，否則在可行範圍內，授權人是以現狀及現有之基礎提供本授權素材，且未聲明或提供關於本授權素材之任何保證，無論明示、默示、是否為法律所規定或其他保證。這包含但不限於任何有關本授權素材權利之擔保、可商業性、是否符合某特定之目的、未侵害他人權利、不具有潛在或其他之缺陷、正確性、或不論能否被發現之錯誤。當免責聲明全部或一部不被允許時，此免責聲明可能不適用於您。
+2.
+在可行範圍內，任何因本公眾授權條款或本授權素材的使用所生之直接的、特殊的、間接的、附隨的、連帶的、懲罰性的、警告性的或其他的損失、支出、費用或損害，授權人對您不負任何法理上或其他的責任（包含但不限於過失責任），縱授權人已經被告知發生此類損失、支出、費用或損害的可能性時，亦同。當責任限制規定全部或一部不被允許時，此限制可能不適用於您。
+3.
+前述所提供的免責聲明及責任限制規定，在可行範圍內，應該以最接近於確實免除全部責任的方式來解釋。
+第6條 有效期間及終止條款
+1.
+本公眾授權條款適用於本公眾授權條款中被授權之著作權及相似權利的存續期間，但若您未能遵守本公眾授權條款，則您依據本公眾授權條款所取得的權利將自動終止。
+2.
+當您使用本授權素材的權利根據第6條第(a)項已被終止時，該權利在下列兩種情況下即恢復：
+1.
+自違反行為被補正之日起自動恢復，但須在您發現違犯情事30日內補正；或
+2. 根據授權人之明示恢復。
+為避免疑義，本公眾授權條款第6條第(b)項不影響授權人因您違反本公眾授權條款而得尋求補償的任何權利。
+-
+為避免疑義，授權人亦得依不同的條款或條件提供本授權素材或隨時停止散布本授權素材，惟這麼做將不會終止本公眾授權條款。
+-
+本公眾授權條款第1、5、6、7及8條，不因本公眾授權條款之終止而失效。
+第7條 其他條款及條件
+1.
+除非有明示同意，否則授權人不受您所傳達的任何附加或不同的條款或條件所拘束。
+2.
+未於本公眾授權條款述及之關於本授權素材之任何約定、認知或協議，係分離且獨立於本公眾授權條款之條款及條件之外。
+第8條 解釋
+1.
+為避免疑義，本公眾授權條款不會、亦不應被解釋為減少、限制、約束、或施加條件於本授權素材的任何使用，而該等使用係得合法為之而無需依據本公眾授權條款取得許可。
+2.
+在可行範圍內，若本公眾授權條款之任何條文被視為無法執行，該條文應在使其可執行之最小必要範圍內被自動修改。若該條文無法修改，其應在不影響其餘條款及條件可執行性的情況下，排除於本公眾授權條款之外。
+3.
+除非授權人明示同意，本公眾授權條款之任何條款或條件皆不得拋棄，亦無得不遵守的協議。
+4.
+本公眾授權條款不構成，亦不得被解釋為對適用於授權人或您的任何特權及豁免的限制或拋棄，包含豁免於任何司法管轄或行政機構的法律程序。
 
-Copyright (c) 2026 BrainLeech198
+---
 
-## 1. Scope
-
-This license applies to the original code and original assets of the
-"Qingfeng" project (collectively, the "Software"). Third-party components
-within the project (such as open-source libraries like libGDX, and third-party
-icon/sound/font assets) are licensed separately under their own licenses and
-are not subject to the grants or restrictions of this license.
-
-## 2. Granted Rights
-
-Subject to the restrictions in Section 3, anyone may, free of charge:
-
-1. Use and copy the Software;
-2. Modify and adapt the Software for personal study, personal use, or creation;
-3. Redistribute the Software and its modified versions on a non-commercial
-   basis.
-
-## 3. Commercial Use and Authorization
-
-1. **Personal and non-commercial use is free**: Use of the Software for
-   personal study, personal use, or non-commercial purposes requires no
-   authorization and no payment.
-2. **Commercial use requires authorization**: Use of the Software or its
-   modified versions for commercial purposes (including but not limited to
-   selling, paid distribution, bundling for sale, or providing profit-making
-   services) requires prior written authorization from the original author;
-   the profit-sharing ratio and terms shall be agreed upon by both parties.
-3. **Retain the notice**: All copies or substantial portions of the Software
-   must retain the above copyright notice and this license text.
-
-## 4. Derived Works
-
-Content works created with the Software (such as scripts, illustrations,
-audio, and other parts created by the creator themselves) belong to their
-creators and are not subject to the commercial use and authorization
-restrictions in Section 3.
-
-## 5. Disclaimer
-
-The Software is provided "as is", without warranty of any kind, express or
-implied, including but not limited to the warranties of merchantability,
-fitness for a particular purpose and non-infringement. In no event shall the
-author be liable for any claim, damages or other liability arising from the
-use of the Software.
+Attribution-NonCommercial 4.0 International
+By exercising the Licensed Rights (defined below), You accept and
+agree to be bound by the terms and conditions of this Creative
+Commons Attribution-NonCommercial 4.0 International Public License
+("Public License"). To the extent this Public License may be
+interpreted as a contract, You are granted the Licensed Rights in
+consideration of Your acceptance of these terms and conditions, and
+the Licensor grants You such rights in consideration of benefits the
+Licensor receives from making the Licensed Material available under
+these terms and conditions.
+Section 1 – Definitions.
+1.
+Adapted Material
+means material subject to Copyright and Similar Rights that is
+derived from or based upon the Licensed Material and in which the
+Licensed Material is translated, altered, arranged, transformed,
+or otherwise modified in a manner requiring permission under the
+Copyright and Similar Rights held by the Licensor. For purposes of
+this Public License, where the Licensed Material is a musical
+work, performance, or sound recording, Adapted Material is always
+produced where the Licensed Material is synched in timed relation
+with a moving image.
+2.
+Adapter's License
+means the license You apply to Your Copyright and Similar Rights
+in Your contributions to Adapted Material in accordance with the
+terms and conditions of this Public License.
+3.
+Copyright and Similar Rights
+means copyright and/or similar rights closely related to copyright
+including, without limitation, performance, broadcast, sound
+recording, and Sui Generis Database Rights, without regard to how
+the rights are labeled or categorized. For purposes of this Public
+License, the rights specified in Section
+2(b)(1)-(2) are not Copyright and Similar
+Rights.
+4.
+Effective Technological Measures
+means those measures that, in the absence of proper authority, may
+not be circumvented under laws fulfilling obligations under
+Article 11 of the WIPO Copyright Treaty adopted on December 20,
+1996, and/or similar international agreements.
+5.
+Exceptions and Limitations
+means fair use, fair dealing, and/or any other exception or
+limitation to Copyright and Similar Rights that applies to Your
+use of the Licensed Material.
+6.
+Licensed Material
+means the artistic or literary work, database, or other material
+to which the Licensor applied this Public License.
+7.
+Licensed Rights
+means the rights granted to You subject to the terms and
+conditions of this Public License, which are limited to all
+Copyright and Similar Rights that apply to Your use of the
+Licensed Material and that the Licensor has authority to license.
+8.
+Licensor means the
+individual(s) or entity(ies) granting rights under this Public
+License.
+9.
+NonCommercial
+means not primarily intended for or directed towards commercial
+advantage or monetary compensation. For purposes of this Public
+License, the exchange of the Licensed Material for other material
+subject to Copyright and Similar Rights by digital file-sharing or
+similar means is NonCommercial provided there is no payment of
+monetary compensation in connection with the exchange.
+10.
+Share means to
+provide material to the public by any means or process that
+requires permission under the Licensed Rights, such as
+reproduction, public display, public performance, distribution,
+dissemination, communication, or importation, and to make material
+available to the public including in ways that members of the
+public may access the material from a place and at a time
+individually chosen by them.
+11.
+Sui Generis Database Rights
+means rights other than copyright resulting from Directive 96/9/EC
+of the European Parliament and of the Council of 11 March 1996 on
+the legal protection of databases, as amended and/or succeeded, as
+well as other essentially equivalent rights anywhere in the world.
+12.
+You means the
+individual or entity exercising the Licensed Rights under this
+Public License. Your has a corresponding meaning.
+Section 2 – Scope.
+1.
+License grant.
+1.
+Subject to the terms and conditions of this Public License,
+the Licensor hereby grants You a worldwide, royalty-free,
+non-sublicensable, non-exclusive, irrevocable license to
+exercise the Licensed Rights in the Licensed Material to:
+1.
+reproduce and Share the Licensed Material, in whole or in
+part, for NonCommercial purposes only; and
+2.
+produce, reproduce, and Share Adapted Material for
+NonCommercial purposes only.
+-
+Exceptions and Limitations. For the avoidance
+of doubt, where Exceptions and Limitations apply to Your use,
+this Public License does not apply, and You do not need to
+comply with its terms and conditions.
+-
+Term. The term of this Public License is
+specified in Section 6(a).
+-
+Media and formats; technical modifications allowed. The Licensor authorizes You to exercise the Licensed Rights
+in all media and formats whether now known or hereafter
+created, and to make technical modifications necessary to do
+so. The Licensor waives and/or agrees not to assert any right
+or authority to forbid You from making technical modifications
+necessary to exercise the Licensed Rights, including technical
+modifications necessary to circumvent Effective Technological
+Measures. For purposes of this Public License, simply making
+modifications authorized by this Section
+2(a)(4) never produces Adapted Material.
+-
+Downstream recipients.
+1.
+Offer from the Licensor – Licensed Material. Every recipient of the Licensed Material automatically
+receives an offer from the Licensor to exercise the
+Licensed Rights under the terms and conditions of this
+Public License.
+2.
+No downstream restrictions. You may not offer or impose any additional or different
+terms or conditions on, or apply any Effective
+Technological Measures to, the Licensed Material if doing
+so restricts exercise of the Licensed Rights by any
+recipient of the Licensed Material.
+-
+No endorsement. Nothing in this Public License constitutes or may be
+construed as permission to assert or imply that You are, or
+that Your use of the Licensed Material is, connected with, or
+sponsored, endorsed, or granted official status by, the
+Licensor or others designated to receive attribution as
+provided in Section 3(a)(1)(A)(i).
+-
+Other rights.
+1.
+Moral rights, such as the right of integrity, are not licensed
+under this Public License, nor are publicity, privacy, and/or
+other similar personality rights; however, to the extent
+possible, the Licensor waives and/or agrees not to assert any
+such rights held by the Licensor to the limited extent
+necessary to allow You to exercise the Licensed Rights, but
+not otherwise.
+2.
+Patent and trademark rights are not licensed under this Public
+License.
+3.
+To the extent possible, the Licensor waives any right to
+collect royalties from You for the exercise of the Licensed
+Rights, whether directly or through a collecting society under
+any voluntary or waivable statutory or compulsory licensing
+scheme. In all other cases the Licensor expressly reserves any
+right to collect such royalties, including when the Licensed
+Material is used other than for NonCommercial purposes.
+Section 3 – License Conditions.
+Your exercise of the Licensed Rights is expressly made subject to
+the following conditions.
+1.
+Attribution.
+1.
+If You Share the Licensed Material (including in modified
+form), You must:
+1.
+retain the following if it is supplied by the Licensor
+with the Licensed Material:
+1.
+identification of the creator(s) of the Licensed
+Material and any others designated to receive
+attribution, in any reasonable manner requested by the
+Licensor (including by pseudonym if designated);
+2. a copyright notice;
+3.
+a notice that refers to this Public License;
+4.
+a notice that refers to the disclaimer of warranties;
+5.
+a URI or hyperlink to the Licensed Material to the
+extent reasonably practicable;
+-
+indicate if You modified the Licensed Material and retain
+an indication of any previous modifications; and
+-
+indicate the Licensed Material is licensed under this
+Public License, and include the text of, or the URI or
+hyperlink to, this Public License.
+-
+You may satisfy the conditions in Section
+3(a)(1) in any reasonable manner based on
+the medium, means, and context in which You Share the Licensed
+Material. For example, it may be reasonable to satisfy the
+conditions by providing a URI or hyperlink to a resource that
+includes the required information.
+-
+If requested by the Licensor, You must remove any of the
+information required by Section
+3(a)(1)(A) to the extent reasonably
+practicable.
+-
+If You Share Adapted Material You produce, the Adapter's
+License You apply must not prevent recipients of the Adapted
+Material from complying with this Public License.
+Section 4 – Sui Generis Database Rights.
+Where the Licensed Rights include Sui Generis Database Rights that
+apply to Your use of the Licensed Material:
+1.
+for the avoidance of doubt, Section
+2(a)(1) grants You the right to extract,
+reuse, reproduce, and Share all or a substantial portion of the
+contents of the database for NonCommercial purposes only;
+2.
+if You include all or a substantial portion of the database
+contents in a database in which You have Sui Generis Database
+Rights, then the database in which You have Sui Generis Database
+Rights (but not its individual contents) is Adapted Material; and
+3.
+You must comply with the conditions in Section
+3(a) if You Share all or a substantial portion
+of the contents of the database.
+For the avoidance of doubt, this Section
+4 supplements and does not replace Your
+obligations under this Public License where the Licensed Rights
+include other Copyright and Similar Rights.
+Section 5 – Disclaimer of Warranties and Limitation of Liability.
+1.
+Unless otherwise separately undertaken by the Licensor, to the
+extent possible, the Licensor offers the Licensed Material as-is
+and as-available, and makes no representations or warranties of
+any kind concerning the Licensed Material, whether express,
+implied, statutory, or other. This includes, without limitation,
+warranties of title, merchantability, fitness for a particular
+purpose, non-infringement, absence of latent or other defects,
+accuracy, or the presence or absence of errors, whether or not
+known or discoverable. Where disclaimers of warranties are not
+allowed in full or in part, this disclaimer may not apply to
+You.
+2.
+To the extent possible, in no event will the Licensor be liable
+to You on any legal theory (including, without limitation,
+negligence) or otherwise for any direct, special, indirect,
+incidental, consequential, punitive, exemplary, or other losses,
+costs, expenses, or damages arising out of this Public License
+or use of the Licensed Material, even if the Licensor has been
+advised of the possibility of such losses, costs, expenses, or
+damages. Where a limitation of liability is not allowed in full
+or in part, this limitation may not apply to You.
+3.
+The disclaimer of warranties and limitation of liability provided
+above shall be interpreted in a manner that, to the extent
+possible, most closely approximates an absolute disclaimer and
+waiver of all liability.
+Section 6 – Term and Termination.
+1.
+This Public License applies for the term of the Copyright and
+Similar Rights licensed here. However, if You fail to comply with
+this Public License, then Your rights under this Public License
+terminate automatically.
+2.
+Where Your right to use the Licensed Material has terminated
+under Section 6(a), it reinstates:
+1.
+automatically as of the date the violation is cured, provided
+it is cured within 30 days of Your discovery of the violation;
+or
+2. upon express reinstatement by the Licensor.
+For the avoidance of doubt, this Section
+6(b) does not affect any right the Licensor
+may have to seek remedies for Your violations of this Public
+License.
+-
+For the avoidance of doubt, the Licensor may also offer the
+Licensed Material under separate terms or conditions or stop
+distributing the Licensed Material at any time; however, doing so
+will not terminate this Public License.
+-
+Sections 1, 5,
+6, 7, and
+8 survive termination of this Public License.
+Section 7 – Other Terms and Conditions.
+1.
+The Licensor shall not be bound by any additional or different
+terms or conditions communicated by You unless expressly agreed.
+2.
+Any arrangements, understandings, or agreements regarding the
+Licensed Material not stated herein are separate from and
+independent of the terms and conditions of this Public License.
+Section 8 – Interpretation.
+1.
+For the avoidance of doubt, this Public License does not, and
+shall not be interpreted to, reduce, limit, restrict, or impose
+conditions on any use of the Licensed Material that could lawfully
+be made without permission under this Public License.
+2.
+To the extent possible, if any provision of this Public License is
+deemed unenforceable, it shall be automatically reformed to the
+minimum extent necessary to make it enforceable. If the provision
+cannot be reformed, it shall be severed from this Public License
+without affecting the enforceability of the remaining terms and
+conditions.
+3.
+No term or condition of this Public License will be waived and no
+failure to comply consented to unless expressly agreed to by the
+Licensor.
+4.
+Nothing in this Public License constitutes or may be interpreted
+as a limitation upon, or waiver of, any privileges and immunities
+that apply to the Licensor or You, including from the legal
+processes of any jurisdiction or authority.

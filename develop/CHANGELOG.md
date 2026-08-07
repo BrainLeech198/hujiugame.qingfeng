@@ -41,6 +41,7 @@
 
 ### 变更
 
+- **许可证更换为 CC BY-NC 4.0** — 根目录 `LICENSE` 及 `assets/LICENSE`、`lwjgl3/setup/LICENSE` 副本更换为知识共享「署名-非商业性使用 4.0 国际」（CC BY-NC 4.0）官方文本（简体/繁体/英文三语，简→繁→英顺序），个人与非商业使用自由、商业使用需另行授权；`README.md` 三语许可说明同步更新
 - **许可证商用条款细化** — 商业使用由"禁止"改为"须事先取得作者书面授权、分成比例与方式双方协商确定"（商讨制），保留个人与非商业使用免费；`README.md` 三语许可说明同步更新
 - **项目许可证从 MIT 更换为非商业许可** — 根目录 `LICENSE` 及 `assets/LICENSE`、`lwjgl3/setup/LICENSE` 副本更换为「氢风非商业许可证」（允许修改与个人使用、禁止商业售卖、二次创作作品归创作者所有、第三方组件按各自许可单独授权）；`README.md` 三语许可声明与 `assets/THIRDPARTY_LICENSES.md` 头部引用同步更新
 - **`inno_setup.iss` 文件关联图标独立化** — 5 种后缀（`.qfg`/`.qfl`/`.qft`/`.qfgl`/`.qfgt`）改用各自独立图标，新增 5 个图标常量与 `[Files]` Source 条目，5 处 `DefaultIcon` 分别指向 `qfg.ico`/`qfl.ico`/`qft.ico`/`qfgl.ico`/`qfgt.ico`
