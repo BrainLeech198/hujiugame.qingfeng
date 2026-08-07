@@ -102,42 +102,57 @@
 - 不强制署名（可选感谢作者）
 - 不得作为独立文件转售、再许可或分发
 
-#### 1.2.4 文件关联图标（qfl.ico / qft.ico / qfgl.ico / qfgt.ico）
+#### 1.2.4 qfl.ico（语言包图标）
 
-以下 4 个文件关联图标涉及 **3 个第三方素材版权**：document 5_122642 为共用基础素材（4 个图标都有），language-setting 159167 供 qfl/qfgl 一组使用，color-lens 90605 供 qft/qfgt 一组使用；图标均替换为主题色 `#3F48CC` + 副主题色 `#FDA1FF`：
-
-| 文件 | 使用素材 | 说明 |
-|------|----------|------|
-| `lwjgl3/setup/qfl.ico` | document + language-setting | 语言包图标 |
-| `lwjgl3/setup/qfgl.ico` | document + language-setting | qfl 的配色互换变体（游戏语言包） |
-| `lwjgl3/setup/qft.ico` | document + color-lens | 主题包图标 |
-| `lwjgl3/setup/qfgt.ico` | document + color-lens | qft 的配色互换变体（游戏主题包） |
-
-**document-page-notes-text（5_122642）**
-
-- **使用范围：** 4 个图标的共用基础素材（qfl/qfgl/qft/qfgt）
-- **作者：** Free-psd-templates（icon-icons.com）
-- **来源：** [icon-icons.com - document-page-notes-text](https://icon-icons.com/icon/document-page-notes-text/122642)
+- **文件：** `lwjgl3/setup/qfl.ico`
+- **作者：** Free-psd-templates、Chanut（icon-icons.com）
+- **来源：** [icon-icons.com - document-page-notes-text](https://icon-icons.com/icon/document-page-notes-text/122642)、[icon-icons.com - language-setting](https://icon-icons.com/icon/language-setting/159167)
 - **许可：** icon-icons.com 免费许可（Free for commercial use，无需署名）
-- **修改：** 是（替换为主题色/副主题色并调整配色）
+- **修改：** 是（以 document 为基础，整合 language-setting，替换为主题色 `#3F48CC` + 副主题色 `#FDA1FF`）
 
-**language-setting（159167）**
+本图标使用了上述 icon-icons.com 素材，按免费许可使用：
 
-- **使用范围：** qfl.ico、qfgl.ico（语言包一组）
-- **作者：** Chanut（icon-icons.com）
-- **来源：** [icon-icons.com - language-setting](https://icon-icons.com/icon/language-setting/159167)
+- 可免费用于商业项目（Free for commercial use）
+- 不强制署名（可选感谢作者）
+- 不得作为独立文件转售、再许可或分发
+
+#### 1.2.5 qfgl.ico（游戏语言包图标）
+
+- **文件：** `lwjgl3/setup/qfgl.ico`
+- **作者：** Free-psd-templates、Chanut（icon-icons.com）
+- **来源：** [icon-icons.com - document-page-notes-text](https://icon-icons.com/icon/document-page-notes-text/122642)、[icon-icons.com - language-setting](https://icon-icons.com/icon/language-setting/159167)
 - **许可：** icon-icons.com 免费许可（Free for commercial use，无需署名）
-- **修改：** 是（整合进 qfl.ico，qfgl.ico 为其配色互换变体）
+- **修改：** 是（qfl.ico 的配色互换变体，素材与来源同 qfl.ico）
 
-**color-lens（90605）**
+本图标使用了上述 icon-icons.com 素材，按免费许可使用：
 
-- **使用范围：** qft.ico、qfgt.ico（主题包一组）
-- **作者：** Google（icon-icons.com，Material 系列）
-- **来源：** [icon-icons.com - color-lens](https://icon-icons.com/icon/color-lens/90605)
+- 可免费用于商业项目（Free for commercial use）
+- 不强制署名（可选感谢作者）
+- 不得作为独立文件转售、再许可或分发
+
+#### 1.2.6 qft.ico（主题包图标）
+
+- **文件：** `lwjgl3/setup/qft.ico`
+- **作者：** Free-psd-templates、Google（icon-icons.com，Material 系列）
+- **来源：** [icon-icons.com - document-page-notes-text](https://icon-icons.com/icon/document-page-notes-text/122642)、[icon-icons.com - color-lens](https://icon-icons.com/icon/color-lens/90605)
 - **许可：** icon-icons.com 免费许可（Free for commercial use，无需署名）
-- **修改：** 是（整合进 qft.ico，qfgt.ico 为其配色互换变体）
+- **修改：** 是（以 document 为基础，整合 color-lens，替换为主题色 `#3F48CC` + 副主题色 `#FDA1FF`）
 
-以上素材均按 icon-icons.com 免费许可使用：
+本图标使用了上述 icon-icons.com 素材，按免费许可使用：
+
+- 可免费用于商业项目（Free for commercial use）
+- 不强制署名（可选感谢作者）
+- 不得作为独立文件转售、再许可或分发
+
+#### 1.2.7 qfgt.ico（游戏主题包图标）
+
+- **文件：** `lwjgl3/setup/qfgt.ico`
+- **作者：** Free-psd-templates、Google（icon-icons.com，Material 系列）
+- **来源：** [icon-icons.com - document-page-notes-text](https://icon-icons.com/icon/document-page-notes-text/122642)、[icon-icons.com - color-lens](https://icon-icons.com/icon/color-lens/90605)
+- **许可：** icon-icons.com 免费许可（Free for commercial use，无需署名）
+- **修改：** 是（qft.ico 的配色互换变体，素材与来源同 qft.ico）
+
+本图标使用了上述 icon-icons.com 素材，按免费许可使用：
 
 - 可免费用于商业项目（Free for commercial use）
 - 不强制署名（可选感谢作者）
