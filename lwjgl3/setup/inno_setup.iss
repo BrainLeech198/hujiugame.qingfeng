@@ -53,7 +53,8 @@ SolidCompression=yes
 Compression=lzma2/ultra64
 LZMAUseSeparateProcess=yes
 WizardStyle=modern
-LicenseFile=.\LICENSE
+; 安装向导按 简体→繁体→英文 三段展示三语许可（UTF-8 with BOM）
+LicenseFile=.\LICENSE.combined.txt
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -74,6 +75,10 @@ Source: ".\qfl.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: ".\qft.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: ".\qfgl.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: ".\qfgt.ico"; DestDir: "{app}"; Flags: ignoreversion
+; 三语许可证随程序安装到程序目录
+Source: ".\LICENSE"; DestDir: "{app}"; Flags: ignoreversion
+Source: ".\LICENSE.zh-CN"; DestDir: "{app}"; Flags: ignoreversion
+Source: ".\LICENSE.zh-TW"; DestDir: "{app}"; Flags: ignoreversion
 
 [Registry]
 ; 绑定 .qfg 默认 ProgID，使双击 .qfg 直接调用 launcher.exe "%1"

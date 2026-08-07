@@ -769,12 +769,30 @@ class Builder:
         content = re.sub(r'qingfeng-.*\.jar', f'qingfeng-{self.version}.jar', content)
         iss_path.write_text(content, encoding="utf-8")
 
-        # 复制 LICENSE 到安装包目录
-        license_src = PROJECT_DIR / "LICENSE"
-        license_dst = SETUP_DIR / "LICENSE"
-        if license_src.exists():
-            shutil.copy2(license_src, license_dst)
-            print(f"  [信息] 已添加许可证: {license_dst.name}")
+        # 复制三语 LICENSE 到安装包目录（随程序安装）
+        for lic_name in ("LICENSE", "LICENSE.zh-CN", "LICENSE.zh-TW"):
+            lic_src = PROJECT_DIR / lic_name
+            lic_dst = SETUP_DIR / lic_name
+            if lic_src.exists():
+                shutil.copy2(lic_src, lic_dst)
+                print(f"  [信息] 已添加许可证: {lic_name}")
+
+        # 生成安装向导展示用的三语合并文件（LicenseFile 引用，UTF-8 BOM）
+        def _read_license(name):
+            return (PROJECT_DIR / name).read_text(encoding="utf-8").strip()
+
+        sep = "=" * 60
+        combined = "\n\n".join([
+            sep + "\n简体中文 — 氢风项目许可证（CC BY-NC 4.0 署名—非商业性使用）\n" + sep,
+            _read_license("LICENSE.zh-CN"),
+            sep + "\n繁體中文 — 氫風專案授權條款（CC BY-NC 4.0 姓名標示—非商業性）\n" + sep,
+            _read_license("LICENSE.zh-TW"),
+            sep + "\nEnglish — QingFeng Project License (CC BY-NC 4.0 Attribution-NonCommercial)\n" + sep,
+            _read_license("LICENSE"),
+        ]) + "\n"
+        (SETUP_DIR / "LICENSE.combined.txt").write_bytes(
+            b"\xef\xbb\xbf" + combined.encode("utf-8"))
+        print("  [信息] 已生成三语合并许可证: LICENSE.combined.txt")
 
         # 运行 ISCC
         print(f"  > ISCC {iss_path}")

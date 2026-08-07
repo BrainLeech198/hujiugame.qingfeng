@@ -61,6 +61,10 @@
 - **启动器说明更新** — `lwjgl3/setup/README.md` 目录结构补充 5 个图标文件，新增「文件关联」小节（后缀/关联名/图标文件对照表 + 独立替换说明），图标填充说明由"占位待替换"更新为主题配色二创
 - **第三方素材版权登记** — `assets/THIRDPARTY_LICENSES.md` 按文件逐一登记 4 个文件关联图标来源（qfl/qfgl = document 5_122642 + language-setting 159167，qft/qfgt = document 5_122642 + color-lens 90605；均 icon-icons.com 免费商用授权；qfgl/qfgt 分别为 qfl/qft 的配色互换变体），`qfg.ico` 列入原创素材清单
 
+### 构建
+
+- **打包流程同步三语许可证** — `build_package.py` 安装器步骤将根目录 `LICENSE`/`LICENSE.zh-CN`/`LICENSE.zh-TW` 复制到 `lwjgl3/setup/`，并生成安装向导展示用的三语合并文件 `LICENSE.combined.txt`（UTF-8 BOM）；`inno_setup.iss` 的 `LicenseFile` 指向该合并文件（简体→繁体→英文三段展示），`[Files]` 将三语许可证安装到程序目录；`assets/` 同步三语许可证副本（随 APK 分发）
+
 ## 2026-08-06 — 官方语言/主题 Internal 句柄化 + 默认配置损坏恢复预想方案入库 + 版权素材清理替换 + 文件后缀关联补全与四类资源包注册 + 启动器单实例限制 + 启动器源码整理 + 启动器说明文档同步
 
 ### 新增
