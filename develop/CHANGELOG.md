@@ -65,6 +65,10 @@
 
 - **打包流程同步三语许可证** — `build_package.py` 安装器步骤将根目录 `LICENSE`/`LICENSE.zh-CN`/`LICENSE.zh-TW` 复制到 `lwjgl3/setup/`，并生成安装向导展示用的三语合并文件 `LICENSE.combined.txt`（UTF-8 BOM）；`inno_setup.iss` 的 `LicenseFile` 指向该合并文件（简体→繁体→英文三段展示），`[Files]` 将三语许可证安装到程序目录；`assets/` 同步三语许可证副本（随 APK 分发）
 
+### 网站
+
+- **官网新增许可证与项目素材版权页** — 新增 `docs/LICENSE.html`（三语许可证查看页，简体/繁體/English tab 切换）与 `docs/PROJECT_THIRDPARTY.html`（项目素材第三方版权声明，由 `assets/THIRDPARTY_LICENSES.md` 渲染）；`docs/index.html` 页脚改为三链接排列：项目许可证 → 项目素材第三方版权声明 → 网站素材第三方版权声明；9 种语言 locale 新增 `footer_license`/`footer_project_thirdparty`/`footer_website_thirdparty` 页脚文案
+
 ## 2026-08-06 — 官方语言/主题 Internal 句柄化 + 默认配置损坏恢复预想方案入库 + 版权素材清理替换 + 文件后缀关联补全与四类资源包注册 + 启动器单实例限制 + 启动器源码整理 + 启动器说明文档同步
 
 ### 新增
