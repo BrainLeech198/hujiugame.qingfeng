@@ -104,14 +104,14 @@
 
 #### 1.2.4 文件关联图标（qfl.ico / qft.ico / qfgl.ico / qfgt.ico）
 
-以下 4 个文件关联图标均以 icon-icons.com 的 document 图标为基础二次创作（替换为主题色 `#3F48CC` + 副主题色 `#FDA1FF`），qfl/qft 额外叠加了独立素材：
+以下 4 个文件关联图标均以 icon-icons.com 的 document 图标为基础二次创作（替换为主题色 `#3F48CC` + 副主题色 `#FDA1FF`），qfl/qft 额外叠加了独立素材，qfgl/qfgt 分别为 qfl/qft 的配色互换变体：
 
 | 文件 | 基础素材 | 额外素材 |
 |------|----------|----------|
 | `lwjgl3/setup/qfl.ico` | document 5_122642 | language-setting 159167 |
+| `lwjgl3/setup/qfgl.ico` | qfl 的配色互换变体 | — |
 | `lwjgl3/setup/qft.ico` | document 5_122642 | color-lens 90605 |
-| `lwjgl3/setup/qfgl.ico` | document 5_122642（配色互换变体） | — |
-| `lwjgl3/setup/qfgt.ico` | document 5_122642（配色互换变体） | — |
+| `lwjgl3/setup/qfgt.ico` | qft 的配色互换变体 | — |
 
 **document-page-notes-text（5_122642）**
 
