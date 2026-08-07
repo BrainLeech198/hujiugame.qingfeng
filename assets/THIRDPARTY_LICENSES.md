@@ -5,7 +5,7 @@
 - 项目主页：<https://github.com/BrainLeech198/hujiugame.qingfeng>
 
 本文件列举了 qingfeng 项目中使用的第三方素材及其许可信息。
-如无特殊说明，项目自有代码和素材以根目录 `LICENSE`（MIT）为准。
+如无特殊说明，项目自有代码和素材以根目录 `LICENSE`（非商业许可）为准。
 
 ---
 

@@ -1,57 +1,81 @@
-MIT 授權條款
+# 氢风（Qingfeng）非商业许可证
 
 版权所有 (c) 2026 BrainLeech198
 
-特此無償授予任何取得本軟體及相關文件（下稱「軟體」）副本之人員，
-無限制地處理本軟體（包括但不限於使用、複製、修改、合併、發布、
-散布、再授權及/或銷售本軟體之副本），並允許被提供本軟體之人員
-在符合下列條件之情況下亦為上述行為：
+## 一、适用范围
 
-本軟體之所有副本或重要部分均須包含上述版權聲明及本授權聲明。
+本许可证适用于"氢风"项目的原创代码与原创素材（以下合称"本软件"）。
+项目内的第三方组件（如 libGDX 等开源库、第三方图标/音效/字体素材）
+按其各自许可证单独授权，不适用本许可证的授予与限制。
 
-本軟體係依「現狀」提供，不負任何明示或默示之擔保責任，包括但不
-限於適售性、特定用途之適用性及非侵權保證。在任何情況下，著作人
-或版權持有人均不應就因使用或無法使用本軟體所導致之任何索賠、損
-害或其他責任負擔，無論其係基於合約、侵權或其他訴訟原因。
+## 二、授予的权利
+
+在遵守第三条的前提下，任何人可以免费：
+
+1. 使用、复制本软件；
+2. 修改、改编本软件，用于个人学习、自用或创作；
+3. 以非商业方式再分发本软件及其修改版本。
+
+## 三、限制
+
+1. **禁止商业使用**：不得将本软件或其修改版本用于商业目的，包括但不
+   限于销售、收费分发、捆绑销售或提供盈利性服务。
+2. **保留声明**：本软件的所有副本或重要部分须保留上述版权声明及本
+   许可证文本。
+
+## 四、二次创作作品
+
+使用本软件创作的内容作品（剧本、立绘、音频等由创作者自行创作的部分）
+归创作者所有，不受第三条"禁止商业使用"的限制。
+
+## 五、免责声明
+
+本软件按"现状"提供，不提供任何明示或默示的担保，包括但不限于适销性、
+特定用途适用性及不侵权。任何情况下，作者不对因使用本软件产生的任何
+损害承担责任。
 
 ---
 
-MIT 许可证
-
-版权所有 (c) 2026 BrainLeech198
-
-特此免费授予任何获得本软件及相关文档（以下简称"软件"）副本的人
-员，不受限制地处理本软件的权利，包括但不限于使用、复制、修改、
-合并、发布、分发、再许可和/或销售本软件副本的权利，并允许被提
-供本软件的人员在符合以下条件的情况下这样做：
-
-本软件的所有副本或重要部分均须包含上述版权声明和本许可声明。
-
-本软件按"现状"提供，不提供任何明示或暗示的保证，包括但不限于
-适销性、特定用途的适用性和非侵权保证。在任何情况下，作者或版权
-持有人均不对因使用或无法使用本软件而产生的任何索赔、损害或其他
-责任负责，无论是基于合同、侵权或其他诉讼原因。
-
----
-
-MIT License
+# Qingfeng Non-Commercial License
 
 Copyright (c) 2026 BrainLeech198
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+## 1. Scope
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+This license applies to the original code and original assets of the
+"Qingfeng" project (collectively, the "Software"). Third-party components
+within the project (such as open-source libraries like libGDX, and third-party
+icon/sound/font assets) are licensed separately under their own licenses and
+are not subject to the grants or restrictions of this license.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+## 2. Granted Rights
+
+Subject to the restrictions in Section 3, anyone may, free of charge:
+
+1. Use and copy the Software;
+2. Modify and adapt the Software for personal study, personal use, or creation;
+3. Redistribute the Software and its modified versions on a non-commercial
+   basis.
+
+## 3. Restrictions
+
+1. **Non-commercial use only**: The Software and its modified versions may
+   not be used for commercial purposes, including but not limited to selling,
+   paid distribution, bundling for sale, or providing profit-making services.
+2. **Retain the notice**: All copies or substantial portions of the Software
+   must retain the above copyright notice and this license text.
+
+## 4. Derived Works
+
+Content works created with the Software (such as scripts, illustrations,
+audio, and other parts created by the creator themselves) belong to their
+creators and are not subject to the "non-commercial use" restriction in
+Section 3.
+
+## 5. Disclaimer
+
+The Software is provided "as is", without warranty of any kind, express or
+implied, including but not limited to the warranties of merchantability,
+fitness for a particular purpose and non-infringement. In no event shall the
+author be liable for any claim, damages or other liability arising from the
+use of the Software.

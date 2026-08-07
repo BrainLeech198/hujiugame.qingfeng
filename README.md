@@ -187,7 +187,7 @@
 
 ## 许可证
 
-本项目基于 **MIT 许可证** 授权发布。详情见 [LICENSE](LICENSE) 文件。
+本项目基于 **非商业许可** 授权发布（可修改、可自用，禁止商业售卖）。详情见 [LICENSE](LICENSE) 文件。
 
 ---
 
@@ -332,7 +332,7 @@
 
 ## 授權條款
 
-本專案基於 **MIT 授權條款** 發佈。詳情見 [LICENSE](LICENSE) 檔案。
+本專案基於 **非商業授權** 發佈（可修改、可自用，禁止商業販售）。詳情見 [LICENSE](LICENSE) 檔案。
 
 ---
 
@@ -514,7 +514,7 @@ All project documentation (contributing guide, code style, commit conventions, e
 
 ## License
 
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the **Non-Commercial License** (modification and personal use allowed; commercial selling prohibited). See the [LICENSE](LICENSE) file for details.
 
 ---
 
