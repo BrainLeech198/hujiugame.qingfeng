@@ -1,5 +1,7 @@
 {
-  "backgroundPicture" : "menu.background.png",
+  "graphics" : {
+    "backgroundPicture" : "menu.background.png"
+  },
   "ui" : {
     "label" : {
       "load" : {

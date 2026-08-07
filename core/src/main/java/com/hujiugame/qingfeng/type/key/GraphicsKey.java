@@ -1,7 +1,7 @@
 package com.hujiugame.qingfeng.type.key;
 
 /**
- * graphics 分类下的子字段常量，对应 layout.json → graphics 内部的 picture / gif 子分类
+ * graphics 分类下的子字段常量，对应 layout.json → graphics 内部的 backgroundPicture 字段与 picture / gif 子分类
  */
 public final class GraphicsKey
 {
@@ -9,6 +9,9 @@ public final class GraphicsKey
     {
         throw new UnsupportedOperationException("Utility class cannot be instantiated");
     }
+
+    /** graphics → backgroundPicture 背景图片文件名 */
+    public static final String BACKGROUND_PICTURE = "backgroundPicture";
 
     /** graphics → picture 子分类 */
     public static final String PICTURE = "picture";

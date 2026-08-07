@@ -241,9 +241,22 @@ public final class LayoutManager
     {
         try
         {
+            // 解析 graphics 节点
+            // ===================================================================================================================
+            JsonEntity graphicsJson = layoutJson.getJsonEntityByKey(LayoutKey.GRAPHICS);
+
             // 解析背景图片路径
             // ===================================================================================================================
-            String backgroundPictureName = layoutJson.getString(LayoutKey.BACKGROUND_PICTURE);
+            // 背景图片已收编到 graphics 内部（graphics.backgroundPicture）；优先读新格式，回退读顶层旧格式，兼容第三方页面
+            String backgroundPictureName = null;
+            if (!graphicsJson.isEmpty())
+            {
+                backgroundPictureName = graphicsJson.getString(GraphicsKey.BACKGROUND_PICTURE);
+            }
+            if (backgroundPictureName == null)
+            {
+                backgroundPictureName = layoutJson.getString(LayoutKey.BACKGROUND_PICTURE);
+            }
             String backgroundPicturePath = null;
 
             if (backgroundPictureName != null)
@@ -262,7 +275,6 @@ public final class LayoutManager
 
             // 解析 graphics 子分类
             // ===================================================================================================================
-            JsonEntity graphicsJson = layoutJson.getJsonEntityByKey(LayoutKey.GRAPHICS);
             if (!graphicsJson.isEmpty())
             {
                 if (!loadLayoutGraphicsPicture(layout, graphicsJson, resourceRootDirectory)) return false;

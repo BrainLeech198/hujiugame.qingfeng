@@ -423,15 +423,14 @@
 | `name` | String | 可选 | 文件名（不含扩展名） | 页面名称 |
 | `template` | String | 可选 | — | 模板布局名，加载后与本布局合并（`mergeLayout`） |
 | `audio` | Object | 可选 | — | 音频节点，子字段 `backgroundMusic`（背景音乐）与 `music`（点播音乐），见 [3.2](#32-背景音乐配置) |
-| `backgroundPicture` | String | 可选 | — | 背景图片文件名，相对 `resource/image/` |
-| `graphics` | Object | 可选 | — | 图片/动图容器，内部分 `picture` / `gif` 子分类，每一项见 [3.4](#34-graphics-条目) |
+| `graphics` | Object | 可选 | — | 图形容器，含 `backgroundPicture`（背景图，见 [3.3](#33-背景图片配置)）与 `picture` / `gif` 子分类（每一项见 [3.4](#34-graphics-条目)） |
 | `ui.image` | Object | 可选 | — | UI 图像映射表，每一项见 [3.5](#35-uiimage-条目) |
 | `ui.label` | Object | 可选 | — | 标签映射表，每一项见 [3.6](#36-uilabel-条目) |
 | `ui.button` | Object | 可选 | — | 按钮映射表，每一项见 [3.7](#37-uibutton-条目) |
 
 **模板合并行为**：
 当 `template` 指定后，会先加载模板布局，然后将两者的字段按以下规则合并：
-- 基础字段（backgroundPicture、backgroundMusicList、musicList）：merge 覆盖 main
+- 基础字段（backgroundMusicList、musicList）与 backgroundPicture（graphics 下）：merge 覆盖 main
 - 映射表字段（graphics/picture、graphics/gif、image、label、button）：相同 tag 时 merge 的字段覆盖 main，main 填补缺失字段
 - JSON 数据：`layoutJson.combined(mergeJson)`
 
@@ -463,11 +462,24 @@
 
 ### 3.3 背景图片配置
 
-**字段**：`backgroundPicture`（Layout 顶层）
+**字段**：`graphics.backgroundPicture`（Layout 的 `graphics` 节点下）
+
+**结构示例**：
+
+```json
+{
+  "graphics" : {
+    "backgroundPicture" : "menu.background.png",
+    "picture" : { ... }
+  }
+}
+```
 
 | 值类型 | 示例 | 说明 |
 |--------|------|------|
 | String | `"menu.background.png"` | 背景图片文件名，相对 `resource/image/` |
+
+> **兼容**：旧格式将 `backgroundPicture` 写在 Layout 顶层；读取时优先取 `graphics.backgroundPicture`，缺失则回退顶层旧格式（第三方页面不受影响）。
 
 ---
 

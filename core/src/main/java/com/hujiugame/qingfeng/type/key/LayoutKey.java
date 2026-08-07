@@ -13,7 +13,7 @@ public final class LayoutKey
     /** audio 音频节点 */
     public static final String AUDIO = "audio";
 
-    /** 背景图片文件名 */
+    /** 背景图片文件名（旧版顶层格式；已收编至 graphics 节，此常量保留用于回退兼容） */
     public static final String BACKGROUND_PICTURE = "backgroundPicture";
 
     /** 装饰图片/动图容器 */

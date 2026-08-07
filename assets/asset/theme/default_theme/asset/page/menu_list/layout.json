@@ -2,8 +2,8 @@
   "audio" : {
     "backgroundMusic" : ["Scorching Sun.mp3", "Title Music.mp3", "The Dragon Fell in Love wit.mp3"]
   },
-  "backgroundPicture" : "menu.background.png",
   "graphics" : {
+    "backgroundPicture" : "menu.background.png",
     "picture" : {
     "path_tab" : {
       "path" : "transparent/black48.png",

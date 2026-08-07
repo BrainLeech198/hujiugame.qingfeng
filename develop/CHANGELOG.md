@@ -100,6 +100,24 @@
 
 - **JSON_STANDARD.md 背景音乐配置同步** — 顶层字段表新增 `audio` 行；3.2 节字段位置改为 `audio.backgroundMusic` 并补充结构示例与单曲/多曲说明
 
+---
+
+### 重构
+
+- **`backgroundPicture` 收编进 `graphics` 节点（Java 端）** — `GraphicsKey` 新增 `BACKGROUND_PICTURE` 常量；`LayoutManager.loadLayoutGraphics` 优先读 `graphics.backgroundPicture`，缺失则回退顶层旧格式（兼容第三方页面）；`LayoutKey.BACKGROUND_PICTURE` 注释标注为旧版顶层格式、保留用于回退
+
+---
+
+### 资产
+
+- **5 个 layout.json 背景图收编** — `menu_main`/`menu_list`/`menu_load`/`config_basic`/`config_display` 顶层 `backgroundPicture` 移入 `graphics` 节内，与 `picture`/`gif` 子分类并列
+
+---
+
+### 文档
+
+- **JSON_STANDARD.md 背景图配置同步** — `backgroundPicture` 从 Layout 顶层字段表移入 `graphics` 描述；3.3 节字段位置改为 `graphics.backgroundPicture` 并补充旧格式回退说明；模板合并行为条目同步
+
 ## 2026-08-06 — 官方语言/主题 Internal 句柄化 + 默认配置损坏恢复预想方案入库 + 版权素材清理替换 + 文件后缀关联补全与四类资源包注册 + 启动器单实例限制 + 启动器源码整理 + 启动器说明文档同步
 
 ### 新增
