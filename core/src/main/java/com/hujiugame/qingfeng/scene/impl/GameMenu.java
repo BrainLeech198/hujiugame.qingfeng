@@ -7,6 +7,7 @@ import com.hujiugame.qingfeng.type.game.state.GameSubState;
 import com.hujiugame.qingfeng.type.key.RequirementKey;
 import com.hujiugame.qingfeng.audio.AudioManager;
 import com.hujiugame.qingfeng.graphic.GraphicsManager;
+import com.hujiugame.qingfeng.input.VirtualInputHandler;
 import com.hujiugame.qingfeng.scene.GameRender;
 import com.hujiugame.qingfeng.ui.UiManager;
 import com.hujiugame.qingfeng.event.EventQueue;
@@ -17,6 +18,7 @@ public final class GameMenu implements GameRender
 {
     private final EventQueue eventQueue;
     private final GameHost gameHost;
+    private final VirtualInputHandler virtualInputHandler;
     private AudioManager gameAudioManager;
     private GraphicsManager gameGraphicsManager;
     private UiManager gameUiManager;
@@ -24,10 +26,11 @@ public final class GameMenu implements GameRender
 
     // ===================================================================================================================
 
-    public GameMenu (EventQueue eventQueue, GameHost gameHost)
+    public GameMenu (EventQueue eventQueue, GameHost gameHost, VirtualInputHandler virtualInputHandler)
     {
         this.eventQueue = eventQueue;
         this.gameHost = gameHost;
+        this.virtualInputHandler = virtualInputHandler;
     }
 
     /**
@@ -44,6 +47,9 @@ public final class GameMenu implements GameRender
         gameGraphicsManager = gameHost.getPlayLocalData().getGraphicsManager();
         gameUiManager = gameHost.getPlayLocalData().getUiManager();
         gameUiManager.addLayout(gameStateDataContainer.getLayoutConfig());
+
+        // 虚拟输入优先选中：必须在 addLayout 之后，否则 getButton 拿不到控件
+        virtualInputHandler.setPriorityConfirmSelectObject(gameStateDataContainer.getConfigJson());
     }
 
     /**

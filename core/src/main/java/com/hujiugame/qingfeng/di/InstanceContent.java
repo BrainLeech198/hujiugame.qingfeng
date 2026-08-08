@@ -115,10 +115,11 @@ public final class InstanceContent
                 instanceContent.virtualInputHandler));
 
         registry.register(GameState.GAME, GameSubState.GAME_MENU,
-            () -> new GameMenu(instanceContent.eventQueue, instanceContent.gameHost));
+            () -> new GameMenu(instanceContent.eventQueue, instanceContent.gameHost,
+                instanceContent.virtualInputHandler));
         registry.register(GameState.GAME, GameSubState.GAME_ROLE,
             () -> new GameRole(instanceContent.eventQueue, instanceContent.layoutManager,
-                instanceContent.gameHost));
+                instanceContent.gameHost, instanceContent.virtualInputHandler));
         registry.register(GameState.GAME, GameSubState.GAME_PLAY,
             () -> new GamePlay(instanceContent.eventQueue, instanceContent.layoutManager,
                 instanceContent.gameHost));

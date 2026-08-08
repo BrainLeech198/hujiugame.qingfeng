@@ -8,6 +8,7 @@ import com.hujiugame.qingfeng.type.key.UniversalUiKey;
 import com.hujiugame.qingfeng.type.play.Hoster;
 import com.hujiugame.qingfeng.audio.AudioManager;
 import com.hujiugame.qingfeng.graphic.GraphicsManager;
+import com.hujiugame.qingfeng.input.VirtualInputHandler;
 import com.hujiugame.qingfeng.scene.GameRender;
 import com.hujiugame.qingfeng.ui.UiManager;
 import com.hujiugame.qingfeng.event.EventQueue;
@@ -22,6 +23,7 @@ public final class GameRole implements GameRender
     private final EventQueue eventQueue;
     private final LayoutManager layoutManager;
     private final GameHost gameHost;
+    private final VirtualInputHandler virtualInputHandler;
     private AudioManager gameAudioManager;
     private GraphicsManager gameGraphicsManager;
     private UiManager gameUiManager;
@@ -36,11 +38,12 @@ public final class GameRole implements GameRender
     // ===================================================================================================================
 
     public GameRole (EventQueue eventQueue, LayoutManager layoutManager,
-                     GameHost gameHost)
+                     GameHost gameHost, VirtualInputHandler virtualInputHandler)
     {
         this.eventQueue = eventQueue;
         this.layoutManager = layoutManager;
         this.gameHost = gameHost;
+        this.virtualInputHandler = virtualInputHandler;
     }
 
     // ===================================================================================================================
@@ -132,6 +135,9 @@ public final class GameRole implements GameRender
 
         roleIdList = gameHost.getPlayLocalData().getGameRoleManager().getRoleIdList();
         loadShowLayout();
+
+        // 虚拟输入优先选中：必须在 addLayout 之后，否则 getButton 拿不到控件
+        virtualInputHandler.setPriorityConfirmSelectObject(gameStateDataContainer.getConfigJson());
     }
 
     /**
