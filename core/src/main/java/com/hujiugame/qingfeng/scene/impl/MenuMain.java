@@ -5,6 +5,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Vector3;
 import com.hujiugame.qingfeng.core.UpdateChecker;
 import com.hujiugame.qingfeng.data.game.GameStateDataContainer;
+import com.hujiugame.qingfeng.input.VirtualInputHandler;
 import com.hujiugame.qingfeng.manager.ThemeManager;
 import com.hujiugame.qingfeng.type.file.FileName;
 import com.hujiugame.qingfeng.type.file.PathName;
@@ -30,13 +31,15 @@ public final class MenuMain implements GameRender
     private final UiManager uiManager;
     private final EventQueue eventQueue;
     private final UseViewport useViewport;
+    private final VirtualInputHandler virtualInputHandler;
     private GameStateDataContainer gameStateDataContainer;
 
     public MenuMain (UpdateChecker updateChecker, AudioManager audioManager,
                      GraphicsManager graphicsManager, ThemeManager themeManager,
                      UiManager uiManager,
                      EventQueue eventQueue,
-                     UseViewport useViewport)
+                     UseViewport useViewport,
+                     VirtualInputHandler virtualInputHandler)
     {
         this.updateChecker = updateChecker;
         this.audioManager = audioManager;
@@ -45,6 +48,7 @@ public final class MenuMain implements GameRender
         this.uiManager = uiManager;
         this.eventQueue = eventQueue;
         this.useViewport = useViewport;
+        this.virtualInputHandler = virtualInputHandler;
     }
 
     /**
@@ -63,6 +67,9 @@ public final class MenuMain implements GameRender
         FileUtils.copyFile(backgroundPicturePath, appInitPicturePath);
 
         uiManager.addLayout(gameStateDataContainer.getLayoutConfig());
+
+        // 虚拟输入优先选中：必须在 addLayout 之后，否则 getButton 拿不到控件
+        virtualInputHandler.setPriorityConfirmSelectObject(gameStateDataContainer.getConfigJson());
     }
 
     /**
