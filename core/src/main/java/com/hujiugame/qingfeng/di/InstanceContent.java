@@ -102,7 +102,8 @@ public final class InstanceContent
             () -> new MenuList(instanceContent.updateChecker, instanceContent.audioManager,
                 instanceContent.graphicsManager, instanceContent.uiManager,
                 instanceContent.eventQueue,
-                instanceContent.gameHost, instanceContent.rootPath));
+                instanceContent.gameHost, instanceContent.rootPath,
+                instanceContent.virtualInputHandler));
         registry.register(GameState.MENU, GameSubState.MENU_LOAD,
             () -> new MenuLoad(instanceContent.audioManager, instanceContent.graphicsManager,
                 instanceContent.uiManager, instanceContent.eventQueue,
@@ -110,7 +111,8 @@ public final class InstanceContent
 
         registry.register(GameState.CONFIG, GameSubState.CONFIG_BASIC,
             () -> new ConfigBasic(instanceContent.eventQueue, instanceContent.audioManager,
-                instanceContent.graphicsManager, instanceContent.uiManager));
+                instanceContent.graphicsManager, instanceContent.uiManager,
+                instanceContent.virtualInputHandler));
 
         registry.register(GameState.GAME, GameSubState.GAME_MENU,
             () -> new GameMenu(instanceContent.eventQueue, instanceContent.gameHost));

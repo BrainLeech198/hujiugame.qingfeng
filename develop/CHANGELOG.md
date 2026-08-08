@@ -18,6 +18,14 @@
 > 7. 【如果】本次更新比较重要、与项目关键设计相关 → 同步写入 `temp/CLAUDE_MEMORY.md`（gitignored 本地工作记忆，仅当前开发机可见），便于后续 AI 对话延续上下文
 > 8. 【必须】CHANGELOG 条目不独立提交：每个内容改动 = 一笔提交，同时包含对应改动的文件 + 本文档中该改动对应的条目。先改文件并写对应条目 → 一并提交 → 再改下一个文件、写下一条目；按内容逐条拆分提交，禁止攒一堆 CHANGELOG 更新最后统一提交（例：文件 `a`、`b` 均有改动 → 提交 1 = `a` + 「更新了 a」条目；提交 2 = `b` + 「更新了 b」条目）
 
+## 2026-08-08 — 启动器页面接入虚拟输入优先选中（menu_list/config_basic/config_display）
+
+### 功能
+
+- **`MenuList`/`ConfigBasic`/`ConfigDisplay` 接入虚拟输入优先选中** — `init` 在 `uiManager.addLayout` 之后调用 `virtualInputHandler.setPriorityConfirmSelectObject(configJson)`，从页面 `config.json` 解析 `priorityConfirmUi.type/tag` 设置优先选中对象；`menu_list/config.json` 新增 `priorityConfirmUi`（import 导入按钮），新建 `config_basic/config.json`（language 语言标签）、`config_display/config.json`（back 返回按钮）；三个页面构造函数新增 `VirtualInputHandler` 参数，`InstanceContent` 注册时注入
+
+---
+
 ## 2026-08-08 — 主菜单接入虚拟输入优先选中配置
 
 ### 功能

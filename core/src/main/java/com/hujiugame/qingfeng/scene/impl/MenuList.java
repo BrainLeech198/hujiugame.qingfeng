@@ -10,6 +10,7 @@ import com.hujiugame.qingfeng.data.game.GameStateDataContainer;
 import com.hujiugame.qingfeng.event.EventQueue;
 import com.hujiugame.qingfeng.event.imp.EventPopGameState;
 import com.hujiugame.qingfeng.graphic.GraphicsManager;
+import com.hujiugame.qingfeng.input.VirtualInputHandler;
 import com.hujiugame.qingfeng.scene.GameRender;
 import com.hujiugame.qingfeng.type.file.FileSuffix;
 import com.hujiugame.qingfeng.type.file.PathName;
@@ -36,6 +37,7 @@ public final class MenuList implements GameRender
     private final EventQueue eventQueue;
     private final GameHost gameHost;
     private final String rootPath;
+    private final VirtualInputHandler virtualInputHandler;
     private GameStateDataContainer gameStateDataContainer;
 
     private String gameListAbsolutePath;
@@ -65,7 +67,8 @@ public final class MenuList implements GameRender
     public MenuList (UpdateChecker updateChecker, AudioManager audioManager,
                      GraphicsManager graphicsManager, UiManager uiManager,
                      EventQueue eventQueue,
-                     GameHost gameHost, String rootPath)
+                     GameHost gameHost, String rootPath,
+                     VirtualInputHandler virtualInputHandler)
     {
         this.updateChecker = updateChecker;
         this.audioManager = audioManager;
@@ -74,6 +77,7 @@ public final class MenuList implements GameRender
         this.eventQueue = eventQueue;
         this.gameHost = gameHost;
         this.rootPath = rootPath;
+        this.virtualInputHandler = virtualInputHandler;
     }
 
     // ===================================================================================================================
@@ -372,6 +376,9 @@ public final class MenuList implements GameRender
 
         // ui
         uiManager.addLayout(gameStateDataContainer.getLayoutConfig());
+
+        // 虚拟输入优先选中：必须在 addLayout 之后，否则 getButton 拿不到控件
+        virtualInputHandler.setPriorityConfirmSelectObject(gameStateDataContainer.getConfigJson());
 
         // 获取游戏列表路径
         gameListAbsolutePath = FileUtils.pathJoin(rootPath, PathName.BASE, PathName.GAME);
