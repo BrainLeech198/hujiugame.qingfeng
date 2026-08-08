@@ -17,6 +17,7 @@ import com.hujiugame.qingfeng.ui.kind.TextObject;
 import com.hujiugame.qingfeng.ui.kind.button.ButtonInfo;
 import com.hujiugame.qingfeng.ui.kind.button.ButtonKind;
 import com.hujiugame.qingfeng.ui.kind.button.ButtonState;
+import com.hujiugame.qingfeng.type.Numeric;
 import com.hujiugame.qingfeng.type.key.UiKey;
 import com.hujiugame.qingfeng.audio.AudioManager;
 import com.hujiugame.qingfeng.graphic.GraphicsManager;
@@ -111,7 +112,7 @@ public final class ButtonManager
             Color fontColor = Color.valueOf(fontColorStr);
             style.fontColor = new Color(fontColor);
             style.downFontColor = new Color(1f - fontColor.r, 1f - fontColor.g, 1f - fontColor.b, fontColor.a);
-            style.disabledFontColor = fontColor.cpy().mul(0.5f, 0.5f, 0.5f, 1f);
+            style.disabledFontColor = fontColor.cpy().mul(Numeric.Alpha.DISABLED_DARKEN, Numeric.Alpha.DISABLED_DARKEN, Numeric.Alpha.DISABLED_DARKEN, 1f);
 
             JsonEntity imageJson = buttonKindJson.getJsonEntityByKey(UiKey.Button.Image.KEY);
             FileHandle resImgDir = themePath.child(PathName.ASSET_S_RESOURCE_IMAGE);
@@ -208,7 +209,7 @@ public final class ButtonManager
             {
                 finalButtonStyle.fontColor = fontColor;
                 finalButtonStyle.downFontColor = new Color(1f - fontColor.r, 1f - fontColor.g, 1f - fontColor.b, fontColor.a);
-                finalButtonStyle.disabledFontColor = fontColor.cpy().mul(0.5f, 0.5f, 0.5f, 1f);
+                finalButtonStyle.disabledFontColor = fontColor.cpy().mul(Numeric.Alpha.DISABLED_DARKEN, Numeric.Alpha.DISABLED_DARKEN, Numeric.Alpha.DISABLED_DARKEN, 1f);
             }
 
             // 计算九宫格裁切位置（sourceBorder）与绘制大小（renderBorder）
@@ -450,7 +451,7 @@ public final class ButtonManager
             {
                 buttonContainer.getButtonStyle().fontColor = fontColor;
                 buttonContainer.getButtonStyle().downFontColor = new Color(1f - fontColor.r, 1f - fontColor.g, 1f - fontColor.b, fontColor.a);
-                buttonContainer.getButtonStyle().disabledFontColor = fontColor.cpy().mul(0.5f, 0.5f, 0.5f, 1f);
+                buttonContainer.getButtonStyle().disabledFontColor = fontColor.cpy().mul(Numeric.Alpha.DISABLED_DARKEN, Numeric.Alpha.DISABLED_DARKEN, Numeric.Alpha.DISABLED_DARKEN, 1f);
             }
 
             if (text != null)

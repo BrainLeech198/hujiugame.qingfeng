@@ -11,6 +11,7 @@ import com.hujiugame.qingfeng.di.InstanceContent;
 import com.hujiugame.qingfeng.core.GameHost;
 import com.hujiugame.qingfeng.core.UpdateChecker;
 import com.hujiugame.qingfeng.data.JsonEntity;
+import com.hujiugame.qingfeng.type.Numeric;
 import com.hujiugame.qingfeng.type.file.FileName;
 import com.hujiugame.qingfeng.type.file.PathName;
 import com.hujiugame.qingfeng.type.key.ConfigKey;
@@ -230,6 +231,9 @@ public class Main extends ApplicationAdapter
     {
         try
         {
+            // 获取帧时间增量
+            float deltaTime = Gdx.graphics.getDeltaTime();
+
             // 清屏 + 适配视口（每帧起点，固定流程）
             ScreenUtils.clear(0, 0, 0, 1f); // 黑色背景，可配置为主题色
             stage.getViewport().apply(); // 适配窗口大小变化
@@ -244,11 +248,10 @@ public class Main extends ApplicationAdapter
             }
 
             // 主绘制
-            float deltaTime = Gdx.graphics.getDeltaTime();
             mainRender(deltaTime);
 
             // 顶层绘制
-            topRender();
+            topRender(deltaTime);
         }
         catch (Throwable e)
         {
@@ -282,7 +285,7 @@ public class Main extends ApplicationAdapter
     /**
      * 顶层绘制逻辑，绘制覆盖层内容（如虚拟输入提示）
      */
-    private void topRender ()
+    private void topRender (float deltaTime)
     {
         stage.getViewport().apply(); // 适配窗口大小变化
         spriteBatch.setProjectionMatrix(stage.getViewport().getCamera().combined); // 绑定相机矩阵
@@ -813,7 +816,7 @@ public class Main extends ApplicationAdapter
             thread.interrupt();
             try
             {
-                thread.join(3000);
+                thread.join(Numeric.Time.THREAD_JOIN_MS);
             }
             catch (InterruptedException ignored)
             {

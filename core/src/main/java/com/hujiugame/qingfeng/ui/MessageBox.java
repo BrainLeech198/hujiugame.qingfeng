@@ -12,6 +12,7 @@ import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.ui.kind.TextObject;
 import com.hujiugame.qingfeng.ui.kind.button.ButtonInfo;
 import com.hujiugame.qingfeng.ui.kind.label.LabelInfo;
+import com.hujiugame.qingfeng.type.Numeric;
 import com.hujiugame.qingfeng.type.ScreenSize;
 import com.hujiugame.qingfeng.type.file.FileName;
 import com.hujiugame.qingfeng.type.file.PathName;
@@ -108,7 +109,7 @@ public final class MessageBox
             // 初始化遮盖
             Table maskLayer = new Table();
             maskLayer.setFillParent(true);
-            maskLayer.setBackground(new TextureRegionDrawable(createSolidTexture(new Color(0f, 0f, 0f, 0.5f))));
+            maskLayer.setBackground(new TextureRegionDrawable(createSolidTexture(new Color(0f, 0f, 0f, Numeric.Alpha.MESSAGE_BOX_MASK))));
             maskLayer.setTouchable(Touchable.enabled);
             maskLayer.setVisible(true);
             uiManager.setMaskLayer(maskLayer);

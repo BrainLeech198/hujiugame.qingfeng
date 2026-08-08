@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.hujiugame.qingfeng.di.InstanceContent;
 import com.hujiugame.qingfeng.core.GameHost;
 import com.hujiugame.qingfeng.ui.kind.InteractableObject;
+import com.hujiugame.qingfeng.type.Numeric;
 import com.hujiugame.qingfeng.type.ScreenSize;
 import com.hujiugame.qingfeng.type.VirtualInputType;
 import com.hujiugame.qingfeng.type.file.FileName;
@@ -161,8 +162,8 @@ public class ControllerInputHandler implements ControllerListener
         float moveY = -leftAxis.y;
 
         // 死区处理
-        if (Math.abs(moveX) < 0.1f) moveX = 0;
-        if (Math.abs(moveY) < 0.1f) moveY = 0;
+        if (Math.abs(moveX) < Numeric.Input.STICK_DEAD_ZONE) moveX = 0;
+        if (Math.abs(moveY) < Numeric.Input.STICK_DEAD_ZONE) moveY = 0;
 
         // 移动虚拟鼠标（仅当摇杆有移动时才更新）
         if (moveX != 0 || moveY != 0)

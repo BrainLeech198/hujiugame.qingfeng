@@ -17,6 +17,7 @@ import com.hujiugame.qingfeng.ui.kind.TextObject;
 import com.hujiugame.qingfeng.ui.kind.label.LabelInfo;
 import com.hujiugame.qingfeng.ui.kind.label.LabelKind;
 import com.hujiugame.qingfeng.ui.kind.label.LabelState;
+import com.hujiugame.qingfeng.type.Numeric;
 import com.hujiugame.qingfeng.type.key.JsonKey;
 import com.hujiugame.qingfeng.type.key.UiKey;
 import com.hujiugame.qingfeng.type.file.PathName;
@@ -276,7 +277,7 @@ public final class LabelManager
             Label.LabelStyle finalStyle = parseFinalLabelStyle(
                 labelKind.getLabelStyle(), fontName, fontSize, fontColor);
 
-            float padX = 50, padY = 50;
+            float padX = Numeric.Layout.DEFAULT_COMPONENT_PADDING, padY = Numeric.Layout.DEFAULT_COMPONENT_PADDING;
             if (fontArgs != null)
             {
                 if (fontArgs.containsKey(JsonKey.Font.Args.PAD_X) && fontArgs.containsKey(JsonKey.Font.Args.PAD_Y))
@@ -618,7 +619,7 @@ public final class LabelManager
             // 更新内边距
             if (fontArgs != null)
             {
-                float padX = 50, padY = 50;
+                float padX = Numeric.Layout.DEFAULT_COMPONENT_PADDING, padY = Numeric.Layout.DEFAULT_COMPONENT_PADDING;
                 if (fontArgs.containsKey(JsonKey.Font.Args.PAD_X) && fontArgs.containsKey(JsonKey.Font.Args.PAD_Y))
                 {
                     padX = fontArgs.getFloat(JsonKey.Font.Args.PAD_X);

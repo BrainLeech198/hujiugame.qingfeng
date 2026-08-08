@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.hujiugame.qingfeng.di.InstanceContent;
 import com.hujiugame.qingfeng.data.JsonEntity;
+import com.hujiugame.qingfeng.type.Numeric;
 import com.hujiugame.qingfeng.type.VersionType;
 import com.hujiugame.qingfeng.type.file.FileName;
 import com.hujiugame.qingfeng.type.file.PathName;
@@ -925,7 +926,7 @@ public final class UpdateChecker
 
         // 设置请求参数
         request.setUrl(versionUrl);
-        request.setTimeOut(8000);
+        request.setTimeOut(Numeric.Time.HTTP_TIMEOUT_MS);
 
         Gdx.net.sendHttpRequest(request, new Net.HttpResponseListener()
         {
@@ -944,7 +945,7 @@ public final class UpdateChecker
             public void handleHttpResponse (Net.HttpResponse httpResponse)
             {
                 int statusCode = httpResponse.getStatus().getStatusCode();
-                if (statusCode == 200)
+                if (statusCode == Numeric.Http.STATUS_OK)
                 {
                     try
                     {

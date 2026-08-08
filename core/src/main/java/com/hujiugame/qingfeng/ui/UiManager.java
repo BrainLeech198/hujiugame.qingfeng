@@ -1785,7 +1785,7 @@ public final class UiManager
             Label.LabelStyle finalStyle = parseFinalLabelStyle(
                 labelKind.getLabelStyle(), fontName, fontSize, fontColor);
 
-            float padX = 50, padY = 50;
+            float padX = Numeric.Layout.DEFAULT_COMPONENT_PADDING, padY = Numeric.Layout.DEFAULT_COMPONENT_PADDING;
             if (fontArgs != null)
             {
                 if (fontArgs.containsKey(JsonKey.Font.Args.PAD_X) && fontArgs.containsKey(JsonKey.Font.Args.PAD_Y))
@@ -2039,7 +2039,7 @@ public final class UiManager
             }
             if (fontArgs != null)
             {
-                float padX = 50, padY = 50;
+                float padX = Numeric.Layout.DEFAULT_COMPONENT_PADDING, padY = Numeric.Layout.DEFAULT_COMPONENT_PADDING;
                 if (fontArgs.containsKey(JsonKey.Font.Args.PAD_X) && fontArgs.containsKey(JsonKey.Font.Args.PAD_Y))
                 {
                     padX = fontArgs.getFloat(JsonKey.Font.Args.PAD_X);
@@ -3007,7 +3007,7 @@ public final class UiManager
             {
                 finalButtonStyle.fontColor = fontColor;
                 finalButtonStyle.downFontColor = new Color(1f - fontColor.r, 1f - fontColor.g, 1f - fontColor.b, fontColor.a);
-                finalButtonStyle.disabledFontColor = fontColor.cpy().mul(0.5f);
+                finalButtonStyle.disabledFontColor = fontColor.cpy().mul(Numeric.Alpha.DISABLED_DARKEN);
             }
 
             CustomTextButton buttonContainer = new CustomTextButton(text, finalButtonStyle, buttonTag, this);
@@ -3120,7 +3120,7 @@ public final class UiManager
                 TextButton.TextButtonStyle btnStyle = button.getButtonStyle();
                 btnStyle.fontColor = fontColor;
                 btnStyle.downFontColor = new Color(1f - fontColor.r, 1f - fontColor.g, 1f - fontColor.b, fontColor.a);
-                btnStyle.disabledFontColor = fontColor.cpy().mul(0.5f);
+                btnStyle.disabledFontColor = fontColor.cpy().mul(Numeric.Alpha.DISABLED_DARKEN);
                 LogUtils.debug(UiManager.class, "updateButton 更新按钮颜色 (tag): " + buttonTag + " (color): " + fontColor);
             }
             if (button.getX() != x || button.getY() != y)
@@ -4543,7 +4543,7 @@ public final class UiManager
                 // 如果Gdx.app已空，直接同步销毁（兜底）
                 texture.dispose();
             }
-        }, 50, TimeUnit.MILLISECONDS);
+        }, Numeric.Time.DISPOSE_DELAY_MS, TimeUnit.MILLISECONDS);
     }
 
     /**
@@ -4573,7 +4573,7 @@ public final class UiManager
             {
                 font.dispose();
             }
-        }, 50, TimeUnit.MILLISECONDS);
+        }, Numeric.Time.DISPOSE_DELAY_MS, TimeUnit.MILLISECONDS);
     }
 
     // ===================================================================================================================
@@ -4630,7 +4630,7 @@ public final class UiManager
             disposeExecutor.shutdown();
             try
             {
-                if (!disposeExecutor.awaitTermination(5, TimeUnit.SECONDS)) disposeExecutor.shutdownNow();
+                if (!disposeExecutor.awaitTermination(Numeric.Time.ASYNC_TERMINATE_WAIT_SECONDS, TimeUnit.SECONDS)) disposeExecutor.shutdownNow();
             }
             catch (InterruptedException e)
             {

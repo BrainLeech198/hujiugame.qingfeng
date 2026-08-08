@@ -7,6 +7,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.MathUtils;
 import com.hujiugame.qingfeng.data.game.Layout;
 import com.hujiugame.qingfeng.manager.UserConfigManager;
+import com.hujiugame.qingfeng.type.Numeric;
 import com.hujiugame.qingfeng.util.system.FileUtils;
 import com.hujiugame.qingfeng.util.system.LogUtils;
 
@@ -1449,7 +1450,7 @@ public final class AudioManager
             {
                 LogUtils.error(AudioManager.class, "asyncDisposeCachedResources", e);
             }
-        }, 50, TimeUnit.MILLISECONDS);
+        }, Numeric.Time.DISPOSE_DELAY_MS, TimeUnit.MILLISECONDS);
     }
 
     /**

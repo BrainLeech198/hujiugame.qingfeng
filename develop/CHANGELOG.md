@@ -18,6 +18,16 @@
 > 7. 【如果】本次更新比较重要、与项目关键设计相关 → 同步写入 `temp/CLAUDE_MEMORY.md`（gitignored 本地工作记忆，仅当前开发机可见），便于后续 AI 对话延续上下文
 > 8. 【必须】CHANGELOG 条目不独立提交：每个内容改动 = 一笔提交，同时包含对应改动的文件 + 本文档中该改动对应的条目。先改文件并写对应条目 → 一并提交 → 再改下一个文件、写下一条目；按内容逐条拆分提交，禁止攒一堆 CHANGELOG 更新最后统一提交（例：文件 `a`、`b` 均有改动 → 提交 1 = `a` + 「更新了 a」条目；提交 2 = `b` + 「更新了 b」条目）
 
+## 2026-08-08 — 数字型常量统一收编
+
+### 重构
+
+- **`Numeric` 新增通用数字常量嵌套类** — `Time`（异步销毁延迟/HTTP 超时/线程 join/线程池终止等待）、`Alpha`（禁用态压暗、消息框遮罩）、`Layout`（组件内边距）、`Input`（摇杆死区）、`Http`（成功状态码）；`AudioManager`、`GraphicsManager`、`UiManager`、`ButtonManager`、`LabelManager`、`MessageBox`、`UpdateChecker`、`Main`、`ControllerInputHandler` 的裸数字替换为常量引用
+- **类内私有数字收编为私有常量** — `MenuMain` 版本号区域点击尺寸与文字参数、`Init` 进度条高度比例与维修图标位置尺寸、`TextInputUtils` 桌面输入框对话框布局尺寸、`ValueTask` 指令参数个数（一元/二元）各改为 `private static final` 常量
+- **`Numeric` 默认字体缩放档位与主题对齐** — `FONT_NORMAL_SCALE_LIST` 由 `{0.5f, 0.8f, 1.2f}` 改为 `{0.8f, 1.2f, 1.5f}`，与 `default_theme/theme.json` 的 `fontUseSize` 数值一致，作为字段缺失/解析失败时的兜底（JSON 数据文件无法引用 Java 常量，故数值对齐而非单一来源）
+
+---
+
 ## 2026-08-08 — 游戏内页面接入虚拟输入优先选中（game_menu/game_role）
 
 ### 功能

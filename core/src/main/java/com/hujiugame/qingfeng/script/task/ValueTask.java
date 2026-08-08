@@ -2,6 +2,7 @@ package com.hujiugame.qingfeng.script.task;
 
 import com.hujiugame.qingfeng.script.data.value.command.ValueCommand;
 import com.hujiugame.qingfeng.script.data.value.command.action.ValueCommandAction;
+import com.hujiugame.qingfeng.type.Numeric;
 
 import java.util.*;
 
@@ -21,25 +22,31 @@ public class ValueTask implements Task
     private final Stack<ValueCommandAction> actionStack = new Stack<>();
     private final Stack<List<Object>> actionParamStack = new Stack<>();
     private static final Map<ValueCommandAction, Integer> actionParamCount = new HashMap<>();
+
+    /** 一元运算（取反/非）参数个数 */
+    private static final int UNARY_PARAM_COUNT = 1;
+    /** 二元运算（算术/比较/逻辑）参数个数 */
+    private static final int BINARY_PARAM_COUNT = 2;
+
     static
     {
-        actionParamCount.put(ValueCommandAction.ADD, 2);
-        actionParamCount.put(ValueCommandAction.SUB, 2);
-        actionParamCount.put(ValueCommandAction.MUL, 2);
-        actionParamCount.put(ValueCommandAction.DIV, 2);
-        actionParamCount.put(ValueCommandAction.NEG, 1);
-        actionParamCount.put(ValueCommandAction.RANDOM, 2);
+        actionParamCount.put(ValueCommandAction.ADD, BINARY_PARAM_COUNT);
+        actionParamCount.put(ValueCommandAction.SUB, BINARY_PARAM_COUNT);
+        actionParamCount.put(ValueCommandAction.MUL, BINARY_PARAM_COUNT);
+        actionParamCount.put(ValueCommandAction.DIV, BINARY_PARAM_COUNT);
+        actionParamCount.put(ValueCommandAction.NEG, UNARY_PARAM_COUNT);
+        actionParamCount.put(ValueCommandAction.RANDOM, BINARY_PARAM_COUNT);
 
-        actionParamCount.put(ValueCommandAction.EQUAL, 2);
-        actionParamCount.put(ValueCommandAction.NOT_EQUAL, 2);
-        actionParamCount.put(ValueCommandAction.GREATER, 2);
-        actionParamCount.put(ValueCommandAction.LESS, 2);
-        actionParamCount.put(ValueCommandAction.GREATER_EQUAL, 2);
-        actionParamCount.put(ValueCommandAction.LESS_EQUAL, 2);
+        actionParamCount.put(ValueCommandAction.EQUAL, BINARY_PARAM_COUNT);
+        actionParamCount.put(ValueCommandAction.NOT_EQUAL, BINARY_PARAM_COUNT);
+        actionParamCount.put(ValueCommandAction.GREATER, BINARY_PARAM_COUNT);
+        actionParamCount.put(ValueCommandAction.LESS, BINARY_PARAM_COUNT);
+        actionParamCount.put(ValueCommandAction.GREATER_EQUAL, BINARY_PARAM_COUNT);
+        actionParamCount.put(ValueCommandAction.LESS_EQUAL, BINARY_PARAM_COUNT);
 
-        actionParamCount.put(ValueCommandAction.AND, 2);
-        actionParamCount.put(ValueCommandAction.OR, 2);
-        actionParamCount.put(ValueCommandAction.NOT, 1);
+        actionParamCount.put(ValueCommandAction.AND, BINARY_PARAM_COUNT);
+        actionParamCount.put(ValueCommandAction.OR, BINARY_PARAM_COUNT);
+        actionParamCount.put(ValueCommandAction.NOT, UNARY_PARAM_COUNT);
     }
 
     public ValueTask (TaskType taskType, Task parentTask, List<ValueCommand> commands, Object defaultReturnValue)

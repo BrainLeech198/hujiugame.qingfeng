@@ -2,6 +2,7 @@ package com.hujiugame.qingfeng.util;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.hujiugame.qingfeng.type.Numeric;
 import com.hujiugame.qingfeng.util.system.LogUtils;
 import com.hujiugame.qingfeng.util.system.PlatformUtils;
 
@@ -20,6 +21,21 @@ public final class TextInputUtils
     {
         throw new UnsupportedOperationException("Utility class cannot be instantiated");
     }
+
+    // ==================== 桌面输入对话框布局尺寸 ====================
+    /** 对话框内容四周内边距（面板/按钮区共用） */
+    private static final int DIALOG_EDGE_PADDING = 15;
+    /** 内容面板底部内边距 */
+    private static final int DIALOG_PANEL_PADDING_BOTTOM = 10;
+    /** 按钮区顶部/底部内边距 */
+    private static final int BUTTON_PANEL_PADDING_TOP = 5;
+    private static final int BUTTON_PANEL_PADDING_BOTTOM = 15;
+    /** 输入框首选尺寸 */
+    private static final int TEXT_FIELD_WIDTH = 280;
+    private static final int TEXT_FIELD_HEIGHT = 28;
+    /** 按钮水平/垂直间距 */
+    private static final int BUTTON_GAP_H = 20;
+    private static final int BUTTON_GAP_V = 5;
 
     // ==================== 监听器实现 ====================
 
@@ -229,16 +245,16 @@ public final class TextInputUtils
             dialog.setLayout(new BorderLayout());
 
             JPanel panel = new JPanel(new BorderLayout());
-            panel.setBorder(BorderFactory.createEmptyBorder(15, 15, 10, 15));
+            panel.setBorder(BorderFactory.createEmptyBorder(DIALOG_EDGE_PADDING, DIALOG_EDGE_PADDING, DIALOG_PANEL_PADDING_BOTTOM, DIALOG_EDGE_PADDING));
             JTextField textField = new JTextField(initialText);
             textField.setToolTipText(hint);
-            textField.setPreferredSize(new Dimension(280, 28));
+            textField.setPreferredSize(new Dimension(TEXT_FIELD_WIDTH, TEXT_FIELD_HEIGHT));
             panel.add(textField, BorderLayout.CENTER);
             dialog.add(panel, BorderLayout.CENTER);
 
             JPanel buttonPanel = new JPanel();
-            buttonPanel.setBorder(BorderFactory.createEmptyBorder(5, 15, 15, 15));
-            buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
+            buttonPanel.setBorder(BorderFactory.createEmptyBorder(BUTTON_PANEL_PADDING_TOP, DIALOG_EDGE_PADDING, BUTTON_PANEL_PADDING_BOTTOM, DIALOG_EDGE_PADDING));
+            buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, BUTTON_GAP_H, BUTTON_GAP_V));
             JButton okButton = new JButton("CONFIRM");
             JButton cancelButton = new JButton("CANCEL");
             buttonPanel.add(okButton);

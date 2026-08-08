@@ -34,6 +34,15 @@ public final class MenuMain implements GameRender
     private final VirtualInputHandler virtualInputHandler;
     private GameStateDataContainer gameStateDataContainer;
 
+    /** 版本号区域可点击宽高（虚拟坐标） */
+    private static final int VERSION_LABEL_WIDTH = 180;
+    private static final int VERSION_LABEL_HEIGHT = 40;
+
+    /** 版本号文字缩放与屏幕位置（虚拟坐标） */
+    private static final float VERSION_TEXT_SCALE = 1.0f;
+    private static final int VERSION_TEXT_X = 5;
+    private static final int VERSION_TEXT_Y = 5;
+
     public MenuMain (UpdateChecker updateChecker, AudioManager audioManager,
                      GraphicsManager graphicsManager, ThemeManager themeManager,
                      UiManager uiManager,
@@ -85,7 +94,7 @@ public final class MenuMain implements GameRender
         {
             Vector3 touchPos = new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0);
             useViewport.getViewport().unproject(touchPos);
-            if (touchPos.x >= 0 && touchPos.x <= 180 && touchPos.y >= 0 && touchPos.y <= 40)
+            if (touchPos.x >= 0 && touchPos.x <= VERSION_LABEL_WIDTH && touchPos.y >= 0 && touchPos.y <= VERSION_LABEL_HEIGHT)
             {
                 uiManager.getMessageBox().showAsk(RequirementKey.Language.MessageBox.OPEN_OFFICIAL_WEBSITE,
                     "{language$" + RequirementKey.Language.REQUIREMENT_BLOCK + "#" + RequirementKey.Language.MESSAGE_BOX + "." + RequirementKey.Language.MessageBox.OPEN_OFFICIAL_WEBSITE_TITLE + "}",
@@ -164,7 +173,7 @@ public final class MenuMain implements GameRender
     {
         audioManager.playLayout(gameStateDataContainer.getLayoutConfig());
         graphicsManager.putLayout(gameStateDataContainer.getLayoutConfig(), deltaTime);
-        graphicsManager.putText(updateChecker.getDisplayVersionString(), 1.0f, 5, 5);
+        graphicsManager.putText(updateChecker.getDisplayVersionString(), VERSION_TEXT_SCALE, VERSION_TEXT_X, VERSION_TEXT_Y);
     }
 
     /**

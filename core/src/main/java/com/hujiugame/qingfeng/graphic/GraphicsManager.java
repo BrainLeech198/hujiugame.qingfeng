@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.BufferUtils;
 import com.hujiugame.qingfeng.data.game.Layout;
 import com.hujiugame.qingfeng.graphic.model.GifInfo;
 import com.hujiugame.qingfeng.graphic.model.PictureInfo;
+import com.hujiugame.qingfeng.type.Numeric;
 import com.hujiugame.qingfeng.type.ScreenSize;
 import com.hujiugame.qingfeng.type.file.FileName;
 import com.hujiugame.qingfeng.type.file.PathName;
@@ -914,7 +915,7 @@ public final class GraphicsManager
                     executeAsyncDispose();
                     disposeScheduled.set(false);
                 }
-            }, 50, TimeUnit.MILLISECONDS);
+            }, Numeric.Time.DISPOSE_DELAY_MS, TimeUnit.MILLISECONDS);
         }
     }
 
@@ -1046,7 +1047,7 @@ public final class GraphicsManager
             disposeExecutor.shutdown();
             try
             {
-                if (!disposeExecutor.awaitTermination(5, TimeUnit.SECONDS)) disposeExecutor.shutdownNow();
+                if (!disposeExecutor.awaitTermination(Numeric.Time.ASYNC_TERMINATE_WAIT_SECONDS, TimeUnit.SECONDS)) disposeExecutor.shutdownNow();
             }
             catch (InterruptedException e)
             {

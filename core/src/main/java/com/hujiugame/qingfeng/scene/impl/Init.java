@@ -9,6 +9,7 @@ import com.hujiugame.qingfeng.util.interact.NativeDialogUtils;
 import com.hujiugame.qingfeng.util.system.CrashUtils;
 import com.hujiugame.qingfeng.data.JsonEntity;
 import com.hujiugame.qingfeng.data.game.GameStateDataContainer;
+import com.hujiugame.qingfeng.type.Numeric;
 import com.hujiugame.qingfeng.type.ScreenSize;
 import com.hujiugame.qingfeng.type.file.FileName;
 import com.hujiugame.qingfeng.type.file.PathName;
@@ -43,6 +44,15 @@ public final class Init implements GameRender
     private final EventQueue eventQueue;
 
     private static final float STEP_DELAY = 0.4f;
+
+    /** 进度条高度占屏幕高度比例 */
+    private static final float PROCESS_BAR_HEIGHT_RATIO = 0.02f;
+
+    /** 维修图标位置与尺寸（虚拟坐标） */
+    private static final int REPAIR_IMAGE_X = 2400;
+    private static final int REPAIR_IMAGE_Y = 48;
+    private static final int REPAIR_IMAGE_SIZE = 96;
+
     private int initState = 0;
     private float initTimer = 0f;
 
@@ -84,7 +94,7 @@ public final class Init implements GameRender
         int processPictureX = 0;
         int processPictureY = 0;
         int processPictureWidth = (int) (ScreenSize.WIDTH * processPercent);
-        int processPictureHeight = (int) (ScreenSize.HEIGHT * 0.02f);
+        int processPictureHeight = (int) (ScreenSize.HEIGHT * PROCESS_BAR_HEIGHT_RATIO);
 
         // 绘制进度（使用主题色叠加）
         if (processColor != null)
@@ -275,7 +285,7 @@ public final class Init implements GameRender
         // 维修图标缓存和显示
         FileHandle repairPictureHandle = Gdx.files.internal(FileUtils.pathJoin(PathName.ASSET_S_RESOURCE_IMAGE, FileName.DEFAULT_REPAIR));
         uiManager.loadImageKind(repairImageKind, repairPictureHandle);
-        uiManager.addImage(repairImageTag, repairImageKind, 2400, 48, 96 ,96);
+        uiManager.addImage(repairImageTag, repairImageKind, REPAIR_IMAGE_X, REPAIR_IMAGE_Y, REPAIR_IMAGE_SIZE, REPAIR_IMAGE_SIZE);
 
         // 从 app_config.json 读取进度条颜色
         loadProcessColor();
