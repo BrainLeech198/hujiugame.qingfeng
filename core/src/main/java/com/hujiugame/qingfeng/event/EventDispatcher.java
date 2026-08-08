@@ -49,9 +49,11 @@ public final class EventDispatcher
     {
         try
         {
+            // 获取事件名
             String eventName = eventObject.getEventName();
             LogUtils.debug(EventDispatcher.class, "handleEvent 事件名: " + eventName);
 
+            // 根据事件名执行对应的方法
             switch (eventName)
             {
                 case Event.PUSH_GAME_STATE:
@@ -71,7 +73,7 @@ public final class EventDispatcher
                     break;
 
                 case Event.ENTER_GAME:
-                    handleEventOfEnterGame(eventObject);
+                    handleEventOfEnterGame();
                     break;
 
                 case Event.QUIT_GAME:
@@ -79,7 +81,7 @@ public final class EventDispatcher
                     break;
 
                 case Event.PLAY_GAME:
-                    handleEventOfPlayGame(eventObject);
+                    handleEventOfPlayGame();
                     break;
 
                 default:
@@ -93,6 +95,11 @@ public final class EventDispatcher
         }
     }
 
+    /**
+     * 处理游戏状态压栈事件
+     *
+     * @param event 事件对象
+     */
     private void handleEventOfPushGameState (EventObject event)
     {
         EventPushGameState pushEvent = (EventPushGameState) event;
@@ -101,7 +108,11 @@ public final class EventDispatcher
         LogUtils.debug(EventDispatcher.class, "handleEventOfPushGameState 执行推入游戏状态成功");
     }
 
-
+    /**
+     * 处理游戏状态弹栈事件
+     *
+     * @param event 事件对象
+     */
     private void handleEventOfPopGameState (EventObject event)
     {
         LogUtils.debug(EventDispatcher.class, "handleEventOfPopGameState 尝试执行弹出游戏状态");
@@ -109,6 +120,11 @@ public final class EventDispatcher
         LogUtils.debug(EventDispatcher.class, "handleEventOfPopGameState 执行弹出游戏状态成功");
     }
 
+    /**
+     * 处理游戏状态设置事件
+     *
+     * @param eventObject 事件对象
+     */
     private void handleEventOfSetGameState (EventObject eventObject)
     {
         EventSetGameState setEvent = (EventSetGameState) eventObject;
@@ -117,6 +133,9 @@ public final class EventDispatcher
         LogUtils.debug(EventDispatcher.class, "handleEventOfSetGameState 执行设置游戏状态成功");
     }
 
+    /**
+     * 处理游戏状态重置事件
+     */
     private void handleEventOfResetGameState ()
     {
         LogUtils.debug(EventDispatcher.class, "handleEventOfResetGameState 尝试执行重置游戏状态");
@@ -130,7 +149,11 @@ public final class EventDispatcher
         }
     }
 
-    private void handleEventOfEnterGame (EventObject event)
+    /**
+     * 处理进入游戏事件
+     *
+     */
+    private void handleEventOfEnterGame ()
     {
         EventPushGameState pushGameStateEvent = new EventPushGameState(GameState.GAME, GameSubState.GAME_MENU);
         LogUtils.debug(EventDispatcher.class, "handleEventOfEnterGame 尝试执行进入游戏状态 (EventPushGameState):{ (State): " + pushGameStateEvent.getState() + ", (SubState): " + pushGameStateEvent.getSubState() + " }");
@@ -138,15 +161,22 @@ public final class EventDispatcher
         LogUtils.debug(EventDispatcher.class, "handleEventOfEnterGame 执行进入游戏状态成功");
     }
 
+    /**
+     * 处理退出游戏事件
+     */
     private void handleEventOfQuitGame ()
     {
         EventResetGameState resetGameStateEvent = new EventResetGameState();
         LogUtils.debug(EventDispatcher.class, "handleEventOfQuitGame 尝试执行退出游戏状态 (EventResetGameState)");
-        handleEvent(resetGameStateEvent);
+        handleEventOfResetGameState();
         LogUtils.debug(EventDispatcher.class, "handleEventOfQuitGame 执行退出游戏状态成功");
     }
 
-    public void handleEventOfPlayGame (EventObject event)
+    /**
+     * 处理游戏开始事件
+     *
+     */
+    public void handleEventOfPlayGame ()
     {
         EventPushGameState pushGameStateEvent = new EventPushGameState(GameState.GAME, GameSubState.GAME_PLAY);
         LogUtils.debug(EventDispatcher.class, "handleEventOfPlayGame 尝试执行游戏开始状态 (EventPushGameState):{ (State): " + pushGameStateEvent.getState() + ", (SubState): " + pushGameStateEvent.getSubState() + " }");

@@ -13,7 +13,7 @@ public final class FileSuffix
     /** 游戏文件 */
     public static final String EXT_GAME = ".qfg";
 
-    /** 资源包文件 */
+    /* 资源包文件 */
     /** 语言包 */
     public static final String EXT_LANGUAGE_PACK = ".qfl";
     /** 主题包 */

@@ -90,10 +90,12 @@ public final class RenderPipeline
     {
         try
         {
+            // 调用当前渲染机的帧更新（包含输入处理）
             if (gameRender != null)
             {
+                // 调用当前渲染机的帧更新
                 gameRender.update(deltaTime);
-                if (inputUpdater != null) inputUpdater.accept(deltaTime);
+                if (inputUpdater != null) inputUpdater.accept(deltaTime); // 调用输入处理
             }
             else
             {
@@ -116,6 +118,7 @@ public final class RenderPipeline
     {
         try
         {
+            // 调用当前渲染机的渲染
             if (gameRender != null)
             {
                 gameRender.render(deltaTime);
