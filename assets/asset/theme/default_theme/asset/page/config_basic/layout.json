@@ -53,8 +53,8 @@
           "y" : 1075
         },
         "size" : {
-          "width" : 928,
-          "height" : 100
+          "width" : 1855,
+          "height" : 110
         },
         "textKey" : "{language$requirement.json#config.basic.language} : {game$user.language.name} ({game$user.language})",
         "fontSize" : 1,
@@ -68,8 +68,8 @@
           "y" : 1075
         },
         "size" : {
-          "width" : 928,
-          "height" : 100
+          "width" : 1855,
+          "height" : 110
         },
         "textKey" : "{language$requirement.json#config.basic.language} : {game$user.language.name} ({game$user.language})",
         "fontSize" : 1,
