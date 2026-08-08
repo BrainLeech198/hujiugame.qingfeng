@@ -11,6 +11,7 @@ import com.hujiugame.qingfeng.type.VirtualInputType;
 import com.hujiugame.qingfeng.type.file.FileName;
 import com.hujiugame.qingfeng.type.file.PathName;
 import com.hujiugame.qingfeng.type.key.RequirementKey;
+import com.hujiugame.qingfeng.type.key.UiKey;
 import com.hujiugame.qingfeng.type.key.UniversalUiKey;
 import com.hujiugame.qingfeng.ui.MessageBox;
 import com.hujiugame.qingfeng.ui.UiManager;
@@ -146,14 +147,14 @@ public class VirtualInputHandler
      *
      * @param object 优先选中的交互对象，传 null 取消
      */
-    public void setPrioritySelectObject (InteractableObject object)
+    public void setPriorityConfirmSelectObject (InteractableObject object)
     {
         prioritySelectObject = object;
     }
 
     /**
      * 根据页面配置设置优先选中对象。从 configJson 中读取 priorityConfirmUi 配置，
-     * 按 tag 匹配交互对象并设为优先选中。
+     * 按控件类型（button/label/image）+ tag 匹配交互对象并设为优先选中。
      *
      * @param configJson 页面配置数据，包含 priorityConfirmUi.type + tag 字段
      */
@@ -161,6 +162,7 @@ public class VirtualInputHandler
     {
         try
         {
+            // 配置为空或不包含优先选中配置，则返回
             if (configJson == null || !configJson.containsKey(RequirementKey.Config.UNIVERSAL_PRIORITY_CONFIRM_UI))
             {
                 return;
@@ -176,25 +178,55 @@ public class VirtualInputHandler
                 ? priorityConfig.getString(RequirementKey.Config.UNIVERSAL_PRIORITY_CONFIRM_UI_TAG) : "";
 
             // 配置格式校验
-            if (!"tag".equals(type) || tag.isEmpty())
+            if (tag.isEmpty())
             {
                 LogUtils.error(VirtualInputHandler.class, "setPriorityConfirmSelectObject 配置格式错误 (type): " + type + " (tag): " + tag);
                 return;
             }
 
-            // 从 UiManager 全量交互对象集合中按 tag 查找
-            for (InteractableObject obj : uiManager.getInteractableObjectSet())
+            // 游戏内页面使用游戏内 UiManager，否则使用启动器 UiManager
+            UiManager effectiveUiManager;
+            if (gameHost.getGameSessionManager().isInGame())
             {
-                if (tag.equals(obj.getTag()))
-                {
-                    setPrioritySelectObject(obj);
-                    LogUtils.debug(VirtualInputHandler.class,
-                        "setPriorityConfirmSelectObject 配置驱动优先选中 (tag): " + tag + " (obj): " + obj);
-                    return;
-                }
+                effectiveUiManager = gameHost.getPlayLocalData().getUiManager();
+            }
+            else
+            {
+                effectiveUiManager = uiManager;
             }
 
-            LogUtils.debug(VirtualInputHandler.class, "setPriorityConfirmSelectObject 未找到匹配 (tag): " + tag);
+            // 按控件类型 + tag 从 UiManager 分类型集合中查找
+            InteractableObject obj;
+            switch (type)
+            {
+                case UiKey.Button.KEY:
+                    obj = effectiveUiManager.getButton(tag);
+                    break;
+
+                case UiKey.Label.KEY:
+                    obj = effectiveUiManager.getLabel(tag);
+                    break;
+
+                case UiKey.Image.KEY:
+                    obj = effectiveUiManager.getImage(tag);
+                    break;
+
+                default:
+                    LogUtils.error(VirtualInputHandler.class, "setPriorityConfirmSelectObject 未知类型 (type): " + type + " (tag): " + tag);
+                    return;
+            }
+
+            // 未找到对象
+            if (obj == null)
+            {
+                LogUtils.debug(VirtualInputHandler.class, "setPriorityConfirmSelectObject 未找到 (type): " + type + " (tag): " + tag);
+                return;
+            }
+
+            // 设置优先选中对象
+            setPriorityConfirmSelectObject(obj);
+            LogUtils.debug(VirtualInputHandler.class,
+                "setPriorityConfirmSelectObject 配置驱动优先选中 (type): " + type + " (tag): " + tag + " (obj): " + obj);
         }
         catch (Exception e)
         {

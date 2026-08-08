@@ -3,7 +3,7 @@
 > **文档定位**：项目 Java 代码的编码规范约定，包括大括号风格、命名规则、注释要求等。
 >
 > **文档结构**：
-> - 按 `大括号 → 缩进 → 空格 → 修饰符顺序 → 注解 → 导入顺序 → 工具类 → 异常处理 → 日志 → 节分隔符 → 命名 → 注释 → 枚举 → 匿名内部类 → JSON` 顺序编排
+> - 按 `大括号 → 缩进 → 空格 → 修饰符顺序 → 注解 → 导入顺序 → 工具类 → 异常处理 → 日志 → 节分隔符 → 命名 → 常量使用 → 注释 → 枚举 → 匿名内部类 → JSON` 顺序编排
 > - 每条规范包含：规则说明 + 正确示例 + 错误示例对比
 > - 命名规范用表格列出各元素类型的格式要求
 >
@@ -196,7 +196,46 @@ LogUtils.error(ClassName.class, "methodName", e); // 带异常的日志
 | 布尔查询               | `isXxx()` / `hasXxx()`  | `isClicked()`, `hasEvent()`           |
 | 动作型布尔方法（执行+返回是否成功） | `doXxx()`               | `doInit()`, `doDetectUpdateFinish()`  |
 
-## 12. 注释
+## 12. 常量使用
+
+**非常量类中禁止直接书写字面量（魔法字符串/魔法数字），必须引用已有且语义相符的常量类（`xxxKey` 等）中的常量，便于统一管理。**
+
+- **字符串字面量**：语义相符的已有常量（如 `UiKey.Button.KEY`、`RequirementKey.Config.*`）必须引用；语义不存在时在合适常量类中新增常量后再引用
+- **数字字面量**：业务含义明确的魔法数字（坐标、阈值、时长、尺寸、缩放等）同样收编进常量类，禁止在判断/计算/绘制中散落裸数字
+- **作用域**：仅类内使用且语义私有的常量保留为类内 `private static final`；跨类共用或业务语义通用的常量收进公共常量类（`type.key` 等）
+- **禁止重复定义**：已有语义相符的常量必须复用，不得在新位置重复定义同名常量
+
+正例：
+
+```java
+// 引用常量类常量（字符串）
+case UiKey.Button.KEY:
+    obj = uiManager.getButton(tag);
+    break;
+
+// 引用常量（数字）
+if (delay < MAX_LOAD_TIME_MS)
+{
+    // ...
+}
+```
+
+反例：
+
+```java
+// 裸字符串字面量
+case "button":
+    obj = uiManager.getButton(tag);
+    break;
+
+// 裸魔法数字
+if (delay < 5000)
+{
+    // ...
+}
+```
+
+## 13. 注释
 
 - 描述性注释使用中文
 - 使用 `//` 单行注释，不使用 `/* */` 块注释
@@ -204,7 +243,7 @@ LogUtils.error(ClassName.class, "methodName", e); // 带异常的日志
 - 私有方法/内部类使用 `/** */` Javadoc 注释描述功能，私有变量不要求注释
 - 公开 API 方法必须有 `/** */` Javadoc 注释，包含 `@param` 和 `@return`（如适用）
 
-## 13. 枚举格式
+## 14. 枚举格式
 
 ```java
 public enum EnumName
@@ -222,7 +261,7 @@ public enum EnumName
 - 如果枚举有方法，需要在最后一个常量后加分号
 - 纯常量枚举（无方法）不需要尾部分号
 
-## 14. 匿名内部类
+## 15. 匿名内部类
 
 匿名内部类同样遵循 Allman 风格大括号：
 
@@ -243,7 +282,7 @@ Gdx.net.sendHttpRequest (request, new Net.HttpResponseListener()
 });
 ```
 
-## 15. JSON 格式
+## 16. JSON 格式
 
 assets/ 目录下的 JSON 配置文件遵循以下格式：
 

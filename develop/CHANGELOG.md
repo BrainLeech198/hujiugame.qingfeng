@@ -26,6 +26,19 @@
 
 ---
 
+## 2026-08-08 — VirtualInputHandler 优先选中按控件类型查找 + 游戏内 UiManager 切换 + 编码规范常量使用规则
+
+### 修复
+
+- **`VirtualInputHandler.setPriorityConfirmSelectObject(JsonEntity)` 优先选中按控件类型查找** — `priorityConfirmUi.type` 语义由固定 `"tag"` 字面量改为控件类型（`button`/`label`/`image`），配合 `tag` 走 UiManager 分类型集合（`getButton`/`getLabel`/`getImage`）精确查找，替代全量遍历交互对象集合；配置校验改为 tag 非空 + type 合法
+- **优先选中支持游戏内页面** — `isInGame()` 时切换为游戏内 `UiManager`（`gameHost.getPlayLocalData().getUiManager()`），使 `game_menu`/`game_role` 等游戏内页面同样可配置优先选中
+
+### 编码规范
+
+- **`CODING_STYLE.md` 新增「12. 常量使用」规范** — 非常量类中禁止直接书写字符串/数字字面量（魔法值），必须引用已有且语义相符的常量类（`xxxKey` 等）常量，语义不存在时新增后引用；涵盖数字型常量收编；后续章节编号顺延
+
+---
+
 ## 2026-08-07 — UiKey/LayoutKey 布局字段 kind/show 单一来源 + RequirementKey.Language 嵌套重构 + 提交规范 + 文件关联图标独立化 + 许可证三文件拆分 + BGM 播放记录同步 + 页面切换过渡动画方案
 
 ### 文档
