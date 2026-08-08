@@ -58,10 +58,17 @@ public final class GameStatePageInfo
         map.put(GameState.MENU, Collections.unmodifiableMap(menuMap));
 
         // CONFIG
-        map.put(GameState.CONFIG, null);
+        Map<Integer, Boolean> configMap = new HashMap<>();
+        configMap.put(GameSubState.CONFIG_BASIC, true);
+        configMap.put(GameSubState.CONFIG_DISPLAY, true);
+        map.put(GameState.CONFIG, Collections.unmodifiableMap(configMap));
 
         // GAME
-        map.put(GameState.GAME, null);
+        Map<Integer, Boolean> gameMap = new HashMap<>();
+        gameMap.put(GameSubState.GAME_MENU, true);
+        gameMap.put(GameSubState.GAME_ROLE, true);
+        gameMap.put(GameSubState.GAME_PLAY, false);
+        map.put(GameState.GAME, Collections.unmodifiableMap(gameMap));
 
         GAME_STATE_CONFIG_MAP = Collections.unmodifiableMap(map);
     }
