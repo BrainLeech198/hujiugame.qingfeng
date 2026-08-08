@@ -2,5 +2,233 @@
   "priorityConfirmUi" : {
     "type" : "button",
     "tag" : "start"
+  },
+  "animation" : {
+    "fadeIn" : {
+      "default" : {
+        "duration" : 0.2,
+        "action" : {
+          "synchronization" : [
+            {
+              "object" : {
+                "class" : "graphics",
+                "type" : "backgroundPicture"
+              },
+              "action" : {
+                "type" : "none",
+                "param" : {
+                }
+              }
+            },
+            {
+              "object" : {
+                "class" : "graphics",
+                "type" : "picture",
+                "tag" : "logo"
+              },
+              "action" : {
+                "type" : "none",
+                "param" : {
+                }
+              }
+            }
+          ],
+          "schedule" : [
+            {
+              "object" : {
+                "class" : "ui",
+                "type" : "button",
+                "tag" : "start"
+              },
+              "action" : {
+                "type" : "smoothMove",
+                "param" : {
+                  "orientation" :
+                  {
+                    "x" : -1,
+                    "y" : 0
+                  },
+                  "distance" : 100,
+                  "duration" : 0.05
+                }
+              }
+            },
+            {
+              "object" : {
+                "class" : "ui",
+                "type" : "button",
+                "tag" : "create"
+              },
+              "action" : {
+                "type" : "smoothMove",
+                "param" : {
+                  "orientation" :
+                  {
+                    "x" : -1,
+                    "y" : 0
+                  },
+                  "distance" : 100,
+                  "duration" : 0.05
+                }
+              }
+            },
+            {
+              "object" : {
+                "class" : "ui",
+                "type" : "button",
+                "tag" : "config"
+              },
+              "action" : {
+                "type" : "smoothMove",
+                "param" : {
+                  "orientation" :
+                  {
+                    "x" : -1,
+                    "y" : 0
+                  },
+                  "distance" : 100,
+                  "duration" : 0.05
+                }
+              }
+            },
+            {
+              "object" : {
+                "class" : "ui",
+                "type" : "button",
+                "tag" : "quit"
+              },
+              "action" : {
+                "type" : "smoothMove",
+                "param" : {
+                  "orientation" :
+                  {
+                    "x" : -1,
+                    "y" : 0
+                  },
+                  "distance" : 100,
+                  "duration" : 0.05
+                }
+              }
+            }
+          ]
+        }
+      },
+      "fromPage" :
+      {
+        "config_basic" : {
+          "duration" : 0.5
+        }
+      }
+    },
+    "fadeOut" : {
+      "default" : {
+        "duration" : 0.2,
+        "action" : {
+          "synchronization" : [
+            {
+              "object" : {
+                "class" : "graphics",
+                "type" : "backgroundPicture"
+              },
+              "action" : {
+                "type" : "none",
+                "param" : {
+                }
+              }
+            },
+            {
+              "object" : {
+                "class" : "graphics",
+                "type" : "picture",
+                "tag" : "logo"
+              },
+              "action" : {
+                "type" : "none",
+                "param" : {
+                }
+              }
+            }
+          ],
+          "schedule" : [
+            {
+              "object" : {
+                "class" : "ui",
+                "type" : "button",
+                "tag" : "start"
+              },
+              "action" : {
+                "type" : "smoothMove",
+                "param" : {
+                  "orientation" :
+                  {
+                    "x" : -1,
+                    "y" : 0
+                  },
+                  "distance" : 100,
+                  "duration" : 0.1
+                }
+              }
+            },
+            {
+              "object" : {
+                "class" : "ui",
+                "type" : "button",
+                "tag" : "create"
+              },
+              "action" : {
+                "type" : "smoothMove",
+                "param" : {
+                  "orientation" :
+                  {
+                    "x" : -1,
+                    "y" : 0
+                  },
+                  "distance" : 100,
+                  "duration" : 0.1
+                }
+              }
+            },
+            {
+              "object" : {
+                "class" : "ui",
+                "type" : "button",
+                "tag" : "config"
+              },
+              "action" : {
+                "type" : "smoothMove",
+                "param" : {
+                  "orientation" :
+                  {
+                    "x" : -1,
+                    "y" : 0
+                  },
+                  "distance" : 100,
+                  "duration" : 0.1
+                }
+              }
+            },
+            {
+              "object" : {
+                "class" : "ui",
+                "type" : "button",
+                "tag" : "quit"
+              },
+              "action" : {
+                "type" : "smoothMove",
+                "param" : {
+                  "orientation" :
+                  {
+                    "x" : -1,
+                    "y" : 0
+                  },
+                  "distance" : 100,
+                  "duration" : 0.1
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
   }
 }
